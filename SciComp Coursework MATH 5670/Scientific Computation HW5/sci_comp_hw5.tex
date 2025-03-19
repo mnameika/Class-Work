@@ -1,0 +1,249 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{empty}
+
+
+\title{Scientific Computation HW5}
+\author{Michael Nameika}
+\date{October 2022}
+
+\begin{document}
+
+\maketitle
+
+\section*{Exercise 5.11}
+
+Determine the characteristic polynomials $\rho(\zeta)$ and $\sigma(\zeta)$ for the following linear multistep methods. Verify that (5.48) holds in each case. 
+\begin{enumerate}
+    \item[(a)] The 3-step Adams-Bashforth method,
+    \newline
+    The 3-step Adams-Bashforth method is given by the following:
+    \[U^{n+3} = U^{n+2} + \frac{k}{12}(5f(U^n) - 16f(U^{n+1}) + 23f(U^{n+2}))\]
+    Rewriting, we find
+    \[-U^{n+2} + U^{n+3} = k\left( \frac{5}{12}f(U^{n}) - \frac{16}{12}f(U^{n+1}) + \frac{23}{12}f(U^{n+2})\right)\]
+    Then we can see our characteristic polynomials for the 3-step Adams-Bashforth method are
+    \begin{align*}
+        \rho(\zeta) &= \zeta^3 - \zeta^2 \\
+        \sigma(\zeta) &= \frac{5}{12} - \frac{16}{12}\zeta + \frac{23}{12}\zeta^2 \\
+    \end{align*}
+    Now we must verify that (5.48) holds:
+    \begin{align*}
+        &\sum_{j=0}^r \alpha_j = 1 - 1 = 0 \\
+        &\sum_{j=0}^r j\alpha_j = 3 - 2 = 1 \\
+        &\sum_{j=0}^r \beta_j = \frac{5}{12} - \frac{16}{12} + \frac{23}{12} = 1 = \sum_{j=0}^r j\alpha_j
+    \end{align*}
+    \item[(b)] The 3-step Adams-Moulton method,
+    \newline
+    The 3-step Adams-Moulton method is given by the following:
+    \[U^{n+3} = U^{n+2} + \frac{k}{24}(f(U^n) - 5f(U^{n+1}) + 19f(U^{n+2}) + 9f(U^{n+3}))\]
+    Rewriting, we find
+    \begin{align*}
+        -U^{n+2} + U^{n+3} &= k\left( \frac{1}{24}f(U^n) - \frac{5}{24}f(U^{n+1}) + \frac{19}{24}f(U^{n+2}) + \frac{9}{24}f(U^{n+2}) \right) \\
+    \end{align*}
+    Then our characteristic polynomials are:
+    \begin{align*}
+        \rho(\zeta) &= \zeta^3 - \zeta^2 \\
+        \sigma(\zeta) &= \frac{1}{24} - \frac{5}{24}\zeta + \frac{19}{24}\zeta^2 + \frac{9}{24}\zeta^3 \\
+    \end{align*}
+    Verifying (5.48):
+    \begin{align*}
+        &\sum_{j=0}^r \alpha_j = -1 + 1 = 0 \\
+        &\sum_{j=0}^r j\alpha_j = 3 - 2 = 1 \\
+        &\sum_{j=0}^r \beta_j = \frac{1}{24} - \frac{5}{24} + \frac{19}{24} + \frac{9}{24} = 1 = \sum_{j=0}^r j\alpha_j \\
+    \end{align*}
+    
+    \item[(c)] The 2-step Simpson's method of Example 5.16.
+    \newline
+    The 2-step Simpson's method is given by the following:
+    \[U^{n+2} = U^n + \frac{2k}{6}(f(U^n) + 4f(U^{n+1}) + f(U^{n+2})\]
+    which we may rewrite as
+    \[-U^n + U^{n+2} = k \left( \frac{2}{6}f(U^n) + \frac{8}{6}f(U^{n+1}) + \frac{2}{6}f(U^{n+2}) \right)\]
+    Then our characteristic polynomials are
+    \begin{align*}
+        \rho(\zeta) &= \zeta^2 - 1 \\
+        \sigma(\zeta) &= \frac{1}{3} + \frac{4}{3}\zeta + \frac{1}{3}\zeta^2 \\
+    \end{align*}
+    Verifying (5.48):
+    \begin{align*}
+        &\sum_{j=0}^r \alpha_j = 1 - 1 = 0 \\
+        &\sum_{j=0}^r j\alpha_j = 2 \\
+        &\sum_{j=0}^r \beta_j = \frac{1}{3} + \frac{4}{3} + \frac{1}{3} = 2 = \sum_{j=0}^r j\alpha_j \\
+    \end{align*}
+\end{enumerate}
+
+\section*{Exercise 5.12}
+\begin{enumerate}
+    \item[(a)] Verify that the predictor-corrector method (5.53) is second order accurate.
+    \newline
+    Recall the predictor-corrector method:
+    \begin{align*}
+        \hat{U}^{n+1} &= U^n + kf(U^n), \\
+        U^{n+1} &= U^n + \frac{1}{2}k(f(U^n) + f(\hat{U}^{n+1})). \\
+    \end{align*}
+    Rewriting, we have
+    \[U^{n+1} = U^n + \frac{1}{2}k(f(U^n) + f(U^n + kf(U^n))\]
+    Taylor expanding $f(U^n + kf(U^n))$, we find
+    \[f(U^n + kf(U^n)) = f(U^n) + kf(U^n)f'(U^n) + \frac{1}{2}(kf(U^n))^2f''(U^n) + \mathcal{O}(k^3)\]
+    Now, to show this method is second order accurate, let us inspect the local truncation error:
+    \[\tau_n = \frac{u(t_{n+1}) - u(t_n)}{k} - \left(\frac{1}{2}(2f(u^n) + kf(u^n)f'(u^n) + \frac{1}{2}(kf(u^n))^2f''(u^n) + \mathcal{O}(k^3)\right)\]
+    Notice 
+    \[u(t_{n+1}) = u(t_n) + ku'(t_n) + \frac{k^2}{2}u''(t_n) + \frac{k^3}{6}u'''(t_n) + \mathcal{O}(k^4)\]
+    So 
+    \[\tau_n = u'(t_n) + \frac{k}{2}u''(t_n) + \frac{k^2}{6}u'''(t_n) - f(u(t_n)) - \frac{k}{2}f(u(t_n))f'(u(t_n)) - \frac{1}{4}(kf(u(t_n)))^2f''(u(t_n)) + \mathcal{O}(k^3)\]
+    Since $f(u) = u'$, we have $f'(u)u' = u''$, we have
+    \begin{align*}
+        \tau_n &= u'(t_n) + \frac{k}{2}u''(t_n) + \frac{k^2}{6}u'''(t_n) - u'(t_n) - \frac{k}{2}u''(t_n) - \frac{1}{4}(kf(u(t_n)))^2f''(u(t_n)) + \mathcal{O}(k^3) \\
+        &= \frac{k^2}{6}u'''(t_n) - \frac{1}{4}(kf(u(t_n)))^2f''(u(t_n)) + \mathcal{O}(k^3) \\
+        &= \mathcal{O}(k^2) \\
+    \end{align*}
+    So the predictor corrector method is second order accurate.
+    
+    
+    \item[(b)] Show that the predictor-corrector method obtained by predicting with the 2-step Adams-Bashforth method followed by correcting with the 2-step Adams Moulton method is third order accurate.
+    \newline
+    The predictor-corrector method described above is given by the following:
+    \begin{align*}
+        \hat{U}^{n+2} &= U^{n+1} + \frac{k}{2}(-f(U^n) + 3f(U^{n+1})) \\
+        U^{n+2} &= U^{n+1} + \frac{k}{12}(-f(U^n) + 8f(U^{n+1}) + 5f(\hat{U}^{n+2}) \\
+    \end{align*}
+    Then the local truncation error is given by
+    \[\tau_n = 12\frac{u_{n+2} - u_{n+1}}{k} - (-f(u_n) + 8f(u_{n+1}) + 5f(\hat{u}_{n+2}))\]
+    Let us begin by expanding $(u_{n+2} - u_{n+1})/k$ and simplifying by means of Taylor series:
+    \begin{align*}
+        \frac{u_{n+2} - u_{n+1}}{k} &= u_n' + \frac{3k}{2}u_n'' + \frac{7k^2}{6}u_n''' + \frac{15k^3}{24}u_n'''' + \mathcal{O}(k^4) \\
+        12\frac{u_{n+2} - u_{n+1}}{k} &= 12u_n' + 18ku_n'' + 14k^2u_n''' + \frac{15k^3}{2}u_n'''' + \mathcal{O}(k^4) \\ 
+    \end{align*}
+    Now, we must expand $-f(u_n) + 8f(u_{n+1}) + 5f(\hat{u}_{n+2})$. Let us begin by expanding $f(\hat{u}_{n+2})$:
+    \begin{align*}
+        f(\hat{u}_{n+2}) &= f\left(u_{n+1} + \frac{k}{2}(-f(u_n) + 3f(u_{n+1}))\right) \\
+        &= \lambda \left(u_{n+1} + \frac{k}{2}(-\lambda u_n + 3\lambda u_{n+1})\right) \\
+        &= \lambda \left(u_n + ku_n' + \frac{k^2}{2}u_n'' + frac{k^3}{6}u_n''' + \lambda ku_n + \frac{3k^2}{2}\lambda u_n' + \frac{3k^3}{4}\lambda u_n'' + \mathcal{O}(k^4) \right) \\
+        &= \lambda \left( u_n + 2ku_n' + 2k^2u_n'' + \frac{11k^3}{12}u_n''' + \mathcal{O}(k^4) \right) \\
+        &= u_n' + 2ku_n'' + 2k^2u_n''' + \frac{11k^3}{12}u_n'''' + \mathcal{O}(k^4) \\
+    \end{align*}
+    Now $-f(u_n) + 8f(u_{n+1})$:
+    \begin{align*}
+        -f(u_n) + 8f(u_{n+1}) &= -\lambda u_n + 8\lambda\left(u_n + ku_n' + \frac{k^2}{2}u_n'' + \frac{k^3}{6}u_n''' + \mathcal{O}(k^4)\right) \\
+        &= 7u_n' + 8ku_n'' + 4k^2u_n''' + \frac{4k^3}{3}u_n'''' + \mathcal{O}(k^4) \\
+    \end{align*}
+    Adding them up ($-f(u_n) + 8f(u_{n+1}) + 5f(\hat{u}_{n+2}))$:
+    \begin{align*}
+        -f(u_n) + 8f(u_{n+1}) + 5f(\hat{u}_{n+2}) &= 7u_n' + 8ku_n'' + 4k^2u_n''' + \frac{4k^3}{3}u_n'''' + 5u_n' + 10ku_n'' + 10k^2u_n''' + \frac{55k^3}{12}u_n'''' + \mathcal{O}(k^4) \\
+        &= 12u_n' + 18ku_n'' + 14k^2u_n''' + \frac{59k^3}{12}u_n'''' + \mathcal{O}(k^4) \\
+    \end{align*}
+    Finally,
+    \begin{align*}
+        \tau_n &= 12u_n' + 18ku_n'' + 14k^2u_n''' + \frac{15k^3}{2}u_n'''' - 12u_n' - 18ku_n'' - 14k^2u_n''' - \frac{55k^3}{12}u_n'''' + \mathcal{O}(k^4) \\
+        &= \frac{35k^3}{12}u_n'''' + \mathcal{O}(k^4) \\
+        &= \mathcal{O}(k^3) \\
+    \end{align*}
+    So this method is third order accurate (at least for the problem $u' = \lambda u$).
+\end{enumerate}
+
+\section*{Exercise 5.13}
+
+Consider the Runge-Kutta methods defined by the tableaux below. In each case show that the method is third order accurate in two different ways: First by checking that the order conditions (5.35), (5.37), and (5.38) are satisfied, and then by applying one step of the method to $u' = \lambda u$ and verifying that the Taylor series expansion of $e^{k\lambda}$ is recovered to the expected order. 
+\newline
+We must show the following conditions are satisfied for each method:
+\begin{align*}
+    \sum_{j=1}^ra_{ij} &= c_i, \:\: i = 1,2, \dots, r, \\
+    \sum_{j=1}^rb_j &= 1 \\
+    \sum_{j=1}^rb_jc_j &= \frac{1}{2} \\
+    \sum_{j=1}^rb_jc^2_j &= \frac{1}{3} \\
+    \sum_{i=1}^r\sum_{j=1}^rb_ia_{ij}c_j &= \frac{1}{6} \\
+\end{align*}
+\begin{enumerate}
+    \item[(a)] Runge's 3rd order method:
+    \newline
+    \begin{center}
+        \begin{tabular}{c|c c c c}
+            0 & & & &  \\
+            1/2 & 1/2 & & & \\
+            1 & 0 & 1 & & \\
+            1 & 0 & 0 & 1 & \\
+            \hline
+            & 1/6 & 2/3 & 0 & 1/6 \\
+        \end{tabular}
+    \end{center}
+    By inspection, we can see that the first condition ($\sum_{j=1}^ra_{ij} = c_i$) is satisfied since each row in the tableaux clearly adds up to the leftmost column. Now, let us confirm the second condition:
+    \[\sum_{j=1}^rb_j = \frac{1}{6} + \frac{2}{3} + 0 + \frac{1}{6} = 1\]
+    Now the third condition:
+    \[\sum_{j=1}^rb_jc_j = 0\left(\frac{1}{6}\right) + \frac{1}{2}\left(\frac{2}{3}\right) + 1(0) + 1\left(\frac{1}{6}\right) = \frac{1}{3} + \frac{1}{6} = \frac{1}{2}\]
+    And the fourth condition:
+    \[\sum_{j=1}^rb_jc_j^2 = \left(\frac{1}{6}\right)0^2 + \left(\frac{2}{3}\right)\left(\frac{1}{2}\right)^2 + 0(1)^2 + \left(\frac{1}{6}\right)(1)^2 = \frac{1}{6} + \frac{1}{6} = \frac{1}{3}\]
+    And finally, the fifth condition:
+    \begin{align*}
+        \sum_{i=1}^r\sum_{j=1}^rb_ia_{ij}c_j &= \sum_{i=1}^rb_i(a_{i1}c_1 + a_{i2}c_2 + a_{i3}c_3 + a_{i4}c_4) \\
+       &= c_1\sum_{j=1}^rb_ia_{i1} + c_2\sum_{j=1}^rb_ia_{i2} + c_3\sum_{j=1}^rb_ia_{i3} + c_4\sum_{j=1}^rb_ia_{i4} \\
+       &= 0\left(\frac{1}{3}\right) + \frac{1}{2}\left(0\right) + 1\left(\frac{1}{6}\right) + 1(0) \\
+       &= \frac{1}{6} \\
+    \end{align*}
+    So all the conditions are satisfied. So Runge's 3rd order method is indeed 3rd order method.
+    
+    \item[(b)] Heun's 3rd order method:
+    \newline
+    \begin{center}
+        \begin{tabular}{c|c c c}
+            0 & & & \\
+            1/3 & 1/3 & & \\
+            2/3 & 0 & 2/3 & \\
+            \hline
+             & 1/4 & 0 & 3/4 \\
+        \end{tabular}
+    \end{center}
+\end{enumerate}
+To begin, notice that each $c_j$ is equal to the sum of the rows of the $a_{ij}$s, so the first condition is satisfied. Now, let us inspect the sum of the $b_j$:
+\[\sum_{j=1}^r b_j = \frac{1}{4} + 0 + \frac{3}{4} = 1\]
+So the second condition is satisfied. Now let us inspect the sum of $b_jc_j$:
+\[\sum_{j=1}^j b_jc_j = 0\left(\frac{1}{4}\right) + \left(\frac{1}{3}\right)0 + \left(\frac{2}{3}\right)\left(\frac{3}{4}\right) = \frac{1}{2}\]
+So the third condition is satisfied. Now let us inspect the sum of $b_jc_j^2$:
+\[\sum_{j=1}^r b_jc_j^2 = \left(\frac{1}{4}\right)0^2 + 0\left(\frac{1}{3}\right)^2 + \left(\frac{3}{4}\right)\left(\frac{2}{3}\right)^2 = \frac{1}{3}\]
+So the fourth condition is satisfied. Finally, let us inspect the sum of $b_ja_{ij}c_i$:
+\begin{align*}
+    \sum_{i=1}^r\sum_{j=1}^r b_ia_{ij}c_j &= \sum_{i=1}^rb_i(a_{i1}c_1 + a_{i2}c_2 + a_{i3}c_3) \\
+    &= \frac{1}{3}\sum_{i=1}^rb_ia_{i2} + \frac{2}{3}\sum_{i=1}^rb_ia_{i3} \\
+    &= \frac{1}{3}\left(\frac{1}{2}\right) = \frac{1}{6} \\
+\end{align*}
+So all conditions for third order accuracy are satisfied. Thus, Heun's third order method is indeed third order accurate.
+\section*{Exercise 17}
+
+\begin{enumerate}
+    \item[(a)] Apply the trapezoidal rule to the equation $u' = \lambda u$ and show
+    \[U^{n+1} = \frac{1 + z/2}{1 - z/2}U^n\]
+    where $z = \lambda k$.
+    \newline
+    Recall the trapezoidal rule:
+    \[\frac{U^{n+1} - U^n}{k} = \frac{1}{2}(f(U^n) + f(U^{n+1}))\]
+    Applying this to $u' = \lambda u$, we see $f(u) = \lambda u$ and so the trapezoidal rule in this case becomes
+    \begin{align*}
+        U^{n+1} &= U^{n} + \frac{\lambda k}{2}U^n + \frac{\lambda k}{2} U^{n+1} \\
+        \left(1 - \frac{\lambda k}{2}\right)U^{n+1} &= \left(1 + \frac{\lambda k}{2}\right)U^n \\
+        U^{n+1} &= \frac{1 + z/2}{1 - z/2}U^n \\
+    \end{align*}
+    where $z = \lambda k$.
+    
+    \item[(b)] Let 
+    \[R(z) = \frac{1 + z/2}{1 - z/2}\]
+    Show that $R(z) = e^z + \mathcal{O}(k^3)$ and conclude that the one step error of the trapezoidal method on this problem is $\mathcal{O}(k^3)$.
+    \newline
+    Notice that we may expand $\frac{1}{1 - z/2}$ as 
+    \[\frac{1}{1-z/2} = 1 + \left(\frac{z}{2}\right) + \left(\frac{z}{2}\right)^2 + \left(\frac{z}{2}\right)^3 + \cdots \]
+    Multiplying by $1 + z/2$, we find
+    \begin{align*}
+        \frac{1+z/2}{1-z/2} &= 1 + \left(\frac{z}{2}\right) + \left(\frac{z}{2}\right)^2 + \left(\frac{z}{2}\right)^3 + \cdots + \frac{z}{2} + \left(\frac{z}{2}\right)^2 + \left(\frac{z}{2}\right)^3 + \left(\frac{z}{2}\right)^4 + \cdots \\
+        &= 1 + z + \frac{z}{2} + \frac{z^3}{6} + \frac{z^3}{12} + \frac{z^4}{6} + \cdots \\
+        &= e^z + \mathcal{O}(z^3) \\
+    \end{align*}
+    So this method is third order accurate for $u' = \lambda u$.
+    
+\end{enumerate}
+
+\end{document}
