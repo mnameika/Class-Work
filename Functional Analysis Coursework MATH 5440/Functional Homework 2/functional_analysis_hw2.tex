@@ -1,0 +1,169 @@
+\documentclass{article}
+\usepackage{graphicx, mathtools, amsmath, amssymb}
+
+\graphicspath{{Images/}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{empty}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\say}[1]{``#1"}
+
+\title{Homework 2}
+\author{Michael Nameika}
+\date{September 2023}
+
+\begin{document}
+
+\maketitle
+
+\section*{Section 1.5 Problems}
+\begin{itemize}
+    \item[\textbf{4}.] Show that $M$ in Prob. 3 is not complete by applying Theorem 1.4-7.
+    \newline\newline
+    \textit{Proof:} Consider the sequence $\{x_n\} \in M$ defined by $x_n = \left(1, \tfrac{1}{2}, \tfrac{1}{4}, \cdots, \tfrac{1}{2^n}, 0, 0, \cdots\right)$. I claim that $x_n \to x = \left(1, \tfrac{1}{2}, \tfrac{1}{4}, \cdots, \tfrac{1}{2^n}, \cdots\right)$. Note that for any element $x^{(i)}$ of $x$, $|x^{(i)}| \leq 1$, hence $x \in \ell^{\infty}$. Then notice
+    \begin{align*}
+        d(x_n,x) &= \sup_{i \geq 1}|x_n^{(i)} - x^{(i)}|\\
+        &= \frac{1}{2^{n+1}}.
+    \end{align*}
+    Fix $\varepsilon > 0$ and take $N = \lfloor \log_2\left(\tfrac{1}{\epsilon}\right) - 1\rfloor$. Then for $n>N$, we have
+    \[d(x_n,x_m) < \varepsilon.\]
+    Hence, $\{x_n\}$ converges to $x$ in $\ell^{\infty}$, however, notice that $x$ contains only nonzero elements, hence $x \notin M$. That is, $x$ is a limit point of $M$, but $x \notin M$. Hence, $M$ is not closed, and by theorem 1.4-7, $M$ is not a complete subspace of $\ell^{\infty}$.
+\end{itemize}   
+
+\section*{Section 2.1 Problems}
+\begin{itemize}
+    \item[\textbf{9}.] On a fixed interval $[a,b] \subset \mathbb{R}$, consider the set $X$ consisting of all polynomials with real coefficients and of degree not exceeding a given $n$, and the polynomial $x = 0$ (for which a degree is not defined in the usual discussion of degree). Show that $X$, with the usual addition and the usual multiplication by real numbers, is a real vector space of dimension $n + 1$. Find a basis for $X$. Show that we can obtain a complex vector space $\tilde{X}$ in a similar fashion if we let those coefficients be complex. Is $X$ a subspace of $\tilde{X}$?
+    \newline\newline
+    \textit{Proof:} (of $X$ being a vector space with dimension $n+1$.) Let $x = \alpha_0 + \alpha_1t + \cdots + \alpha_nt^n, y = \beta_0 + \beta_1t + \cdots + \beta_nt^n,z = \gamma_0 + \gamma_1t + \cdots + \gamma_nt^n \in X$. Since $x,y,z$ are polynomials of real numbers, it follows that, since $\mathbb{R}$ is closed under addition, for any fixed $t \in [a,b]$, 
+    \begin{align*}
+        x(t) + y(t) &= \alpha_0 + \alpha_1t + \cdots + \alpha_nt^n + \beta_0 + \beta_1t + \cdots + \beta_nt^n\\
+        &= (\alpha_0 + \beta_0) + (\alpha_1 + \beta_1)t + \cdots + (\alpha_n + \beta_n)t^n\\
+        &= \delta_0 + \delta_1t + \cdots + \delta_nt^n
+    \end{align*}
+    with $\delta_i = \alpha_i + \beta_i$. Hence, $X$ is closed under addition. Similarly, since $\mathbb{R}$ is closed under multiplication, for any $c \in \mathbb{R}$ and $t \in [a,b]$,
+    \begin{align*}
+        cx(t) &= c\alpha_0 + c\alpha_1t + \cdots + c\alpha_nt^n\\
+        &= \tau_0 + \tau_1t + \cdots + \tau_nt^n
+    \end{align*}
+    with $\tau_i = c\alpha_i$. Hence, $X$ is closed under scalar multiplication. Now, since addition in $\mathbb{R}$ is commutative and associative, for $t \in [a,b]$, we have
+    \begin{align*}
+        x(t) + y(t) &= y(t) + x(t)\\
+        (x(t) + y(t)) + z(t) &= x(t) + (y(t) + z(t))
+    \end{align*}
+    Hence, commutativity and associativity hold in $X$. Now, since $0 \in X$, we have 
+    \[x + 0 = x\]
+    and 
+    \[x + (-x) = 0.\]
+    It is also easy to verify that
+    \[1x = x.\]
+    Let $c,d \in \mathbb{R}$ and consider the following:
+    \begin{align*}
+        c(dx) &= c(d\alpha_0 + d\alpha_1t + \cdots + d\alpha_nt^n)\\
+        &= cd\alpha_0 + cd\alpha_1t + \cdots + cd\alpha_nt^n\\
+        &= d(c\alpha_0 + c\alpha_1t + \cdots + c\alpha_nt^n)\\
+        &= d(cx)
+    \end{align*}
+    So multiplication by scalars is associative in $X$. Finally, checking distributivity, we find
+    \begin{align*}
+        c(x + y) &= c([\alpha_0 + \beta_0] + [\alpha_1 + \beta_1]t + \cdots + [\alpha_n + \beta_n]t^n)\\
+        &= [c\alpha_0 + c\beta_0] + [c\alpha_1 + c\beta_1]t + \cdots + [c\alpha_n + c\beta_n]t^n\\
+        &= cx + cy
+    \end{align*}
+    \begin{align*}
+        (c + d)x &= (c+d)\alpha_0 + (c+d)\alpha_1t + \cdots + (c+d)\alpha_nt^n\\
+        &= c\alpha_0 + \cdots + c\alpha_nt^n + d\alpha_0 + \cdots + d\alpha_nt^n\\
+        &= cx + dx.
+    \end{align*}
+    Hence, distributivity holds. Thus, $X$ is a vector space.
+    \newline
+    Finally, notice that $\{1, t, t^2, \cdots, t^n\}$ is a basis for $X$ and has dimension $n+1$. Thus, since any basis of a vector space has the same cardinality, $X$ has dimension $n+1$.
+    \newline\newline
+
+
+    Note that if we replace $\mathbb{R}$ with $\mathbb{C}$ for our arguments involving scalar multiples above, we may show that $\tilde{X}$ is a vector space. However, $X$ is not a subspace of $\tilde{X}$ since for any complex coefficient $\tilde{c}$ and element $x \in X$, $\tilde{c}x \notin X$.
+    
+
+    
+
+    \item[\textbf{10}.] If $Y$ and $Z$ are subspaces of a vector space $X$, show that $Y \cap Z$ is a subspace of $X$, but $Y \cup Z$ need not be one. Give examples.
+    \newline\newline
+    \textit{Proof:} Let $X$ be a vector space and $Y,Z \subseteq X$ be subspaces and suppose $Y\cap Z \neq \emptyset$. Let $x,y,z \in Y\cap Z$. Since $Y$ and $Z$ are subspaces, it follows that $x + y \in Y$ and $x + y \in Z$ so $x + y \in Y \cap Z$. Also,
+    \begin{align*}
+        x + y &= y + x\\
+        x + (y + z) &= (x + y) + z
+    \end{align*}
+    in $Y \cap Z$. Additionally, $0 \in Y \cap Z$ and $-x \in Y \cap Z$ for any $x \in Y \cap Z$. Let $\alpha, \beta$ be any scalars. Then $\alpha x \in Y \cap Z$ and the distributive laws hold in $Y \cap Z$ since they hold for both $Y$ and $Z$. Hence $Y \cap Z$ is a subspace. To see that $Y\cup Z$ is not necessarily a subspace, consider the subspaces of $\mathbb{R}^2$ given by
+    \[Y = \text{span}\left\{\begin{pmatrix}
+        1\\
+        1
+    \end{pmatrix}\right\}, \hspace{2em} Z = \text{span}\left\{\begin{pmatrix*}[r]
+        -1\\
+        1
+    \end{pmatrix*}\right\}\]
+    Then $Y \cup Z$ is the set of lines given by $y = \pm x$ in graphical form. To see why $Y \cup Z$ is not a subspace, consider $(1,1)^T \in Y$ and $(-1, 1)^T \in Z$. Then
+    \[\begin{pmatrix}
+        1\\
+        1
+    \end{pmatrix} + \begin{pmatrix*}[r]
+        -1\\
+        1
+    \end{pmatrix*} = \begin{pmatrix}
+        0\\
+        2
+    \end{pmatrix} \notin Y \cup Z.\]
+    Hence, $Y\cup Z$ is not closed under addition, so $Y \cup Z$ is not a subspace.
+\end{itemize}
+
+\section*{Assigned Exercise}
+\begin{itemize}
+    \item[II.1] Let $M$ be a nonempty subset of a metric space $(X,d)$ and define the closure of $M$ as the smallest closed set containing $M$, that is $\overline{M} = \underset{K \text{ closed }, M \subseteq K}{\cap}K$. This definition is an alternative to the one in the text. 
+    \newline
+    (a). Prove Theorem \textbf{1.4-6(a)} using the above definition of closure only, and not by using the equivalence stated on p. 21 of the text that the smallest closed set containing $M$ is the same as the union of $M$ with its accumulation points.
+    \newline\newline
+    \textit{Proof:} Let $(X,d)$ be a metric space and $M \subseteq X$ be nonempty and let $\{K_{\lambda} \: | \: \lambda \in \Lambda\}$ be an indexed collection of closed sets in $X$ that contain $M$. That is, $M \subseteq K_{\lambda}$ for all $\lambda$. 
+    First suppose that there is a sequence of points $\{x_n\}$ in $M$ converging to $x$. We wish to show that $x \in \overline{M}$. Suppose by way of contradiction that $x \notin \overline{M}$. Then necessarily,
+    \[x \in X \backslash \overline{M} = \bigcup_{\lambda \in \Lambda} X \backslash K_{\lambda}\]
+    and quickly note that for any $m \in M$,
+    \[M \bigcap\left( \bigcup_{\lambda \in \Lambda} X \backslash K_{\lambda}\right) = \emptyset\]
+    since $M \subseteq K_{\lambda}$ for all $\lambda$.
+    
+    Since each $K_{\lambda}$ is a closed set, $\cap_{\lambda \in \Lambda} K_{\lambda}$ is closed and so $\cup_{\lambda \in \Lambda} X \backslash K_{\lambda}$ is open. Then there exists some $r > 0$ such that the open ball of radius $r$ centered at $x$ is completely contained in $\cup_{\lambda \in \Lambda} X \backslash K_{\lambda}$. That is,
+    \[B_r(x) \subseteq \bigcup_{\lambda \in \Lambda} X \backslash K_{\lambda}\]
+    But since $\{x_n\}$ converges to $x$, there exists an index $N$ such that for all $n > N$, 
+    \[d(x_n,x) < \frac{r}{2}\]
+    Meaning that for all $n > N$, $x_n \in B_r(x)$. But then $x_n \notin M$ for all $n > N$, contradicting the fact that $\{x_n\}$ is a sequence in $M$. Thus, $x \in \overline{M}$.
+    \\
+    
+    Now suppose $x \in \overline{M}$. We wish to show that there exists a sequence of points in $M$ converging to $x$. Suppose by way of contradiction that there does not exist such a sequence. 
+    Then there exists some $r > 0$ such that the open ball $B_r(x)$ shares no points in common with $M$. If there was no such $r$, then we could select a point $x_n \in B_{1/n}(x)$ such that $x_n \in M$ for each $n$, which would contradict our assumption that there is no sequence in $M$ converging to $x$. 
+    Now, since each $K_{\lambda}$ is closed,
+    \[X \backslash \bigcap_{\lambda\in\Lambda} K_{\lambda} = \bigcup_{\lambda \in \Lambda} X \backslash K_{\lambda}\]
+    is open in $X$. Then define
+    \[I = B_r(x) \cup \left(\bigcup_{\lambda \in \Lambda} X \backslash K_{\lambda}\right)\]
+    is open in $X$, hence $X \backslash I$ is closed in $X$ and contains $M$, since $M \subseteq K_{\lambda}$ for all $\lambda$. So then 
+    \[X\backslash I \in \{K_{\lambda} \: | \: \lambda \in \Lambda\}\]
+    But since $x \notin X\backslash I$, $x \notin \overline{M}$, a contradiction.
+    \newline\newline
+
+    
+    (b) Prove the equivalence between the two definitions of closure stated on p. 21 of the text.
+    \newline\newline
+    \textit{Proof:} We wish to show that $M \cup M' = \cap_{\lambda \in \Lambda} K_{\lambda}$, where $M'$ is the set of limit points of $M$. To begin, let $x \in M\cup M'$. If $x \in M$, then $x \in \cap_{\lambda \in \Lambda} K_{\lambda}$ since $M \subseteq K_{\lambda}$ for all $\lambda$. 
+    If $x \in M'$, then for any open ball $B_r(x)$, $B_r(x) \cap M \neq \emptyset$, hence, create the sequence $\{x_n\}$ by selecting $x_n \in B_{1/n}(x)$ such that $x_n \in M$ for each $n$. 
+    Then $d(x_n,x) < \tfrac{1}{n}$, hence, $\{x_n\}$ is a sequence in $M$ converging to $x$, and so by our work in part (a), $x \in \cap_{\lambda \in \Lambda} K_{\lambda}$. 
+    Hence,
+    \[M\cup M' \subseteq \bigcap_{\lambda \in \Lambda} K_{\lambda}\]
+    Now let $x \in \cap_{\lambda \in \Lambda} K_{\lambda}$. Then by our work in part (a), there exists a sequence $\{x_n\}$ in $M$ converging to $x$. That is, $x$ is a limit point of $M$, so $x \in M'$, and so $x \in M \cup M'$. Then
+    \[\bigcap_{\lambda \in \Lambda} K_{\lambda} \subseteq M\cup M'\]
+    By double inclusion, we have
+    \[M\cup M' = \bigcap_{\lambda \in \Lambda} K_{\lambda}\]
+
+    
+\end{itemize}
+\end{document}

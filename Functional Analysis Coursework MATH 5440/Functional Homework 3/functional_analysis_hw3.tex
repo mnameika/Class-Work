@@ -1,0 +1,180 @@
+\documentclass{article}
+\usepackage{graphicx, mathtools, amsmath, amssymb, float, fancyhdr}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{fancy}
+
+\fancyfoot{}
+\fancyhead[L]{MATH 5350}
+\fancyhead[R]{\thepage}
+
+\newcommand{\say}[1]{``#1"}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+\begin{center}
+    \vspace{0.5cm}
+    {\Huge Homework III}
+    \vspace{0.5cm}
+    
+    {\Large Michael Nameika}
+    \vspace{0.5cm}
+    
+\end{center}
+
+\section*{Section 2.3 Problems}
+\begin{itemize}
+    \item[\textbf{2.}] Show that $c_0$ in Prob. 1 is a \textit{closed} subspace of $\ell^{\infty}$, so that $c_0$ is complete by 1.5-2 and 1.4-7.
+    \newline\newline
+    \textit{Proof}: Let $x$ be a limit point of $c_0$. We will show that $x \in c_0$. Since $x$ is a limit point of $c_0$, there exists a sequence $\{x_n\}$ of points in $c_0$ such that for any $\varepsilon > 0$, there exists a natural number $N_0$ such that
+    \[||x_n - x|| < \frac{\varepsilon}{2}.\]
+    whenever $n > N_0$. Similarly, since $x_n \in c_0$, there exists a natural number $N_1$ such that
+    \[|x_n^{(m)}| < \frac{\varepsilon}{2}\]
+    whenever $m > N_1$ where the superscript $(m)$ denotes the $m^{\text{th}}$ element of $x_n$. Now notice, for $m > N_1$, $n > N_0$,
+    \begin{align*}
+        |x^{(m)}| &= |x^{(m)} - x_n^{(m)} + x_n^{(m)}|\\
+        &\leq |x^{(m)} - x_n^{(m)}| + |x_n^{(m)}|\\
+        &\leq \sup_{m > N_1}|x^{(m)} - x_n^{(m)}| + |x_n^{(m)}|\\
+        &= ||x^{(m)} - x_n^{(m)}|| + |x_n^{(m)}|\\
+        &< \frac{\varepsilon}{2} + \frac{\varepsilon}{2}.\\
+        &= \varepsilon
+    \end{align*}
+    So $|x^{(m)}| < \varepsilon$ for $m > N_1$. Since $\varepsilon$ is an upper bound for $|x^{(m)}|$ for all $m > N_1$,
+    \begin{align*}
+        \sup_{m > N_1} |x^{(m)}| &< \varepsilon
+    \end{align*}
+    Thus, $x \to 0$, so $x \in c_0$ and $c_0$ is a closed subspace of $\ell^{\infty}$.
+    
+    
+
+    \item[\textbf{5.}] Show that $x_n \to x$ and $y_n \to y$ implies $x_n + y_n \to x + y$. Show that $\alpha_n \to \alpha$ and $x_n \to x$ implies $\alpha_nx_n \to \alpha x$.
+    \newline\newline
+    \textit{Proof}: To start, let $x_n \to x$ and $y_n \to y$. Fix $\varepsilon > 0$. Then there exist indices $N_1,N_2 \in \mathbb{N}$ such that, whenever $n > N_1$,
+    \[||x_n - x|| < \frac{\varepsilon}{2}\]
+    and similarly, when $n > N_2$,
+    \[||y_n - y|| < \frac{\varepsilon}{2}.\]
+    Let $N = \max\{N_1,N_2\}$. Then for $n > N$, notice
+    \begin{align*}
+        ||(x_n + y_n) - (x + y)|| &= ||(x_n - x) + (y_n - y)||\\
+        &\leq ||x_n - x|| + ||y_n - y||\\
+        &< \frac{\varepsilon}{2} + \frac{\varepsilon}{2}\\
+        &= \varepsilon.
+    \end{align*}
+    That is, $||(x_n + y_n) - (x + y)|| < \varepsilon$ for $n > N$, so $x_n + y_n \to x + y$.
+    \newline 
+    \vspace{0.3cm}
+    
+    Now let $\alpha_n \to \alpha$. We wish to show that $\alpha_nx_n \to \alpha x$. Notice the following:
+    \begin{align*}
+        \|x_n\alpha_n - x\alpha\| &= \|x_n\alpha_n - x\alpha_n + x_n\alpha - x\alpha\|\\
+        &\leq \|x_n\alpha_n - x_n\alpha\| + \|x_n\alpha - x\alpha\|\\
+        &= |\alpha_n - \alpha|\|x_n\| + |\alpha| \|x_n - x\| \tag*{(Homogeneity of the norm)}.
+    \end{align*}
+    Since $x_n$ converges, $\{x_n\}$ is a bounded sequence, hence there exists some positive number $M$ such that
+    \[\|x_n\| \leq M\]
+    for all $n$. Now, fix $\varepsilon > 0$. Since $\alpha_n \to \alpha$, there exists a natural number $N_1$ such that 
+    \[|\alpha_n - \alpha| < \frac{\varepsilon}{2M}\]
+    whenever $n > N_1$. Similarly, since $x_n \to x$, there exists a natural number $N_2$ such that
+    \[\|x_n - x\| < \frac{\varepsilon}{2|\alpha|}\]
+    whenever $n > N_2$. Take $N = \max\{N_1,N_2\}$ so that whenever $n > N$,
+    \begin{align*}
+        \|x_n\| |\alpha_n - \alpha| + |\alpha| \|x_n - x\| &\leq M |\alpha_n - \alpha| + |\alpha| \|x_n -x\|\\
+        &< M \frac{\varepsilon}{2M} + |\alpha| \frac{\varepsilon}{2|\alpha|}\\
+        &= \frac{\varepsilon}{2} + \frac{\varepsilon}{2}\\
+        &= \varepsilon.
+    \end{align*}
+    Thus, $\alpha_nx_n \to \alpha x$.
+    
+    \item[\textbf{10.}] \textbf{(Schauder Basis)} Show that if a normed space has a Schauder basis, it is separable.
+    \newline\newline
+    \textit{Proof}: Let $X = (X, \|\cdot\|)$ be a normed space that has a Schauder basis. That is, for each $x \in X$, there exists a unique sequence of scalars $\{\alpha_n\}$ and a sequence of \say{basis} vectors $\{e_n\}$ such that $\|x - (\alpha_1e_1 + \cdots + \alpha_ne_n)\| \to 0$ as $n \to \infty$. Now, define the set
+    \[M = \{x \in X \: | \: x = q_1e_1 + \cdots + q_ke_k\}.\]
+    where $q_i \in \mathbb{Q}$ if the scalar field is $\mathbb{R}$, or $q_i  = q_i^R + iq_i^I$, $q_i^R, q_i^I \in \mathbb{R}$ if the scalar field is $\mathbb{C}$.
+    That is, $M$ is the set of vectors in $X$ that can be expressed as a linear combination of basis vectors whose coefficients are dense (but countable) in the scalar field. We will begin by showing that $M$ is dense in $X$. 
+    
+    Fix $\varepsilon > 0$ and let $y \in X$. Since $X$ has a Schauder basis, there exists a unique sequence of scalars $\{\alpha_n\}$ and an index $N \in \mathbb{N}$ such that whenever $n > N$, 
+    \[\|y - (\alpha_1e_1 + \cdots + \alpha_2e_n)\| < \frac{\varepsilon}{2}\]
+    Now, for each $i$, we may find $q_i$ such that 
+    \[|\alpha_i - q_i| < \frac{\varepsilon}{2n||e_i||}\]
+    Then notice
+    \begin{align*}
+        \|y - (q_1e_1 + \cdots + q_ne_n)\| &= \|y - (\alpha_1e_1 + \cdots + \alpha_ne_n) + (\alpha_1e_1 + \cdots + \alpha_ne_n) - (q_1 + \cdots + q_ne_n\|\\
+        &\leq \|y - (\alpha_1e_1 + \cdots + \alpha_ne_n)\| + \|(\alpha_1 - q_1)e_1 + \cdots + (\alpha_n - q_n)e_n\|\\
+        &\leq \|y - (\alpha_1e_1 + \cdots + \alpha_ne_n)\| + |\alpha_1 - q_1|\|e_1\| + \cdots + |\alpha_n + q_n\|\|e_n\|\\
+        &< \frac{\varepsilon}{2} + \frac{\varepsilon}{2n} + \cdots + \frac{\varepsilon}{2n}\\
+        &= \frac{\varepsilon}{2} + \frac{\varepsilon}{2}\\
+        &= \varepsilon.
+    \end{align*}
+    Since $(q_1e_1 + \cdots + q_ne_n) \in M$, we have that $M$ is dense in $X$. Also, since $M$ has a countable basis, namely, $\{e_1, \cdots, e_n\}$ and since the scalars are pulled from a countable and dense subset of $\mathbb{R}$ or $\mathbb{Q}$, it follows that $M$ is countable.
+
+    Thus, if $X$ has a Schauder basis, then $X$ is a separable space.
+    
+    
+\end{itemize}
+
+\section*{Section 2.4 Problems}
+\begin{itemize}
+    \item[\textbf{6.}] Theorem 2.4-5 implies that $\|\cdot\|_2$ and $\|\cdot\|_{\infty}$ in Prob. 8, Sec. 2.2, are equivalent Give a direct proof of this fact.
+    \newline\newline
+    \textit{Proof}: Let $X$ be the set of $n-$tuples of numbers and $x = (\xi_1, \cdots, \xi_n) \in X$. We wish to show that the 2 and infinity norms defined below are equivalent.
+    \begin{align*}
+        \|x\|_2 &= \sqrt{(\xi_1)^2 + \cdots + (\xi_n)^2}\\
+        \|x\|_{\infty} &= \max\{|\xi_1|, \cdots, |\xi_n|\}
+    \end{align*}
+    To begin, since $\{|\xi_1|, \cdots, |\xi_n|\}$ is a finite set, there exists an index $i$ such that 
+    \[|\xi_i| = \max\{|\xi_1|,\cdots, |\xi_n|\} = \|x\|_{\infty}\]
+    Now notice that
+    \begin{align*}
+        (\xi_i)^2 &\leq (\xi_1)^2 + \cdots + (\xi_i)^2 + \cdots + (\xi_n)^2\\
+        |\xi_i| &\leq \sqrt{(\xi_1)^2 + \cdots + (\xi_i)^2 + \cdots + (\xi_n)^2}\\
+        \implies \|x\|_{\infty} &\leq \|x\|_2.
+    \end{align*}
+    Now, notice that since $|\xi_i| = \max\{|\xi_1|, \cdots, |\xi_n|\}$, 
+    \begin{align*}
+        (\xi_1)^2 + \cdots + (\xi_n)^2 &\leq (\xi_i)^2 + \cdots + (\xi_i)^2\\
+        &= n(\xi_i)^2
+    \end{align*}
+    hence,
+    \begin{align*}
+        \sqrt{(\xi_1)^2 + \cdots + (\xi_n)^2} &\leq \sqrt{n}|\xi_i|\\
+        \implies \|x\|_2 &\leq \sqrt{n}\|x\|_{\infty}.
+    \end{align*}
+    Putting the two inequalities together, we have
+    \[\|x\|_{\infty} \leq \|x\|_2 \leq \sqrt{n}\|x\|_{\infty}\]
+    Thus, $\|x\|_2$ and $\|x\|_{\infty}$ are equivalent norms.
+    
+\end{itemize}
+
+
+\section*{Assigned Exercises}
+\begin{itemize}
+    \item[\textbf{III.1}] Let $c_0$ be the subspace of $\ell^{\infty}$ consisting of all sequences that converge to zero. Prove that $c_0$ has the Schauder basis $(e_n)$, where $e_n = (\delta_{nj})$ is the $n-$th unit coordinate sequence.
+    \newline\newline
+    \textit{Proof}: Let $x \in c_0$. We wish to show that there exists a unique sequence of scalars $\{\alpha_n\}$ such that 
+    \[\|x - (\alpha_1e_1 + \cdots + \alpha_ne_n)\| \to 0 \:\: \text{ as } \:\: n \to \infty.\]
+    Well, take $\alpha_n = x^{(n)}$, where the superscript $(n)$ denotes the $n^{\text{th}}$ element of the sequence. Additionally, since $x \in c_0$, for any $\varepsilon > 0$, there exists a natural number $N$ such that
+    \[|x^{(n)}| < \frac{\varepsilon}{2}\]
+    whenever $n > N$. That is, $\tfrac{\varepsilon}{2}$ is an upper bound for all $x^{(n)}$ so that $\sup_{i > n} |x^{(i)}| \leq \tfrac{\varepsilon}{2} < \varepsilon$. Now, let $y = x - (\alpha_1e_1 + \cdots + \alpha_ne_n)$ so that
+    \begin{align*}
+        \|y\| &= \|(0,0,\cdots, 0, x^{(n+1)}, \cdots)\|
+    \end{align*}
+    but since each $y^{(i)} = 0$ for $1 \leq i \leq n$, 
+    \begin{align*}
+        \sup_{i \geq 1}|y^{(i)}| &= \sup_{i > n} |y^{(i)}|\\
+        &= \sup_{i > n} |x^{(i)}|.
+    \end{align*}
+    Hence, for $n > N$ as above,
+    \[\sup_{i > n}|x^{(i)}| < \varepsilon.\]
+    Hence, 
+    \[\|x - (\alpha_1e_1 + \cdots + \alpha_ne_n)\| \to 0 \:\: \text{ as } \:\: n\to \infty\]
+    so that $c_0$ has the Schauder basis $\{e_n\}$.
+    
+\end{itemize}
+\end{document}

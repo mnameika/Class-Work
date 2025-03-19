@@ -1,0 +1,472 @@
+\documentclass{article}
+\usepackage{graphicx, amsmath, amssymb, mathtools, fancyhdr} % Required for inserting images
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{fancy}
+
+\fancyfoot{}
+\fancyhead[R]{\thepage}
+\fancyhead[L]{MATH 6440}
+
+\begin{document}
+
+\begin{center}
+    {\huge Approximation Methods Homework 2}
+    \vspace{0.5cm}
+
+    {\Large Michael Nameika}
+    \vspace{0.5cm}
+\end{center}
+
+\begin{itemize}
+    \item[\textbf{1.29}.] Let $\mathbf{A}$ and $\mathbf{D}$ be (real) $n \times n$ matrices.
+    \begin{itemize}
+        \item[(a)] Suppose $\mathbf{A}$ is symmetric and has $n$ distinct eigenvalues. Find a two-term expansion of the eigenvalues of the perturbed matrix $\mathbf{A} + \varepsilon\mathbf{D}$, where $\mathbf{D}$ is positive definite. What you are finding is known as a Rayleigh-Schr{\"o}dinger series for the eigenvalues.
+        \newline\newline
+        \textit{Soln.} We begin by noting that since $A$ is real symmetric and has $n$ distinct eigenvalues, the eigenvectors of $A$ for a complete orthonormal basis for $\mathbb{R}^n$. Now, consider the perturbed eigenvalue problem
+        \[(\mathbf{A} + \varepsilon \mathbf{D})v = \lambda v\]
+        and assume
+        \[\lambda \sim \lambda_0 + \varepsilon^{\alpha} \lambda_1 + \cdots\]
+        and
+        \[v \sim v_0 + \varepsilon^{\beta}v_1  + \cdots.\]
+        Plugging these expansions into our eigenvalue problem, we find
+        \begin{align*}
+            (\mathbf{A} + \varepsilon \mathbf{D})(v_0 + \varepsilon^{\beta}v_1 + \cdots) &= (\lambda_0 + \varepsilon^{\alpha}\lambda_1 + \cdots)(v_0 + \varepsilon^{\beta}v_1 + \cdots)\\
+            \implies \mathbf{A}(v_0 + \varepsilon^{\beta}v_1 + \cdots) + \varepsilon\mathbf{D}(v_0 + \varepsilon^{\beta}v_1 +\cdots) &= \lambda_0v_0 + \varepsilon^{\alpha}\lambda_1v_0 + \cdots + \varepsilon^{\beta}\lambda_0v_1 + \varepsilon^{\alpha + \beta}\lambda_1v_1 + \cdots
+        \end{align*}
+        From the $\mathcal{O}(1)$ terms, we have the system
+        \[\mathbf{A}v_0 = \lambda_0v_0\]
+        which gives us that $\lambda_0$ is an eigenvalue of $\mathbf{A}$ with associated eigenvector $v_0$. Further, we see that from the $\mathcal{O}(\varepsilon)$ term, either $\alpha = 1$ or $\beta = 1$. Consider the case $\beta = 1$ and $\alpha < \beta$. If $\alpha \in \mathbb{R} \backslash \mathbb{Q}$, then from balancing terms on the right hand side of the above equation, we have $\lambda_1 = \lambda_2 = \cdots = 0$ since the powers on the right hand side are of the form $\alpha + k$, $k \in \mathbb{N}$ so there is no perturbation of $\lambda$. If $\alpha \in \mathbb{Q}$, then there is an integer $n$ such that $\lambda_1,\cdots, \lambda_{n-1} = 0$ and $\lambda_n \neq 0$, which will recover the case $\alpha = 1$ with reordering. The cases $\alpha > \beta$ or $\alpha = 1$ with $\alpha < \beta$ or $\alpha > \beta$ follow similarly leading us to conclude $\alpha = \beta = 1$. Thus the $\mathcal{O}(\varepsilon)$ terms give
+        \[\mathbf{A}v_1 + \mathbf{D}v_0 = \lambda_1v_0 + \lambda_0v_1.\]
+        Now project onto $v_0$:
+        \begin{align}
+        \label{project_eqn}
+            \langle v_0, \mathbf{A}v_1\rangle + \langle v_0, \mathbf{D}v_0\rangle &= \langle v_0, \lambda_1v_0\rangle + \lambda_0\langle v_0, v_1\rangle.
+        \end{align}
+        Since $\mathbf{A}$ is real symmetric, $A$ is self-adjoint, so 
+        \begin{align*}
+            \langle v_0, \mathbf{A}v_1\rangle &= \langle \mathbf{A}v_0, v_1\rangle\\
+            &= \lambda_0\langle v_0, v_1\rangle.
+        \end{align*}
+        Then equation (\ref{project_eqn}) becomes
+        \begin{align*}
+            \langle v_0, \mathbf{D}v_0 \rangle &= \langle v_0, \lambda_1 v_0\rangle\\
+            &= \lambda_1^*
+        \end{align*}
+        and since $\mathbf{D}$ is positive definite, we have $\langle v_0, \mathbf{D}v_0 \rangle >0$ so that $\lambda_1^* = \lambda_1$ giving us
+        \[\lambda_1 = \langle v_0, \mathbf{D}v_0\rangle\]
+        and so our two term expansion for $\lambda$ is
+        \[\lambda \sim \lambda_0 + \varepsilon\langle v_0, \mathbf{D}v_0\rangle\]
+        with $\lambda_0$ an eigenvalue of $\mathbf{A}$ and $v_0$ the associated eigenvector.
+        \newline\newline
+        
+
+        \item[(b)] Suppose $\mathbf{A}$ is the identity and $\mathbf{D}$ is symmetric. Find a two-term expansion of the eigenvalues for the matrix $\mathbf{A} + \varepsilon\mathbf{D}$.
+        \newline\newline
+        \textit{Soln.} Consider the perturbed eigenvalue problem
+        \[(\mathbf{A} + \varepsilon \mathbf{D})v = \lambda v.\]
+        Following the same argument in part (a), we can asssume
+        \[\lambda \sim \lambda_0 + \varepsilon\lambda_1 + \cdots\]
+        and 
+        \[v \sim v_0 + \varepsilon v_1 + \cdots.\]
+        Note that, since $\mathbf{A}$ is the identity matrix, $\mathbf{A}$ has only one eigenvalue, $\lambda_{\mathbf{A}} = 1$. Plugging these expansions into our eigenvalue problem, we find
+        \begin{align*}
+            (\mathbf{A} + \varepsilon\mathbf{D})(v_0 + \varepsilon v_1 + \cdots) &= (\lambda_0 + \varepsilon \lambda_1 + \cdots)(v_0 + \varepsilon v_1 + \cdots)\\
+            \implies \mathbf{A}(v_0 + \varepsilon v_1 + \cdots) + \varepsilon\mathbf{D}(v_0 + \varepsilon v_1 + \cdots) &= \lambda_0v_0 + \varepsilon\lambda_1v_0 + \cdots + \varepsilon\lambda_0v_1 + \cdots.
+        \end{align*}
+        The $\mathcal{O}(1)$ terms gives 
+        \[\mathbf{A}v_0 = \lambda_0v_0\]
+        and since $\mathbf{A}$ is the identity, $\lambda_0 = 1$ and $v_0$ is to be determined. The $\mathcal{O}(\varepsilon)$ terms gives 
+        \begin{align*}
+            \mathbf{D}v_0 + \mathbf{A}v_1 &= \lambda_1v_0 + \lambda_0v_1\\
+            \implies \mathbf{D}v_0 + v_1 &= \lambda_1v_0 + v_1\\
+            \implies \mathbf{D}v_0 &= \lambda_1v_0
+        \end{align*}
+        which gives us $\lambda_1$ is an eigenvalue of $\mathbf{D}$ with associated eigenvector $v_0$. Further, since $\mathbf{D}$ is symmetric, we have $\lambda_1$ is real, and so our two term expansion for $\lambda$ is 
+        \[\lambda \sim 1 + \varepsilon a\]
+        where $a$ is an eigenvalue of $\mathbf{D}$.
+        \newline\newline
+
+
+        \item[(c)] Considering
+        \[\mathbf{A} = \begin{pmatrix}
+            0 & 1\\
+            0 & 0
+        \end{pmatrix} \:\: \mathbf{D} = \begin{pmatrix}
+            0 & 0\\
+            1 & 0
+        \end{pmatrix},\]
+        show that $\mathcal{O}(\varepsilon)$ perturbation of a matrix need not result in a $\mathcal{O}(\varepsilon)$ perturbation of the eigenvalues. This example also demonstrates that a smooth perturbation of a matrix need not result in a smooth perturbation of the eivgenvalues.
+        \newline\newline
+        \textit{Proof:} Notice 
+        \[\mathbf{A} + \varepsilon\mathbf{D} = \begin{pmatrix}
+            0 & 1\\
+            \varepsilon & 0
+        \end{pmatrix}.\]
+        Computing the eigenvalues, we find
+        \begin{align*}
+            \left|\begin{matrix}
+                -\lambda & 1\\
+                \varepsilon & -\lambda
+            \end{matrix}\right| &= 0\\
+            \implies \lambda^2 - \varepsilon &= 0\\
+            \implies \lambda^2 &= \varepsilon\\
+            \implies \lambda &= \pm\sqrt{\varepsilon}.
+        \end{align*}
+        And note that the eigenvalues of $\mathbf{A}$ are $\lambda = 0$. Thus a $\mathcal{O}(\varepsilon)$ perturbation in the matrix results in a $\mathcal{O}(\varepsilon^{1/2})$ perturbation of the eigenvalues.
+    \end{itemize}
+
+    \pagebreak
+    
+    \item[\textbf{1.33}.] Find a two-term asymptotic expansion, for small $\varepsilon$, of the solution of the following problems. Also, comment on how the boundary conditions help determine the form of the expansion. 
+    \begin{itemize}
+        \item[(c)] $y'' - y + \varepsilon y^3 = 0$, where $y(0) = 0$ and $y(1) = \varepsilon.$
+        \newline\newline
+        \textit{Soln.} Assume $y \sim \varepsilon^{\alpha}(y_0 + \varepsilon^{\beta}y_1 + \cdots)$ and that 
+        \[y'' \sim \varepsilon^{\alpha}(y_0'' + \varepsilon^{\beta}y_1'' + \cdots)\]
+        and
+        \begin{align*}
+            y^3 &= \varepsilon^{3\alpha}\left(y_0 + \varepsilon^{\beta}y_1 + \cdots\right)^3\\
+            &= \varepsilon^{3\alpha}\left(y_0^3 + 3\varepsilon^{\beta}y_0^2y_1 + \cdots\right).
+        \end{align*}
+        Applying our boundary conditions to this expansion gives
+        \begin{align*}
+            y(0) &= \varepsilon^{\alpha}(y_0(0) + \varepsilon^{\beta}y_1(0) + \cdots)\\
+            &= 0\\
+            \implies y_0(0) &= y_1(0) = \cdots = 0
+        \end{align*}
+        and
+        \begin{align*}
+            y(1) &= \varepsilon^{\alpha}(y_0(1) + \varepsilon^{\beta}y_1(1) + \cdots)\\
+            &= \varepsilon\\
+            \implies y_1(1) &= y_2(1) = \cdots = 0
+        \end{align*}
+        and balancing gives $\alpha = 1$ with $y_0(1) = 1$.
+        Plugging this expansion into our differential equation yields
+        \begin{align*}
+            \varepsilon y_0'' + \varepsilon^{1 + \beta}y_1'' + \cdots - \varepsilon y_0 - \varepsilon^{1 + \beta}y_1 - \cdots + \varepsilon^4y_0^3 +  3\varepsilon^{\beta + 2}y_0^2y_1 + \cdots = 0.
+        \end{align*}
+        Now, the $\mathcal{O}(\varepsilon)$ term gives the ODE
+        \[y_0'' - y_0 = 0, \hspace{0.75cm} y_0(0) = 0 \hspace{0.5cm} \text{and} \hspace{0.5cm} y_0(1) = 1.\]
+        which has general solution
+        \[y_0(t) = a_0\cosh(t) + b_0\sinh(t)\]
+        From the boundary conditions, we find $y_0(0) = a_0 = 0$ and $y_0(1) = b_0\sinh(1) = 1 \implies b_0 = \frac{1}{\sinh(1)}$. Balancing the next lowest order terms in the differential equation gives us $\beta = 3$. Thus the $\mathcal{O}(\varepsilon^4)$ terms yield
+        \[y_1'' - y_1 + \frac{\sinh^3(t)}{\sinh^3(1)} = 0, \hspace{0.75cm} y_1(0) = 0 \hspace{0.5cm} \text{and} \hspace{0.5cm} y_1(1) = 0.\]
+        The general solution to the homogeneous equation is again $y_{1,h} = a\cosh(t) + b\sinh(t)$. To get the particular solution, we apply variation of parameters. Let $g(t) = -\frac{\sinh^3(t)}{\sinh^3(1)}$. Then from variation of parameters, we have $y_{1,p} = u_1x_1 + u_2x_2$ with $x_1 = \cosh(t)$ and $x_2 = \sinh(t)$ and
+        \begin{align*}
+            u_1 &= -\int_0^t\frac{g(s)x_2}{W}ds\\
+            u_2 &= \int_0^t\frac{g(s)x_1}{W}ds
+        \end{align*}
+        where $W = W(\cosh(t), \sinh(t)) = 1$ so 
+        \begin{align*}
+            u_1 &= \frac{1}{\sinh^3(1)}\int_0^{t}\sinh^4(s)ds\\
+            u_2 &= -\frac{1}{\sinh^3(1)}\int_0^t\cosh(s)\sinh^3(s)ds.
+        \end{align*}
+        Let's now compute the above integrals. For $u_2$, let $v = \sinh(s)$ so that $dv = \cosh(s)ds$ and
+        \begin{align*}
+            \int_0^t\cosh(s)\sinh^3(s)ds &= \int_0^{\sinh(t)}v^3dv\\
+            &= \frac{\sinh^4(t)}{4}\\
+            \implies u_2 &= -\frac{\sinh^4(t)}{4\sinh^3(1)}.
+        \end{align*}
+        For $u_1$, notice
+        \begin{align*}
+            \int_0^t\sinh^4(s)ds &= \int_0^t\sinh^2(s)(\cosh^2(s) - 1)ds\\
+            &= \int_0^t\sinh^2(s)\cosh^2(s)ds - \int_0^t\sinh^2(s)ds.
+        \end{align*}
+        For the second integral, using the identity $\sinh^2(s) = \frac{\cosh(2s) - 1}{2}$ so that
+        \begin{align*}
+            \int_0^t\sinh^2(s)ds &= \frac{1}{2}\int_0^t(\cosh(2s) - 1)ds\\
+            &= \frac{\sinh(2t)}{4} - \frac{t}{2}.
+        \end{align*}
+        For the first integral, we use the above identity for $\sinh^2(s)$ with the identity $\cosh^2(s) = \frac{\cosh(2s) + 1}{2}$ so that
+        \begin{align*}
+            \int_0^t\sinh^2(s)\cosh^2(s)ds &= \int_0^t\left(\frac{\cosh(2s) - 1}{2}\right)\left(\frac{\cosh(2s) + 1}{2}\right)ds\\
+            &= \frac{1}{4}\int_0^t (\cosh^2(2s) - 1)ds\\
+            &= \frac{1}{8}\int_0^t(\cosh(4s) + 1) - \frac{t}{4}\\
+            &= \frac{\sinh(4t)}{32} + \frac{t}{8} - \frac{t}{4}\\
+            &= \frac{\sinh(4t)}{32} - \frac{t}{8}.
+        \end{align*}
+        Thus
+        \begin{align*}
+            \int_0^t\sinh^4(s)ds &= \frac{\sinh(4t)}{32}- \frac{\sinh(2t)}{4} - \frac{t}{8} + \frac{t}{2}\\
+            &= \frac{\sinh(4t)}{32} - \frac{\sinh(2t)}{4} + \frac{3t}{8}.
+        \end{align*}
+        Thus our solution to this differential equation is
+        \begin{align*}
+            y_1(t) &= a\cosh(t) + b\sinh(t) + \frac{\cosh(t)}{\sinh^3(1)}\left(\frac{\sinh(4t)}{32} - \frac{\sinh(2t)}{4} + \frac{3t}{8}\right) - \frac{\sinh^5(t)}{4\sinh^3(1)}.
+        \end{align*}
+        And from our boundary conditions, we have
+        \begin{align*}
+            y_1(0) &= a = 0\\
+            y_1(1) &= b\sinh(1) + \frac{\cosh(1)}{\sinh^3(1)}\left(\frac{\sinh(4)}{32} - \frac{\sinh(2)}{4} + \frac{3}{8}\right) - \frac{\sinh^2(1)}{4} = 0\\
+            \implies b &=  - \frac{\cosh(1)}{\sinh^4(1)}\left(\frac{\sinh(4)}{32} - \frac{\sinh(2)}{4} + \frac{3}{8}\right) + \frac{\sinh(1)}{4}.
+        \end{align*}
+        Thus our two term expansion for the differential equation is
+        \[y(t) \sim \varepsilon\frac{\sinh(t)}{\sinh(1)} + \varepsilon^4\left(b\sinh(t) + \frac{\cosh(t)}{\sinh^3(1)}\left(\frac{\sinh(4t)}{32} - \frac{\sinh(2t)}{4} + \frac{3t}{8}\right) - \frac{\sinh^5(t)}{4\sinh^3(1)}\right).\]
+    \end{itemize}
+
+    \pagebreak
+
+    \item[\textbf{1.36}.] The eigenvalue problem for the vertical displacement, $y(x)$, of an elastic string with variable density is
+    \[y'' + \lambda^2\rho(x,\varepsilon)y = 0, \hspace{0.5cm} \text{for} \hspace{0.2cm} 0 < x < 1,\]
+    where $y(0) = y(1) = 0$. For small $\varepsilon$ assume $\rho \sim 1 + \varepsilon\mu(x)$, where $\mu(x)$ is positive and continuous. In this case the solution $y(x)$ and eigenvalue $\lambda$ depend on $\varepsilon$, and the appropriate expansions are $y \sim y_0(x) + \varepsilon y_1(x)$ and $\lambda \sim \lambda_0 + \varepsilon \lambda_1$ (better expansions will be discussed in Sect. 3.6).
+    \begin{itemize}
+        \item[(a)] Find $y_0$ and $\lambda_0$.
+        \newline\newline
+        \textit{Soln.} Plugging the above expansions into our differential equation, we have
+        \begin{align*}
+            &y_0'' + \varepsilon y_1'' + (\lambda_0 + \varepsilon\lambda_1)^2(1 + \varepsilon\mu(x))(y_0 + \varepsilon y_1) = 0 
+        \end{align*}
+        which, up to $\mathcal{O}(\varepsilon)$ becomes
+        \[y_0'' + \varepsilon y_1'' + \lambda_0^2y_0 + \varepsilon(\lambda_0^2y_1 + \lambda_0^2y_0\mu(x) + 2\lambda_0\lambda_1y_0) = 0\]
+        For the $\mathcal{O}(1)$ terms, we have
+        \[y_0'' + \lambda_0^2y_0 = 0, \hspace{0.5cm} y_0(0) = 0, y_0(1) = 0\]
+        which has general solution $y_0 = a_0\cos(\lambda_0x) + b_0\sin(\lambda_0x)$. From the boundary conditions, we have 
+        \begin{align*}
+            y_0(0) &= a_0 = 0\\
+            y_0(1) &= b_0\sin(\lambda_0).
+        \end{align*}
+        Since this is an eigenvalue problem, $b_0 \neq 0$ giving $\lambda_0 = n\pi$ $n \in \mathbb{Z}$, $n \neq 0$. Thus
+        \begin{align*}
+            y_0 &= b_0\sin(n\pi x)\\
+            \lambda_0 &= n\pi.
+        \end{align*}
+        
+
+
+        \item[(b)] Find $y_1$ and $\lambda_1$.
+        \newline\newline
+        \textit{Soln.} From the $\mathcal{O}(\varepsilon)$ terms in the expansion in part (a), we find
+        \begin{align*}
+            y_1'' + \pi^2n^2y_1 + \sin(n\pi x)(\mu(x)n^2\pi^2 + 2\lambda_0\lambda_1) &= 0.
+        \end{align*}
+        Which admits the homogeneous solution $y_{1,h} = a_1\cos(n\pi x) + b_1\sin(n\pi x)$. Let $g(x) = -\sin(n\pi x)(\mu(x)n^2\pi^2 + 2\lambda_0\lambda_1)$ and $x_1 = \cos(n\pi x)$ and $x_2 = \sin(n\pi x)$. From variation of parameters, we seek functions $u_1$, $u_2$ such that $y_p = u_1x_1 + u_2x_2$ where 
+        \begin{align*}
+            u_1 &= -\int_0^x\frac{g(s)x_2(s)}{W(x_1,x_2)}ds\\
+            u_2 &= -\int_0^x\frac{g(x)x_1(s)}{W(x_1,x_2)}ds.
+        \end{align*}
+        Now, 
+        \begin{align*}
+            W(x_1,x_2) &= \left|\begin{matrix}
+                \cos(n\pi x) & \sin(n\pi x)\\
+                -n\pi \sin(n\pi x) & n\pi \cos(n\pi x)
+            \end{matrix}\right|\\
+            &= n\pi(\cos^2(n\pi x) + \sin^2(n\pi x))\\
+            &= n\pi.
+        \end{align*}
+        Then
+        \begin{align*}
+            u_1 &= \frac{1}{n\pi}\left(b_0\int_0^x\sin^2(n\pi s)\mu(x)ds + 2b_0n\pi\lambda_1\int_0^x\sin^2(n\pi s)ds\right)\\
+            &= n\pi b_0\int_0^x\sin^2(n\pi x)\mu(s)ds + \lambda_1b_0\left(x - \frac{\sin(2n\pi x)}{2\pi n}\right)
+        \end{align*}
+        and
+        \begin{align*}
+            u_2 &= -\frac{1}{n\pi}\left(n\pi a_0 \int_0^x\sin(n\pi s)\cos(n\pi s)\mu(s)ds - 2\lambda_1b_0\int_0^x\sin(n\pi s)\cos(n \pi s)ds\right)\\
+            &= -\frac{b_0n\pi}{2}\int_0^x\sin(2n\pi s)\mu(s)ds - \lambda_1b_0\int_0^x\sin(2n\pi s)ds\\
+            &= -\frac{b_0n\pi}{2}\int_0^x\sin(2n\pi s)\mu(s)ds + \frac{\lambda_1b_0}{2n\pi}(\cos(2n\pi x) - 1)
+        \end{align*}
+        so that our general solution for $y_1$ takes the form
+        \begin{align*}
+            y_1 &= n\pi b_0\cos(n\pi x)\int_0^x\sin^2(n\pi s)\mu(s)ds + n\pi \lambda_1b_0\cos(n\pi x)\left(x - \frac{\sin(2n\pi x)}{2n\pi}\right)\\
+            &- \frac{n\pi b_0}{2}\sin(n\pi x)\int_0^x\sin(2n\pi s)\mu(s)ds + \frac{\lambda_1b_0}{2}\sin(n\pi x)(\cos(2n\pi x) - 1) + a\cos(n\pi x) + b\sin(n \pi x).
+        \end{align*}
+        From the boundary conditions, notice $y_1(0) = a = 0$ and
+        \begin{align*}
+            y_1(1) &= n\pi a_0\cos(n\pi)\int_0^1\sin^2(n\pi s)\mu(s)ds + \lambda_1b_0\cos(n\pi) = 0\\
+            \implies \lambda_1 &= -n\pi \int_0^1\sin^2(n\pi s)\mu(s)ds
+        \end{align*}
+         and so 
+        \begin{align*}
+            y_1 &= n\pi a_0\cos(n\pi x)\int_0^x\sin^2(n\pi s)\mu(s)ds + \lambda_1b_0\cos(n\pi x)\left(x - \frac{\sin(2n\pi x)}{2n\pi}\right)\\
+            &-\frac{n\pi}{2}\sin(n\pi x)\int_0^x\sin(2n\pi s)\mu(s)ds + \frac{\lambda_1b_0}{2n\pi}\sin(n\pi x)(\cos(2n\pi x) - 1) + b_1\sin(n\pi x).
+        \end{align*}
+    \end{itemize}
+
+    \pagebreak
+
+    \item[\textbf{1.41}.] In quantum mechanics, the perturbation theory for bound states involves the time-independent (normalized) Schr{\"o}dinger equation
+    \[\Psi'' - [V_0(x) + \varepsilon V_1(x)]\Psi = -E\Psi, \hspace{0.75cm} \text{for} \hspace{0.4cm} -\infty < x < \infty,\]
+    where $\psi(-\infty) = \psi(\infty) = 0$. In this problem the eigenvalue $E$ is the energy, $V_1$ i s the perturbing potential, and $\varepsilon$ is called the coupling constant. The potentials $V_0$ and $V_1$ are given continuous functions. This exercise examines what is known as a logarithmic perturbation expansion to fin dthe corrections to the energy. To do this, it is assumed that the unperturbed ($\varepsilon = 0$) state is nonzero (more specifically, it is a nondegenerate ground state).
+    \begin{itemize}
+        \item[(a)] Assuming $\psi \sim \psi_0(x) + \varepsilon \psi_1(x) + \varepsilon^2\psi_2(x)$ and $E \sim E_0 + \varepsilon E_1 + \varepsilon^2E_2$, find what problem the first term in these expansions satisfies. In this problem assume 
+        \[\int_{-\infty}^{\infty} \psi_0^2dx = 1 \hspace{0.5cm} \text{and} \hspace{0.5cm} \int_{-\infty}^{\infty}|V_1(x)|dx < \infty.\]
+        \textit{Soln.} Plugging these expansions into our differential equation, we find the following:
+        \begin{align*}
+            \psi_0'' + \varepsilon\psi_1'' + \varepsilon^2\psi_2'' - [V_0(x) + \varepsilon V_1(x)](\psi_0 + \varepsilon\psi_1 + \varepsilon^2\psi_2) &= -(E_0 + \varepsilon E_1 + \varepsilon^2E_2)(\psi_0+ \varepsilon\psi_1 + \varepsilon^2\psi_2)
+        \end{align*}
+        and notice the $\mathcal{O}(1)$ terms give us the following equation:
+        \[\psi_0'' - V_0(x)\psi_0 = -E_0\psi_0.\]
+        That is, the first terms of the expansions satisfy the standard time independent Schr{\"o}dinger equation.
+        \newline\newline
+        
+
+
+        \item[(b)] Letting $\psi = e^{\varphi(x)}$, find the problem $\varphi(x)$ satisfies.
+        \newline\newline
+        \textit{Soln.} For $\psi = e^{\varphi(x)}$, we have
+        \begin{align*}
+            \psi' &= \varphi'e^{\varphi}\\
+            \psi'' &= \varphi''e^{\varphi} + (\varphi')^2e^{\varphi}.
+        \end{align*}
+        Plugging this into our equation, we have
+        \begin{align*}
+            \varphi''e^{\varphi} + (\varphi')^2e^{\varphi} - [V_0 + \varepsilon V_1]e^{\varphi} &= -E e^{\varphi}\\
+            \implies \varphi'' + (\varphi')^2 - [V_0 + \varepsilon V_1] &= -E.
+        \end{align*}
+        \vspace{0.5cm}
+        
+        
+        
+
+        \item[(c)] Expand $\varphi(x)$ for small $\varepsilon$, and from this find $E_1$ and $E_2$ in terms of $\psi_0$ and the perturbing potential.
+        \newline\newline
+        \textit{Soln.} Assume $\varphi \sim \varphi_0 + \varepsilon^{\alpha}\varphi_1 + \varepsilon^{2\alpha}\varphi_2$ and $\varphi'' \sim \varphi_0'' + \varepsilon^{\alpha}\varphi_1'' + \varepsilon^{2\alpha}\varphi_2''$. Plugging this expansion into our differential equation gives
+        \begin{align*}
+            \varphi_0'' + \varepsilon^{\alpha}\varphi_1'' + \varepsilon^{2\alpha}\varphi_2'' + \cdots  + \left(\varphi_0' + \varepsilon^{\alpha}\varphi_1' + \varepsilon^{2\alpha}\varphi_2' + \cdots\right)^2 - V_0 - \varepsilon V_1 &= -E_0 - \varepsilon E_1 - \varepsilon^2 E_2.
+        \end{align*}
+        From the $\mathcal{O}(1)$ terms, we have
+        \[\varphi_0'' + (\varphi_0')^2 - V_0 = -E_0\]
+        and from the $\mathcal{O}(\varepsilon)$ term, we have $\alpha = 1$ and so
+        \[\varphi_1'' + 2\varphi_0'\varphi_1' - V_1 = -E_1\]
+        and finally the $\mathcal{O}(\varepsilon^2)$ term gives
+        \[\varphi_2'' + (\varphi_1')^2 + 2\varphi_0'\varphi_2' = -E_2.\]
+        Now, relating the asymptotic expansion of $\psi$ with the asymptotic expansion for $\varphi$, notice
+        \begin{align*}
+            \psi &\sim e^{\varphi_0 + \varepsilon\varphi_1 + \varepsilon^{2}\varphi_2 + \cdots}\\
+            &= e^{\varphi_0}e^{\varepsilon\varphi_1 + \varepsilon^{2}\varphi_2 + \cdots}\\
+            &= e^{\varphi_0}\left(1 + \varepsilon(\varphi_1 + \varepsilon \varphi_2 + \cdots) + \frac{\varepsilon^2}{2}(\varphi_1 + \varepsilon \varphi_2 + \cdots)^2 + \cdots\right)\\
+            &= \psi_0 + \varepsilon\psi_1 + \varepsilon^2\psi_2 + \cdots\\
+            \implies \psi_0 &= e^{\varphi_0}\\
+            \psi_1 &= e^{\varphi_0}\varphi_1 = \psi_0\varphi_1\\
+            \psi_2 &= e^{\varphi_0}\left(\frac{\varphi_1^2}{2} + \varphi_2\right) =\psi_0\left(\frac{\varphi_1^2}{2} + \varphi_2\right).
+        \end{align*}
+        Now, we wish to solve for $E_1$ and $E_2$, so for the $\mathcal{O}(\varepsilon)$ ODE for $\varphi_1$, multiply each side by $e^{2\varphi_0}$ so that the equation becomes
+        \begin{align*}
+            &e^{2\varphi_0}\varphi_1'' + 2\varphi_0'e^{2\varphi_0}\varphi_1' - V_1e^{2\varphi_0} = -E_1e^{2\varphi_0}\\
+            &\implies \frac{d}{dx}\left(e^{2\varphi_0}\varphi_1'\right) = e^{2\varphi_0}(V_1 - E_1)\\
+            &\implies \int_{-\infty}^{\infty}\frac{d}{dx}\left(e^{2\varphi_0}\varphi_1'\right)dx = \int_{-\infty}^{\infty}e^{2\varphi_0}(V_1 - E_1)dx\\
+            &\implies \psi_0^2(\infty)\varphi_1'(\infty) - \psi_0^2(-\infty)\varphi_1'(-\infty) = \int_{-\infty}^{\infty}V_1\psi_0^2dx - E_1\int_{-\infty}^{\infty}\psi_0^2dx.
+        \end{align*}
+        And since $\varphi_1 = \frac{\psi_1}{\psi_0}$, we have $\varphi_1' = \frac{\psi_1'\psi_0 - \psi_0'\psi_1}{\psi_0^2}$ so that the above equation becomes
+        \begin{align*}
+            \psi_1'(\infty)\psi_0(\infty) - \psi_0'(\infty)\psi_1(\infty) - \psi_1'(-\infty)\psi_0(\infty) + \psi_0'(-\infty)\psi_1(-\infty) = \int_{-\infty}^{\infty}V_1\psi_0^2dx - E_1.
+        \end{align*}
+        Now using the fact that $\psi_0(\pm \infty) = \psi_1(\pm \infty) = 0$, it follows that (see lemma 1) $\psi_0'(\pm \infty) = \psi_1'(\pm \infty) = 0$ so that the above equation becomes
+        \begin{align*}
+            E_1 &= \int_{-\infty}^{\infty}V_1\psi_0^2dx.
+        \end{align*}
+        For $E_2$, multiply the $\mathcal{O}(\varepsilon^2)$ ODE for $\varphi_2$ by $e^{2\varphi_0}$:
+        \begin{align*}
+            &e^{2\varphi_0}\varphi_2'' + e^{2\varphi_0}(\varphi_1')^2 + 2e^{2\varphi_0}\varphi_0'\varphi_2' = -E_2e^{2\varphi_0}\\
+            \implies &\frac{d}{dx}\left(\psi_0^2\varphi_2'\right) = -\psi_0^2(E_2 + (\varphi_1')^2)\\
+            \implies &\int_{-\infty}^{\infty}\frac{d}{dx}(\psi_0^2\varphi_2')dx = -\int_{-\infty}^{\infty}\psi_0^2(E_2 + (\varphi_1')^2)dx.\\
+            \implies &\psi_0^2(\infty)\varphi_2'(\infty) - \psi_0^2(-\infty)\varphi_2'(-\infty) = -\int_{-\infty}^{\infty}\psi_0^2(E_2 + (\varphi_1')^2)dx.
+         \end{align*}
+         Now notice
+         \begin{align*}
+             \varphi_2'\psi_0^2 &= \psi_2'\psi_0 - \psi_0'\psi_2\\
+             \implies \varphi_2'(\pm \infty)\psi_0^2(\pm \infty) &= \psi_2'(\pm \infty)\psi_0(\pm \infty) - \psi_0'(\pm \infty)\psi_2(\pm \infty)\\
+             &= 0 
+        \end{align*}
+        by lemma 1. Thus 
+        \begin{align*}
+            0 &= -E_2\int_{-\infty}^{\infty}\psi_0^2dx - \int_{-\infty}^{\infty}\psi_0^2(\varphi_1')^2dx\\
+            \implies E_2 &= -\int_{-\infty}^{\infty}\psi_0^2(\varphi_1')^2dx.
+        \end{align*}
+        And from out work in finding $E_1$, recall
+        \begin{align*}
+           \frac{d}{dx}(\psi_0^2\varphi_1') &= \psi_0^2(V_1 - E_1)\\
+           \implies \varphi_1'(x) &= \psi_0^{-2}\int_{-\infty}^x \psi_0^2(V_1 - E_1)dt\\
+           \implies (\varphi_1'(x))^2 &= \psi_0^{-4}\left(\int_{-\infty}^x \psi_0^2(V_1 - E_1)dt\right)^2.
+        \end{align*}
+        Thus
+        \[E_2 = \int_{-\infty}^{\infty}\psi_0^{-2}\left(\int_{-\infty}^x\psi_0^2(V_1 - E_1)dt\right)^2dx.\]
+        with
+        \[E_1 = \int_{-\infty}^{\infty}V_1\psi_0^2dx.\]
+        \vspace{1cm}
+
+        \textbf{Lemma 1:} If $f: \mathbb{R} \to \mathbb{R}$ is differentiable and 
+        \[\lim_{x \to \pm \infty} |f(x)| = M < \infty\]
+        then 
+        \[\lim_{x \to \pm \infty} |f'(x)| = 0.\]
+        The purpose of this lemma is to show that $\lim_{x \to \pm\infty} f(x)f'(x) \neq 0$ cannot be the case.
+        \newline\newline
+        \textit{Proof:} It suffices to show that if $\lim_{x \to \infty} f(x) = 0$, then $\lim_{x \to \infty} f'(x) = 0$. The case where $x \to -\infty$ will follow similarly. Let $\{x_n\}$ be a sequence of positive real numbers such that $x_n \to \infty$ as $n \to \infty$. In particular, suppose $x_n$ satisfies the relation $x_n = 2x_{n-1}$. By the mean value theorem, there exists a $c(x_n) \in (x_{n-1}, x_n)$ such that
+        \begin{align*}
+            f'(c) &= \frac{f(x_n) - f(x_{n-1})}{x_n - x_{n-1}}.\\
+            \implies |f'(c)| &\leq \frac{|f(x_n)| + |f(x_{n-1})|}{|x_n - x_{n-1}|}\\
+            \implies |f'(c(x))| &\leq \frac{4M}{x_n}
+        \end{align*}
+        and as $n \to \infty$, $\frac{4M}{x_{n}} \to 0$, so that $\lim_{x \to \infty} f'(x) = 0$, as desired.
+        \newline\newline\newline
+        
+        
+        
+
+        \item[(d)] For a harmonic oscillator (thus, $V_0 = \lambda^2x^2$ with $\lambda > 0$) with perturbing potential $V_1 = \alpha xe^{-\gamma x^2}$ (where $\alpha$ and $\gamma$ are positive) show that
+        \[E \sim \lambda - \frac{1}{4}\left(\frac{\varepsilon\alpha}{\gamma + \lambda}\right)^2\sqrt{\frac{\lambda}{\lambda + 2\gamma}}.\]
+        \textit{Proof:} We assume $\psi \sim \psi_0 + \varepsilon \psi_1 + \varepsilon^2\psi_2$, $E \sim E_0 + \varepsilon E_1 + \varepsilon^2E_2$ and $\psi_0 = ae^{-\lambda x^2/2}$ where $a$ is a scaling constant to be determined that allows $\psi_0$ to satisfy the normalization condition
+        \[\int_{-\infty}^{\infty}\psi_0^2dx = 1.\]
+        Notice
+        \begin{align*}
+            \int_{-\infty}^{\infty}\psi_0^2dx &= \int_{-\infty}^{\infty}a^2e^{-\lambda x^2}dx.\\
+            &= \frac{a^2}{\sqrt{\lambda}}\int_{-\infty}^{\infty}e^{-u^2}du\\
+            &= a^2\sqrt{\frac{\pi}{\lambda}} = 1\\
+            \implies a &= \left(\frac{\lambda}{\pi}\right)^{1/4}.
+        \end{align*}
+        With $u = \sqrt{\lambda}x$. To get $E_0$, we plug this equation into the equation found in part (a):
+        \begin{align*}
+            &\frac{d^2}{dx^2}\left(ae^{-\lambda x^2/2}\right) - \lambda^2x^2ae^{-\lambda x^2/2} = -E_0e^{-\lambda x^2/2}\\
+            &\implies -\lambda e^{-\lambda x^2/2} + \lambda^2x^2e^{-\lambda x^2/2} - \lambda^2x^2e^{-\lambda x^2/2} = -E_0e^{-\lambda x^2/2}\\
+            &\implies E_0 = \lambda.
+        \end{align*}
+        
+        
+        
+        Now, notice 
+        \begin{align*}
+            E_1 &= \int_{-\infty}^{\infty}V_1\psi_0^2dx\\
+            &= \int_{-\infty}^{\infty}\alpha \sqrt{\frac{\lambda}{\pi}}xe^{-(\gamma + \lambda)x^2}dx.
+        \end{align*}
+        And since the integrand is odd and the integral converges ($\ast$), we have that $E_1 = 0$. Now, solving for $E_2$, let us first evaluate ${\displaystyle \int_{-\infty}^{x}\psi_0^2V_1dt }$:
+        \begin{align*}
+            \int_{-\infty}^x\psi_0^2V_1dt &= \alpha\sqrt{\frac{\lambda}{\pi}}\int_{-\infty}^{x}te^{-(\gamma + \lambda)t^2}dt\\
+            &= \frac{\alpha}{2(\gamma + \lambda)}\sqrt{\frac{\lambda}{\pi}}\int_{\infty}^{(\gamma + \lambda)x^2}e^{-u}du\\
+            &= \frac{\alpha}{2(\gamma + \lambda)}\sqrt{\frac{\lambda}{\pi}}[-e^{-u}]\bigg|_{\infty}^{(\gamma + \lambda)x^2}\\
+            &= -\frac{\alpha}{2(\gamma + \lambda)}\sqrt{\frac{\lambda}{\pi}}\left(e^{-(\gamma + \lambda)x^2}\right)\\
+            \implies \left(\int_{-\infty}^{x}\psi_0^2V_1dt\right)^2 &= \frac{\lambda}{4\pi}\left(\frac{\alpha}{\gamma + \lambda}\right)^2e^{-2(\gamma + \lambda)x^2}
+        \end{align*}
+        with $u = (\gamma + \lambda)t^2$. Thus
+        \begin{align*}
+            E_2 &= \frac{\lambda}{4\pi}\left(\frac{\alpha}{\gamma + \lambda}\right)^2\sqrt{\frac{\pi}{\lambda}}\int_{-\infty}^{\infty}e^{-(\lambda + 2\gamma)x^2}dx\\
+            &= \frac{1}{4}\sqrt{\frac{\lambda}{\pi(\lambda + 2\gamma)}}\left(\frac{\alpha}{\gamma + \lambda}\right)^2\int_{-\infty}^{\infty}e^{-u^2}du\\
+            &= \frac{1}{4}\sqrt{\frac{\lambda}{\pi(\lambda + 2\gamma)}}\left(\frac{\alpha}{\gamma + \lambda}\right)^2\sqrt{\pi}\\
+            &= \frac{1}{4}\left(\frac{\alpha}{\gamma + \lambda}\right)^2\sqrt{\frac{\lambda}{2\gamma + \lambda}}.
+        \end{align*}
+        With $u = \sqrt{2\gamma + \lambda}x$. Hence
+        \[E \sim \lambda - \frac{1}{4}\left(\frac{\varepsilon \alpha}{\gamma + \lambda}\right)^2\sqrt{\frac{\lambda}{2\gamma + \lambda}}\]
+        as desired.
+        \newline\newline
+        \textbf{Proof of }($\ast$): By a change of variables, it suffices to inspect the integral 
+        \[\int_{-\infty}^{\infty}xe^{-x^2}dx.\]
+        We split the integral from $-\infty \text{ to } 0$ and $0 \text{ to } \infty$:
+        \begin{align*}
+            \int_{-\infty}^{\infty}xe^{-x^2}dx &= \int_{-\infty}^{0}xe^{-x^2}dx + \int_0^{\infty} xe^{-x^2}dx.
+        \end{align*}
+        Further, it is sufficients to show ${\displaystyle \int_0^{\infty}xe^{-x^2}dx < \infty }$ since ${\displaystyle \int_{-\infty}^{0}xe^{-x^2} dx = -\int_{0}^{\infty}xe^{-x^2}}dx$. From letting $u = x^2$, we find
+        \begin{align*}
+            \int_0^{\infty} xe^{-x^2}dx &= \frac{1}{2}\int_{0}^{\infty}e^{-u}du\\
+            &= -\frac{1}{2}[e^{-u}]\bigg|_0^{\infty}\\
+            &= \frac{1}{2}
+        \end{align*}
+        Thus, the integral converges, as desired.
+        
+
+        
+    \end{itemize}
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,151 @@
+\documentclass{article}
+\usepackage{graphicx, amsmath, amssymb, mathtools, fancyhdr}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{fancy}
+
+\fancyfoot{}
+\fancyhead[R]{\thepage}
+\fancyhead[L]{MATH 5350}
+
+
+
+\begin{document}
+
+\begin{center}
+    {\Huge Homework XII}
+    \vspace{0.5cm}
+
+    {\Large Michael Nameika}
+\end{center}
+
+\section*{Section 8.1 Problems}
+\begin{itemize}
+    \item[14.] Show that $T: \ell^{\infty} \to \ell^{\infty}$ with $T$ defined by $y = (\eta_j) = Tx$, $\eta_j = \xi_j/j$, is compact.
+    \newline\newline
+    \textit{Proof:} Note that $T$ is linear. Consider the sequence of linear operators $T_n : \ell^{\infty} \to \ell^{\infty}$ defined by
+    \[T_nx = \left(\xi_1, \frac{\xi_2}{2}, \frac{\xi_3}{3}, \cdots, \frac{\xi_n}{n}, 0, 0, \cdots\right)\]
+    we now inspect $\|T_nx - Tx\|$:
+    \begin{align*}
+        \|T_nx - Tx\| &= \left\|\left(0,0,\cdots,0,\frac{\xi_{n+1}}{n+1}, \frac{\xi_{n+2}}{n+2}, \cdots\right)\right\|      
+    \end{align*}
+    and notice that since $|\xi_j| \leq \|x\|$ $(j \geq 1)$ by the sup norm on $\ell^{\infty}$, and so $\left|\tfrac{\xi_{n+1}}{n+1}\right| \leq \tfrac{\|x\|}{n+1}$ and $\left|\tfrac{\xi_{n+2}}{n+2}\right| \leq \tfrac{\|x\|}{n+2} \leq \tfrac{\|x\|}{n+1}$. Thus for any $\xi_j/j$ for $j \geq n+1$, $|\xi_j/j| \leq \tfrac{\|x\|}{n+1}$. Hence
+    \[\|T_nx - Tx\| \leq \frac{\|x\|}{n+1}\]
+    thus
+    \[\|T_n - T\| \leq \frac{1}{n+1}.\]
+    Thus $T_n \to T$ uniformly in the operator norm so that $T$ is compact.
+    
+\end{itemize}
+
+\section*{Assigned Exercises}
+\begin{itemize}
+    \item[\textbf{XII.1}.] For parts (a) - (b) let $X$ be a complex Banach space and let $T: X \to X$ be a bounded linear operator. 
+    \newline\newline
+    (a) Using Theorem 4.12-2 and Lemma 7.2-3 of the text, prove that $\lambda \in \sigma(T)$ if and only if $T - \lambda I$ is \textit{not} bijective. 
+    \newline\newline
+    \textit{Proof:} First suppose that $\lambda \in \sigma(T)$. We wish to show that $T - \lambda I$ is not bijecctive. Suppose by way of contradiction that $T - \lambda I$ is bijective. In particular $T - \lambda I$ is injective so that $R_{\lambda}(T) = (T - \lambda)^{-1}$ exists, and by the bounded inverse theorem, $R_{\lambda}(T)$ is bounded. Additionally, $T - \lambda I$ is surjective, so that $\mathcal{D}(R_{\lambda}(T)) = X$, so that by definition, $\lambda \in \rho(T)$, contradicting the fact that $\rho(T) \cap \sigma(T) = \emptyset$.
+    \newline\newline
+    Now suppose that $T - \lambda I$ is not bijective. We wish to show that $\lambda \in \sigma(T)$. Well, by Lemma 7.2-3, we have that since $T$ is bounded, if $\lambda \in \rho(T)$, then $R_{\lambda}(T)$ is defined on $X$ and is bounded, so that $T - \lambda I$ is bijective. Hence, it must be the case that $\lambda \in \sigma(T)$.
+    \newline\newline
+
+    
+    (b) We say that $\lambda$ is an \textit{approximate eigenvalue} if there exists a sequence $(x_n)$ in $X$ with $\|x_n\| = 1$ such that $Tx_n - \lambda x_n \to \mathbf{0}$. Note that an eigenvalue is an approximate eigenvalue. Prove that an approximate eigenvalue $\lambda$ belongs to $\sigma(T)$. If such a $\lambda$ is \textit{not} an eigenvalue, can $T - \lambda I$ be surjective?
+    \newline\newline
+    \textit{Proof:} Let $\lambda$ be an approximate eigenvalue of $T$ and suppose that $\lambda$ is not an eigenvalue of $T$ since if $\lambda$ is an eigenvalue of $T$, $\lambda \in \sigma_p(T) \subseteq \sigma(T)$. Suppose by way of contradiction that $\lambda \in \rho(T)$. Then $R_{\lambda}(T) = (T - \lambda I)^{-1}$ is bounded. Define 
+    \[y_n = (T - \lambda I) (x_n)\]
+    where $(x_n)$ is a sequence in $X$ such that $Tx_n - \lambda x_n \to 0$. Then $y_n \to 0$ since $y_n = Tx_n - \lambda x_n$ and $(T - \lambda I)^{-1}$ is bijective by part (a),
+    \[x_n = (T - \lambda I)^{-1}(y_n)\]
+    and so
+    \[\|(T - \lambda I)^{-1}(y_n)\| = 1\]
+    thus
+    \[1 \leq \|(T - \lambda I)^{-1}\|\|y_n\|\]
+    and since $\lambda \in \rho(T)$, $(T - \lambda I)^{-1}$ is bounded, say $\|(T - \lambda I)^{-1}\| \leq M$ so
+    \[1 \leq M\|y_n\| \to 0\]
+    a contradiction. Thus, $\lambda \notin \rho(T)$, so that $\lambda \in \sigma(T)$ by definition.
+    \newline\newline
+
+    (c) (extra credit, 2 pts.) By considering $\lambda = 0$ for the linear operator $T: \ell^2 \to \ell^2$ defined by $(\xi_1, \xi_2, \xi_3, \cdots) \mapsto (\xi_2,\xi_3,\cdots)$, show that there exists a bounded linear operator $T: X \to X$ on a complex Banach space $X$ and an eigenvalue $\lambda$ for $T$ such that $T - \lambda I$ is surjective.
+    \newline\newline
+
+    \pagebreak
+    \item[\textbf{XII.2}.] For $1 \leq p < \infty$, let $T: \ell^p \to \ell^p$ be defined by $(\xi_1, \xi_2, \xi_3, \cdots) \mapsto (\xi_2,\xi_3,\cdots)$. Note that $T$ is a bounded linear operator on a complex Banach space. Prove that if $|\lambda| = 1$, that is $\lambda$ is on the unit circle of $\mathbb{C}$, then
+    \newline
+    (a) $\lambda$ is \textit{not} an eigenvalue of $T$,
+    \newline\newline
+    \textit{Proof:} Suppose by way of contradiction that $\lambda$ with $|\lambda| = 1$ is an eigenvalue of $T$. Then for some $x = (\xi_1, \xi_2, \cdots)$, we have
+    \[Tx = \lambda x\]
+    so that
+    \[\|Tx\| = |\lambda| \|x\| = \|x\|.\]
+    Then
+    \begin{align*}
+        Tx &= (\xi_2, \xi_3, \cdots)\\
+        \implies \|Tx\| &= \left(\sum_{k = 2}^{\infty} |\xi_k|^p\right)^{1/p}
+    \end{align*}
+    and since $\|x\| = \left(\sum_{k = 1}^{\infty}|\xi_k|^p\right)^{1/p}$, we have that 
+    \begin{align*}
+        \left(\sum_{k = 1}^{\infty}|\xi_k|^p\right)^{1/p} &= \left(\sum_{k = 2}^{\infty} |\xi_k|^p\right)^{1/p}\\
+        \implies \sum_{k = 1}^{\infty} |\xi_k|^p &= \sum_{k = 2}^{\infty} |\xi_k|^p\\
+        \implies |\xi_1|^p + |\xi_2|^p + |\xi_3|^p + \cdots &= |\xi_2|^p + |\xi_3|^p + \cdots\\
+        \implies |\xi_1|^p &= 0\\
+        \implies |\xi_1| &= 0.
+    \end{align*}
+    Now, using $Tx = \lambda x$, we find
+    \begin{align*}
+        (\xi_2, \xi_3,\cdots) &= (0, \lambda \xi_2, \lambda \xi_3, \cdots)
+    \end{align*}
+    which gives us $\xi_2 = 0$, which likewise gives us $\xi_3 = 0$ and continuing, we find $\xi_n = 0$ for all $n \in \mathbb{N}$. Thus, $x = \mathbf{0}$ which is not an eigenvector by definition, so that $\lambda$ satisfying $|\lambda| = 1$ is not an eigenvalue of $T$.
+    \newline\newline
+    \textit{Proof:} Begin by noting that $\lambda = 0$ is indeed an eigenvalue for $T$ defined above since, for $x = (\xi_1, 0, 0, \cdots) \in \ell^2$, we have that
+    \[Tx = (0,0,\cdots = 0\cdot x.\]
+    Now, for $\lambda = 0$, we have that $T - \lambda I = T$ so we need to show that $T$ is surjective. Let $y = (\eta_1, \eta_2, \cdots) \in \ell^2$. And notice that for $w = (0, \eta_1, \eta_2, \eta_3, \cdots)$ in $\ell^2$ (since $y \in \ell^2$), we have
+    \[Tw = (\eta_1, \eta_2, \cdots) = y\]
+    so that $T$ is surjective.
+
+
+    
+    (b) $\lambda$ is an approximate eigenvalue of $T$ (cf. Exercise XII.1(b)).
+    \newline
+    \textit{Hint:} For part (b) consider $x_n = c_n(1, \lambda, \lambda^2, \dots, \lambda^{n-1}, 0, 0, \dots)$ for an appropriate sequence $c_n = c_{n,p} > 0.$
+    \newline\newline
+    \textit{Proof:} Notice that $\|(1, \lambda, \lambda^2, \dots, \lambda^{n-1}, 0, 0, \dots)\| = n^{1/p}$, so define $c_n = 1/n^{1/p}$ so that $\|x_n\| = 1$. Now, notice
+    \begin{align*}
+        Tx_n - \lambda x_n &= c_n(\lambda, \lambda^2, \dots, \lambda^{n-1}, 0, 0, 0,\dots) - c_n(\lambda, \lambda^2, \dots, \lambda^{n-1}, \lambda^n, 0, 0, \dots)\\
+        &= \frac{1}{n^{1/p}}(0,0,\dots, 0,\lambda^n,0,0,\dots)\\
+        \implies \|Tx_n - \lambda x_n\| &= \frac{|\lambda^n|^{1/p}}{n^{1/p}}\\
+        &= \frac{1}{n^{1/p}}.
+    \end{align*}
+    Thus $Tx_n - \lambda x_n \to 0$, and so $\lambda$ is an approximate eigenvalue by definition.
+
+    \pagebreak
+    \item[\textbf{XII.3}.] (a) Let $H$ be a complex Hilbert space, let $T: H \to H$ be a bounded linear operator and let $T^*: H \to H$ be the Hilbert-adjoint of $T$. Prove that $\lambda \in \rho(T)$ if and only if $\overline{\lambda} \in \rho(T^*)$, and therefore that $\sigma(T)$ and $\sigma(T^*)$ are complex conjugates of one another.
+    \newline
+    \textit{Hint}: $\lambda \in \rho(T)$ if and only if $T - \lambda I $ is bijective if and only if there exists a bijective bounded linear operator $R: H \to H$ such that $R(T - \lambda I) = (T - \lambda I)R = I$. Apply the Hilbert-adjoint operator to the products.
+    \newline\newline
+    \textit{Proof:} Let $\lambda \in \rho(T)$. We wish to show that $\overline{\lambda} \in \rho(T^*)$. Well, since $\lambda \in \rho(T)$, we have that $R_{\lambda} = (T - \lambda I)^{-1}$ exists. Then by definition of the inverse of an operator, we have
+    \begin{align*}
+        (T - \lambda I)^{-1}(T - \lambda I) &= I\\
+        (T - \lambda I)(T - \lambda I)^{-1} &= I
+    \end{align*}
+    applying the Hilbert adjoint to each side of the above two equations, we find
+    \[[(T - \lambda I)^{-1}]^*(T^* - \overline{\lambda} I) = I\]
+    and 
+    \[(T^* - \overline{\lambda} I )[(T - \lambda I)^{-1}]^* = I\]
+    from this, we see
+    \[[(T - \lambda I)^{-1}]^* = (T^* - \overline{\lambda} I)^{-1}\]
+    and is bounded since $R_{\lambda}(T)$ is bounded and is similarly defined over a dense subset of $H$. Thus, $\overline{\lambda} \in \rho(T^*)$.
+    \newline\newline
+    The case $\overline{\lambda} \in \rho(T^*)$ follows similarly using $(T^*)^* = T$.
+    \newline\newline
+    
+
+    
+    (b) Let $T: \ell^2 \to \ell^2$ be the \textit{right-shift operator} defined by $(\xi_1, \xi_2,\dots) \mapsto (0, \xi_1, \xi_2,\dots)$. Recall from Sec. 3.9 Prob. 10 that the Hilbert adjoint of $T$ is the operator $T^* : \ell^2 \to \ell^2$ defined by $(\xi_1, \xi_2,\xi_3, \dots) \mapsto (\xi_2, \xi_3,\dots)$, that is the \textit{left-shift operator}. Prove in this example that both spectra $\sigma(T)$ and $\sigma(T^*)$ are the same and equal $\{\lambda \in \mathbb{C} \: : \: |\lambda| \leq 1\}$. (Cf. Sec. 10.5 Probs. 7-10.)
+    \newline\newline
+    \textit{Proof:}
+    Notice $\sigma(T) = \{\lambda \in \mathbb{C} \: : \: |\lambda| \leq 1\}$ and by part (a), since $\sigma(T^*) = \overline{\sigma(T)}$, we have $\sigma(T^*) = \{\overline{\lambda} \in \mathbb{C} \: : \: |\overline{\lambda}| \leq 1\}$. Since $|\lambda| = |\overline{\lambda}|$, we see that $\sigma(T) = \sigma(T^*)$.
+\end{itemize}
+
+\end{document}

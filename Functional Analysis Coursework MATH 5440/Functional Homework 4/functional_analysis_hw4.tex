@@ -1,0 +1,166 @@
+\documentclass{article}
+\usepackage{graphicx, amsmath, amssymb, mathtools, float, fancyhdr}
+\graphicspath{{Images/}}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{fancy}
+
+
+\fancyfoot{}
+\fancyhead[L]{MATH 5350}
+\fancyhead[R]{\thepage}
+
+\begin{document}
+
+\begin{center}
+    {\Large Homework IV}
+    \vspace{0.5 cm}
+
+    {\large Michael Nameika}
+\end{center}
+
+\section*{Section 2.5 Problems}
+\begin{itemize}
+    \item[\textbf{10}.] Let $X$ and $Y$ be metric spaces, $X$ compact, and $T: X \to Y$ bijective and continuous. Show that $T$ is a homeomorphism.
+    \newline\newline
+    \textit{Proof:} Since $T$ is bijective, we have that $T^{-1}$ exists. Let $\{y_n\}$ be a sequence in $Y$ that converges to a point $y \in Y$. We wish to show $T^{-1}(y_n) \to T^{-1}(y)$. Well, since $T$ is bijective, we have that for each $y_n \in Y$, there exists $x_n \in X$ such that $T(x_n) = y_n$ (or, equivalently, $x_n = T^{-1}(y_n)$). Since $X$ is compact, there exists a convergent subsequence $\{x_{n_k}\}$ of $\{x_n\}$. Call the limit of this subsequence $x$. Since $T$ is continuous, we have
+    \[T(x_{n_k}) \to T(x).\] 
+    By the definition of our sequence $\{x_n\}$, we have $T(x_{n_k}) = y_{n_k}$ and since $y_n \to y$, $y_{n_k} \to y$ and since the limit of convergent sequences is unique, we have that $T(x) = y$. 
+
+    Now, rewriting each $x_{n_k}$ as $x_{n_k} = T^{-1}(y_{n_k})$, we have 
+    \[T^{-1}(y_{n_k}) \to T^{-1}(y)\]
+    and since $\{y_{n_k}\}$ has the same limit as $\{y_n\}$, we have
+    \[T^{-1}(y_n) \to T^{-1}(y).\]
+    Thus, $T^{-1}$ is continuous and so $T$ is a homeomorphism.
+\end{itemize}
+
+\section*{Section 2.6 Problems}
+\begin{itemize}
+    \item[\textbf{12}.] Does the inverse of $T$ in 2.6-4 exit?
+    \newline\newline
+    No, recall that the inverse of a linear operator $T$ exists if and only if $T$ is injective. I claim that $T$ is not injective. Let $x(t) = t^2 + 1$ and $y(t) = t^2 + 2$ be in the space of polynomials on $[a,b]$. Then notice
+    \[Tx(t) = x'(t) = 2x\]
+    and
+    \[Ty(t) = y'(t) = 2x\]
+    so $Ty(t) = Tx(t)$, but $x(t) \neq y(t)$ for all $t \in [a,b]$. Thus, $T$ is not injective, and so does not have an inverse. 
+\end{itemize}
+
+\section*{Section 2.7 Problems}
+\begin{itemize}
+    \item[\textbf{6}.] \textbf{(Range)} Show that the range $\mathcal{R}(T)$ of a bounded linear operator $T: X \to Y$ need not be closed in $Y$.
+    \newline\newline
+    \textit{Proof:} Consider the sequence $\{x_n\}$ in $\ell^{\infty}$ defined by $x_n = (1, 1, \cdots, 1, 0, 0, \cdots)$. Then $Tx_n = (1, \tfrac{1}{2}, \cdots, \tfrac{1}{n}, 0, 0, \cdots)$. So as $n \to \infty$, $Tx_n \to x = (1, \tfrac{1}{2}, \cdots, \tfrac{1}{n}, \tfrac{1}{n+1},\cdots) \in \ell^{\infty}$. However, the preimage of $x$ is given by
+    \[(1, 1, \cdots, 1, 1,\cdots) \notin \ell^{\infty}.\]
+    So $\{Tx_n\}$ is a sequence in $R(T)$ which converges to $x = (1, \tfrac{1}{2}, \cdots, \tfrac{1}{n}, \cdots) \in \ell^{\infty}$, but the preimage $x$ is not in $\ell^{\infty}$ (that is, not in the domain of $T$), so $\{Tx_n\}$ does not converge in $R(T)$, hence $R(T)$ is not closed. 
+    
+
+
+    \item[\textbf{8}.] Show that the inverse $T^{-1}: \mathcal{R}(T) \to X$ of a bounded linear operator $T: X \to Y$ need not be bounded.
+    \newline\newline
+    \textit{Proof:} Consider the linear bounded operator $T: \ell^{\infty} \to \ell^{\infty}$ defined by $y = (\eta_j) = Tx$, $\eta_j = \xi_j/j$, $x = (\xi_j)$ as in problem 5. Consider the sequence of vectors $x_n \in \ell^{\infty}$, $x_n = (1,1,1, \cdots, 1, 0, 0, \cdots)$ with $n$ ones followed by zeros. Then
+    \[T^{-1}x_n = (1, 2, 3, \cdots, n, 0, 0, \cdots)\]
+    so that 
+    \[\|T^{-1}x_n\| = n\]
+    which is not bounded below since, if $m$ were a lower bound, there exists a natural number $N > m$ such that 
+    \[\|T^{-1}x_N\| = N > m.\]
+    Hence, $T^{-1}$ is unbounded
+\end{itemize}
+
+\section*{Assigned Exercise IV.1}
+\begin{itemize}
+    \item[(a)] Let $X = C[0,1]$ be the continuous real-valued functions on $[0,1]$ with the usual sup-norm: 
+    \[\|x\| = \max_{t \in [0,1]} |x(t)|.\]
+    Define $T: X \to X$ by
+    \[y = Tx, \:\: y(t) = \int_0^ts \cdot x(s)ds, \:\: \text{ all } t \in [0,1].\]
+    Prove that $T$ is a bounded linear operator and determine the value of the operator norm; $\|T\| = $ ? Justify your assertion.
+    \newline\newline
+    \textit{Proof:} We must first verify that $T$ is a linear operator. Let $\alpha, \beta$ be arbitrary scalars and let $x,y \in C[0,1]$ and notice the following:
+    \begin{align*}
+        T(\alpha x + \beta y) &= \int_0^t s\cdot(\alpha x(s) + \beta y(s))ds\\
+        &= \int_0^t (s\cdot (\alpha x(s)) + s \cdot (\beta y(s)))ds\\
+        &= \int_0^t (\alpha s\cdot x(t) + \beta s\cdot y(s))ds\\
+        &=\int_0^t \alpha s\cdot x(s) ds + \int_0^t \beta s\cdot y(s)ds\\
+        &= \alpha \int_0^t s\cdot x(s) + \beta \int_0^t s\cdot y(s)ds\\
+        &= \alpha Tx + \beta Ty
+    \end{align*}
+    so $T$ is a linear operator. We must now show that $T$ is bounded, that is, there exists a real number $c$ such that $\|Tx\| \leq c\|x\|$ for all $x \in X$. 
+    
+    Notice
+    \begin{align*}
+        \left|\int_0^t s \cdot x(s)ds\right| &\leq \int_0^t |s \cdot x(s)| ds\\
+        &\leq \|x\| \int_0^t s ds\\
+        &= \|x\| \frac{t^2}{2}\\
+        &\leq \frac{1}{2}\|x\|.
+    \end{align*}
+    Then $\frac{1}{2}\|x\|$ is an upper bound for $|\int_0^t s\cdot x(s)ds|$, hence
+    \begin{align*}
+        \max_{t \in [0,1]} \left|\int_0^t s \cdot x(s)ds\right| &\leq \frac{1}{2}\|x\|.
+    \end{align*}
+    Hence,
+    \[\|Tx\| \leq \frac{1}{2}\|x\|\]
+     so that $T$ is a bounded linear operator. For a lower bound, take $x(t) = 1$ on $[0,1]$. Clearly, $\|x(t)\| = 1$ and 
+     \begin{align*}
+        \|Tx\| &= \max_{t \in [0,1]}\left|\int_0^t s \cdot 1ds\right|\\
+        &= \max_{t \in [0,1]} \left|\frac{t^2}{2}\right|\\
+        &= \frac{1}{2}\\
+        &= \frac{1}{2}\|x\|.
+     \end{align*}
+     Hence, $\|T\| \geq \frac{1}{2}$, so that we have
+     \[\|T\| = \frac{1}{2}\]
+    %We must now find the operator norm, $\|T\|$. I claim that $\|T\| = \frac{1}{2}$. To see so, consider the sequence of functions $\{x_n\} \in C[0,1]$ defined by $x_n(t) = t^{1/n}$. Notice that 
+    % \[\|x_n\| = \max_{t \in [0,1]} |t^{1/n}| = 1.\]
+    % Also note that
+    % \begin{align*}
+    %     Tx_n &= \int_0^t s\cdot s^{1/n}ds \\
+    %     &= \int_0^t s^{1 + 1/n}ds\\
+    %     &= \left[\frac{1}{2 + \tfrac{1}{n}}s^{2 + 1/n}\right]\bigg|_0^t\\
+    %     &= \frac{1}{2 + \tfrac{1}{n}}t^{2 + 1/n}
+    % \end{align*}
+    % and so
+    % \[\|Tx_n\| = \max_{t \in [0,1]} \left|\frac{1}{2 + \tfrac{1}{n}}t^{2 + 1/n}\right| = \frac{1}{2 + \tfrac{1}{n}}.\]
+    % As $n \to \infty$, notice $\|Tx_n\| \to \frac{1}{2}$, so it must be the case that
+    % \[\|T\| = \frac{1}{2}.\]
+    
+
+
+    \item[(b)] Let $X$ be the complex sequence space $\ell^2$ with the usual norm $\|x\| = \sqrt{\sum_{j=1}^{\infty} |\xi_j|^2}$, where $x = (\xi_1, \xi_2, \dots)$. Fix $y = (\eta_1, \eta_2, \dots) \in \ell^2$, with $y \neq 0$, and define $f : X \to X$ by 
+    \[f(x) = \sum_{j=1}^{\infty}\xi_j\overline{\eta}_j, \:\: x = (\xi_1, \xi_2, \dots) \in X; \:\:\:\:\: \overline{\eta}_i \text{ is the complex conjugate of } \eta_i \in \mathbb{C}.\]
+    Prove that $f$ is bounded as a linear operator (functional), and determine its operator norm $\|f\|$ in terms of $y$. Justify your assertion.
+    \newline\newline
+    \textit{Proof:} We will first verify that $f$ is a linear operator. Let $\alpha, \beta$ be arbitrary scalars and let $x, z \in \ell^{\infty}$, $x = (\xi_1, \xi_2, \cdots, )$ $z = (\zeta_1, \zeta_2, \cdots)$ and consider $f(\alpha x + \beta z)$:
+    \begin{align*}
+        f(\alpha x + \beta z) &= \sum_{j=1}^{\infty} (\alpha \xi_j + \beta \zeta_j)\overline{\eta}_j\\
+        &= \sum_{j=1}^{\infty} (\alpha \xi_j \overline{\eta}_j + \beta \zeta_j \overline{\eta}_j)\\
+        &= \sum_{j = 1}^{\infty} \alpha \xi_j \overline{\eta}_j + \sum_{j = 1}^{\infty} \beta \zeta_j \overline{\eta}_j\\
+        &= \alpha \sum_{j = 1}^{\infty}\xi_j \overline{\eta}_j + \beta \sum_{j=1}^{\infty} \zeta_j\overline{\eta}_j\\
+        &= \alpha f(x) + \beta f(z)
+    \end{align*}
+    so $f$ is a linear operator. We will now show that $f$ is bounded. That is, we must find a $c \in \mathbb{R}$ such that $|f(x)| \leq c\|x\|$ for all $x$. Let $x \in \ell^2$, $x = (\xi_1, \xi_2, \cdots)$. Notice
+    \begin{align*}
+        |f(x)| &= \left|\sum_{j = 1}^{\infty} \xi_j \overline{\eta}_j\right|\\
+        &\leq \sum_{j=1}^{\infty} |\xi_j\overline{\eta}_j|\\
+        &= \sum_{j=1}^{\infty} |\xi_j||\eta_j|\\
+        &\leq \left(\sum_{j = 1}^{\infty} |\xi_j|^2\right)^2\left(\sum_{j = 1}^{\infty} |\eta_j|^2\right)^2 \tag*{(H{\"o}lder's Inequality)}\\
+        &= \|y\|\|x\|
+    \end{align*}
+    Thus,
+    \[|f(x)| \leq \|y\|\|x\|.\]
+    and since $y\in \ell^2$ is fixed, we have that $f$ is bounded. We must now find the operator norm. I claim that 
+    \[|f| = \|y\|.\]
+    To see this, take $x = y \in \ell^2$. Then notice
+    \begin{align*}
+        |f(x)| &= \left|\sum_{j = 1}^{\infty}\eta_j\overline{\eta}_j\right|\\
+        &= \left|\sum_{j = 1}^{\infty} |\eta_j|^2\right|\\
+        &= \|y\|^2\\
+        &= \|y\|\|y\|\\
+        &= \|y\|\|x\|. 
+    \end{align*}
+    Hence, $\|y\|$ is a lower bound for $|f|$, so
+    \[|f| = \|y\|\]
+    
+\end{itemize}
+
+\end{document}

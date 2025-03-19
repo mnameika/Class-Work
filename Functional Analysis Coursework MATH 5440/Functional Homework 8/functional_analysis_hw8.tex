@@ -1,0 +1,191 @@
+\documentclass{article}
+\usepackage{graphicx, amsmath, amssymb, mathtools, fancyhdr, halloweenmath}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{fancy}
+
+\fancyfoot{}
+\fancyhead[R]{$\mathbat$ \thepage \hspace{0.06cm} $\mathbat$}
+\fancyhead[L]{$\mathbat$ MATH 5350 $\mathbat$}
+
+
+\title{Functional Homework 8}
+\author{Michael Nameika}
+\date{October 2023}
+
+\begin{document}
+\begin{center}
+    {\Huge Homework VIII}
+    \vspace{0.5cm}
+
+    {\large Michael Nameika}
+\end{center}
+
+\section*{Section 3.8 Problems}
+\begin{itemize}
+    \item[\textbf{7}.] Show that the dual space $H'$ of a Hilbert space $H$ is a Hilbert space with inner product $\langle \cdot, \cdot \rangle$, defined by 
+    \[\langle f_z, f_v\rangle = \overline{\langle z, v\rangle} = \langle v, z \rangle\]
+    where $f_z(x) = \langle x, z\rangle$, etc.
+    \newline\newline
+    \textit{Proof:} Let $\{f_n\}$ be a Cauchy sequence in $H'$. By the Riesz representation, for each $n \in \mathbb{N}$, there exists a unique $x_n \in H$ such that 
+    \[f_n(z) = \langle z, x_n \rangle.\]
+    Fix $\varepsilon > 0$. Since $\{f_n\}$ is Cauchy, there exists an index $N$ such that whenever $n > m > N$,
+    \[\|f_n - f_m\| < \varepsilon.\]
+    Now notice
+    \begin{align*}
+        \|f_n - f_m\|^2 &= \langle f_n - f_m, f_n - f_m\rangle \\
+        &= \langle f_n, f_n \rangle - \langle f_m, f_n \rangle - \langle f_n, f_m\rangle + \langle f_m,f_m\rangle\\
+        &= \langle x_n, x_n\rangle - \langle x_n, x_m \rangle - \langle x_m, x_n \rangle + \langle x_m, x_m\rangle\\
+        &= \langle x_n - x_m, x_n\rangle - \langle x_n - x_m, x_m\rangle\\
+        &= \langle x_n - x_m, x_n - x_m\rangle\\
+        &= \|x_n - x_m\|^2\\
+        \implies \|x_n - x_m\|^2 &< \varepsilon^2\\
+        \implies \|x_n - x_m \| &< \varepsilon
+    \end{align*}
+    so that $\{x_n\}$ is Cauchy in $H$. Since $H$ is a Hilbert space, $\{x_n\}$ converges to some element $x \in H$. Now define the bounded linear functional $f \in H'$ by
+    \[f(z) := \langle z, x\rangle. \]
+    Now, for $\varepsilon > 0$ above, since $\{x_n\}$ converges to $x$, there exists an index $M$ such that whenever $n > M$,
+    \[\|x_n - x\| < \varepsilon.\]
+    But from our work above, we have
+    \begin{align*}
+        \|f_n - f\|^2 &= \|x_n - x\|^2\\
+        &< \varepsilon^2\\
+        \implies \|f_n - f\| &< \varepsilon
+    \end{align*}
+    so that $f_n \to f$. Thus, $H'$ is complete and is thus a Hilbert space. \hfill $\mathghost$
+\end{itemize}
+
+\section*{Section 3.9 Problems}
+\begin{itemize}
+    \item[\textbf{10}.] \textbf{(Right shift operator)} Let $(e_n)$ be a total orthonormal sequence in a separable Hilbert space $H$ and define the \textit{right shift operator} to be the linear operator $T: H \to H$ such that $Te_n = e_{n+1}$ for $n = 1,2,\cdots$. Explain the name. Find the range, null space, norm and Hilbert adjoint operator of $T$.
+    \newline\newline
+    \textit{Soln.} This operator is appropriately called the right shift operator since it ``shifts" index of a given $e_n$ in $(e_n)$ by 1 to the right. \newline
+    Since $H$ is a separable Hilbert space and $(e_n)$ is a total orthonormal sequence, any $x \in H$ has a unique representation
+    \[x = \sum_{k = 1}^{\infty} \alpha_k e_k.\]
+    Now, notice that if $x \neq \mathbf{0}$, there exists at least one $\alpha_k \neq 0$, and so $T(\alpha_k e_k) = \alpha_k e_{k+1} \neq \mathbf{0}$ so that $Tx \neq \mathbf{0}$. Thus, 
+    \[\mathcal{N}(T) = \{\mathbf{0}\}.\]
+    For the range space, notice that for, since we are shifting each element of the orthonormal sequence to the right by one index, there does not exist an element $e_k$ in $(e_n)$ such that $Te_k = e_1$. Hence, any element in the range has the form $x = \sum_{k=2}^{\infty} \alpha_k e_k$ so that
+    \[\mathcal{R}(T) = \left\{x \in H \hspace{0.15cm} \bigg| \hspace{0.15cm} x = \sum_{k = 2}^{\infty} \alpha_k e_k\right\}\]
+    \hfill $\mathghost$
+\end{itemize}
+
+\section*{Section 3.10 Problems}
+\begin{itemize}
+    \item[\textbf{6}.] If $T: H \to H$ is a bounded self-adjoint linear operator and $T \neq 0$, then $T^n \neq 0$. Prove this (a) for $n = 2,4,8,16,\cdots,$(b) for every $n \in \mathbb{N}$.
+    \newline\newline
+    \textit{Proof:} (a) We proceed by induction. First consider the case $n = 2$. Then since $T$ is self-adjoint, we have $T = T^*$ so that
+    \begin{align*}
+        T^2 &= T^*T\\
+        &\neq 0
+    \end{align*}
+    since $T \neq 0$. Now, notice that $T^2$ is self-adjoint since
+    \[(T^2)^* = (T^*T)^* = T^*(T^*)^* = T^*T = T^2.\]
+    Now assume that $T^n \neq 0$ (and is self-adjoint) for all $n = 2, 4, \cdots, 2^k$ for some $k \in \mathbb{N}$. We wish to show that $T^{n+1} \neq 0$ for $n = 2^{k+1}$. By the induction hypothesis, we have
+    \begin{align*}
+        T^{2^k} &\neq 0
+    \end{align*}
+    and so, since $T^{2^k}$ is self-adjoint by assumption,
+    \begin{align*}
+        T^{2^{k+1}} &= \left(T^{2^{k}}\right)^2\\
+        &= \left(T^{2^k}\right)\left(T^{2^k}\right)^*\\
+        &\neq 0
+    \end{align*}
+    since $T^{2^k} \neq 0$. 
+    \newline\newline
+    (b) We will show by induction that $T^n$ is self adjoint so that since $T \neq 0$, $T^n \neq 0$. We proved the case $n = 2$ in part (a). Now suppose this holds up to some integer $k$. We must show it holds for $k+1$. By the induction hypothesis, we have $T^k$ is self adjoint. Then
+    \begin{align*}
+        T^{k+1} &= T^kT\\
+        \implies (T^kT)^* &= T^*(T^k)^*\\
+        &= TT^k\\
+        &= T^{k+1}
+    \end{align*}
+    so that $T^{k+1}$ is self-adjoint. Thus, since $T \neq 0$, $T^n \neq 0$ for all $n$, and since $T^n$ is self adjoint, $T^n \neq 0$ for all $n \in \mathbb{N}$. \hfill $\mathghost$
+\end{itemize}
+
+\section*{Extra Credit Problems}
+\begin{itemize}
+    \item[\textbf{3.9.8}] Let $S = I + T^*T : H \to H$, where $T$ is linear and bounded. Show that $S^{-1}: S(H) \to H$ exists. 
+    \newline\newline
+    \textit{Proof:} We will show $S$ is injective. To do so, we will show $\mathcal{N}(S) = \{\mathbf{0}\}$. Let $x \in H$ such that $Sx = 0$. That is, 
+    \begin{align*}
+        Sx &= Ix + (T^*T)x\\
+        &= x + (T^*T)x\\
+        &= 0.
+    \end{align*}
+    Then we have $\|Sx\| = \|x + (T^*T)x\| = \|\mathbf{0}\| = 0$. Thus, 
+    \begin{align*}
+        \|x + (T^*T)x\|^2 &= \langle x + (T^*T)x, x + (T^*T)x\rangle\\
+        &= \langle x ,x\rangle + \langle x, (T^*T)x\rangle + \langle (T^*T)x, x\rangle + \langle (T^*T)x, (T^*T)x\rangle\\
+        &= \|x\|^2 + \langle Tx, Tx\rangle + \langle Tx, Tx\rangle + \|(T^*T)x\|^2 \tag{$\langle x, T^*y\rangle = \langle Tx, y\rangle$}\\
+        &= \|x\|^2 + 2\|Tx\|^2 + \|(T^*T)x\|^2\\
+        &= 0
+    \end{align*}
+    but since $\|x\|^2, 2\|Tx\|^2, \|(T^*T)x\|^2 \geq 0$, it must be the case that $\|x\|^2 = \|Tx\|^2 = \|(T^*T)x\|^2 = 0$. Hence $x = \mathbf{0}$. Since $x$ was chosen arbitrarily, we have that
+    \[\mathcal{N}(S) = \{\mathbf{0}\}\]
+    so that $S$ is injective and hence invertible. \hfill $\mathghost$
+
+    \item[\textbf{2.10.8}] Show that the dual space of the space $c_0$ is $\ell^1$. 
+    \newline\newline
+    \textit{Proof:} Note that since $c_0$ is a subspace of $\ell^{\infty}$ and $\ell^{\infty}$ admits the standard Schauder basis $e_k  = \delta_{jk}$, for any $x \in c_0$ there exist scalars $\xi_1, \xi_2, \cdots$ such that 
+    \[x = \xi_1e_1 + \xi_2e_2 + \cdots.\]
+    Now, let $f \in c_0'$. Then since $f$ is bounded and linear, $f$ is continuous so that
+    \begin{align*}
+        f(x) &= \sum_{k = 1}^{\infty} \xi_k\gamma_k \tag{$\gamma_k = f(e_k)$}\\
+        \implies |f(x)| &\leq \max_{k \geq 1}|\xi_k| \sum_{k=1}^{\infty} |\gamma_k|\\
+        &= \|x\| \sum_{k = 1}^{\infty} |\gamma_k|
+    \end{align*}
+    so that $\|f\| \leq \sum_{k = 1}^{\infty} \gamma_k$. Now, for a lower bound, consider the sequence $x = (\xi_1, \xi_2, \cdots)$ in $c_0$ given by
+    \[\xi_k = \begin{cases}
+    \begin{matrix}
+        \frac{\overline{\gamma_k}}{|\gamma_k|} & \gamma_k \neq 0\\
+        1 & \gamma_k = 0
+    \end{matrix} & k \leq n\\
+    0 & k > n
+    \end{cases}\]
+    for some $n \in \mathbb{N}$. Then notice $\|x\| = 1$ since $\left|\tfrac{\overline{\gamma_k}}{|\gamma_k|}\right| = 1$ for all $k$. Then notice
+    \begin{align*}
+        f(x) &= \sum_{k = 1}^{n} \frac{\overline{\gamma_k}}{|\gamma_k|}\gamma_k\\
+        &= \sum_{k = 1}^{n} |\gamma_k|
+     \end{align*}
+    (note that for $\gamma_k = 0$, $\xi_k\gamma_k = 1\cdot 0 = 0 = |\gamma_k|$ so that above holds for all $k$). And since $\|x\| = 1$, we have
+    \[\|f\| \geq \sum_{k = 1}^{\infty} |\gamma_k|.\]
+    Since $f$ is a bounded linear functional, and $|\gamma_k| \geq 0$ for all $k$, the sequence of partial sums $s_n = \sum_{k = 1}^n |\gamma_k|$ is a monotonically increasing bounded sequence, so by the monotone convergence theorem, $\{s_n\}$ converges and, moreover,
+    \[\sum_{k = 1}^{\infty} |\gamma_k| \leq \|f\|.\]
+    Since $\sum_{k = 1}^{\infty} |\gamma_k|$ converges, the sequence $g_n = |\gamma_n| \in \ell^1$. Now, by the above two inequalities for $\|f\|$, 
+    \[\|f\| = \sum_{k = 1}^{\infty} |\gamma_k|.\]
+    so that $f$ is norm preserving.
+    Now, for any $b \in \ell^1$, $b = (\beta_1, \beta_2, \cdots)$, we may define an associated bounded linear functional $g(x)$ for $x \in c_0$:
+    \[g(x) = \sum_{k = 1}^{\infty} \xi_k\beta_k.\]
+    Then the mapping $f \mapsto (g_n)$ where $g_n = \gamma_n = f(e_n)$ is norm preserving and bijective, so that $c_0' \cong \ell^1$. Hence,
+    the dual space of $c_0$ is $\ell^1$. \hfill $\mathghost$
+\end{itemize}
+
+\section*{VIII.1}
+Let $T : H \to H$ be the right shift operator of Prob. 3.9 \# 10, where $(e_n)$ is a total orthonormal sequence in a separable Hilbert space $H$. By definition, a scalar $\lambda$ and a nonzero vector $x \in H$ is an eigenvalue-eigenvector pair for a linear operator $T : H \to H$ if 
+\[Tx = \lambda x \hspace{0.6cm} (\lambda \text{ a scalar, } x \neq \mathbf{0}).\]
+\begin{itemize}
+    \item[(a)] Show that $T$ has no eigenvalue-eigenvector pairs.
+    \newline\newline
+    \textit{Proof:} Suppose that $T$ has at least one eigenvalue-eigenvector pair. Then for some $x \in H$, $x = \xi_1e_1 + \xi_2e_2 + \cdots \neq \mathbf{0}$, 
+    \begin{align*}
+        Tx &= \xi_1e_2 + \xi_2e_3 + \cdots\\
+        &= \lambda\xi_1e_1 + \lambda\xi_2e_2 + \cdots
+    \end{align*}
+    But then $Tx - \lambda x = 0$, so that
+    \begin{align*}
+        Tx - \lambda x &= (\xi_1e_2 + \xi_2e_3 + \cdots) - (\lambda\xi_1e_1 + \lambda\xi_2e_2 + \cdots)\\
+        &= -\lambda\xi_1e_1 + (\xi_1 - \lambda\xi_2)e_2 + (\xi_2 - \lambda\xi_3)e_3 + \cdots\\
+        &= \mathbf{0}
+    \end{align*}
+    so that $\lambda = 0$ by the $e_1$ term, which then gives us that $\xi_j = 0$ for $j > 1$. But since $x \neq \mathbf{0}$, $\xi_1 \neq 0$, so that $\lambda x \neq 0$ since $Tx = \xi_1e_2 \neq 0$, we have a contradiction. 
+
+    \item[(b)] Show that the adjoint $T^*: H \to H$ has an eigenvalue-eigenvector pair for every scalar $\lambda$ with $|\lambda| < 1$.
+    \newline\newline
+    \textit{Proof:}
+    
+\end{itemize}
+
+\end{document}

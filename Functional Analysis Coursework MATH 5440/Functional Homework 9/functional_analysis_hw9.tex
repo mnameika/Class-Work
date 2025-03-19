@@ -1,0 +1,112 @@
+\documentclass{article}
+\usepackage{graphicx, amsmath, amssymb, mathtools, fancyhdr}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{fancy}
+
+\fancyfoot{}
+\fancyhead[R]{\thepage}
+\fancyhead[L]{MATH 5350}
+
+
+\begin{document}
+\begin{center}
+    {\Huge Homework IX}
+    \vspace{0.5cm}
+
+    {\Large Michael Nameika}
+\end{center}
+\section*{Section 4.7 Problems}
+\begin{itemize}
+    \item[\textbf{2}.] Of what category is the set of all integers (a) in $\mathbb{R}$, (b) in itself (taken with the metric induced from $\mathbb{R}$)?
+    \newline\newline
+    \textit{Soln.} (a) In $\mathbb{R}$, for any $n \in \mathbb{Z}$, $\{n\}$ is not an open set since, for any $r > 0$, the open ball of radius $r$ centered at $n$, $B_r(n)$ contains elements in $\mathbb{R}$ not in $\{n\}$. But $\overline{\{n\}} = \{n\}$ so that $\{n\}$ is rare for each $n \in \mathbb{Z}$. Now notice,
+    \[\mathbb{Z} = \bigcup_{n = -\infty}^{\infty}\{n\}\]
+    so that $\mathbb{Z}$ is a countable union of rare sets in $\mathbb{R}$, hence $\mathbb{Z}$ is meager in $\mathbb{R}$.
+    \newline\newline
+    (b) In $\mathbb{Z}$, any subset $S \subseteq \mathbb{Z}$ contains an open set since, if $n \in S$ (the case $S = \emptyset$ is itself trivially open), the open ball of radius $1/2$, $B_{1/2}(n) = \{n\} \subseteq S$. Thus, $\mathbb{Z}$ is nonmeager in itself.
+
+
+
+    \item[\textbf{6}.] Show that the complement $M^c$ of a meager subset $M$ of a complete metric space $X$ is nonmeager. 
+    \newline\newline
+    We begin by proving the following lemma:
+    \newline
+    \textit{Lemma:}
+    The union of two meager sets is meager. 
+    \newline\newline
+    \textit{Proof:} Let $A, B \subseteq X$ be meager. Then there exist countable collections of rare sets $(a_k)_{k \in \mathbb{N}}, (b_j)_{j \in \mathbb{N}}$ such that
+    \[A = \bigcup_{k \in \mathbb{N}} a_k, \hspace{1cm} B = \bigcup_{j \in \mathbb{N}} b_k\]
+    thus,
+    \[A \cup B = \left(\bigcup_{k \in \mathbb{N}} a_k\right) \cup \left(\bigcup_{j \in \mathbb{N}} b_k\right)\]
+    and notice that the right hand side is the union of two countable unions, which is itself countable. 
+    \begin{flushright}
+        $\square$
+    \end{flushright}
+    Now for the main problem:
+    \newline\newline
+    \textit{Proof:}
+    Suppose by way of contradiction that $M^c$ is meager. Then, by definition of set complement, we may express $X$ as
+    \[X = M^c \cup M\]
+    but since $M$ and $M^c$ are meager, $X$ is meager in itself by the above proof. But this contradicts Baire's Category Theorem, where, since $X$ is complete, $X$ is nonmeager in itself. Thus, $M^c$ is nonmeager, which is what we sought to show.
+
+
+    \item[\textbf{8}.] Show that the completeness of $X$ is essential in Theorem 4.7-3 and cannot be omitted. [Consider the subspace $x \subset \ell^{\infty}$ consisting of all $x = (\xi_j)$ such that $\xi_j = 0$ for $j \geq J \in \mathbb{N}$, where $J$ depends on $x$, and let $T_n$ be defined by $T_nx = f_n(x) = n\xi_n$.]
+    \newline\newline
+    \textit{Proof:} We first show that $X$ is incomplete. Consider the sequence $\{x_n\}$ in $X$ defined by $x_n = (1, \tfrac{1}{\sqrt{2}}, \cdots, \tfrac{1}{\sqrt{n}}, 0, 0, \cdots)$. Notice that this defines a Cauchy sequence in $X$ since, for natural numbers $n > m$,
+    \begin{align*}
+        \|x_n - x_m\| &= \frac{1}{\sqrt{m}}
+    \end{align*}
+    and so, for any any $\varepsilon > 0$, by the Archimedean property of $\mathbb{R}$, there exists an index $N$ such that whenever $n > m > N$, 
+    \begin{align*}
+        \frac{1}{\sqrt{m}} &< \varepsilon\\
+        \implies \|x_n - x_m\| &< \varepsilon.
+    \end{align*}
+    Now, notice that, as $n \to \infty$, $x_n \to (1, \tfrac{1}{\sqrt{2}}, \tfrac{1}{\sqrt{3}}, \cdots) \notin X$. Thus, $X$ is not a complete space. Now, suppose that $T_n$ is uniformly bounded. That is, there exists a $c$ such that $\|T_n\| \leq c$ for all $n$. But notice 
+    \begin{align*}
+        \|T_nx_n\| &= \sqrt{n}
+    \end{align*}
+    so that, for $n > c^2$, $\|T_nx_n\| > c$, a contradiction. Thus, the completeness of $X$ in Theorem 4.7-3 is essential, by the above example.
+
+
+    \item[\textbf{10}.] \textbf{(Space $\mathbf{c_0}$)} Let $y = (\eta_j)$, $\eta_j \in \mathbb{C}$, be such that $\sum \xi_j\eta_j$ converges for every $x = (\xi_j) \in c_0$, where $c_0 \in \ell^{\infty}$ is the subspace of all complex sequences converging to zero. Show that $\sum |\eta_j| < \infty$. (Use 4.7-3.)
+    \newline\newline
+    \textit{Proof:} Define the sequence of linear functionals $\{f_n\}$ by
+    \[f_n(x) = \sum_{j = 1}^n \xi_j\eta_j \tag{$x = (\xi_1, \xi_2, \cdots)$}\]
+    and since $\sum_{j = 1}^{\infty} \xi_j\eta_j$ converges for all $x$, the sequence $\{s_n\}$ defined by $s_n = \sum_{j = 1}^n \xi_j\eta_j$ is bounded by some $c_x$ (depending on $x$), $|s_n| \leq c_x$. Thus,
+    \[|f_n(x)| \leq c_x.\]
+    Note also that each $f_n$ is bounded since
+    \begin{align*}
+        |f_n(x)| &\leq \sum_{j = 1}^n |\xi_j||\eta_j| \tag*{(Triangle Inequality)}\\
+        &\leq \sup_{j \geq 1} |\xi_j| \sum_{j = 1}^n |\eta_j|\\
+        &= \|x\|\sum_{j = 1}^n |\eta_j|\\
+        \implies \|f_n\| &\leq \sum_{j = 1}^n|\eta_j|
+    \end{align*}
+    which is bounded since $\sum_{j = 1}^n|\eta_j|$ is a finite sum. Thus, since $c_0$ is a complete space, by the uniform boundedness theorem, there exists some $c > 0$ such that 
+    \[\|f_n\| \leq c.\]
+    Now, notice that as $n \to \infty$,
+    \[f_n \to f = \sum_{j = 1}^{\infty} \xi_j\eta_j\]
+    and so, by continuity of the norm,
+    \[\|f\| \leq c.\]
+    Now, define the sequence $\{x_n\}$ where $x_n = (\xi_1, \xi_2, \cdots, \xi_n, 0, 0, \cdots)$ with
+    \[\xi_j = \begin{cases}
+        \frac{\overline{\eta_j}}{|\eta_j|}, & \text{if } \eta_j \neq 0\\
+        0, & \text{if } \eta_j = 0.
+    \end{cases}\]
+    Notice that $\|x_n\| = 1$ for all $n$ and that
+    \begin{align*}
+        f(x_n) &= \sum_{j = 1}^{n} \xi_j\eta_j\\
+        &= \sum_{j = 1}^n |\eta_j|\\
+        \implies |f(x_n)| &= \sum_{j = 1}^n |\eta_j|\\
+        \implies \|f\| &\geq \sum_{j = 1}^n |\eta_j|
+    \end{align*}
+    but since $f$ is a bounded linear functional ($\|f\| \leq c$), we have
+    \[\sum_{j = 1}^n |\eta_j| \leq c\]
+    and since $|\eta_j| \geq 0$ for all $j$, so that by the monotone convergence theorem, $\sum_{j = 1}^{\infty}|\eta_j|$ converges, as was desired.
+    
+\end{itemize}
+
+\end{document}

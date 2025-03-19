@@ -1,0 +1,165 @@
+\documentclass{article}
+\usepackage{graphicx, amsmath, amssymb, mathtools, fancyhdr, float}
+
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{fancy}
+\fancyfoot{}
+\fancyhead[L]{MATH 5350}
+\fancyhead[R]{\thepage}
+
+\begin{document}
+
+\begin{center}
+    {\Huge Michael Nameika}
+    \vspace{0.5 cm}
+
+    {\huge Homework V}
+\end{center}
+
+\section*{Section 2.8 Problems}
+\begin{itemize}
+    \item[\textbf{3}.] Find the norm of the linear functional $f$ defined on $C[-1,1]$ by 
+    \[f(x) = \int_{-1}^0x(t)dt - \int_0^1 x(t)dt.\]
+    \textit{Soln.} Let $x \in C[-1,1]$ and notice
+    \begin{align*}
+        |f(x)| &= \left|\int_{-1}^0x(t)dt - \int_0^1x(t)dt\right|\\
+        &\leq \left|\int_{-1}^0x(t)dt\right| + \left|\int_0^1x(t)dt\right|\\
+        &\leq \int_{-1}^0|x(t)|dt + \int_0^1 |x(t)|dt\\
+        &\leq \|x(t)\|\int_{-1}^0dt + \|x(t)\|\int_0^1dt\\
+        &= \|x(t)\| + \|x(t)\|\\
+        &= 2\|x(t)\|
+    \end{align*}
+    so that $|f| \leq 2$. Now, define the sequence of functions $\{x_n(t)\}$ in $C[-1,1]$ by 
+    \[x_n(t) = t^{\frac{1}{2n + 1}}\]
+    and notice that $\|x_n(t)\| = 1$ for each $n$. Then we have
+    \begin{align*}
+        f(x_n) &= \int_{-1}^0 t^{\frac{1}{2n + 1}}dt - \int_0^1 t^{\frac{1}{2n + 1}}dt\\
+        &= \frac{2n + 1}{2n + 2}\left[t^{\frac{2n+2}{2n+1}}\right]\bigg|_{-1}^0 - \frac{2n + 1}{2n + 2}\left[t^{\frac{2n+2}{2n+1}}\right]\bigg|_0^1\\
+        &= -\frac{2n + 1}{2n + 2} - \frac{2n + 1}{2n + 2}\\
+        &= -2\left(\frac{2n + 1}{2n + 2}\right)
+    \end{align*}
+    but since $\frac{2n + 1}{2n + 2} \to 1$ as $n \to \infty$ and $|f(x_n)| < 2$ for all $n$, we have for any positive number $\varepsilon > 0$, there exists a natural number $N$ such that whenever $n > N$,
+    \[\left||f(x_n)| - 2\right| < \varepsilon\]
+    Thus, 
+    \[|f| = 2\]
+
+
+    \item[\textbf{10}.] Show that in Prob. 9, two elements $x_1, x_2 \in X$ belong to the same element of the quotient space $X/\mathcal{N}(f)$ if and only if $f(x_1) = f(x_2)$; show that codim $\mathcal{N}(f) = 1$.
+    \newline\newline
+    \textit{Proof:} First suppose that $f(x_1) = f(x_2)$. By problem 9, we have that for a fixed $x_0 \in X\backslash \mathcal{N}(f)$, $x_1,x_2$ have the unique representations
+    \begin{align*}
+        x_1 &= \alpha_1x_0 + y_1\\
+        x_2 &= \alpha_2x_0 + y_2
+    \end{align*}
+    where $y_1,y_2 \in \mathcal{N}(f)$. Then notice, since $f$ is a linear functional
+    \begin{align*}
+        f(x_1) &= \alpha_1f(x_0)\\
+        f(x_2) &= \alpha_2f(x_0)
+    \end{align*}
+    and since $f(x_1) = f(x_2)$, we have $\alpha_1 = \alpha_2$, so that $x_1$ and $x_2$ differ only by their null space component. Hence, $x_1,x_2$ belong to the coset
+    \[\alpha_1x_0 + \mathcal{N}(f) \]
+    so that $x_1,x_2$ belong to the same element of the quotient space. Now suppose $x_1,x_2$ belong to the same element of the quotient space. That is, for some $x \in X\backslash \mathcal{N}(f)$, $x_1,x_2 \in x + \mathcal{N}(f)$. That is, there exists vectors $y_1,y_2 \in \mathcal{N}(f)$ such that
+    \begin{align*}
+        x_1 &= x + y_1\\
+        x_2 &= x + y_2
+    \end{align*}
+    then we have
+    \begin{align*}
+        f(x_1) &= f(x)\\
+        f(x_2) &= f(x)
+    \end{align*}
+    so that $f(x_1) = f(x_2)$. 
+    \newline\newline
+    We now wish to find the codimension of $\mathcal{N}(f)$, or dim$(X/\mathcal{N}(f))$. Let $x \in X$. Then for a fixed $x_0 \in X\backslash\mathcal{N}(f)$, $x$ has the unique representation
+    \[x = \alpha x_0 + y\]
+    for $y \in \mathcal{N}(f)$. Then $x$ belongs to the element
+    \[\alpha x_0 + \mathcal{N}(f) = \{v \:|\: v = \alpha x_0 + y, y \in \mathcal{N}(f)\}\]
+    but any other element $z \in X$ can be written, for some $\beta$ and $\tilde{y} \in \mathcal{N}(f)$,
+    \[z = \beta x_0 + \tilde{y}\]
+    Thus, $z \in \beta x_0 + \mathcal{N}(f)$. Then any vector in $X$ is an element of a scalar multiple of the coset $x_0 + \mathcal{N}(f)$. Thus, 
+    \[X/\mathcal{N}(f) = \text{span}\{x_0 + \mathcal{N}(f)\}\]
+    so that $\text{dim}(X/\mathcal{N}(f)) = 1$.
+\end{itemize}
+
+
+\section*{Section 2.9 Problems}
+\begin{itemize}
+    \item[\textbf{8}.] If $Z$ is an $(n-1)$-dimensional subspace of an $n$-dimensional vector space $X$, show that $Z$ is the null space of a suitable linear functional on $X$, which is uniquely determined to within a scalar multiple.
+    \newline\newline
+    \textit{Proof:} Let $E = \{e_1,\cdots,e_{n-1}\}$ be a basis for $Z$. Then since $\text{dim(}X\text{)} = n$, there exists a vector $v \in X$ such that $V = \{e_1, \cdots, e_{n-1}, v\}$ forms a basis for $V$. Define the linear functional $f_v$ with the property that $f_v(e_j) = 0$ for all $1 \leq j \leq n-1$ and $f_v(v) = 1$. Then for any $z = \alpha_1e_1 + \alpha_2e_2 + \cdots + \alpha_{n-1}e_{n-1}$ in $Z$, we have that 
+    \begin{align*}
+        f_v(z) &= f_v(\alpha_1e_1 + \alpha_2e_2 + \cdots + \alpha_{n-1}e_{n-1})\\
+        &= \alpha_1f_v(e_1) + \alpha_2f_v(e_2) + \cdots + \alpha_{n-1}f_v(e_{n-1})\\
+        &= 0 + 0 + \cdots + 0\\
+        &= 0.
+    \end{align*}
+    and for $x = \beta v$ in $X\backslash Z$, we have
+    \[f_v(x) = \beta f_v(v) = \beta\]
+    So that $f_v$ is a linear functional on $X$ with $\mathcal{N}(f) = Z$. Now suppose there exists some other linear function $g$ with the property that $\mathcal{N}(g) = Z$. Then for any $x \in X\backslash Z$, we have $x = \beta v$ and so
+    \begin{align*}
+        g(x) &= g(\beta v)\\
+        &= \beta g(v)
+    \end{align*}
+    so that $g(x)$ differs from $f(x)$ by the scalar $g(v)$.
+
+
+    \item[\textbf{12}.] If $f_1, \cdots, f_p$ are linear functionals on an $n$-dimensional vector space $X$, where $p < n$, show that there is a vector $x \neq 0$ in $X$ such that $f_1(x) = 0, \cdots, f_p(x) = 0$. What consequences does this result have with respect to linear equations?
+    \newline\newline
+    \textit{Proof:} To begin, we consider the mapping 
+    \[T: x \mapsto (f_1(x), \cdots, f_p(x)) \in K^p\]
+    where $K$ is the scalar field. Then $\mathcal{D}(T) = X$ by construction so that dim($\mathcal{D}(T)$)$ = n$. Note that $T$ is linear since each of $f_1, \cdots, f_p$ are linear. Suppose by way of contradiction that there exists no $x \neq 0$ in $X$ such that $f_1(x) = 0, \cdots f_p(x) = 0$. Then the only vector where each $f_1,\cdots, f_p$ is equal to zero is the zero vector. Hence,
+    \[\mathcal{N}(T) = \{\mathbf{0}\}.\]
+    And so $T$ is injective since its null space contains only the zero vector. And since $T$ is injective, we have that $T^{-1}$ exists. Then since dim($\mathcal{R}(T)$) $ \leq p$, we have $\text{dim}(\mathcal{D}(T)) = \text{dim}(\mathcal{R}(T)) \leq p$. So we have
+    \[n \leq p < n\]
+    a contradiction. 
+    \newline\newline
+    What this tells us is, if we have $p < n$ linear functionals in an $n$-dimensional space, then the linear system corresponding to said functionals will have a nontrivial null space. That is, suppose we write $f_i = (\alpha_1^{(i)}, \alpha_2^{(i)}, \cdots, \alpha_n^{(i)})$ for $1 \leq i \leq p$ and $x = (\xi_1, \xi_2, \cdots, \xi_n)$ where $Tx = 0$ so that the mapping $T$ on $x$ has the following form:
+    \[\begin{pmatrix}
+        \alpha_1^{(1)} & \alpha_2^{(1)} & \cdots & \alpha_n^{(1)}\\
+        \alpha_1^{(2)} & \alpha_2^{(2)} & \cdots & \alpha_n^{(2)}\\
+        \vdots & \vdots & & \vdots\\
+        \alpha_1^{(p)} & \alpha_2^{(p)} & \cdots & \alpha_n^{(p)}
+    \end{pmatrix}\begin{pmatrix}
+        \xi_1\\
+        \xi_2\\
+        \vdots\\
+        \xi_n
+    \end{pmatrix} = \mathbf{0}\]
+    will have a nontrivial solution.
+\end{itemize}
+
+
+\section*{Section 2.10 Problems}
+\begin{itemize}
+    \item[\textbf{6}.] If $X$ is the space of ordered $n$-tuples of real numbers and $\|x\| = \underset{j}{\max} |\xi_j|$, where $x = (\xi_1, \cdots, \xi_n)$, what is the corresponding norm on the dual space $X'$?
+    \newline\newline
+    \textit{Proof:} Let $f$ be a linear functional on $X$ and suppose we write $f$ as 
+    \[f = (\alpha_1, \alpha_2, \cdots, \alpha_n)\]
+    we wish to find the norm on $f$. Let $x = (\xi_1, \xi_2, \cdots, \xi_n)$ be such that $\|x\| = 1$. Then
+    \begin{align*}
+        |f(x)| &= |\alpha_1 \xi_1 + \alpha_2 \xi_2 + \cdots + \alpha_n \xi_n|\\
+        &\leq |\alpha_1\xi_1| + |\alpha_2 \xi_2| + \cdots + |\alpha_n \xi_n|\\
+        &= |\alpha_1||\xi_1| + |\alpha_2| |\xi_2| + \cdots + |\alpha_n| |\xi_n|\\
+        &\leq |\alpha_1| \underset{j}{\max}|\xi_j| + |\alpha_2| \underset{j}{\max}|\xi_j| + \cdots + |\alpha_n| \underset{j}{\max}|\xi_j|\\
+        &= |\alpha_1| + |\alpha_2| + \cdots + |\alpha_n|
+    \end{align*}
+    so we have
+    \[|f(x)| \leq |\alpha_1| + |\alpha_2| + \cdots + |\alpha_n|.\]
+    For a lower bound, take $y = (\eta_1, \eta_2, \cdots, \eta_n)$ in $X$ defined by
+    \[\eta_j = \begin{cases}
+        1, & \alpha_j \geq 0\\
+        -1, & \alpha_j < 0
+    \end{cases}\]
+    and note that $\|y\| = 1$. Then 
+    \[f(y) = |\alpha_1| + |\alpha_2| + \cdots + |\alpha_n|\]
+    so that 
+    \[\|f\| = |\alpha_1| + |\alpha_2| + \cdots + |\alpha_n|\]
+    Then the norm on the dual space is the ``one norm," defined in the above equation.
+    
+\end{itemize}
+
+\end{document}

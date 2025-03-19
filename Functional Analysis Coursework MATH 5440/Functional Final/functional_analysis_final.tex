@@ -1,0 +1,305 @@
+\documentclass{article}
+\usepackage{graphicx, amsmath, amssymb, mathtools, fancyhdr}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{fancy}
+
+\fancyfoot{}
+\fancyhead[R]{\thepage}
+\fancyhead[L]{MATH 5350}
+
+\begin{document}
+\begin{center}
+    {\Huge Final Exam}
+    \vspace{0.5cm}
+
+    {\Large Michael Nameika}
+\end{center}
+
+\begin{itemize}
+    \item[1.] (10 pts) Let $H$ be a Hilbert space and let $T: H \to H$ be a bijective bounded linear operator. Prove that
+    \newline
+    (a) $(T^{-1})^*$ exists on $H$.
+    \newline
+    (b) $(T^*)^{-1}$ exists on $H$ and $(T^*)^{-1} = (T^{-1})^*$.
+    \newline\newline
+    \textit{Proof:} (a) Since $H$ is a Hilbert space and $T$ is bijective and bounded, we have that $T^{-1}$ exists, and by the bounded inverse theorem, $T^{-1}$ is bounded. Then by the existence theorem of Hilbert-adjoint operators, we have that $(T^{-1})^*$ exists. 
+    \newline\newline
+    (b) We have that $T^*$ exists by the existence theorem of Hilbert-adjoint operators. To show that $(T^*)^{-1}$ exists, we show that $\mathcal{N}(T^*) = \{\mathbf{0}\}$. Let $x, y\in H$ with $x \neq 0$ and $y \in \mathcal{N}(T^*)$. Then 
+    \begin{align*}
+        \langle Tx, y\rangle &= \langle x, T^* y\rangle\\
+        &= \langle x, 0\rangle\\
+        &= 0
+    \end{align*}
+    so that $Tx \perp y$ hence $y \in \mathcal{R}(T)^{\perp}$. But since $T$ is bijective, we have $\overline{\mathcal{R}(T)} = \mathcal{R}(T) = H$ and by the direct sum decomposition for Hilbert spaces, we have
+    \begin{align*}
+        H &= \mathcal{R}(T) \oplus \mathcal{R}(T)^{\perp}\\
+        &= H \oplus \mathcal{R}(T)^{\perp}\\
+        \implies \mathcal{R}(T)^{\perp} &= \{\mathbf{0}\}
+    \end{align*}
+    so that $y = \mathbf{0}$, and so $\mathcal{N}(T^*) = \{\mathbf{0}\}$ and $T^*$ is hence injective and so $(T^*)^{-1}$ exists. We now show that $(T^*)^{-1} = (T^{-1})^*$. Let $x \in H$. We wish to show $T^*(T^{-1})^*x = x$. Well, notice
+    \begin{align*}
+        \langle T^*(T^{-1})^*x, x\rangle &= \langle T^*x, T^{-1}x\rangle\\
+        &= \langle x, TT^{-1}x\rangle\\
+        &= \langle x, x\rangle
+    \end{align*}
+    thus $(T^*)^{-1} = (T^{-1})^*$.
+
+
+    \pagebreak
+    \item[2.] (15 pts) (a) Let $X$ and $Y$ be Banach spaces. Let $T_n: X \to Y$ be a sequence of bounded linear operators. Assume that $(T_nx)$ converges for every $x \in X$. 
+    \begin{itemize}
+        \item[(i)] Prove that the sequence of operator norms $(\|T_n\|)$ is bounded.
+        \newline\newline
+        \textit{Proof:} Since $(T_nx)$ converges for every $x \in X$, we have that for each $x$, $(T_nx)$ is bounded, that is,
+        \[\|T_nx\| \leq c_x\]
+        for some $c_x = c(x) > 0$. Then by the bounded inverse theorem, we have that $(\|T_n\|)$ is bounded.
+
+        \item[(ii)] Prove that $Tx = \underset{n\to \infty}{\lim} T_nx$ defines a bounded linear operator $T: X \to Y$. 
+        \newline\newline
+        \textit{Proof:} By hypothesis, since $T_nx$ converges for every $x \in X$, we have that $Tx = \lim_{n \to \infty} T_nx$ exists and is well-defined by uniqueness of limits. We now show that $T$ is linear. Let $x,y \in X$ and $\alpha$ be any scalar. Now notice
+        \begin{align*}
+            T(\alpha x + y) &= \lim_{n \to \infty} T_n(\alpha x + y)\\
+            &= \lim_{n \to \infty} T_n(\alpha x) + \lim_{n \to \infty} Ty \tag{Linearity of Limits}\\
+            &= \lim_{n \to \infty} \alpha T_nx + Ty \tag{Linearity of $T_n$}\\
+            &= \alpha\lim_{n\to \infty} T_nx + Ty \tag{Linearity of Limits}\\
+            &= \alpha Tx + Ty \tag{Def. of $T$}
+        \end{align*}
+        so that $T$ is linear. What remains is to show that $T$ is bounded. Well, since the sequence $(\|T_n\|)$ is bounded by part (a), we have that $T$ is bounded since for some $M > 0$, 
+        \[\|T_n\| \leq M\]
+        hence, letting $n \to \infty$, we have
+        \[\|T\| \leq M.\]
+    \end{itemize}
+    (b) Let $T_n: \ell^2 \to \ell^2$ be defined by $T_nx = (\xi_1, \dots, \xi_n, 0, 0, \dots)$, for $x = (\xi_j)$. Prove that the hypothesis of part (a) is satisfied, yet for the limit $T$ of part (a)(ii), we have $\|T_n - T\| = 1$ for all $n$. 
+    \newline\newline
+    \textit{Proof:} Note that $\ell^2$ is a Banach space and $T_n$ is bounded since
+    \begin{align*}
+        \|T_nx\| &= \|(\xi_1,\xi_2,\dots, \xi_n, 0, 0,\dots)\|\\
+        &\leq \|x\|\\
+        \implies \|T_n\| &\leq 1.
+    \end{align*}
+    Now, $(T_nx)$ clearly converges for any $x \in \ell^2$ since, as $n\to \infty$, 
+    \begin{align*}
+        \lim_{n\to \infty} T_nx &= (\xi_1,\xi_2,\xi_3,\dots) = x.
+    \end{align*}
+    Now, notice that 
+    \[\|(T_n - T)x\| = \|(0,0,\dots, \xi_{n+1}, \dots)\| \leq \|x\|\]
+    so that 
+    \[\|T_n - T\| \leq 1.\]
+    For the lower bound, take, for each $n$, $x_n = (0,0,\dots, 1, 0, \dots)$, all zeros except a 1 in the $(n+1)^{\text{th}}$ position. Then notice that $T_nx_n = 0$ and $Tx = x$ and that $\|x\| = 1$ so that
+    \[\|(T_n - T)x\| = \|x\| = 1\]
+    and we have
+    \[\|T_n - T\| = 1.\]
+    
+
+    \pagebreak
+    \item[3.] (20 pts) (a) Let $T_n : \mathbb{C}^n \to \mathbb{C}^n$ be defined by $T_nx = \left(0, \frac{\xi_1}{1}, \frac{\xi_2}{2}, \dots, \frac{\xi_{n-1}}{n-1}\right)$, where $x = (\xi_1, \dots, \xi_n)$. Find all eigenvalues and eigenvectors of $T_n$ and their algebraic and geometric multiplicities.
+    \newline
+    (b) Let $T: \ell^2 \to \ell^2$ be defined by $Tx = \left(0, \frac{\xi_1}{1}, \frac{\xi_2}{2}, \frac{\xi_3}{3},\dots\right)$, where $x = (\xi_1, \xi_2, \dots)$. Show that $T$ has no eigenvalues, and that $\lambda = 0$ is a spectral value. 
+    \newline
+    (c) Prove that the operator $T: \ell^2 \to \ell^2$ of part (b) is a compact linear operator but is \textit{not} a self-adjoint linear operator.
+    \newline\newline
+    \textit{Proof:} (a) Let $\lambda$ be an eigenvalue of $T_n$ and $x = (\xi_1,\xi_2,\dots, \xi_n)$ be an associated eigenvector. Then
+    \begin{align*}
+        T_nx &= \lambda x\\
+        \implies \left(0, \xi_1, \frac{\xi_2}{2}, \dots, \frac{\xi_{n-1}}{n-1}\right) &= (\lambda \xi_1, \lambda\xi_2,\dots, \lambda\xi_n)
+    \end{align*}
+    which yields
+    \begin{align*}
+        0 &= \lambda \xi_1\\
+        \xi_1 &= \lambda \xi_2\\
+        \frac{\xi_2}{2} &= \lambda \xi_3\\
+        &\vdots\\
+        \frac{\xi_{n-1}}{n-1} &= \lambda \xi_n
+    \end{align*}
+    which, for $\lambda \neq 0$ gives us $x = \mathbf{0}$, which is not an eigenvector by definition. Now, if $\lambda = 0$, the above system of equations is satsified with $x = (0,0,\dots, 0, \xi_n)$. Now, since $\dim{\mathbb{C}^n} = n$, we have that $T_n$ has $n$ eigenvalues (counting multiplicity), so that $\lambda = 0$ has algebraic multiplicity $n$ with geometric multiplicity 1 since $x = (0, 0, \dots, \xi_n)$ is the only associated eigenvector.
+    \newline\newline
+    (b) Suppose that $T$ has an eigenvalue $\lambda$ and let $x = (\xi_1, \xi_2,\dots)$ be an associated eigenvector. Then we have
+    \begin{align*}
+        Tx &= \lambda x\\
+        \implies \left(0, \xi_1, \frac{\xi_2}{2}, \frac{\xi_3}{3}, \dots\right) &= (\lambda \xi_1, \lambda \xi_2, \lambda \xi_3,\dots)\\
+        \implies 0 &= \lambda\xi_1\\
+        \xi_1 &= \lambda\xi_2\\
+        \frac{\xi_2}{2} &= \lambda \xi_3\\
+        &\vdots
+    \end{align*}
+    which, if $\lambda \neq 0$ yields $x = \mathbf{0}$ which is not an eigenvector by definition. If $\lambda \neq 0$, we get $\xi_1 = 0 \implies \xi_2 = 0\implies \xi_3 = 0 \dots$ which yields $x = \mathbf{0}$, which is not an eigenvector by definition. Thus, $T$ has no eigenvalues. Now, to show that $\lambda = 0$ is a spectral value, we show that $\lambda = 0$ is an approximate eigenvalue, and then by problem \textbf{II.1}(b) from homework 12, we have that $\lambda \in \sigma(T)$. Define the sequence $(x_n)$ by $x_n = (\xi_1, \xi_2, \dots)$ with $\xi_k = \delta_{kn}$, the Dirac delta. Notice
+    \begin{align*}
+        \|x_n\| &= \left(\sum_{k = 1}^{\infty} \left|\delta_{kn}\right|^2\right)^{1/2}\\
+        &= 1
+    \end{align*}
+    and that
+    \begin{align*}
+        \|Tx_n - \lambda x_n\| &= \|Tx_n\|\\
+        &= \frac{1}{n+1} \to 0
+    \end{align*}
+    so that $\lambda = 0$ is an approximate eigenvalue and is thus in the spectrum of $T$.
+    \newline\newline
+    (c) Define the sequence of linear operators $(T_n)$ by $T_nx = \left(0, \xi_1, \frac{\xi_2}{2},\dots, \frac{\xi_n}{n}, 0, 0,\dots\right)$ and notice that $\text{dim}(\mathcal{R}(T_n)) = n$ so that each $T_n$ is a compact linear operator. Now, notice that
+    \begin{align*}
+        \|(T - T_n)x\| &= \left\|\left(0,0,\dots,0, \frac{\xi_{n+1}}{n+1},\dots\right)\right\|\\
+        &\leq \frac{\|x\|}{n+1}\\
+        &\to 0
+    \end{align*}
+    so that $(T_n)$ defines a sequence of compact linear operators that converge uniformly to $T$ in the operator norm, hence $T$ is a compact linear operator.
+    \pagebreak
+    \item[4.] (15 pts) Let $(q_j)$ be a bounded sequence of real numbers. Define $T: \ell^2 \to \ell^2$ by $y = Tx$, $x = (\xi_j)$, $y = (\eta_j)$, $\eta_j = q_j\xi_j$, $j = 1,2,\dots$. Verify the hypothesis of Theorem 9.1-2 for $T$. Then apply the criterion (2) of this theorem, that characterizes the resolvent set, to prove that the spectrum of the operator $T$ is the closure of its set of eigenvalues. What are these eigenvalues?
+    \newline\newline
+    \textit{Proof:} Note that $\ell^2$ is a Hilbert space. Notice that $T$ is a bounded linear operator since $(q_j)$ is a bounded sequence, that is there exists some $M > 0$ such that $|q_j| \leq M$ for all $j \in \mathbb{N}$ and 
+    \begin{align*}
+        \|Tx\|^2 &= \sum_{n = 1}^{\infty} |q_j\xi_j|^2\\
+        &\leq M^2\sum_{n = 1}^{\infty} |\xi_j|^2\\
+        &= M^2\|x\|^2\\
+        \implies \|Tx\| &\leq M\|x\|.
+    \end{align*}
+    Additionally, $T$ is self-adjoint since
+    \begin{align*}
+        \langle Tx, y\rangle &= \sum_{n = 1}^{\infty} (q_j\xi_j) \overline{\eta_j}\\
+        &= \sum_{n = 1}^{\infty} \xi_j (q_j \overline{\eta_j})\\
+        &= \sum_{n = 1}^{\infty} \xi_j \overline{(q_j\eta_j)} \tag{$q_j \in \mathbb{R}$}\\
+        &= \langle x, Ty\rangle.
+    \end{align*}
+    Thus, the hypothesis of theorem 9.1-2 is satisfied. We now find the eigenvalues of $T$.\newline
+    I claim that the eigenvalues of $T$ are simply $q_j$ for $j \in \mathbb{N}$ since, for $x_j = (\xi_1, \xi_2, \dots)$, with $\xi_k = \delta_{jk}$, we have that 
+    \begin{align*}
+        Tx_j &= (0,0,\dots, q_j, 0, \dots)\\
+        &= q_j x_j.
+    \end{align*}
+    To see that there are no other eigenvalues, suppose there exists $\lambda \neq q_j$ for $j \in \mathbb{N}$ such that $Tx = \lambda x$, $x \neq x_j$, which gives us
+    \[(q_1\xi_1,q_2\xi_2,\dots) = (\lambda\xi_1, \lambda\xi_2,\dots)\]
+    which yields
+    \begin{align*}
+        q_1\xi_1 &= \lambda\xi_1\\
+        q_2\xi_2 &= \lambda\xi_2\\
+        &\vdots
+    \end{align*}
+    hence, either $x = \mathbf{0}$ which is not an eigenvector by definition, or $\lambda = q_1 = q_2 = \cdots$ so that $(q_j)$ must be a constant sequence with $\lambda = q_1$ contrary to our hypothesis. Thus, the only eigenvalues are $q_j$.
+    We now use (2) of the same theorem to show that the spectrum is the closure of the eigenvalues. Define $Q = \{q_j \: | \: j \in \mathbb{N}\}$ be the set of all elements of the given sequence and let $\lambda \notin \overline{Q}$. In particular, $\lambda$ is not a limit point of $Q$, so there exists some $\varepsilon > 0$ such that
+    \[|\lambda - q| \geq \varepsilon, \hspace{0.5cm} q\in Q.\]
+    Now let $x \in \ell^2$, $x = (\xi_1, \xi_2,\dots)$ and consider $(T - \lambda I)x$:
+    \begin{align*}
+        \|(T - \lambda)x\|^2 &= \|Tx - \lambda x\|^2\\
+        &= \left\|\left((q_1 - \lambda)\xi_1, (q_2 - \lambda)\xi_2, \dots\right)\right\|^2\\
+        &= \sum_{n = 1}^{\infty} |(q_n - \lambda)\xi_n|^2\\
+        &\geq \varepsilon^2\sum_{n = 1}^{\infty} |\xi_n|^2\\
+        \implies \|(T - \lambda I)\| &\geq \varepsilon \|x\|
+    \end{align*}
+    so that by theorem 9.1-2, $\lambda \in \rho(T)$. We note that the above inequality does not hold if $\lambda$ is a limit point of $Q$, so that $\sigma(T) = \overline{Q}$, as desired.
+
+
+    \pagebreak
+    \item[5.] (parts (a)-(c), 15 pts) Let $T: H \to H$ be a bounded linear operator on a Hilbert space $H$.
+    \newline
+    (a) Show that $\mathcal{R}(T) \perp \mathcal{N}(T^*)$, meaning that, for all $y$ in the range of $T$ and all $z$ in the null-space of the Hilbert adjoint $T^*$ we have $y \perp z$. 
+    \newline
+    (b) Suppose in addition that $T$ is self-adjoint and the range $\mathcal{R}(T)$ is dense in $H$. Prove that $T$ is injective.
+    \newline
+    (c) Verify that the linear operator $T: \ell^2 \to \ell^2$ defined by $T(\xi_j) = (\xi_j/j)$ is bounded, self-adjoint, injective, and has dense range, but is \textit{not} surjective.
+    \newline
+    (d) (extra credit, 5 pts) Suppose $T$ is bounded and self-adjoint but not injective. Let $x \in \mathcal{N}(T)$ with $x \neq \mathbf{0}$, and let $\epsilon > 0$ be given. Suppose there exists $u \in H$ such that $z = x - Tu$ satisfies $\|z\| \leq \epsilon$. Prove that then $\|x\| \leq \epsilon$ as well. Show that this result offers a means to prove part (b).
+    \newline
+    \textit{Hint}: Consider $\langle x, x - z\rangle$.
+    \newline\newline
+    \textit{Proof:} (a) Let $y \in \mathcal{R}(T)$. Then there exists some $x \in H$ such that $Tx = y$. Let $z \in \mathcal{N}(T^*)$ and consider
+    \begin{align*}
+        \langle y, z\rangle &= \langle Tx, z\rangle\\
+        &= \langle x, T^*z\rangle\\
+        &= \langle x, 0\rangle\\
+        &= 0
+    \end{align*}
+    since $y$ and $z$ were chosen arbitrarily, we have that $\mathcal{R}(T) \perp \mathcal{N}(T^*)$, as desired.
+    \newline\newline
+    (b) Suppose that $T$ is not injective. Then let $x \in \mathcal{N}(T)$ with $x \neq \mathbf{0}$. Take $y \in H$, $y \notin \mathcal{N}(T)$ and consider
+    \begin{align*}
+        \langle Tx, y\rangle &= \langle 0, y\rangle = 0
+    \end{align*}
+    but since $T$ is self-adjoint,
+    \begin{align*}
+        \langle Tx, y\rangle &= \langle x, Ty \rangle\\
+        &= 0
+    \end{align*}
+    so that $x \perp Ty$. But since $\mathcal{R}(T)$ is dense in $H$, we have that $\mathcal{R}(T)^{\perp} = \{\mathbf{0}\}$. Additionally, by part (a), we have that, along with the fact that $T$ is self-adjoint,
+    \[\mathcal{R}(T) \perp \mathcal{N}(T).\]
+    Thus, $\mathcal{N}(T) \subseteq \mathcal{R}(T)^{\perp} = \{\mathbf{0}\} \implies \mathcal{N}(T) = \{\mathbf{0}\}$ a contradiction. Hence $T$ is injective.
+    \newline\newline
+    (c) Let $x \in \ell^2$ with $x = (\xi_1, \xi_2, \dots)$ and notice $Tx = \left(\xi_1, \frac{\xi_2}{2},\dots\right)$. Then note that, for any $j \in \mathbb{N}$, 
+    \[\left|\frac{\xi_j}{j}\right| \leq |\xi_j|.\]
+    Thus 
+    \[\|Tx\| \leq \|x\|\]
+    and so $T$ is bounded. Now let $x \in \mathcal{N}(T)$, $x = (\xi_1, \xi_2, \dots)$ and notice
+    \begin{align*}
+        Tx &= \left(\xi_1, \frac{\xi_2}{2}, \frac{\xi_3}{3},\dots\right)\\
+        &= (0,0,\dots)\\
+        \implies \xi_1 &= 0\\
+        \xi_2 &= 0\\
+        &\vdots
+    \end{align*}
+    so that $x = \mathbf{0}$ and so $\mathcal{N}(T) = \{\mathbf{0}\}$. Thus $T$ is injective. We now show that $T$ is self-adjoint. Let $x, y \in \ell^2$ with $x = (\xi_1,\xi_2,\dots)$, $y = (\eta_1, \eta_2, \dots)$. Recall that the inner product on $\ell^2$ is defined by
+    \[\langle x, y\rangle = \sum_{k = 1}^{\infty} \xi_k \overline{\eta_k}\]
+    and so
+    \begin{align*}
+        \langle Tx, y\rangle &= \sum_{k = 1}^{\infty} \frac{\xi_k}{k}\overline{\eta_k}\\
+        &= \sum_{k = 1}^{\infty} \xi_k\frac{\overline{\eta_k}}{k}\\
+        &= \sum_{k = 1}^{\infty} \xi_k\overline{\left(\frac{\eta_k}{k}\right)}\\
+        &= \langle x, Ty \rangle
+    \end{align*}
+    so that $T$ is self-adjoint. To see that $T$ is not surjective, notice that $x = \left(1, \frac{1}{2}, \frac{1}{3}, \dots\right) \in \ell^2$ since 
+    \[\|x\|^2 = \sum_{k = 1}^{\infty} \frac{1}{k^2} < \infty.\]
+    But note that the preimage of $x$ is $y = (1,1,1,\dots) \notin \ell^2$. Hence, $x \notin \mathcal{R}(T)$ and $T$ is thus not surjective. Finally, we show that $\mathcal{R}(T)$ is dense in $\ell^2$. Let $x \in \ell^2$ with $x = (\xi_1, \xi_2, \dots)$. Define $x_n = (\xi_1, 2\xi_2, 3\xi_3, \dots, n\xi_n, 0, 0,\dots)$ and notice
+    \[Tx_n = (\xi_1, \xi_2, \dots, \xi_n, 0, 0, \dots)\]
+    and that 
+    \[\sum_{k = 1}^n |k\xi_k|^2 < \infty\]
+    so that $x_n \in \ell^2$ for each $n \in \mathbb{N}$. Notice that 
+    \begin{align*}
+        \|T(x - x_n)\|^2 &= \|(0, 0,\dots, 0, \xi_{n+1},\dots)\|^2\\
+        &= \sum_{k = n+1}^{\infty} |\xi_k|^2
+    \end{align*}
+    and since $x \in \ell^2$, the sequence of partial sums $\left(s_n = \sum_{k = 1}^n |\xi_k|^2\right)$ converges, so that for any $\varepsilon > 0$, there exists some $N \in \mathbb{N}$ such that whenever $n > N$, $|s_n - s|^2 < \varepsilon$ where $s = \lim_{n \to \infty}s_n$. And notice that $|s_n - s| = \|T(x - x_n)\|$ so that for $n > N$, 
+    \[\|T(x - x_n)\|^2 < \varepsilon\]
+    and so $\mathcal{R}(T)$ is dense in $\ell^2$, as desired.
+    \pagebreak
+    \item[6.] (15 pts) Let $X$ be a Banach space and let $T: X \to X$ be a bounded linear operator such that $T^2 = T$. Such an operator is said to be \textit{idempotent}. Assume $T \neq \mathbf{0}$ and $T \neq I$. Show that the spectrum of $T$ is the two-point set $\sigma(T) = \{0,1\}$. To proceed, find an explicit closed formula for $(T - \lambda I)^{-1}$ whenever $\lambda \neq 0,1$ by formally applying (9) of Sec. 7.3 for $\lambda > 1$.
+    \newline
+    \textit{Hint}: (9) collapses to a form $A_{\lambda}I + B_{\lambda}T$ for explicit expressions $A_{\lambda}$ and $B_{\lambda}$ in $\lambda$. Verify algebraically that this linear combination represents $(T - \lambda I)^{-1}$ for any $\lambda \neq 0,1$. For instance, find that $(T + I)^{-1} = I - \tfrac{1}{2}T$.
+    \newline\newline
+    \textit{Proof:} We first consider the case $\lambda > 1$. By (9) of section 7.3-4, we have 
+    \[R_{\lambda} = -\frac{1}{\lambda}\sum_{j = 0}^{\infty} \left(\frac{1}{\lambda}T\right)^j\]
+    which yields
+    \begin{align*}
+        R_{\lambda} &= -\frac{1}{\lambda}\left(I + \sum_{j = 1}^{\infty} \left(\frac{1}{\lambda}T\right)^j\right)\\
+        &= -\frac{1}{\lambda}\left(I + T\sum_{j = 1}^{\infty} \left(\frac{1}{\lambda}\right)^j\right) \tag{$T$ idempotent}\\
+        &= -\frac{1}{\lambda}\left(I + T\left(\frac{\frac{1}{\lambda}}{1 - \frac{1}{\lambda}}\right)\right)\\
+        &= -\frac{1}{\lambda}\left(I + \frac{1}{\lambda - 1}T\right).
+    \end{align*}
+    This formula suggests a form for $R_{\lambda}$ for $\lambda \neq 1,0$. We show that this does indeed define $R_{\lambda}$ for $\lambda \neq 1,0$. Notice
+    \begin{align*}
+        -\frac{1}{\lambda}\left(I + \frac{1}{\lambda - 1}T\right)(T - \lambda I) &= -\frac{1}{\lambda}T + \frac{1}{\lambda - \lambda^2}T + I  - \frac{1}{1 - \lambda}T\\
+        &= -\frac{1}{\lambda}T + I + T\left(\frac{1 - \lambda}{\lambda - \lambda^2}\right)\\
+        &= -\frac{1}{\lambda}T + I + \frac{1}{\lambda}T\\
+        &= I
+    \end{align*}
+    and
+    \begin{align*}
+        (T - \lambda I) \left(-\frac{1}{\lambda}\left(I + \frac{1}{\lambda - 1}T\right)\right) &= -\frac{1}{\lambda}(T - \lambda I)\left(I + \frac{1}{\lambda - 1}T\right)\\
+        &= -\frac{1}{\lambda}\left(T - \lambda I + \frac{1}{\lambda - 1}T - \frac{\lambda}{\lambda - 1}T\right)\\
+        &= -\frac{1}{\lambda}\left(T - \lambda I + \left(\frac{1 - \lambda}{\lambda - 1}\right)T\right)\\
+        &= -\frac{1}{\lambda}(T - \lambda I - T)\\
+        &= -\frac{1}{\lambda}(-\lambda I)\\
+        &= I
+    \end{align*}
+    hence
+    \[R_{\lambda} = -\frac{1}{\lambda}\left(I + \frac{1}{\lambda - 1}T\right)\]
+    for $\lambda \neq 1,0$. Note that $R_{\lambda}$ is bounded since
+    \begin{align*}
+        \|R_{\lambda}x\| &= \left\|-\frac{1}{\lambda}\left(I + \frac{1}{\lambda - 1}T\right)x\right\|\\
+        &\leq \frac{1}{|\lambda|}\|x\| + \frac{1}{|\lambda - 1|}\|T\|\|x\|.
+    \end{align*}
+    Further, $R_{\lambda}$ is defined on all of $X$ since $\mathcal{D}(T) = \mathcal{D}(I) = X$. Thus, whenever $\lambda \neq 1,0$, $\lambda \in \rho(T)$. Hence,
+    \[\sigma(T) = \{0,1\}\]
+    as desired.
+\end{itemize}
+
+\end{document}

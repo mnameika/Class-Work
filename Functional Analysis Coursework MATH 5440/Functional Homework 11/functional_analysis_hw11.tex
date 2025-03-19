@@ -1,0 +1,187 @@
+\documentclass{article}
+\usepackage{graphicx, amsmath, amssymb, mathtools,fancyhdr}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{fancy}
+
+\fancyfoot{}
+\fancyhead[R]{\thepage}
+\fancyhead[L]{MATH 5350}
+
+
+\begin{document}
+\begin{center}
+    {\Huge Homework XI}
+    \vspace{0.5cm}
+
+    {\Large Michael Nameika}
+\end{center}
+
+\section*{Section 7.1 Problems}
+\begin{itemize}
+    \item[7.] \textbf{(Inverse)} Show that the inverse $A^{-1}$ of a square matrix exists if and only if all the eigenvalues $\lambda_1, \cdots, \lambda_n$ of $A$ are different from zero. If $A^{-1}$ exists, show that it has the eigenvalues $1/\lambda_1, \cdots, 1/\lambda_n$. 
+    \newline\newline
+    \textit{Proof:} First suppose that $A^{-1}$ exists. Then we have $\text{det}(A) \neq 0$, and notice $\text{det}(A) = \text{det}(A - 0\cdot I) \neq 0$ so that 0 is not an eigenvalue by definition. Now suppose that 0 is not an eigenvalue. Then $\text{det}(A - 0\cdot I) = \text{det}(A) \neq 0$ so that $A$ is invertible. 
+    \newline\newline
+    Now, suppose $A^{-1}$ exists and let $\lambda$ be an eigenvalue of $A$ and let $v$ be an associated eigenvector of $\lambda$. Then
+    \[Av = \lambda v\]
+    multiplying the above equation on the left by $A^{-1}$, we have
+    \begin{align*}
+        A^{-1}Av &= A^{-1}(\lambda v)\\
+        v &= \lambda A^{-1}v
+    \end{align*}
+    and since $\lambda \neq 0$ by the above proof, we may divide each side of the above equation by $\lambda$:
+    \[A^{-1}v = \frac{1}{\lambda}v\]
+    so that $\tfrac{1}{\lambda}$ is an eigenvalue of $A^{-1}$ by definition. Thus, if $\lambda$ is an eigenvalue of $A$, then $\tfrac{1}{\lambda}$ is an eigenvalue of $A^{-1}$. Thus, $\tfrac{1}{\lambda_1},\cdots \tfrac{1}{\lambda_n}$ are eigenvalues of $A^{-1}$. We must now show that these are precisely the eigenvalues of $A^{-1}$. By the fundamental theorem of algebra and factorization theorem, we have 
+    \[\text{det}(A - \lambda I) = \prod_{k = 1}^n(\lambda - \lambda_k)\]
+    where $\lambda_k, 1\leq k \leq n$ are the eigenvalues of $A$. But then
+    \[\text{det}(A^{-1} - \lambda I) = \prod_{k = 1}^n (\lambda - \lambda_k')\]
+    where $\lambda_k', 1\leq k \leq n$ are the eigenvalues of $A^{-1}$. But since $\tfrac{1}{\lambda_1}, \cdots, \tfrac{1}{\lambda_n}$ are eigenvalues of $A^{-1}$, we have
+    \[\text{det}(A^{-1} - \lambda I) = \prod_{k = 1}^n (\lambda - \tfrac{1}{\lambda_k})\]
+    so that $\tfrac{1}{\lambda_1}, \cdots, \tfrac{1}{\lambda_n}$ are precisely the eigenvalues of $A^{-1}$.
+
+    
+    \item[14.] Show that the geometric multiplicity of an eigenvalue cannot exceed the algebraic multiplicity.
+    \newline\newline
+    \textit{Proof:} Let $X$ be a normed space and $\text{dim}(X) = n$. Let $T: X \to X$ be a linear transformation and $\lambda_0$ an eigenvalue of $T$ with algebraic multiplicity $\ell$ and geometric multiplicity $m$. Let $\{e_1, \cdots, e_m\}$ be a basis for the eigenspace corresponding to $\lambda_0$. We may extend this to a basis 
+    \[e = \{e_1,\cdots, e_m, e_{m+1}, \cdots, e_n\}\]
+    of $X$. We now find the matrix representation of $T$ with respect to the basis $e$, $[T]_e$. Suppose 
+    \[T = \begin{bmatrix}
+        A & B\\
+        C & D
+    \end{bmatrix}\]
+    where $A,B,C,D$ are themselves matrices. Let $v$ be an eigenvector corresponding to $\lambda_0$ and since $Tv = \lambda_0v$, we see by the block matrix representation 
+    \begin{align*}
+        \begin{bmatrix}
+            A & B\\
+            C & D
+        \end{bmatrix}v & = \lambda_0v
+    \end{align*}
+    and definition of matrix-vector multiplication we see that $A = \lambda_0 I_m$ where $I_m$ is the identity matrix relative to the basis $\{e_1, \cdots, e_m\}$. We then have that $C = \mathbf{0}$, so that
+    \[[T]_e = \begin{bmatrix}
+       \lambda_0 I_m & B\\
+       \mathbf{0} & D
+    \end{bmatrix}.\]
+    Now, finding the characteristic equation of $[T]_e$, notice
+    \begin{align*}
+        \text{det}(T - \lambda I_{n}) &= \text{det}(\lambda_0I_m - \lambda I_m)\text{det}(D - \lambda I_{n - m - 1})\\
+        &= (\lambda_0 - \lambda)^m\text{det}(D - \lambda I_{n - m -1})
+    \end{align*}
+    here $I_n$ is the identity matrix relative to the basis $e$ and $I_{n - m - 1}$ is the identity matrix relative to $\{e_{m+1}, \cdots, e_n\}$. Notice that the above expression gives us that the algebraic multiplicity $\ell$ of $\lambda_0$ is greater than or equal to $m$, that is
+    \[\ell \geq m\]
+    which is what we sought to show.
+\end{itemize}
+
+\section*{Section 7.2 Problems}
+\begin{itemize}
+    \item[3.] \textbf{(Invariant subspace)} A subspace $Y$ of a normed space $X$ is said to be invariant under a linear operator $T: X \to X$ if $T(Y) \subset Y$. Show that an eigenspace of $T$ is invariant under $T$. Give examples. 
+    \newline\newline
+    \textit{Proof:} Let $\lambda$ be an eigenvalue of $T$ and let $E$ be the eigenspace of $T$ corresponding to $\lambda$. Let $v \in E$. Then by definition, we have
+    \[Tv = \lambda v.\]
+    Since $E$ is itself a vector space and $\lambda$ is a scalar, we have that $\lambda v \in E$. Thus, since $v \in E$ was chosen arbitrarily, we have
+    \[T(E) \subseteq E\]
+    so that $E$ is invariant under $T$ by definition.
+    \newline\newline
+    For examples, considering the matrices in problems 12 and 13 from section 7.1, we have
+    \newline
+    12: 
+    \[A = \begin{pmatrix}
+        1 & 1\\
+        0 & 1
+    \end{pmatrix}\]
+    which has eigenvalues $\lambda_1 = \lambda_2 = 1$ with associated eigenvector $v = (1,0)^T$. Now consider $x = a\cdot v$ for some scalar $a$. Notice
+    \begin{align*}
+        Ax &= \begin{pmatrix}
+            1 & 1\\
+            0 & 1
+        \end{pmatrix}\begin{pmatrix}
+            a\\
+            0
+        \end{pmatrix}\\
+        &= \begin{pmatrix}
+            a\\
+            0
+        \end{pmatrix}
+    \end{align*}
+    so that $A$ maps elements of the eigenspace to the eigenspace.
+    \newline
+    13: Let 
+    \[A_n = \begin{pmatrix}
+        1 & 1 & 0 & \cdots &0\\
+        0 & 1 & 1 & \cdots& 0\\
+        \vdots & \vdots & \vdots & & \vdots\\
+        0 & 0 & 0 &\cdots & 1
+    \end{pmatrix}\]
+    be an $n\times n$ matrix. We prove by induction that $\lambda_1 = \cdots = \lambda_n = 1$ for $n \geq 2$. For the case $n = 2$, see the above example. Now suppose this holds up to some integer $k$. We wish to show that $A_{k+1}$ has eigenvalues of only 1. Well, notice
+    \begin{align*}
+        \det{(A_{k+1} - \lambda I_{k+1})} &= (1 - \lambda) \det{(A_k - \lambda I_k)}
+    \end{align*}
+    (this follows from the cofactor definition of the determinant and the fact that the last row of $A_{k+1} = (0,0,\cdots, 0,1)$) and since, by the induction hypothesis, $A_k$ has eigenvalues that are all equal to 1, we see that the eigenvalues of $A_{k+1}$ are all equal to one.
+    \newline
+    It is also easy to see that the associated eigenvector of $A_n$ is $v = (1,0, \cdots, 0)^T$. Thus, 
+    \begin{align*}
+        A_n(av) &= av
+    \end{align*}
+    so that $A_n$ maps elements of its eigenspace to its eigenspace.
+\end{itemize}
+
+\section*{Section 7.3 Problems}
+\begin{itemize}
+    \item[4.] Let $T: \ell^2 \to \ell^2$ be defined by $y = Tx$, $x = (\xi_j)$, $y = (\eta_j)$, $\eta_j = \alpha_j\xi_j$, where $(\alpha_j)$ is dense in $[0,1]$. Find $\sigma_p(T)$ and $\sigma(T)$.
+    \newline\newline
+    \textit{Proof:} I claim that $\sigma_p(T) = \{\alpha_j \: | \: j \geq 1\}$. Notice that if $x_j = (0,0,\cdots, 1, 0,\cdots )$ (all zeros except a 1 in the $j^{\text{ th}}$ position), we have that
+    \begin{align*}
+        Tx_j &= (0,0,\cdots, \alpha_j, 0, \cdots)\\
+        &= \alpha_j x_j
+    \end{align*}
+    so that $x_j$ is an eigenvector with associated eigenvalue $\alpha_j$. Now, suppose that there exists eigenvalues $\lambda \notin \{\alpha_j \: | \: j \geq 1\}$. Then by definition, we have
+    \[Tv = \lambda v\]
+    with $v = (\nu_1, \nu_2,\cdots)$. Note that $v \neq x_j$, $j \geq 1$ since if it were equal to an $x_j$, $\alpha_j$ would be an eigenvalue, contrary to our assumption. But
+    \begin{align*}
+        Tv &= (\alpha_1\nu_1, \alpha_2\nu_2, \cdots)\\
+        &= (\lambda\nu_1, \lambda\nu_2, \cdots)
+    \end{align*}
+    which gives us either $v \equiv 0$ or $\lambda = \alpha_j$ for all $\alpha_j$ such that $\nu_j \neq 0$. Since $\lambda$ is a single scalar, it must be the case that $v \equiv 0$ which is not an eigenvector by definition. Thus, if $\lambda \notin \{\alpha_j \: | \: j \geq 1\}$, then $\lambda \notin \sigma_p(T)$.
+    \newline\newline
+    We now note that $T$ is bounded since 
+    \begin{align*}
+        \|Tx\|^2 &= \sum_{j = 1}^{\infty} \alpha_j^2|\xi_j|^2\\
+        &\leq \sum_{j = 1}^{\infty} |\xi_j|^2 = \|x\|^2\\
+        \implies \|Tx\| &\leq \|x\|.
+    \end{align*}
+    We now show that if $\lambda \in \mathbb{C}$ such that $\lambda \notin [0,1]$, we have that $\lambda \in \rho(T)$. 
+    \newline
+    We must show that $\lambda$ is a regular value of $T$. Consider $T_{\lambda} = T - \lambda I$. We must first show that $T_{\lambda}^{-1}$ exists. To do so, suppose $x \in \ell^2$ such that $T_{\lambda}x = 0$. That is,
+    \begin{align*}
+        T_{\lambda}x &= (T - \lambda I)x = 0\\
+        \implies Tx &= \lambda x
+    \end{align*}
+    which, if $x \neq 0$, gives us that $\lambda$ is an eigenvalue by definition. But since $\lambda \notin [0,1]$, we have that $\lambda$ is not an eigenvalue by our above work, so that it must be the case that $x = 0$. Thus, $\mathcal{N}(T_{\lambda}) = \{0\}$ so that $T_{\lambda}^{-1}$ exists. We now show that $T^{-1}_{\lambda}$ is surjective. Let $y \in \ell^2$, $y = (\eta_1, \eta_2, \cdots)$ and consider $x = (\xi_1, \xi_2, \cdots)$ with $\xi_j = \frac{\eta_j}{\alpha_j - \lambda}$. Note that there exists some $\varepsilon > 0$ such that $|\alpha_j - \lambda| \geq \varepsilon$ for all $j \in \mathbb{N}$, for if there were no such $\varepsilon$, for some $j \in \mathbb{N}$, we would have
+    \[|\alpha_j - \lambda| < \varepsilon\]
+    for all $\varepsilon > 0$. But then $\lambda$ is a limit point of $(\alpha_j)$, and since $(\alpha_j)$ is dense in $[0,1]$, we have $\lambda \in [0,1]$, a contradiction. Thus,
+    \[\frac{1}{\alpha_j - \lambda} \leq \frac{1}{\varepsilon}\]
+    and so
+    \begin{align*}
+        \sum_{j = 1}^{\infty} |\xi_j|^2 &= \sum_{j = 1}^{\infty} \frac{|\eta_j|^2}{|\alpha_j - \lambda|^2}\\
+        &\leq \sum_{j = 1}^{\infty} \frac{|\eta_j|^2}{\varepsilon^2} < \infty\\
+    \end{align*}
+    since $y \in \ell^2$. Hence $x \in \ell^2$ and $T_{\lambda}^{-1}$ is surjective and is hence bijective since $T$ is injective. Since $T$ is bounded, $T_{\lambda}$ is bounded, and by the bounded inverse theorem, we have that $T_{\lambda}^{-1}$ is bounded. Thus, $\lambda \in \rho(T)$.
+    \newline\newline
+    Now, since $T$ is bounded and $\ell^2$ is a Banach space, we have that $\sigma(T)$ is closed, thus
+    \begin{align*}
+        \sigma_p(T) \subseteq \sigma(T) \subseteq [0,1]
+    \end{align*}
+    and since $\sigma_p(T)$ is dense in $[0,1]$, and $\sigma(T)$ is closed, we have
+    \begin{align*}
+        \overline{\sigma_p(T)} &= [0,1] \subseteq \overline{\sigma(T)} = \sigma(T)
+    \end{align*}
+    so
+    \[[0,1] \subseteq \sigma(T) \subseteq [0,1]\]
+    hence
+    \[\sigma(T) = [0,1].\]
+\end{itemize}
+
+\end{document}

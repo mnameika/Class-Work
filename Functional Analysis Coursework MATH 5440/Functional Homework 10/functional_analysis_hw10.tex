@@ -1,0 +1,80 @@
+\documentclass{article}
+\usepackage{graphicx, amsmath, amssymb, mathtools, fancyhdr}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{fancy}
+
+\fancyfoot{}
+\fancyhead[R]{\thepage}
+\fancyhead[L]{MATH }
+
+
+
+\begin{document}
+\begin{center}
+    {\Huge Homework X}
+    \vspace{0.5cm}
+
+    {\Large Michael Nameika}
+\end{center}
+
+
+\section*{Section 4.12 Problems}
+\begin{itemize}
+    \item[6.] Let $X$ and $Y$ be Banach spaces and $T: X \to Y$ an injective bounded linear operator Show that $T^{-1}: \mathfrak{R}(T) \to X$ is bounded if and only if $\mathfrak{R}$ is closed in $Y$.
+    \newline\newline
+    \textit{Proof:} To begin, since $T$ is injective, we have that $T^{-1}: \mathfrak{R}(T) \to X$ exists. Now, recall that $\mathfrak{R}(T)$ is a vector space since $T$ is a linear operator. First suppose that $\mathfrak{R}(T)$ is closed. Then since $\mathfrak{R}(T)$ is a subspace of $Y$ and is closed, $\mathfrak{R}(T)$ is a Banach space. Then since $T$ is surjective onto $\mathfrak{R}(T)$, by the bounded inverse theorem, $T^{-1}$ is bounded. 
+    
+    Now suppose that $T^{-1}$ is bounded. We wish to show that $\mathfrak{R}(T)$ is closed. Let $\{y_n\}$ be a Cauchy sequence in $\mathfrak{R}(T)$. That is, for any $\varepsilon > 0$, there exists an index $N$ such that whenever $n>m>N$, we have 
+    \[\|y_n - y_m\| < \frac{\varepsilon}{\|T^{-1}\|}\]
+    but since each $y_n \in \mathfrak{R}(T)$, there exists an associated $x_n \in X$ such that $x_n = T^{-1}y_n$. Now notice for $n > m > N$,
+    \begin{align*}
+        \|x_n - x_m\| &= \|T^{-1}y_n - T^{-1}y_m\|\\
+        &= \|T^{-1}(y_n - y_m)\|\\
+        &\leq \|T^{-1}\|\|y_n - y_m\|\\
+        &< \|T^{-1}\|\frac{\varepsilon}{\|T^{-1}\|}\\
+        &= \varepsilon\\
+        \implies \|x_n - x_m\| &< \varepsilon
+    \end{align*}
+    so that $\{x_n\}$ is Cauchy in $X$. Since $X$ is a Banach space, $x_n \to x$ for some $x \in X$. But then since $\mathfrak{D}(T) = X$, $Tx = y$ for some $y \in \mathfrak{R}(T)$. Now, since $T$ is bounded, $T$ is continuous, so that $Tx_n \to Tx \implies y_n \to y$. Since $\{y_n\}$ was an arbitrary Cauchy sequence, we have that $\mathfrak{R}(T)$ is closed. 
+
+    \item[8.] \textbf{(Equivalent Norms)} Let $\|\cdot \|_1$ and $\|\cdot \|_2$ be norms on a vector space $X$ such that $X_1 = (X, \|\cdot\|_1)$ and $X_2 = (X, \|\cdot\|_2)$ are complete. If $\|x_n\|_1 \to 0$ always implies $\|x_n\|_2 \to 0$, show that convergence in $X_1$ implies convergence in $X_2$ and conversely, and there are positive numbers $a$ and $b$ such that for all $x \in X$,
+    \[a\|x\|_1 \leq \|x\|_2 \leq b\|x\|_1.\]
+    \textit{Proof:} First suppose that $\{x_n\}$ is a sequence that converges to some $x \in X_1$. Then by assumption,
+    \begin{align*}
+        \|x_n - x\|_1 &\to 0 \hspace{0.4cm} \text{as} \hspace{0.4cm} n \to \infty\\
+        \implies \|x_n - x\|_2 &\to 0 \hspace{0.4cm} \text{as} \hspace{0.4cm} n\to \infty.
+    \end{align*}
+    Thus convergence in $X_1$ implies convergence in $X_2$. Now suppose $\{x_n\}$ is a sequence converging to $x \in X_2$. Define the linear operator $T: X_1 \to X_2$ by 
+    \[Tx = x\]
+    that is, we are sending $x \in X_1$ to its associated element in $X_2$. Notice that $T$ is bounded since
+    \[\|Tx\| = \|x\|.\]
+    Hence $\|T\| = 1$. Notice that $T$ is surjective by definition. Since $X_1$ and $X_2$ are complete spaces, by the bounded inverse theorem, we have that $T^{-1}$ is bounded. Now notice $\{x_n\}$ and $x$ as elements of $X_1$, we have $x_n = T^{-1}x_n$, $x = T^{-1}x$ and so
+    \begin{align*}
+        \|x_n - x\|_1 &= \|T^{-1}x_n - T^{-1}x\|_2\\
+        &\leq \|T^{-1}\|\|x_n - x\|_2 \to 0 \hspace{0.4cm} \text{as} \hspace{0.4cm} n \to \infty
+    \end{align*}
+    so that convergence in $X_2$ implies convergence in $X_1$. Notice from above, we have
+    \[\frac{1}{\|T^{-1}\|}\|x\|_1 \leq \|x\|_2 \leq \|T\|\|x\|_1.\]
+
+    
+\end{itemize}
+
+\section*{Section 4.13 Problems}
+\begin{itemize}
+    \item[8.] Let $X$ and $Y$ be normed spaces and let $T: X \to Y$ be a closed linear operator. (a) Show that the image $A$ of a compact subset $C \subset X$ is closed in $Y$. (b) Show that the inverse image $B$ of a compact subset $K \subset Y$ is closed in $X$. 
+    \newline\newline
+    \textit{Proof:} (a) Let $\{a_n\}$ be a sequence in $A$ that converges to some $a \in Y$. We wish to show that $a \in A$. Since $a_n \in A$ and $A = T(C)$, there exists, for each $n$, $c_n \in C$ such that $Tc_n = a_n$. And since $C$ is compact, it is sequentially compact, so $\{c_n\}$ admits a convergent subsequence, $c_{n_k} \to c \in C$. Now, since $T$ is closed, and $c_{n_k} \to c$, $Tc_{n_k} = a_{n_k} \to a$, we have that $a = Tc$, so that $a \in A$. Hence $A$ is closed.
+    \newline\newline
+    (b) Let $\{x_n\}$ be a sequence in $B$ such that $x_n \to x \in X$. We wish to show that $x \in B$. By definition of preimage, there exists, for each $n$, $k_n \in K$ such that $T^{-1}k_n = x_n$. Thus, since $K$ is compact, $K$ is sequentially compact, so $\{k_n\}$ admits a convergent subsequence, say $k_{n_{\ell}} \to k \in K$. But since $k \in K$, there exists some $z \in B$ such that $z = T^{-1}k$. But this says that $(z,k) \in \mathcal{G}(T)$ and so, since $T$ is closed, $z = x$, so that $B$ is closed.
+
+\end{itemize}
+
+\section*{Assigned Exercise X.1}
+Let $X$ and $Y$ be normed spaces and let $T: X \to Y$ be a closed linear operator. Suppose that for every convergent sequence $(x_n)$ in $X$, the sequence $(y_n = Tx_n)$ admits a convergent subsequence $(y_{n_k})$. Prove that $T$ is bounded.
+\newline\newline
+\textit{Proof:} Let $M \subseteq Y$ be a closed subset of $Y$, and let $A = T^{-1}(M)$, the preimage of $M$ under $T$. Let $x$ be a limit point of $M$. Then there exists a sequence $\{x_n\}$ in $A$ such that $x \to x \in X$. We must show $x \in A$. But by hypothesis, we have that $\{y_n = Tx_n\}$ admits a convergent subsequence, $\{y_{n_k}\}$ converging to some $y$. Since $M$ is closed, we have that $y \in M$. And since $T$ is a closed linear operator, we have that $x_{n_k} \to x' \in A$ where $Tx' = y$. But since $x_n \to x$ and $x_{n_k} \to x'$, we have $x' = x$ by uniqueness. Thus, $x \in A$ as desired. Hence, $A$ is closed in $X$, and by problem 1.3 \#14, we have that $T$ is continuous and is therefore bounded.
+\end{document}

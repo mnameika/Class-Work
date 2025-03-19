@@ -1,0 +1,518 @@
+\documentclass{article}
+\usepackage{graphicx, mathtools, amsmath, amssymb, float, fancyhdr, halloweenmath}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{fancy}
+
+\fancyfoot{}
+\fancyhead[R]{$\mathbat$ \thepage \hspace{0.05cm} $\mathbat$}
+\fancyhead[L]{$\mathbat$ MATH 5350 $\mathbat$}
+
+\begin{document}
+
+\begin{center}
+    {\Huge Midterm Exam}
+    \vspace{0.5cm}
+
+    {\Large Michael Nameika}
+\end{center}
+\begin{itemize}
+    \item[\textbf{1}.] (20) Consider complex number sequences $x = (\xi_1, \xi_2, \dots)$ with the usual addition and complex scalar multiplication. Define $X = \{(\xi_1, \xi_2, \dots) \: | \: \sum_{k=1}^{\infty} |\xi_k|^2/k \text{  converges}\}$. For each $x \in X$, define $\|x\| = (\sum_{k = 1}^{\infty}|\xi_k|^2/k)^{1/2}$. 
+    \newline\newline
+    (a) First show that $X$ is a vector subspace of all complex sequences. Second, show that the given norm satisfies $\|x\| = \sqrt{\langle x, x\rangle}$ for a certain inner product $\langle x, y \rangle$ on elements $x,y \in X$. Verify that your inner product is well defined. 
+    \newline\newline
+    \textit{Proof:} We will begin by showing that $X$ is a vector subspace of $V = \{\text{ all complex sequences }\}$. To begin, notice that $\mathbf{0} = (0,0, \dots) \in X$ since $\sum_{k=1}^{\infty} 0/k = 0$. Now let $x,y\in X$ where $x = (\xi_1, \xi_2, \dots)$, $y = (\eta_1, \eta_2, \dots)$, and let $\alpha$ be an arbitrary scalar. We will show $\alpha x = (\alpha\xi_1, \alpha \xi_2, \dots) \in X$. Notice
+    \begin{align*}
+        \sum_{k = 1}^{\infty} \frac{|\alpha\xi_k|^2}{k} &= \sum_{k = 1}^{\infty} \frac{|\alpha|^2|\xi_k|^2}{k}\\
+        |\alpha|^2 \sum_{k = 1}^{\infty} \frac{|\xi|^2}{k}
+    \end{align*}
+    which converges, hence $\alpha x \in X$. We will now show that $x + y = (\xi_1 + \eta_1, \xi_2 + \eta_2, \dots) \in X$. Notice
+    \begin{align*}
+        \sum_{k = 1}^{\infty}\frac{|\xi_k + \eta_k|^2}{k} &= \sum_{k = 1}^{\infty} \frac{(\xi_k + \eta_k)(\overline{\xi_k} + \overline{\eta_k})}{k}\\
+        &= \sum_{k = 1}^{\infty} \frac{|\xi_k|^2 + \xi_k\overline{\eta_k} + \overline{\xi_k}\eta_k + |\eta_k|^2}{k}\\
+        &= \sum_{k = 1}^{\infty} \frac{|\xi|^2}{k} + \sum_{k = 1}^{\infty} \frac{|\eta_k^2|}{k} + \sum_{k = 1}^{\infty} \frac{\xi_k\overline{\eta_k} + \overline{\xi_k}\eta_k}{k}
+    \end{align*}
+    and since $x, y \in X$, $\sum_{k=1}^{\infty} |\xi|^2/k, \sum_{k=1}^{\infty} |\eta_k|^2/k$ both converge, so that the problem of showing $x + y \in X$ comes down to showing $\sum_{k=1}^{\infty} \frac{\xi_k\overline{\eta_k} + \overline{\xi_k}\eta_k}{k}$ converges. To show this, we will show the series converges absolutely. Notice
+    \begin{align*}
+        \left|\sum_{k = 1}^{\infty}\frac{\xi_k\overline{\eta_k} + \overline{\xi_k}\eta_k}{k}\right| &\leq \sum_{k = 1}^{\infty} \left|\frac{\xi_k\overline{\eta_k} + \overline{\xi_k}\eta_k}{k}\right|\\
+        &\leq 2\sum_{k = 1}^{\infty} \frac{|\xi_k||\eta_k|}{k}.
+    \end{align*}
+    Now, by H{\"o}lder's inequality, we have
+    \begin{align*}
+        2\sum_{k = 1}^{\infty}\frac{|\xi_k||\eta_k|}{k} &= 2\sum_{k = 1}^{\infty} \left(\frac{|\xi_k|}{\sqrt{k}}\right)\left(\frac{|\eta_k|}{\sqrt{k}}\right)\\
+        &\leq 2\left(\sum_{k = 1}^{\infty} \frac{|\xi_k|^2}{k}\right)^{1/2}\left(\sum_{k = 1}^{\infty}\frac{|\eta_k|^2}{k}\right)^{1/2}\\
+        &= 2\|x\|\|y\|
+    \end{align*}
+    so that $\sum_{k = 1}^{\infty} |\xi_k||\eta_k|/k$ is bounded above, hence, by direct comparison, converges. Thus, $x + y \in X$. Hence, $X$ is a vector subspace of $V$.
+    \newline
+    Now, I claim that the inner product $\langle \cdot , \cdot \rangle$ is given by
+    \[\langle x, y \rangle = \sum_{k = 1}^{\infty} \frac{\xi_k\overline{\eta_k}}{k}.\]
+    We begin by verifying that this is indeed an inner product. Let $x, y, z \in X$ and $\alpha$ an arbitrary scalar where $x = (\xi_1, \xi_2, \dots)$, $y = (\eta_1, \eta_2, \dots)$, and $z = (\zeta_1, \zeta_2, \dots)$ and begin by considering $\langle x + y, z \rangle$:
+    \begin{align*}
+        \langle x + y, z\rangle &= \sum_{k = 1}^{\infty} \frac{(\xi_k + \eta_k)\overline{\zeta_k}}{k}\\
+        &= \sum_{k = 1}^{\infty} \frac{\xi_k\overline{\zeta_k} + \eta_k\overline{\zeta_k}}{k}\\
+        &= \sum_{k = 1}^{\infty} \frac{\xi_k\overline{\zeta_k}}{k} + \sum_{k = 1}^{\infty} \frac{\eta_k\overline{\zeta_k}}{k}\\
+        &= \langle x, z \rangle + \langle y, z\rangle
+    \end{align*}
+    so that linearity holds. Now, consider $\langle \alpha x, y\rangle$:
+    \begin{align*}
+        \langle \alpha x, y \rangle &= \sum_{k = 1}^{\infty} \frac{(\alpha\xi_k)\overline{\eta_k}}{k}\\
+        &= \alpha \sum_{k = 1}^{\infty} \frac{\xi_k\overline{\eta_k}}{k}\\
+        &= \alpha \langle x, y \rangle
+    \end{align*}
+    so that homogeneity holds. Now, notice
+    \begin{align*}
+        \overline{\langle y, x\rangle} &= \overline{\sum_{k = 1}^{\infty}\frac{\eta_k\overline{\xi_k}}{k}}\\
+        &= \sum_{k = 1}^{\infty} \frac{\xi_k\overline{\eta_k}}{k}\\
+        &= \langle x, y\rangle
+    \end{align*}
+    so that conjugate symmetry holds. Finally, 
+    \begin{align*}
+        \langle x, x\rangle &= \sum_{k = 1}^{\infty} \frac{|\xi_k|^2}{k} \geq 0
+    \end{align*}
+    for all $x \in X$. And notice that $\langle x, x\rangle = 0$ if and only if $x = \mathbf{0}$ since, if $x$ contains at least one nonzero element, $\langle x, x \rangle > 0$. So now we have established $\langle \cdot, \cdot, \rangle$ is an inner product. Now, by our above work, $\langle x, y\rangle$ is well defined since $\sum_{k = 1}^{\infty} |\xi_k||\eta_k|/k$ converges and $\left|\sum_{k = 1}^{\infty} \xi_k\overline{\eta_k}/k\right| \leq \sum_{k = 1}^{\infty} |\xi_k||\eta_k|/k$ and the value of the series is unique by uniqueness of limits. \hfill $\mathghost$
+    \newline\newline
+    (b) Suppose that $Y$ is a proper, dense subspace of $X$. Prove that $Y^{\perp} = \{\mathbf{0}\}$.
+    \newline\newline
+    \textit{Proof:} Let $x \in Y^{\perp}$. Since $Y$ is dense in $X$, $x \in \overline{Y}$. Thus, there exists a sequence $\{x_n\}$ in $Y$ converging to $x$. Since $x_n \in Y$, 
+    \[\langle x_n, x\rangle = 0\]
+    for all $n$. By continuity of the inner product, we have
+    \[\lim_{n \to \infty} \langle x_n, x\rangle = \langle x, x\rangle = 0\]
+    so that $x = 0$. Since $x$ was chosen arbitrarily, we have that $Y^{\perp} = \{\mathbf{0}\}$. \hfill $\mathghost$
+    \newline\newline
+    (c) Define $Y = \{(\xi_1, \xi_2, \dots) \in X \: | \: \sum_{k=1}^{\infty} |\xi_k|^2 \text{  converges}\}$. Prove that $Y$ forms a proper, dense subspace of $X$.
+    \newline\newline
+    \textit{Proof:} First consider the sequence $x = \left(1, \frac{1}{\sqrt{2}}, \frac{1}{\sqrt{3}}, \cdots \right)$ and notice that
+    \begin{align*}
+        \sum_{k = 1}^{\infty} \frac{|\xi_k|^2}{k} &= \sum_{k = 1}^{\infty} \frac{1/k}{k}\\
+        &= \sum_{k = 1}^{\infty} \frac{1}{k^2}
+    \end{align*}
+    which converges by the $p$-series test ($p = 2$). However, 
+    \begin{align*}
+        \sum_{k = 1}^{\infty} |\xi_k|^2 &= \sum_{k = 1}^{\infty} \frac{1}{k}
+    \end{align*}
+    which diverges (harmonic series). Moreover, if $x \in Y$, then $x \in H$ since 
+    \[\sum_{k =1}^{\infty} \frac{|\xi_k|^2}{k} \leq \sum_{k = 1}^{\infty} |\xi_k|^2\]
+    Additionally, since each element of $Y$ is an element of $X$, $Y$ is closed under addition and scalar multiplication since $X$ is. Additionally, $\mathbf{0} \in Y$ since clearly,
+    \[\sum_{k = 1}^{\infty} 0 = 0.\]
+    Thus, $Y$ is a proper subspace of $X$. Now, to show $Y$ is dense in $X$, fix $x \in X$. Then since $\sum_{k = 1}^{\infty} |\xi_k|^2/k$ converges, for any $\varepsilon > 0$, there exists an index $N$ such that, whenever $n > m > N$,
+    \[\left|\sum_{k = m+1}^n \frac{|\xi_k|^2}{k}\right| < \frac{\varepsilon^2}{4}\]
+    letting $n \to \infty$, we have
+    \[\left|\sum_{k = m+1}^{\infty} \frac{|\xi_k|^2}{k}\right| \leq \frac{\varepsilon^2}{4}.\]
+    Now, define $y = (\xi_1, \xi_2, \cdots, \xi_m, 0, 0, \cdots)$ and notice that, since $y$ contains finitely many nonzero elements, $\sum_{k = 1}^{\infty} |\eta_k|^2$ converges where $\eta_k = y_k$ so that $y \in Y$. Now, notice
+    \begin{align*}
+        \|x - y\| &= \|(0,0,\cdots, 0, \xi_{m+1}, \xi_{m+1}, \cdots)\|\\
+        &= \left(\sum_{k = m+1}^{\infty} \frac{|\xi_k|^2}{k}\right)^{1/2}\\
+        &\leq \left(\frac{\varepsilon^2}{4}\right)^{1/2}\\
+        &= \frac{\varepsilon}{2}\\
+        &< \varepsilon
+    \end{align*}
+    so that $Y$ is dense in $X$. \hfill $\mathghost$
+    \pagebreak
+
+    \item[\textbf{2}.] (10) Let $X$ be the subspace of $C[-1,1]$ consisting of continuous functions $x(t)$ on $[-1,1]$ that are also differentiable on $(-1,1)$. The norm on $X$ is the subspace norm: $\|x\| = \underset{-1 \leq t \leq 1}{\max} |x(t)|$.
+    \newline
+    (a) Consider the sequence $(x_n)$ in $X$ defined by $x_n(t) = \sqrt{t^2 + 1/n}$, for $-1 \leq t \leq 1$. Verify that the definition of completeness of $X$ fails by the example of this subsequence.
+    \newline\newline
+    \textit{Proof:} We will show that $(x_n)$ is a Cauchy sequence in $X$ with no limit in $X$. Let $n > m$ and inspect $|x_n - x_m|$:
+    \begin{align*}
+        |x_n - x_m| &= |\sqrt{t^2 + 1/n} - \sqrt{t^2 + 1/m}|\\
+        &= \left|\frac{t^2 + 1/n - t^2 - 1/m}{\sqrt{t^2 + 1/n} + \sqrt{t^2 + 1/m}}\right|\\
+        &= \left|\frac{1/n - 1/m}{\sqrt{t^2 + 1/n} + \sqrt{t^2 + 1/m}}\right|\\
+        &\leq \left|\frac{1}{n} - \frac{1}{m}\right|\\
+        &\leq \frac{1}{n} + \frac{1}{m}\\
+        &\leq \frac{2}{m}.
+    \end{align*}
+    We have that $\frac{2}{m}$ is an upper bound for $|x_n - x_m|$ for all $t \in [-1,1]$, so that
+    \[\|x_n - x_m\| \leq \frac{2}{m}\]
+    Hence, $(x_n)$ is Cauchy. Now notice, by continuity of $\sqrt{\cdot}$,
+    \begin{align*}
+        \lim_{n \to \infty} x_n(t) &= \lim_{n \to \infty} \sqrt{t^2 + 1/n}\\
+        &= |t|
+    \end{align*}
+    which is continuous, but not differentiable at $t = 0$. Then $(x_n)$ is a Cauchy sequence in $X$ with no limit in $X$. Hence $X$ is an incomplete space, as desired. \hfill $\mathghost$
+    \newline\newline
+    (b) Prove that the linear functional $f(x) = x'(0)$ is unbounded on $X$.
+    \newline
+    \textit{Hint}: Consider bounded trigonometric functions with small period.
+    \newline\newline
+    \textit{Proof:} Let $\{x_n\}$ be a sequence in $C[-1,1]$ where $x_n(t) = \sin(nt)$. Notice that $\|x_n(t)\| = \underset{-1 \leq t \leq 1}{\max} |\sin(nt)| = 1$ and that $x_n'(t) = n\cos(nt)$ so that $x_n'(0) = n$.  Thus, $f$ is unbounded on $X$ for if it were bounded, there exists some $M \geq 0$ such that $\|f\| \leq M$. But for any $M \geq 0$, take $n = \lceil M \rceil + 1$ so that
+    \begin{align*}
+        \frac{\|f(x_n)\|}{\|x_n\|} &= \|f(x_n)\|\\
+        &= n\\
+        &> M
+    \end{align*}
+    so that $f$ is unbounded. \hfill $\mathghost$
+    \pagebreak
+    \item[\textbf{3}.] (15) For parts (a) and (b), let $f$ be a nonzero bounded linear functional on a real Banach space X.
+    \newline
+    (a) Show that the set $M = \{x \in X \: | \: f(x) \leq 1\}$ is complete and convex in $X$. 
+    \newline\newline
+    \textit{Proof:} To show that $M$ is convex in $M$, let $x,y \in M$ and consider $tx + (1 - t)y$ where $t \in [0,1]$. Then since $x,y \in M$, $f(x), f(y) \leq 1$ and so
+    \begin{align*}
+        f(tx + (1 - t)y) &= f(tx) + f((1-t)y)\\
+        &= tf(x) + (1-t)f(y)\\
+        &\leq t + (1-t)\\
+        &= 1\\
+        \implies tx + (1 - t)y &\in M
+    \end{align*}
+    so that $M$ is convex in $X$. To see that $M$ is complete, we must show that $M$ is closed. Let $x$ be a limit point of $M$. Then there exists a sequence $\{x_n\}$ in $M$ converging to $x$. If $f(x) < 1$, then it is clear that $x \in M$. The interesting case is when $f(x) = 1$. Since $\{x_n\}$ is in $M$, for every $n$, we have
+    \begin{align*}
+        f(x_n) &\leq 1
+    \end{align*}
+    and since $f$ is a bounded linear functional, $f$ is continuous, hence
+    \[\lim_{n \to \infty} f(x_n) = f(x) \leq 1\]
+    so that $x \in M$, hence $M$ is closed and is thus complete. \hfill $\mathghost$
+    
+    (b) Define the set $M_0 = \{x \in X \: | \: f(x) < 1\}$. Prove that the closure of $M_0$ is $\overline{M_0} = M$, for $M$ of part (a).
+    \newline\newline
+    \textit{Proof:} Let $x \in X$ be such that $f(x) = 1$ and define the sequence $\{x_n\}$ where $x_n = (1 - \tfrac{1}{n})x$. Notice
+    \begin{align*}
+        f(x_n) &= (1 - \tfrac{1}{n})f(x)\\
+        &= 1 - \tfrac{1}{n}\\
+        &< 1
+    \end{align*}
+    so that $x_n \in M_0$ for all $n \in \mathbb{N}$. Further, fix $\varepsilon > 0$. Then there exists an index $N$ such that whenever $n > N$,
+    \[\frac{1}{n} < \frac{\varepsilon}{\|x\|}.\]
+    And so, whenever $n > N$,
+    \begin{align*}
+        \|x_n - x\| &= \|x - \tfrac{1}{n}x - x\|\\
+        &= \tfrac{1}{n}\|x\|\\
+        &< \frac{\varepsilon}{\|x\|} \|x\|\\
+        &= \varepsilon\\
+        \implies \|x_n - x\| &< \varepsilon
+    \end{align*}
+    so that $x_n \to x$. And so, letting $n \to \infty$, by continuity of $f$,
+    \begin{align*}
+        \lim_{n \to \infty} f(x_n) &= f(x)
+    \end{align*}
+    so that $x$ is a limit point of $M_0$. Hence, the closure of $M_0$. $\overline{M_0} = M$ as in part (a). \hfill $\mathghost$
+    \newline\newline
+    (c) Let now $X = C[0,1]$, with $\|x\| = \underset{0 \leq t \leq 1}{\max}|x(t)|$, and define the linear functional $f$ by $f(x) = \int_0^1x(t)dt$. Fix the element $x_0$ of $C[0,1]$ defined by $x_0(t) = 8 | t - \tfrac{1}{2}|$, $0 \leq t \leq 1$, and define $M$ by part (a) for the present (definite integral) functional $f$. Show that
+    \begin{itemize}
+        \item[(i)] $f(x_0) = 2$. 
+        \newline\newline
+        \textit{Soln.} Begin by noticing, by definition of absolute value,
+        \begin{align*}
+            8\left|t - \frac{1}{2}\right| &= \begin{cases}
+                -8\left(t - \frac{1}{2}\right), & 0\leq t \leq \frac{1}{2}\\
+                8\left(t - \frac{1}{2}\right), & \frac{1}{2} \leq t \leq 1
+            \end{cases}
+        \end{align*}
+        so that
+        \begin{align*}
+            f(x_0) &= \int_0^1 8|x - \tfrac{1}{2}|dt\\
+            &= -8\int_0^{1/2} (t - \tfrac{1}{2})dt + 8\int_{1/2}^1 (t - \tfrac{1}{2})dt\\
+            &= -8\left[\frac{1}{2}t^2 - \frac{1}{2}t\right]\bigg|_0^{1/2} + 8\left[\frac{1}{2}t^2 - \frac{1}{2}\right]\bigg|_{1/2}^1\\
+            &= -8\left[-\frac{1}{8}\right] - 8\left[-\frac{1}{8}\right]\\
+            &= -8\left[-\frac{1}{4}\right]\\
+            &= 2.
+        \end{align*}
+        \hfill $\mathghost$
+        
+
+        \item[(ii)] for all $\tilde{x} \in M$ we have $\|x_0 - \tilde{x}\| \geq 1$. \textit{Hint}: first show $\|f\| \leq 1$.
+        \newline\newline
+        We first show $\|f\|\leq 1$ so that $|f(x)| \leq \|x\|$ hence $|f(x_0 - \tilde{x})| \leq \|x_0 - \tilde{x}\|$. To begin, let $x \in X$ be such that $\|x\| = 1$. Notice
+        \begin{align*}
+            \left|\int_0^1 x(t) dt\right| &\leq \int_0^1 |x(t)| dt\\
+            &\leq \int_0^1 dt\\
+            &= 1.
+        \end{align*}
+        Hence, $\|f\| \leq 1$. Now, since $f$ is linear, $|f(x_0 - \tilde{x})| = |f(x_0) - f(\tilde{x})|$:
+        \begin{align*}
+            |f(x_0) - f(\tilde{x})| &= |2 - f(\tilde{x})|\\
+            &\geq 2 - f(\tilde{x})
+        \end{align*}
+        and since $f(\tilde{x}) \leq 1$, $-f(\tilde{x}) \geq -1$ so that
+        \[2 - f(\tilde{x}) \geq 2 - 1 = 1.\]
+        Hence,
+        \[\|x_0 - \tilde{x}\| \geq 1\]
+        as desired. \hfill $\mathghost$
+
+        \item[(iii)] Find $x_1 \in M$ such that $\|x_0 - x_1\| = 1$.
+        \newline\newline
+        \textit{Soln.} Take $x_1 = x_0 - \mathbf{1}$, that is, $x_1(t) = 8|t - \tfrac{1}{2}| - 1$. Here we denote the constant function having value one on $[0,1]$ by $\mathbf{1}$. Then note that 
+        \begin{align*}
+            f(x_1) &= \int_0^1 x_1(t)dt\\
+            &= \int_0^1 (8|t - \tfrac{1}{2}| - 1)dt\\
+            &= \int_0^1 8|t - \tfrac{1}{2}| dt - \int_0^1 1dt\\
+            &= f(x_0) - 1\\
+            &= 2 - 1\\
+            &= 1
+        \end{align*}
+        so that $f(x_1) = 1$ and so $x_1 \in M$. Then notice that
+        \begin{align*}
+            \|x_0 - x_1\| &= \|x_0 - (x_0 - \mathbf{1})\|\\
+            &= \|\mathbf{1}\|\\
+            &= 1
+        \end{align*}
+        as desired.
+    \end{itemize} \hfill $\mathghost$
+    \pagebreak
+    \item[\textbf{4}.] (10) Suppose that $H$ is a Hilbert space. Let $Y$ be a closed subspace of $H$. Suppose in turn that $W$ is a closed subspace of $H$ with $W \subset Y$, and $W \neq Y$. Let $x \in H$. Let $y = P_Yx$ and $w = P_Wx$ be the orthogonal projections of $x$ onto the subspaces $Y$ and $W$ respectively.
+    \newline
+    (a) Prove that $(y - w) \in W^{\perp}$.
+    \newline\newline
+    \textit{Proof:} Since $Y$, $W$ are closed subspaces of a Hilbert space, we may decompose $H$ in the following ways:
+    \[H = W \oplus W^{\perp}; \hspace{0.6cm} H = Y \oplus Y^{\perp}.\]
+    That is, for $x \in H$, we may uniquely express $x$ as 
+    \[x = w + w_p \hspace{0.5cm} \text{or} \hspace{0.5cm} x = y + y_p\]
+    where $w = P_Wx$, $w_p \in W^{\perp}$ and $y = P_Yx$, $y_p \in Y^{\perp}$. Subtracting these two expressions, we have
+    \begin{align*}
+        x - x &= w + w_p - y - y_p\\
+        0 &= (w - y) + (w_p - y_p)\\
+        w - y &= y_p - w_p.
+    \end{align*}
+    Now, since $W \subset Y$, we have that $Y^{\perp} \subseteq W^{\perp}$, so that $y_p \in W^{\perp}$ and since $W^{\perp}$ is a subspace, we have $y_p - w_p \in W^{\perp}$. Thus, $w - y \in W^{\perp}$, as desired. \hfill $\mathghost$
+    \newline
+
+    
+    (b) Prove that $\|x\|^2 = \|w\|^2 + \|y - w\|^2 + \|x - y\|^2$. Illustrate for specific points $x,y$ and $z$ of $H = \mathbb{R}^3$, where $Y = $ a plane through the origin, $W = $ a line through the origin, and where $x \notin Y$ and $w \notin Y$.
+    \newline\newline
+    \textit{Proof:} To begin, as in part a), we have the following representations for $x$:
+    \begin{align*}
+        x &= w + w_p\\
+        x &= y + y_p
+    \end{align*}
+    where $w = P_Wx$, $y = P_Yx$, $w_p \in W^{\perp}$, and $y_p \in Y^{\perp}$. Now, consider $\|x - y\|^2$:
+    \begin{align*}
+        \|x - y\|^2 &= \langle x - y, x - y\rangle\\
+        &= \langle x, x\rangle - \langle y, x\rangle - \langle x,y \rangle + \langle y, y \rangle\\
+        &= \|x\|^2 - \langle y, x\rangle - \langle x, y\rangle + \|y\|^2
+    \end{align*}
+    and notice
+    \begin{align*}
+        \langle x, y\rangle &= \langle y + y_p, y\rangle\\
+        &= \langle y, y\rangle + \langle y_p, y\rangle\\
+        &= \|y\|^2
+    \end{align*}
+    and so $\langle y, x\rangle = \overline{\langle x,y\rangle} = \overline{\|y\|^2} = \|y\|^2$. Thus, 
+    \begin{align*}
+        \|x - y\|^2 &= \|x\|^2 - \|y\|^2 - \|y\|^2 + \|y\|^2\\
+        &= \|x\|^2 - \|y\|^2.
+    \end{align*}
+    Now, let us consider $\|y - w\|^2$:
+    \begin{align*}
+        \|y - w\|^2 &= \langle y - w, y - w\rangle\\
+        &= \langle y, y\rangle - \langle w, y\rangle - \langle y, w\rangle + \langle w, w\rangle\\
+        &= \|y\|^2 - \langle w,y\rangle - \langle y,w\rangle + \|w\|^2.
+    \end{align*}
+    Now notice
+    \begin{align*}
+        \langle w, y\rangle &= \langle w, x - w_p\rangle \\
+        &= \langle w, x\rangle - \langle w, w_p \rangle\\
+        &= \|w\|^2
+    \end{align*}
+    so that $\langle y, w\rangle = \overline{\langle w, y\rangle} = \overline{\|w\|^2} = \|w\|^2$. Hence
+    \begin{align*}
+        \|y - w\|^2 &= \|y\|^2 - \|w\|^2 - \|w\|^2 + \|w\|^2\\
+        &= \|y\|^2 - \|w\|^2.
+    \end{align*}
+    Thus,
+    \begin{align*}
+        \|w\|^2 + \|y - w\|^2 + \|x - y\|^2 &= \|w\|^2 + \|y\|^2 - \|w\|^2 + \|x\|^2 - \|y\|^2\\\
+        &= \|x\|^2
+    \end{align*}
+    which is what we sought to show.
+    \newline\newline
+    For an example, take $Y = $ the $x-y$ plane and $W = $ the $x-$axis and let $x = (1,1,1)$. Then 
+    \begin{align*}
+        y &= P_Yx = (1,1,0)\\
+        w &= P_Wx = (1,0,0)
+    \end{align*}
+    and so 
+    \begin{align*}
+        x - y &= (0,0,1)\\
+        y - w &= (0,1,0)
+    \end{align*}
+    and so
+    \begin{align*}
+        \|w\|^2 + \|x - y\|^2 + \|y - w\|^2 &= 1 + 1 + 1\\
+        &= 3.
+    \end{align*}
+    Further, we have $\|x\|^2 = 3$ and so 
+    \[\|x\|^2 = \|w\|^2 + \|x - y\|^2 + \|y - w\|^2.\]
+    \hfill $\mathghost$
+    \pagebreak
+    \item[\textbf{5}.] (10) Let $H$ be a Hilbert space and let $(e_k)$ be an orthonormal sequence in $H$. Let $f$ be a bounded linear functional on $H$. Denote $\gamma_k = f(e_k)$, for all $k \in \mathbb{N}$. 
+    \newline
+    (a) Prove that 
+    \newline\newline
+    (i) for every $n \in \mathbb{N}$, $\|f\| \geq (\sum_{k = 1}^n |\gamma_k|^2)^{1/2}$
+    \newline
+    \textit{Proof:} Let $x_n = \overline{\gamma_1}e_1 + \overline{\gamma_2}e_2 + \cdots + \overline{\gamma_n}e_n$. Then, since $f$ is linear,
+    \begin{align*}
+        f(x_n) &= \overline{\gamma_1}f(e_1) + \overline{\gamma_2}f(e_2) + \cdots + \overline{\gamma_n}f(e_n)\\
+        &= \overline{\gamma_1}\gamma_1 + \overline{\gamma_2}\gamma_2 + \cdots + \overline{\gamma_n}\gamma_n\\
+        &= |\gamma_1|^2 + |\gamma_2|^2 + \cdots + |\gamma_n|^2.
+    \end{align*}
+    And also notice
+    \begin{align*}
+        \|x\|^2 &= \langle x, x\rangle\\
+        &= \left\langle \sum_{k = 1}^n \overline{\gamma_k}e_k, \sum_{j = 1}^n \overline{\gamma_j}e_j \right\rangle\\
+        &= \sum_{k = 1}^n\sum_{j = 1}^n \overline{\gamma_k}\gamma_j \langle e_k, e_j \rangle\\
+        &= \sum_{k = 1}^n\sum_{j = 1}^n \overline{\gamma_k}\gamma_j \delta_{jk}\\
+        &= \sum_{k = 1}^n \overline{\gamma_k}\gamma_k\\
+        &= \sum_{k = 1}^n |\gamma_k|^2.
+    \end{align*}
+    Hence, 
+    \begin{align*}
+        |f(x)| &= \|x\|^2\\
+        &= \|x\|\|x\|\\
+        &= \left(\sum_{k = 1}^n |\gamma_k|^2\right)^{1/2}\|x\|
+    \end{align*}
+    hence
+    \[\|f\| \geq \left(\sum_{k = 1}^n|\gamma_k|^2\right)^{1/2}\]
+    which is what we sought to show. \hfill $\mathghost$
+    \newline\newline
+    
+    (ii) $\underset{n \to \infty}{\lim} \gamma_n = 0$.
+    \newline
+    \textit{Proof:} By part (i), we have that
+    \[\left(\sum_{k = 1}^n|\gamma_k|^2\right)^{1/2} \leq \|f\|\]
+    for all $n \in \mathbb{N}$. And so, since $f$ is a bounded linear functional, we have the sequence $\{s_n\}$ defined by $s_n = \sum_{k = 1}^n|\gamma_k|^2$ is a bounded monotonically increasing sequence so that $\{s_n\}$ is a convergent sequence. And since $\{s_n\}$ is convergent, we have that 
+    \begin{align*}
+        \lim_{n \to \infty} |\gamma_k|^2 &= 0\\
+        \implies \lim_{n \to \infty} |\gamma_k| &= 0\\
+        \implies \lim_{n \to \infty} \gamma_k &= 0
+    \end{align*}
+    which is what we sought to show. \hfill $\mathghost$
+    \newline\newline
+    
+    (b) Suppose that for some scalars $\alpha_1, \alpha_2, \dots,$ we have that $\sum_{k = 1}^{\infty}\alpha_k e_k$ converges to an element $x_0$ of $H$. Prove that $|f(x_0)| \leq \|x_0\|(\sum_{k = 1}^{\infty} |\gamma_k|^2)^{1/2}$.
+    \newline\newline
+    \textit{Proof:} First note that
+    \begin{align*}
+        \|x_0\|^2 &=\lim_{n \to \infty} \left\langle \sum_{k = 1}^{n}\alpha_ke_k, \sum_{j = 1}^{n} \alpha_je_j \right\rangle\\
+        &= \lim_{n \to \infty} \sum_{k = 1}^{n}\sum_{j = 1}^{n} \alpha_k\overline{\alpha_j}\langle e_k,e_j \rangle \\
+        &= \lim_{n \to \infty} \sum_{k = 1}^{n}\sum_{j = 1}^{n} \alpha_k\overline{\alpha_j}\delta_{jk}\\
+        &= \sum_{k = 1}^{\infty} |\alpha_k|^2\\
+        \implies \|x_0\| &= \left(\sum_{k = 1}^{\infty} |\alpha_k|^2\right)^{1/2}.\\
+    \end{align*}
+    And notice, 
+    \begin{align*}
+        f(x_0) &= f\left(\sum_{k = 1}^{\infty} \alpha_ke_k\right)\\
+        &= \sum_{k = 1}^{\infty} \alpha_kf(e_k)\\
+        &= \sum_{k = 1}^{\infty} \alpha_k\gamma_k
+    \end{align*}
+    and so
+    \begin{align*}
+        |f(x_0)| &= \left|\sum_{k = 1}^{\infty}\alpha_k\gamma_k\right|\\
+        &\leq \sum_{k = 1}^{\infty} |\alpha_k| |\gamma_k|
+    \end{align*}
+    and by H{\"o}lder's inequality, we have
+    \begin{align*}
+        \sum_{k = 1}^{\infty} |\alpha_k| |\gamma_k| &\leq \left(\sum_{k = 1}^{\infty}|\alpha_k|^2\right)^{1/2}\left(\sum_{k = 1}^{\infty}|\gamma_k|^2\right)^{1/2}\\
+        &= \|x_0\|\left(\sum_{k = 1}^{\infty} |\gamma_k|^2\right)^{1/2}\\
+        \implies |f(x_0)| &\leq \|x_0\|\left(\sum_{k = 1}^{\infty} |\gamma_k|^2\right)^{1/2}
+    \end{align*}
+    which is what we sought to show. \hfill $\mathghost$
+    \pagebreak
+
+    \item[\textbf{6}.] (10) Let $H$ be a Hilbert space, let $(e_n)$ be an orthonormal sequence in $H$, and let $x \in H$ be fixed. Define the sequence $(x_n)$ in $H$ by $x_n = \sum_{k = 1}^n \langle x, e_k\rangle e_k$, for all $n \in \mathbb{N}$. 
+    \newline
+    (a) Prove by direct computation that $\|x - x_n\|^2 = \|x\|^2 - \sum_{k = 1}^n | \langle x, e_k \rangle|^2$.
+    \newline\newline
+    \textit{Proof:} By definition,
+    \begin{align*}
+        \|x - x_n\| &= \langle x - x_n, x - x_n\rangle\\
+        &= \langle x, x\rangle - \langle x_n, x\rangle - \langle x, x_n \rangle + \langle x_n, x_n \rangle
+    \end{align*}
+    and notice
+    \begin{align*}
+        \langle x_n, x\rangle &= \left\langle \sum_{k = 1}^n \langle x, e_k\rangle e_k, x\right\rangle\\
+        &= \sum_{k = 1}^n \langle x, e_k \rangle \langle e_k, x\rangle\\
+        &= \sum_{k = 1}^n \langle x, e_k\rangle \overline{\langle x, e_k\rangle}\\
+        &= \sum_{k = 1}^n |\langle x, e_k\rangle|^2
+    \end{align*}
+    and that
+    \begin{align*}
+        \langle x, x_n \rangle &= \left\langle x, \sum_{k = 1}^n \langle x, e_k\rangle e_k \right\rangle\\
+        &= \sum_{k = 1}^n \overline{\langle x, e_k\rangle}\langle x, e_k \rangle\\
+        &= \sum_{k = 1}^n |\langle x, e_k \rangle|^2.
+    \end{align*}
+    Now, 
+    \begin{align*}
+        \langle x_n, x_n \rangle &= \left\langle \sum_{k = 1}^n \langle x, e_k\rangle e_k, \sum_{j = 1}^n \langle x, e_k \rangle e_k \right\rangle\\
+        &= \sum_{k = 1}^n\sum_{j = 1}^n \langle x, e_k\rangle \overline{\langle x, e_j\rangle} \langle e_k, e_j \rangle\\
+        &= \sum_{k = 1}^n\sum_{j = 1}^n \langle x, e_k\rangle \overline{\langle x, e_j\rangle} \delta_{jk}\\
+        &= \sum_{k = 1}^n \langle x, e_k\rangle \overline{\langle x, e_k\rangle}\\
+        &= \sum_{k = 1}^n |\langle x, e_k\rangle|^2.
+    \end{align*}
+    Finally, we have
+    \begin{align*}
+        \|x - x_n\|^2 &= \|x\|^2 - 2\sum_{k = 1}^n |\langle x, e_k\rangle |^2 + \sum_{k = 1}^n |\langle x, e_k\rangle |^2\\
+        &= \|x\|^2 - \sum_{k = 1}^n |\langle x, e_k \rangle|^2
+    \end{align*}
+    as was desired. \hfill $\mathghost$
+    \newline
+    
+
+    
+    (b) First explain why the infinite series $\sum_{k = 1}^{\infty} \langle x, e_k\rangle e_k$ converges to some element $x_0$ in $H$. Second, suppose in addition that the following holds: ($\dag$) whenever $u \in H$ satisfies $\langle u, e_j\rangle = 0$, for all $j \in \mathbb{N}$, then in fact $u = 0$. Prove directly (and not by quoting theory from the text) that we have $x_0 = x$.
+    \newline\newline
+    \textit{Soln \& Proof:} Using the result from part (a), we have
+    \begin{align*}
+        \|x - x_n\|^2 &= \|x\|^2 - \sum_{k = 1}^n |\langle x, e_k \rangle |^2 \geq 0\\
+        \sum_{k = 1}^n |\langle x, e_k\rangle|^2 &\leq \|x\|^2
+    \end{align*}
+    hence, the sequence $\{\sigma_n\}$ defined by $\sigma_n = \sum_{k = 1}^n |\langle x, e_k\rangle |^2$ is bounded above by $\|x\|^2$ and is strictly increasing since for each $k$, $|\langle x, e_k \rangle|^2 \geq 0$. Hence, by the monotone convergence theorem, we have that $\{\sigma_n\}$ converges. Now, note that $\{x_n\}$ is Cauchy in the norm of $H$ if and only if $\{\sigma_n\}$ is Cauchy in $\mathbb{R}$ since, for $n > m$,
+    \begin{align*}
+        \|x_n - x_m\|^2 &= \left\| \sum_{k = m+1}^n \langle x, e_k \rangle e_k \right\|^2\\
+        &= \left\langle \sum_{k = m+1}^n \langle x, e_k \rangle e_k, \sum_{j = m+1}^n \langle x, e_j \rangle e_j \right\rangle \\
+        &= \sum_{k = m+1}^n\sum_{j = m+1}^n \langle x, e_k\rangle \overline{\langle x, e_j \rangle} \langle e_k, e_j \rangle\\
+        &= \sum_{k = m+1}^n \sum_{j = m+1}^n \langle x, e_k\rangle \overline{\langle x, e_j \rangle} \delta_{jk}\\
+        &= \sum_{k = m+1}^n |\langle x, e_k\rangle|^2.
+    \end{align*}
+    Thus, since $\{\sigma_n\}$ converges in $\mathbb{R}$, $\{x_n\}$ is Cauchy in the norm of $H$ and hence converges to some $x_0 \in H$. Now, let $u = x - x_0$ and consider $\langle u, e_j\rangle$ for some $e_j \in (e_n)$:
+    \begin{align*}
+        \langle u, e_j \rangle &= \langle x - x_0, e_j\rangle\\
+        &= \langle x, e_j\rangle - \langle x_0, e_j \rangle\\
+        &= \langle x, e_j\rangle - \left\langle \sum_{k = 1}^{\infty}\langle x, e_k \rangle e_k, e_j\right\rangle\\
+        &= \langle x, e_j\rangle - \sum_{k = 1}^{\infty} \langle x, e_k\rangle \langle e_k, e_j\rangle\\
+        &= \langle x, e_j\rangle - \sum_{k = 1}^{\infty} \langle x, e_k\rangle \delta_{kj}\\
+        &= \langle x, e_j\rangle - \langle x, e_j\rangle\\
+        &= 0
+    \end{align*}
+    and since $e_j$ was chosen arbitrarily, we have $\langle x - x_0, e_j\rangle = 0$ for all $j \in \mathbb{N}$, hence 
+    \begin{align*}
+        x - x_0 &= 0\\
+        \implies x &= x_0
+    \end{align*} 
+    as was desired. \hfill $\mathghost$
+
+
+    \item[7.] (c) Find $\|T\|$. Justify your assertion. 
+    \newline\newline
+    \textit{Soln.} From part (a) it can be shown that $\|T\| \leq \pi$. Now, for the lower bound, take $x = e_1 + \tilde{e}_1$ so that
+    \begin{align*}
+        \|x\|^2 &= \langle e_1 + \tilde{e}_1, e_1 + \tilde{e}_1\rangle\\
+        &= \langle e_1, e_1\rangle + \langle \tilde{e}_1, e_1\rangle + \langle e_1, \tilde{e}_1\rangle + \langle \tilde{e}_1, \tilde{e}_1\rangle\\
+        &= 2
+    \end{align*}
+    and
+    \begin{align*}
+        \tilde{T}x &= \pi (\langle e_1 + \tilde{e}_1, e_1\rangle e_1 + \langle e_1 + \tilde{e}_1, \tilde{e}_1\rangle \tilde{e}_1)\\
+        &= \pi(e_1 + \tilde{e}_1)\\
+        &= \pi e_1 + \pi \tilde{e}_1
+    \end{align*}
+    so that
+    \begin{align*}
+        \|\tilde{T}x\|^2 &= \langle \pi e_1 + \pi \tilde{e}_1, \pi e_1 + \pi \tilde{e}_1\rangle\\
+        &= \pi^2 (\langle e_1, e_1\rangle + \langle e_1, \tilde{e}_1 \rangle + \langle \tilde{e}_1, e_1 \rangle + \langle \tilde{e}_1, \tilde{e}_1\rangle)\\
+        &= 2\pi^2
+    \end{align*}
+    hence,
+    \[\frac{\|\tilde{T}x\|}{\|x\|} = \pi\]
+    so that 
+    \[\pi \leq \|\tilde{T}\| \leq \pi\]
+    hence $\|\tilde{T}\| = \pi$ and since $\|T\| = \|\tilde{T}\|$, we have 
+    \[\|T\| = \pi.\]
+    \hfill $\mathghost$
+\end{itemize}
+
+\end{document}

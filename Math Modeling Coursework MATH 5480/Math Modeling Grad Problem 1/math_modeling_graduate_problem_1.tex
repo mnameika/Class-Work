@@ -1,0 +1,64 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{graphicx}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{empty}
+
+
+\graphicspath{{Images/}}
+
+\title{Grad Problem \#1}
+\author{Michael Nameika}
+\date{}
+
+\begin{document}
+
+\maketitle
+Show that an object will take longer to go down than up with a general air resistive force.
+\newline\newline
+From Newton's law, we have the differential equation
+\[\frac{dv}{dt} = -g - f(v)\]
+where the resistive force, $f(v)$, satisfies
+\begin{align*}
+    -f(v) &< 0 \;\;\;\; v > 0\\
+    -f(v) &>0 \;\;\;\; v < 0
+\end{align*}
+And since the magnitude of $f(v)$ must be the same for magnitudes of $v$ being the same, we have $f(v)$ is odd, so $f(-v) = -f(v)$. Let $T$ be the time it takes the object to reach the top of its trajectory. Then $v(T) = 0$. From the differential equation, we have (for the object going up)
+\begin{align*}
+    \int_{v(0)}^{v(T)}\frac{dv}{g + f(v)} &= \int_0^T -dt \\
+    \int_{0}^{v_0}\frac{dv}{g + f(v)} &= T
+\end{align*}
+Now let us do the same analysis for the object moving downwards up to $t = 2T$:
+\begin{align*}
+    \int_{v(T)}^{v(2T)}\frac{dv}{g + f(v)} &= \int_T^{2T}-dt \\
+    \int_{v(2T)}^0 \frac{dv}{g + f(v)} &= T
+\end{align*}
+From this, we have
+\[\int_0^{v(T)} \frac{dv}{g + f(v)} = \int_{v(2T)}^0 \frac{dv}{g + f(v)}\]
+Now, since the first integral corresponds to the object moving upwards, we have $f(v) > 0 $, and in the second integral, we have $f(v) < 0$ since the object is moving downwards. Then we have
+\[\frac{1}{g + f(v)} > \frac{1}{g + f(v)}\]
+where the left fraction corresponds to the object falling downwards. This implies that $v(T) > -v(2T)$. Now we introduce the time variable $0 \leq \tau \leq T$. Notice
+\begin{align*}
+    \int_{v(\tau)}^{v(T)}\frac{dv}{g + f(v)} &= \int_{\tau}^T-dt \\
+    &= -(T- \tau) \\
+    &= -(2T - \tau - T) \\
+    &= \int_{T}^{2T -\tau}-dt \\
+    &= \int_{v(T)}^{V(2t - \tau)}\frac{dv}{g + f(v)} 
+\end{align*}
+So we have
+\[\int_{v(\tau)}^{0}\frac{dv}{g + f(v)} = \int_{0}^{V(2t - \tau)}\frac{dv}{g + f(v)} \]
+Similar to above, we have $-v(2T - \tau) < v(\tau)$. Integrating this inequality with respect to $\tau$ (by monotonicity of the integral), we have
+\begin{align*}
+    -\int_0^Tv(2T - \tau)d\tau &= \int_0^Tv(\tau)d\tau \\
+    h(2T-T) - h(2T)  &< h(T) - h(0) \\
+    h(T) - h(2T) &< h(T) \\
+    h(2T) > 0 
+\end{align*}
+Then the object is still above the ground at $t = 2T$, meaning it will take more time for the object to complete its trip down than going up!
+
+\end{document}

@@ -1,0 +1,183 @@
+\documentclass{article}
+\usepackage{graphicx, amsmath, amssymb, mathtools, fancyhdr, float}
+\usepackage{halloweenmath}
+\fancyfoot{}
+\fancyhead[R]{\thepage}
+\fancyhead[L]{MATH 5350}
+
+\newcommand{\inp}[2]{\langle #1, #2 \rangle}
+
+\graphicspath{{Images/}}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{fancy}
+
+\fancyfoot{}
+\fancyhead[R]{$\mathbat$ \thepage \hspace{0.075cm} $\mathbat$}
+\fancyhead[L]{$\mathbat$ MATH 5350 $\mathbat$}
+
+
+\begin{document}
+
+\begin{center}
+    {\Huge Homework VI}
+    \vspace{0.5cm}
+
+    {\Large Michael Nameika}
+\end{center}
+
+\section*{Section 3.1 Problems}
+\begin{itemize}
+    \item[\textbf{4}.] If an inner product space $X$ is real, show that the condition $\|x\| = \|y\|$ implies $\langle x + y, x - y \rangle = 0$. What does this mean geometrically if $X = \mathbb{R}^2$? What does the condition imply if $X$ is complex?
+    \newline\newline
+    \textit{Proof:} Begin with $\langle x + y, x - y \rangle$:
+    \begin{align*}
+        \langle x + y, x - y \rangle &= \langle x, x \rangle + \langle y, x \rangle - \langle x,y \rangle - \langle y,y \rangle\\
+        &= \|x\|^2 + \langle y, x\rangle - \langle x,y \rangle - \|y\|^2
+    \end{align*}
+    Since $X$ is a real space, we have that $\langle y,x \rangle = \langle x, y\rangle$, so that the above equation becomes
+    \begin{align*}
+        \|x\|^2 + \langle y,x \rangle - \langle x, y \rangle - \|y\|^2 &= \|x\|^2 - \|y\|^2 \\
+        &= 0 
+    \end{align*}
+    since $\|x\| = \|y\| \implies \|x\|^2 = \|y\|^2$. If $X = \mathbb{R}^2$, this relationship geometrically means that the diagonals of the parallelogram formed by two vectors of equal length are orthogonal.
+    \newline\newline
+    If $X$ is complex, we have that $\langle x, y\rangle = \overline{\langle x, y \rangle}$, so that $\overline{\langle x,y \rangle} - \langle x,y\rangle = -2i\text{Im}(\langle x, y\rangle)$. Thus,
+    \[\langle x + y, x - y\rangle = -2i\text{Im}(\langle x, y\rangle)\]
+    \hfill $\mathghost$
+    
+\end{itemize}
+
+
+\section*{Section 3.2 Problems}
+\begin{itemize}
+    \item[\textbf{8}.] Show that in an inner product space, $x \perp y$ if and only if $\|x + \alpha y\| \geq \|x\|$ for all scalars $\alpha$.
+    \newline\newline
+    \textit{Proof:} If $y = 0$, the result is immediate. Let $y \neq 0$ and first suppose $\langle x, y \rangle = 0$. Let $\alpha$ be an arbitrary scalar and notice
+    \begin{align*}
+        \|x + \alpha y\|^2 &= \inp{x + \alpha y}{x + \alpha y}\\
+        &= \inp{x}{y} + \inp{x}{\alpha y} + \inp{\alpha y}{x} + \inp{\alpha y}{\alpha y}\\
+        &= \|x\|^2 + \overline{\alpha}\inp{x}{y} + \alpha \inp{y}{x} + |\alpha|^2\|y\|^2
+    \end{align*}
+    but since $\inp{x}{y} = 0$, the above equation becomes
+    \begin{align*}
+        \|x\|^2 + \overline{\alpha}\inp{x}{y} + \alpha \inp{y}{x} + |\alpha|^2\|y\|^2 &= \|x\|^2 + |\alpha|^2\|y\|^2
+    \end{align*}
+    and since $|\alpha|^2, \|y\|^2 \geq 0$, $|\alpha|^2\|y\|^2 \geq$, so that 
+    \begin{align*}
+        \|x\|^2 + |\alpha|^2\|y\|^2 &\geq \|x\|^2\\
+        \implies \|x + \alpha y\|^2 &\geq \|x\|^2\\
+        \implies \|x + \alpha y \| &\geq \|x\|.
+    \end{align*}
+    We must now show that for any scalar $\alpha$, $\|x + \alpha y\| \geq \|y\|$ implies $\inp{x}{y} = 0$. Notice
+    \begin{align*}
+        \|x + \alpha y\|^2 &= \inp{x + \alpha y}{x + \alpha y}\\
+        &= \inp{x}{x} + \overline{\alpha}\inp{x}{y} + \alpha\inp{y}{x} + \overline{\alpha}\alpha\inp{y}{y}\\
+        &= \|x\|^2 + \overline{\alpha}\inp{x}{y} +\alpha [\inp{y}{x} + \overline{\alpha}\inp{y}{y}]
+    \end{align*}
+    in particular, take $\overline{\alpha} = \frac{-\inp{y}{x}}{\inp{y}{y}}$. Then the above equation becomes
+    \begin{align*}
+        \|x\|^2 + \overline{\alpha}\inp{x}{y} + \alpha [\inp{y}{x} + \overline{\alpha}\inp{y}{y}] &= \|x\|^2 - \frac{\inp{y}{x}}{\inp{y}{y}}\inp{x}{y} - \frac{\inp{x}{y}}{\inp{y}{y}}\left[\inp{y}{x} - \frac{\inp{y}{x}}{\inp{y}{y}}\inp{y}{y}\right]\\
+        &= \|x\|^2 - \frac{|\inp{x}{y}|^2}{\|y\|^2} \geq \|x\|^2\\
+        \implies -\frac{|\inp{x}{y}|^2}{\|y\|^2} &\geq 0
+    \end{align*}
+    but since $\frac{|\inp{x}{y}|^2}{\|y\|^2} \geq 0$, we have
+    \begin{align*}
+        0 &\leq \frac{|\inp{x}{y}|^2}{\|y\|^2} \leq 0\\
+        \implies &\frac{|\inp{x}{y}|^2}{\|y\|^2} = 0\\
+        \implies &|\inp{x}{y}|^2 = 0
+    \end{align*}
+    hence, $\inp{x}{y} = 0$, and so $x \perp y$, which is what we sought to show. \hfill $\mathghost$
+    
+    \item[\textbf{10}.] \textbf{(Zero Operator)} Let $T: X \to X$ be a bounded linear operator on a complex inner product space $X$. If $\langle Tx, x\rangle = 0$ for all $x \in X$, show that $T = 0$.
+        Show that this does not hold in the case of a \textit{real} inner product space. 
+    \newline\newline
+    \textit{Proof:} Let $x,y \in X$ and consider $v = x + iy$. Then $\inp{Tv}{v} = 0$ and notice
+    \begin{align*}
+        \inp{Tv}{v} &= \inp{T(x + iy)}{x + iy}\\
+        &= \inp{Tx}{x} + i\inp{Ty}{x} - i\inp{Tx}{y} + \inp{Ty}{y}\\
+        &= i\inp{Ty}{x} - i\inp{Tx}{y} = 0
+    \end{align*}
+    so that we have $\inp{Ty}{x} - \inp{Tx}{y} = 0$. Now consider $z = x + y$. Then $\inp{Tz}{z} = 0$ and we have
+    \begin{align*}
+        \inp{Tz}{z} &= \inp{T(x + y)}{x + y}\\
+        &= \inp{Tx}{x} + \inp{Ty}{x} + \inp{Tx}{y} + \inp{T}{y}\\
+        &= \inp{Ty}{x} + \inp{Tx}{y} = 0
+    \end{align*}
+    and so we have $\inp{Ty}{x} = 0$ for any $x,y \in X$ since our initial choice of $x,y$ was arbitrary. Then in particular, take $x = Ty$ so that 
+    \begin{align*}
+        \inp{Ty}{Ty} &= \|Ty\|^2 = 0 
+    \end{align*}
+    Thus, for any $y \in X$, $Ty = 0$, so that $T = 0$.
+    \newline\newline
+
+    To see that this result does not hold for real inner product spaces, consider the real inner product space $X = \mathbb{R}^2$ and the linear operator $T$ represented in matrix form as
+    \[T = \begin{pmatrix*}[r]
+        0 & -1\\
+        1 & 0
+    \end{pmatrix*}.\]
+    Note that $T$ rotates vectors in $\mathbb{R}^2$ by $\tfrac{\pi}{2}$ radians counter clockwise. Then for any $x = (x_1,x_2)^T \in \mathbb{R}^2$, notice
+    \begin{align*}
+        Tx &= \begin{pmatrix*}[r]
+            0 & -1\\
+            1 & 0
+        \end{pmatrix*}\begin{pmatrix}
+            x_1\\
+            x_2
+        \end{pmatrix}\\
+        &= \begin{pmatrix*}[r]
+            -x_2\\
+            x_1
+        \end{pmatrix*}
+    \end{align*}
+    and that 
+    \begin{align*}
+        \inp{Tx}{x} &= (-x_2,x_1)\begin{pmatrix*}[r]
+            x_1\\
+            x_2
+        \end{pmatrix*}\\
+        &= -x_2x_1 + x_1x_2\\
+        &= 0
+    \end{align*}
+    but clearly, $T \neq 0$. \hfill $\mathghost$
+    
+    
+\end{itemize}
+
+
+\section*{Section 3.3 Problems}
+\begin{itemize}
+    \item[\textbf{8}.] Show that the annihilator $M^{\perp}$ of a set $M \neq \emptyset$ in an inner product space $X$ is a closed subspace of $X$. 
+    \newline\newline
+    \textit{Proof:} Let $\{x_n\}$ be a sequence in $M^{\perp}$ converging to $x \in X$. That is, for any $y \in M$,
+    \[\langle x_n, y \rangle = 0\]
+    for all $n$. Then notice
+    \begin{align*}
+        \lim_{n \to \infty} \langle x_n, y\rangle  &= \langle x, y\rangle = 0
+    \end{align*}
+    hence $x \in M^{\perp}$, so that $M^{\perp}$ is closed. \hfill $\mathghost$
+
+    \item[\textbf{10}.] If $M \neq \emptyset$ is any subset of a Hilbert space $H$, show that $M^{\perp\perp}$ is the smallest closed subspace of $H$ which contains $M$, that is, $M^{\perp\perp}$ is contained in any closed subspace $Y \subset H$ such that $Y \supset M$.
+    \newline\newline
+    \textit{Proof:} Let $Y$ be an arbitrary closed subspace containing $M$. That is,
+    \[M \subseteq Y.\]
+    By problem 7 b)$^*$, we have 
+    \[Y^{\perp} \subseteq M^{\perp}\]
+    and by problem 7 b) again, 
+    \[M^{\perp \perp} \subseteq Y^{\perp\perp}\]
+    and since $Y$ is a closed subspace of a Hilbert space, we have that
+    \[Y = Y^{\perp \perp}\]
+    and also, since $M \subseteq M^{\perp\perp}$, we have
+    \[M \subseteq M^{\perp\perp} \subseteq Y\]
+    thus, since $Y$ was chosen arbitrarily, $M^{\perp\perp}$ is the smallest closed subset containing $M$. \hfill $\mathghost$
+    \newline\newline
+    ($^*$) Proof of problem 7 b): 
+    \newline
+    Let $A$ and $B$ be nonempty subsets of an inner product space $X$ where $A \subseteq B$. Let $x \in B^{\perp}$. Then $x \perp B$ by definition, and since $A \subseteq B$, we have that $x \perp A$. Thus $x \in A^{\perp}$ so that 
+    \[B^{\perp} \subseteq A^{\perp}\]
+    which is what we sought to show. \hfill $\mathghost$
+\end{itemize}
+\end{document}

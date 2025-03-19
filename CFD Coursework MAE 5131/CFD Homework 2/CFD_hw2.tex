@@ -1,0 +1,409 @@
+\documentclass{article}
+\usepackage{graphicx, amsmath, amssymb, mathtools, fancyhdr}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{fancy}
+
+\fancyfoot{}
+\fancyhead[L]{MAE 5131}
+\fancyhead[R]{\thepage}
+
+\begin{document}
+
+\begin{center}
+    {\huge CFD Homework 2}
+    \vspace{0.5cm}
+
+    {\Large Michael Nameika}
+    \vspace{0.5cm}
+
+    {\large 9/12/24}
+\end{center}
+
+
+\begin{itemize}
+    \item[\textbf{1}.]
+    \begin{itemize}
+        \item[a)] Classify the given PDE below.
+        \[2u_{xx} - 4u_{xy} + 2u_{yy} + 3u = 0\]
+        \textit{Soln.} This is a PDE of the form 
+        \[Au_{xx} + 2Bu_{xy} + Cu_{yy} + Du_x + Eu_y + Fu = 0\]
+        with $A = 2 = C$, $B = -2$, $D = E = 0$, and $F = 3$. To classify the PDE, we must inspect $B^2 - AC$. Well, $B^2 - AC = (-2)^2 - (2)(2) = 4 - 4 = 0$. Thus, by definition, the PDE is \textbf{parabolic}.
+        \newline\newline
+
+        \item[b)] Convert the PDE into a system of first order equations while keeping it the same. Write this system in matrix form. 
+        \newline\newline
+        \textit{Soln.} Let $v = u_x$ and $w = u_y$. Then the PDE in part a) becomes
+        \begin{equation}
+            2v_x - 4v_y + 2w_y + 3u = 0.
+        \end{equation}
+        Assuming a sufficiently smooth solution $u$, we also have
+        \begin{equation}
+            v_y = w_x
+        \end{equation}
+        and after dividing (1) by the scalar $2$, we have the system
+        \begin{equation}
+            \begin{aligned}
+                v_x - 2v_y + w_y + \frac{3}{2}u &= 0\\
+                w_x - v_y &= 0.
+            \end{aligned}
+        \end{equation}
+        Writing (3) as a matrix system, we have
+        \[\frac{\partial }{\partial x}\begin{pmatrix}
+            v\\
+            w
+        \end{pmatrix} + \frac{\partial}{\partial y}\begin{pmatrix}
+            -2 & 1\\
+            -1 & 0
+        \end{pmatrix}\begin{pmatrix}
+            v\\
+            w
+        \end{pmatrix} + \begin{pmatrix}
+            \tfrac{3}{2}u\\
+            0
+        \end{pmatrix} = \begin{pmatrix}
+            0\\
+            0
+        \end{pmatrix}.\]
+        \vspace{0.5cm}
+        
+        \item[c)] Classify the system of equations found in part b.
+        \newline\newline
+        \textit{Soln.} To classify the system in part b), we must inspect the eigenvalues of $A = \begin{pmatrix}
+            -2 & 1\\
+            -1 & 0
+        \end{pmatrix}$. That is,
+        \begin{align*}
+            \text{det}(A - \lambda I) &= \left|\begin{matrix}
+                -2 - \lambda & 1\\
+                -1 & -\lambda
+            \end{matrix}\right|\\
+            &= \lambda(\lambda + 2) + 1\\
+            &= \lambda^2 + 2\lambda + 1\\
+            &= (\lambda + 1)^2 = 0\\
+            \implies \lambda &= -1
+        \end{align*}
+        with algebraic multiplicity 2. Thus, since we have a repeated eigenvalue, the system is \textbf{parabolic}.
+        
+        
+    \end{itemize}
+    \pagebreak
+
+    \item[\textbf{2}.] Derive the fourth-order-accurate central finite-difference for $\frac{\partial^2u}{\partial x^2}:$
+    \[\left(\frac{\partial^2u}{\partial x^2}\right)_i = \frac{-u_{i-2} + 16u_{i-1} - 30u_i + 16u_{i+1} - u_{i+2}}{12(\Delta x)^2} + \mathcal{O}(\Delta x^4)\]
+    This is actually the same scheme in Anderson (4.18). In the derivation of the above equation, we have assumed the mesh is uniform, that is, $\Delta x$ is constant.
+    \newline\newline
+    \textit{Soln.} We approach this by method of undetermined coefficients. Let $x_i = x_0$ and $x_{i \pm 1} = x_0 \pm \Delta x$. We seek a scheme of the form
+    \[u_{xx}(x_0) \approx au(x_0 - 2\Delta x) + bu(x_0 - \Delta x) + cu(x_0) + du(x_0) + \Delta x) + eu(x_0 + 2\Delta x).\]
+    Taylor expanding each of the terms above, we find
+    \begin{align*}
+        u(x_0 + 2\Delta x) &= u(x_0) + 2\Delta x u_x(x_0) + 2(\Delta x)^2u_{xx}(x_0) + \frac{8(\Delta x)^3}{3!}u_{xxx}(x_0) + \frac{16(\Delta x)^4}{4!}u_{xxxx}(x_0) + \mathcal{O}((\Delta x)^5)\\
+        u(x_0 + \Delta x) &= u(x_0) + \Delta x u_x(x_0) + \frac{(\Delta x)^2}{2}u_{xx}(x_0) + \frac{(\Delta x)^3}{3!}u_{xxx}(x_0) + \frac{(\Delta x)^4}{4!}u_{xxxx}(x_0) + \mathcal{O}((\Delta x)^5)\\
+        u(x_0 - \Delta x) &= u(x_0) - \Delta x u_x(x_0) + \frac{(\Delta x)^2}{2}u_{xx}(x_0) - \frac{(\Delta x)^3}{3!}u_{xxx}(x_0) + \frac{(\Delta x)^4}{4!}u_{xxxx}(x_0) + \mathcal{O}((\Delta x)^5)\\
+        u(x_0 - 2\Delta x) &= u(x_0) - 2\Delta x u_x(x_0) + 2(\Delta x)^2 u_{xx}(x_0) - \frac{8(\Delta x)^3}{3!}u_{xxx}(x_0) + \frac{16(\Delta x)^4}{4!}u_{xxxx}(x_0) + \mathcal{O}((\Delta x)^5))
+    \end{align*}
+    By matching coefficients, we find the following linear system:
+    \[\begin{pmatrix}
+        1 & 1& 1& 1& 1\\\\
+        -2 & -1 & 0 & 1 & 2\\\\
+        2 & \tfrac{1}{2} & 0 & \tfrac{1}{2} & 2\\\\
+        -\tfrac{4}{3} & -\tfrac{1}{6} & 0 & \tfrac{1}{6} & \tfrac{4}{3}\\\\
+        \tfrac{2}{3} & \tfrac{1}{24} & 0 & \tfrac{1}{24} & \tfrac{2}{3}
+    \end{pmatrix}\begin{pmatrix}
+        a\\\\
+        b\\\\
+        c\\\\
+        d\\\\
+        e
+    \end{pmatrix} = \begin{pmatrix}
+        0\\\\
+        0\\\\
+        \tfrac{1}{(\Delta x)^2}\\\\
+        0\\\\
+        0
+    \end{pmatrix}\]
+    To solve the problem, we first perform the following row operations: $R_2 + 2R_1 \to R_2$, $R_2 - 2R_1 \to R_3$, $R_4 + \tfrac{4}{3}R_1 \to R_4$, and $R_5 - \tfrac{2}{3}R_1 \to R_5$. Then our system becomes (in augmented form)
+    \begin{align*}
+    &\left(\begin{array}{ccccc|c}
+        1 & 1 & 1 & 1 & 1 & 0\\
+        0 & 1 & 2 & 3 & 4 & 0\\
+        0 & -\tfrac{3}{2} & -2 & -\tfrac{3}{2} & 0 & \tfrac{1}{(\Delta x)^2}\\
+        0 & \tfrac{7}{6} & \tfrac{4}{3} & \tfrac{3}{2} & \tfrac{8}{3} & 0\\
+        0 & -\tfrac{5}{8} & -\tfrac{2}{3} & -\tfrac{5}{8} & 0 & 0
+    \end{array}\right)\begin{array}{c}
+        R_3 - \tfrac{3}{2}R_2 \to R_3\\\\
+        R_4 - \tfrac{7}{6}R_2 \to R_4\\\\
+        R_5 + \tfrac{5}{8}R_2 \to R_5
+    \end{array}\\
+    &\sim\left(\begin{array}{ccccc|c}
+        1 & 1 & 1 & 1 & 1 & 0\\
+        0 & 1 & 2 & 3 & 4 & 0\\
+        0 & 0 & 1 & 3 & 6 & \tfrac{1}{(\Delta x)^2}\\
+        0 & 0 & -1 & -2 & -2 & 0\\
+        0 & 0 & \tfrac{7}{12} & \tfrac{5}{4} & \tfrac{5}{2} & 0
+    \end{array}\right)\begin{array}{c}
+        R_4 + R_3 \to R_4\\\\
+        R_5 - \tfrac{7}{12}R_4 \to R_5
+    \end{array}\\
+    &\sim\left(\begin{array}{ccccc|c}
+        1 & 1 & 1 & 1 & 1 & 0\\
+        0 & 1 & 2 & 3 & 4 & 0\\
+        0 & 0 & 1 & 3 & 6 & \tfrac{1}{(\Delta x)^2}\\
+        0 & 0 & 0 & 1 & 4 & \tfrac{1}{(\Delta x)^2}\\
+        0 & 0 & 0 & -\tfrac{1}{2} & -1 & -\tfrac{7}{12(\Delta x)^2}\\
+    \end{array}
+    \right)\begin{array}{c}
+        R_5 + \tfrac{1}{2}R_4 \to R_5
+    \end{array}\\
+    &\sim\left(\begin{array}{ccccc|c}
+        1 & 1 & 1 & 1 & 1 & 0\\
+        0 & 1 & 2 & 3 & 4 & 0\\
+        0 & 0 & 1 & 3 & 6 & \tfrac{1}{(\Delta x)^2}\\
+        0 & 0 & 0 & 1 & 4 & \tfrac{1}{(\Delta x)^2}\\
+        0 & 0 & 0 & 0 & 1 & -\tfrac{1}{12(\Delta x)^2}
+    \end{array}\right).
+    \end{align*}
+    Back substitution gives us $e = -\frac{1}{12(\Delta x)^2}$, $d = \frac{16}{12(\Delta x)^2}$, $c = -\frac{30}{12(\Delta x)^2}$, $b = \frac{16}{12(\Delta x)^2}$, $a = -\frac{1}{12(\Delta x)^2}$. Further, by symmetry of the coefficients and Taylor expansions, we find that the fifth order terms cancel (and the sixth order terms do not), so we are left with
+    \begin{align*}
+        \left(\frac{\partial u}{\partial x}\right)_i &= \frac{-u_{i+2} + 16u_{i + 1} - 30u_i + 16u_{i-1} - u_{i - 2}}{12(\Delta x)^2} + \frac{1}{12(\Delta x)^2}\mathcal{O}((\Delta x)^6)\\
+        &= \frac{-u_{i+2} + 16u_{i + 1} - 30u_i + 16u_{i-1} - u_{i - 2}}{12(\Delta x)^2} + \mathcal{O}((\Delta x)^4)
+    \end{align*}
+    as desired.
+
+
+
+
+    \pagebreak
+
+
+    \item[\textbf{3}.] Anderson Problems 4.6. Derive the third-order-accurate one-sided difference for $\frac{\partial u}{\partial y}$
+    \[\left(\frac{\partial u}{\partial y}\right)_{i,j} = \frac{1}{6\Delta y}(-11u_{i,j} + 18u_{i,j+1} - 9u_{i,j+2} + 2u_{i,j+3})\]
+    \textit{Soln.} We approach this by method of undetermined coefficients. Letting $x_i = x_0$, $y_i = y_0$, and $y_{i\pm 1} = y_0 \pm \Delta y$, we seek a scheme of the form
+    \[\left(\frac{\partial u}{\partial y}\right)_i \approx au(x_0,y_0) + bu(x_0, y_0 + \Delta y) + cu(x_0, y + 2\Delta y) + du(x_0, y_0 + 3\Delta y).\]
+    Taylor expanding the above terms, we find
+    \begin{align*}
+        u(x_0,y_0 + \Delta y) &= u(x_0, y_0) + \Delta y u_y(x_0, y_0) + \frac{(\Delta y)^2}{2}u_{yy}(x_0,x_0) + \frac{(\Delta y)^3}{3!}u_{yyy}(x_0,y_0) + \mathcal{O}((\Delta y)^4)\\
+        u(x_0, y_0 + 2\Delta y) &= u(x_0, y_0) + 2\Delta y u_y(x_0, y_0) + 2(\Delta y)^2u_{yy}(x_0, y_0) + \frac{8(\Delta y)^3}{3!}u_{yyy}(x_0,y_0) + \mathcal{O}((\Delta y)^4)\\
+        u(x_0, y_0 + 3\Delta y) &= u(x_0, y_0) + 3\Delta y u_y(x_0, y_0) + \frac{9(\Delta y)^2}{2}u_{yy}(x_0, y_0) + \frac{27(\Delta y)^3}{3!}u_{yyy}(x_0,y_0) + \mathcal{O}((\Delta y)^4).
+    \end{align*}
+    Matching coefficients, we find the following linear system:
+    \[\begin{pmatrix}
+        1 & 1 & 1 & 1\\\\
+        0 & 1 & 2 & 3\\\\
+        0 & \tfrac{1}{2} & 2 & \tfrac{9}{2}\\\\
+        0 & \tfrac{1}{6} & \tfrac{4}{3} & \tfrac{9}{2}
+    \end{pmatrix}
+    \begin{pmatrix}
+        a\\\\
+        b\\\\
+        c\\\\
+        d
+    \end{pmatrix} = \begin{pmatrix}
+        0\\\\
+        \tfrac{1}{\Delta y}\\\\
+        0\\\\
+        0
+    \end{pmatrix}\]
+    Performing the following row operations, $R_3 - \frac{1}{2}R_2 \to R_3$ and $R_4 - \frac{1}{6}R_2 \to R_4$, the system becomes (in augmented form)
+    \begin{align*}
+        &\left(\begin{array}{cccc|c}
+            1 & 1 & 1 & 1 & 0\\
+            0 & 1 & 2 & 3 & \tfrac{1}{\Delta y}\\
+            0 & \tfrac{1}{2} & 2 & \tfrac{9}{3} & 0\\
+            0 & \tfrac{1}{6} & \tfrac{4}{3} & \tfrac{9}{2} & 0
+        \end{array}\right)\begin{array}{c}
+            R_3 - \frac{1}{2}R_2 \to R_3\\\\
+            R_4 - \frac{1}{6}R_2 \to R_4
+        \end{array}\\
+        &\sim\left(\begin{array}{cccc|c}
+            1 & 1 & 1 & 1 & 0\\
+            0 & 1 & 2 & 3 & \tfrac{1}{\Delta y}\\
+            0 & 0 & 1 & 3 & -\tfrac{1}{2\Delta y}\\
+            0 & 0 & 0 & 1 & \tfrac{1}{3\Delta y}
+        \end{array}\right).
+    \end{align*}
+    Back substitution gives $d = \frac{1}{3\Delta y}$, $c = -\frac{3}{2\Delta y}$, $b = \frac{3}{\Delta y}$, $a = -\frac{11}{6\Delta y}$ so that our scheme is
+    \begin{align*}
+        \left(\frac{\partial u}{\partial y}\right)_{i,j} &= \frac{1}{6\Delta y}(-11 u_{i.j} + 18u_{i,j+1} - 9u_{i,j+2} + 24u_{i,j+3}) + \frac{1}{6\Delta y}\mathcal{O}((\Delta y)^4)\\
+        &= \frac{1}{6\Delta y}(-11u_{i,j} + 18u_{i,j+1} - 9u_{i,j+2} + 24u_{i,j+3}) + \mathcal{O}((\Delta y)^3)
+    \end{align*}
+    as desired.
+
+    
+
+    \pagebreak
+
+
+    \item[\textbf{4}.] Consider first order wave equation
+    \[\frac{\partial u}{\partial t} + c\frac{\partial u}{\partial x} = 0\]
+    \begin{itemize}
+        \item[(1)] The finite difference equation with forward difference in time, central difference in space can be written as:
+        \[\frac{u_i^{t + \Delta t} - u_i^t}{\Delta t} = -c \frac{u_{i+1}^t - u_{i-1}^t}{2\Delta x}\]
+        Using von Neumann stability analysis, find out the amplification factor, and verify the above scheme is unconditional unstable.
+        \newline\newline
+        \textit{Soln.} Set $\varepsilon_i^n = e^{at + ikx}$. We have that $\varepsilon_i^n$ satisfies the scheme above so that
+        \[\frac{e^{a(t + \Delta t) + ikx} - e^{at + ikx}}{\Delta t} = -c\frac{e^{at + ik(x + \Delta x)} - e^{at + ik(x - \Delta x)}}{2\Delta x}.\]
+        Dividing through by $e^{at + ikx}$, the above equation becomes
+        \begin{align*}
+            \frac{e^{a\Delta t} - 1}{\Delta t} &= -c\frac{e^{ik\Delta x} - e^{-ik\Delta x}}{2\Delta x}\\
+            \implies e^{a\Delta t} &= 1 - c\frac{\Delta t}{2\Delta x}i\sin(k\Delta x)\\
+            \implies \left|e^{a\Delta t}\right|^2 &= \left|1 - c\frac{\Delta t}{2\Delta x}i\sin(k \Delta x)\right|^2\\
+            &= 1 + \left(c\frac{\Delta t}{2\Delta x}\right)^2\sin^2(k\Delta x).
+        \end{align*}
+        So we have the amplification factor $1 + \left(c\frac{\Delta t}{2\Delta x}\right)^2\sin^2(k\Delta x)$, which we require to be greater than or equal to 1. That is, we require
+        \[1 + \left(c\frac{\Delta t}{2\Delta x}\right)^2\sin^2(k\Delta x) \geq 1\]
+        and since $\sin^2(k\Delta x) \geq 0$, we have that the scheme is unconditionally unstable, as desired.
+        \newline\newline
+
+        \item[(2)] Using Lax method, the finite difference equation can be written as:
+        \[u_i^{n + 1} = \frac{u_{i+1}^n + u_{i - 1}^n}{2} - c\frac{\Delta t}{\Delta x}\frac{u_{i+1}^n - u_{i-1}^n}{2}\]
+        Using von Neumann stability analysis, find out the amplification factor, and find the requirement for the above scheme to be stable.
+        \newline\newline
+        \textit{Soln.} Following the process as in part (1), setting $\varepsilon_i^n = e^{at + ikx}$, we have
+        \[e^{a(t + \Delta t) + ikx} = \frac{e^{at + ik(x + \Delta x)} + e^{at + ik(x - \Delta x)}}{2} - c\frac{\Delta t}{\Delta x}\frac{e^{at + ik(x + \Delta x)} - e^{at + ik(x - \Delta x)}}{2}.\]
+        Dividing through by $e^{at + ikx}$ gives
+        \begin{align*}
+            e^{a\Delta t} &= \frac{e^{ik\Delta x} + e^{-ik\Delta x}}{2} - c\frac{\Delta t}{\Delta x}\frac{e^{ik\Delta x} - e^{-ik\Delta x}}{2}\\
+            &= \cos(k\Delta x) - ic\frac{\Delta t}{\Delta x}\sin(k\Delta x)\\
+            \implies \left|e^{a\Delta t}\right|^2 &= \left|\cos(k\Delta x) - ic\frac{\Delta t}{\Delta x}\sin(k\Delta x)\right|^2\\
+            &= \cos^2(k\Delta x) + \left(c\frac{\Delta t}{\Delta x}\right)^2\sin^2(k\Delta x)\\
+            &= 1 - \sin^2(k \Delta x) + \left(c\frac{\Delta t}{\Delta x}\right)^2\sin^2(k\Delta x)\\
+            &= 1 + \left[\left(\frac{\Delta t}{\Delta x}\right)^2 - 1\right]\sin^2(k\Delta x).
+        \end{align*}
+        Since we require $\left|e^{a\Delta t}\right|^2 \leq 1$, we have 
+        \begin{align*}
+            1 + \left[\left(c\frac{\Delta t}{\Delta x}\right)^2 - 1\right]\sin^2(k\Delta x) &\leq 1\\
+            \implies \left[\left(c\frac{\Delta t}{\Delta x}\right)^2 - 1\right]\sin^2(k\Delta x) &\leq 0
+        \end{align*}
+        and since $\sin^2(k\Delta x) \geq 0$, we require 
+        \begin{align*}
+            \left(c\frac{\Delta t}{\Delta x}\right)^2 - 1 &\leq 0\\
+            \implies \left(c\frac{\Delta t}{\Delta x}\right)^2 &\leq 1\\
+            \implies \left|c\frac{\Delta t}{\Delta x}\right| &\leq 1.
+        \end{align*}
+    \end{itemize}
+    Thus, the scheme is stable whenever $\left|c\frac{\Delta t}{\Delta x}\right| \leq 1$ and has amplification factor $\cos(k\Delta x) - ic\frac{\Delta t}{\Delta x}\sin(k\Delta x)$.
+
+    \pagebreak
+
+    \item[\textbf{5}.] Consider first order wave equation
+    \[\frac{\partial u}{\partial t} + c\frac{\partial u}{\partial x} = 0\]
+    The forward difference in time and central difference in space can be written as:
+    \[\frac{u_{i}^{t + \Delta t} - u_i^n}{\Delta t} = -c \frac{u_{i+1}^t - u_{i-1}^t}{2\Delta x}\]
+    Derive the modified equation for the scheme above:
+    \[\frac{\partial u}{\partial t} + c\frac{\partial u}{\partial x} = -\frac{c\Delta x}{2}\nu\frac{\partial^2u}{\partial x^2} - \frac{c(\Delta x)^2}{6}(1 + 2\nu^2)\frac{\partial^3u}{\partial x^3} + \cdots\]
+    and verify the scheme is unconditionally unstable.
+    \newline\newline
+    \textit{Soln.} Let $u$ satisfy the finite difference equation. Taylor expanding, we have
+    \begin{align*}
+        u_i^{n+1} &= u_i^n + \Delta t\left(\frac{\partial u}{\partial t}\right)_i^t + \frac{(\Delta t)^2}{2}\left(\frac{\partial^2u}{\partial t^2}\right)_i^n + \frac{(\Delta t)^3}{6}\left(\frac{\partial^3u}{\partial t^3}\right)_i^n + \mathcal{O}((\Delta t)^4)\\
+        u_{i+1}^n &= u_i^n + \Delta x\left(\frac{\partial u}{\partial x}\right)_i^n + \frac{(\Delta t)^2}{2}\left(\frac{\partial^2u}{\partial x^2}\right)_i^n + \frac{(\Delta x)^3}{6}\left(\frac{\partial^3u}{\partial x^3}\right)_i^n + \mathcal{O}((\Delta x)^4)\\
+        u_{i - 1}^n &= u_i^n  - \Delta x\left(\frac{\partial u}{\partial x}\right)_i^n + \frac{(\Delta x)^2}{2}\left(\frac{\partial^2u}{\partial x^2}\right)_i^n - \frac{(\Delta x)^3}{6}\left(\frac{\partial^3u}{\partial x^3}\right)_i^n + \mathcal{O}((\Delta x)^4)\\
+        \implies \frac{u_i^{n+1} - u_{i}^n}{\Delta t} &= \frac{\partial u}{\partial t} + \frac{\Delta t}{2}\frac{\partial^2u}{\partial t^2} + \frac{(\Delta t)^2}{6}\frac{\partial^3u}{\partial t^3} + \mathcal{O}((\Delta t)^3)\\
+        \frac{u_{i+1}^n - u_{i-1}^n}{2\Delta x} &= \frac{\partial u}{\partial x} + \frac{(\Delta x)^2}{6}\frac{\partial^3u}{\partial x^3} + \mathcal{O}((\Delta x)^4)
+    \end{align*}
+    So the finite difference scheme becomes
+    \begin{equation}
+        \label{mod_eq_1}
+        \frac{\partial u}{\partial t} + c\frac{\partial u}{\partial x} = -\frac{\Delta t}{2}\frac{\partial^2u}{\partial t^2} - \frac{(\Delta t)^2}{6}\frac{\partial^3u}{\partial t^3} - c\frac{(\Delta x)^2}{6}\frac{\partial^3u}{\partial x^3} + \mathcal{O}((\Delta x)^4 + (\Delta t)^2).
+    \end{equation}
+    To derive the modified equation, we wish to express $\frac{\partial^2u}{\partial t^2}, \frac{\partial^3u}{\partial t^3}$ in terms of $\frac{\partial^nu}{\partial x^n}$. First differentiate (\ref{mod_eq_1}) with respect to $t$:
+    \[
+        \frac{\partial^2u}{\partial t^2} + \frac{\partial^2u}{\partial t\partial x} = -\frac{\Delta t}{2}\frac{\partial^3u}{\partial t^3} - \frac{(\Delta t)^2}{6}\frac{\partial^4u}{\partial t^4} - c\frac{(\Delta x)^2}{6}\frac{\partial^4u}{\partial t\partial x^3} + \cdots.
+    \]
+    We wish to keep up to second order terms in (\ref{mod_eq_1}), so we truncate after the linear terms, giving
+    \begin{equation}
+        \label{mod_eq_2}
+        \frac{\partial^2u}{\partial t^2} + c\frac{\partial^2u}{\partial t\partial x} = -\frac{\Delta t}{2}\frac{\partial^3u}{\partial t^3} + \cdots.
+    \end{equation}
+    Differentiating (\ref{mod_eq_1}) with respect to $t$, we find (to leading order)
+    \begin{equation}
+        \frac{\partial^3u}{\partial t^3} = -c\frac{\partial^3u}{\partial t^2\partial x} + \cdots.
+    \end{equation}
+    Now, we need to express $\frac{\partial^3u}{\partial t\partial x^2}$, $\frac{\partial^3u}{\partial t^2 \partial x}$ in terms of $\frac{\partial^nu}{\partial x^n}$. Assuming a sufficiently smooth solution $u$, we have
+    \begin{align*}
+        \frac{\partial^3u}{\partial x^2\partial t} &= \frac{\partial^2}{\partial x^2}\left(\frac{\partial u}{\partial t}\right)\\
+        \frac{\partial^3u}{\partial x\partial t^2} &= \frac{\partial }{\partial x}\left(\frac{\partial^2 u}{\partial t^2}\right)
+    \end{align*}
+    Notice that we have (to leading order)
+    \begin{align*}
+        \frac{\partial^2}{\partial x^2}\left(\frac{\partial u}{\partial t}\right) &= \frac{\partial^2}{\partial x^2}\left(-c\frac{\partial u}{\partial x} + \cdots\right)\\
+        &= -c\frac{\partial^3u}{\partial x^3} + \cdots.
+    \end{align*}
+    and
+    \begin{align*}
+        \frac{\partial}{\partial x}\left(\frac{\partial^2 u}{\partial t^2}\right) &= \frac{\partial }{\partial x}\left(-c\frac{\partial^2u}{\partial x\partial t} + \cdots\right)\\
+        &= -c\frac{\partial^2}{\partial x^2}\left(\frac{\partial u}{\partial t} + \cdots\right)\\
+        &= -c\frac{\partial^2}{\partial x^2}\left(-c\frac{\partial u}{\partial x} + \cdots\right)\\
+        &=c^2\frac{\partial^3u}{\partial x^3} + \cdots
+    \end{align*}
+    which gives us
+    \[\frac{\partial^3u}{\partial t^3} = -c^3\frac{\partial^3u}{\partial x^3} + \cdots\]
+    and
+    \[\frac{\partial^2u}{\partial t^2} = c^2\frac{\partial^2 u}{\partial x^2} + c^3\Delta t\frac{\partial^3u}{\partial x^3} + \cdots.\]
+    Putting these equations into (\ref{mod_eq_1}), we find
+    \begin{align*}
+        \frac{\partial u}{\partial t} + c\frac{\partial u}{\partial x} &= -\frac{\Delta t}{2}\left(c^2\frac{\partial^2u}{\partial x^2} + c^3\Delta t\frac{\partial^3 u}{\partial x^3} + \cdots\right) - \frac{(\Delta t)^2}{6}\left(-c^3\frac{\partial^3u}{\partial x^3} + \cdots\right) - c\frac{(\Delta x)^2}{6}\frac{\partial^3u}{\partial x^3} + \cdots\\
+        &= -c^2\frac{\Delta t}{2}\frac{\partial^2u}{\partial x^2} - c^3\frac{(\Delta t)^2}{2}\frac{\partial^3u}{\partial x^3} + c^3\frac{(\Delta t)^2}{6}\frac{\partial^3u}{\partial x^3} - c\frac{\Delta x)^2}{6}\frac{\partial^3u}{\partial x^3} + \cdots\\
+       &= -c\nu\frac{\Delta x}{2}\frac{\partial^2u}{\partial x^2} - c\frac{(\Delta x)^2}{6}(1 + 2\nu^2)\frac{\partial^3 u}{\partial x^3} + \cdots
+    \end{align*}
+    where we used $\nu = c\frac{\Delta t}{\Delta x}$, as desired.
+    \newline\newline
+    Now, to verify that the scheme is unconditionally unstable, we apply von Neumann stability analysis: let $u_i^n = e^{at + ikx}$. Then the scheme becomes
+    \begin{align*}
+        \frac{e^{a(t + \Delta t) + ikx} - e^{at + ikx}}{\Delta t} &= -c\frac{e^{at + ik(x + \Delta x)} - e^{at + ik(x - \Delta x)}}{2\Delta x}\\
+        \implies \frac{e^{a\Delta t} - 1}{\Delta t} &= -c \frac{e^{ik\Delta x} - e^{-ik\Delta x}}{2\Delta x}\\
+        \implies e^{a\Delta t} &= 1 - \frac{c\Delta t}{\Delta x}\left(\frac{e^{ik\Delta x} - e^{-ik\Delta x}}{2}\right)\\
+        \implies e^{a\Delta t} &= 1 - i\frac{c\Delta t}{\Delta x}\sin(k\Delta x).
+    \end{align*}
+    For stability, we require $|e^{a\Delta t}|^2 \leq 1$. From above, we have
+    \begin{align*}
+        \left|e^{a\Delta t}\right|^2 &= 1 + \left(\frac{c\Delta t}{\Delta x}\right)^2\sin^2(k\Delta x)
+    \end{align*}
+    and since $\left(\frac{c\Delta t}{\Delta x}\right)^2\sin^2(k\Delta x) \geq 0$, we have $|e^{a\Delta t}|^2 \geq 1$, hence the scheme is unconditionally unstable, as desired.
+
+    \pagebreak
+
+
+
+    \item[\textbf{6}.] Consider first order wave equation
+    \[\frac{\partial u}{\partial t} + c\frac{\partial u}{\partial x} = 0\]
+    The Lax-Wendroff scheme for this wave equation is given as:
+    \[\frac{u^{n+1}_i - u^n_i}{\Delta t} + c\frac{u_{i+1}^n - u_{i-1}^n}{2\Delta x} = \frac{c^2\Delta t}{2}\frac{u_{i+1}^n - 2u_i^n + u_{i-1}^n}{(\Delta x)^2}\]
+    Derive the associated modified equation:
+    \[\frac{\partial u}{\partial t} + c\frac{\partial u}{\partial x} = -\frac{c(\Delta x)^2}{6}(1 - \nu^2)\frac{\partial^3u}{\partial x^3} - \frac{c(\Delta x)^3}{8}\nu(1 - \nu^2)\frac{\partial^4u}{\partial x^4} + \cdots\]
+    and verify that the scheme is conditionally stable for $\nu \leq 1$.
+    \newline\newline
+    \textit{Soln.} We begin by showing the method is conditionally stable for $\nu \leq 1$. Replace $u_i^n = e^{at + ikx}$ so that the scheme becomes
+    \begin{align*}
+        \frac{e^{a(t + \Delta t) + ikx} - e^{at + ikx}}{\Delta t} + c\frac{e^{at + ik(x + \Delta x)} - e^{at + ik(x - \Delta x)}}{2\Delta x} &= \frac{c^2\Delta t}{2}\frac{e^{at + ik(x + \Delta x)} - 2e^{at + ikx} + e^{at + ik(x - \Delta x)}}{(\Delta x)^2}\\
+        \implies \frac{e^{a\Delta t} - 1}{\Delta t} + c\frac{e^{ik\Delta x} - e^{-ik\Delta x}}{2\Delta x} &= \frac{c^2\Delta t}{2}\frac{e^{ik\Delta x} + e^{-ik\Delta x} - 2}{(\Delta x)^2}\\
+        \implies e^{a\Delta t} &= 1 - \frac{c\Delta t}{2\Delta x}\left(e^{ik\Delta x} - e^{-ik\Delta x}\right) + \left(\frac{c\Delta t}{\Delta x}\right)^2\left(e^{ik\Delta x} + e^{-ik\Delta x} - 2\right)\\
+        \implies e^{a\Delta t} &= 1 - i\frac{c\Delta t}{\Delta x}\sin(k\Delta x) + \left(\frac{c\Delta t}{\Delta x}\right)^2(\cos(k\Delta x) - 1)\\
+        \implies \left|e^{a\Delta t}\right|^2 &= \left(1 + \left(\frac{c\Delta t}{\Delta x}(\cos(k\Delta x) - 1)\right)\right)^2 + \left(\frac{c\Delta t}{\Delta x}\right)^2\sin^2(k\Delta x)
+    \end{align*}
+    \begin{align*}
+        \implies \left|e^{a\Delta t}\right|^2 &= 1 + 2\left(\frac{c\Delta t}{\Delta x}\right)(\cos(k\Delta x) - 1) + \left(\frac{c\Delta t}{\Delta x}\right)^2(\cos(k\Delta x) - 1)^2 + \left(\frac{c\Delta t}{\Delta x}\right)^2\sin^2(k\Delta x)\\
+        &= 1 + 2\left(\frac{c\Delta t}{\Delta x}\right)(\cos(k\Delta x) - 1) + \left(\frac{c\Delta t}{\Delta x}\right)^2(\cos^2(k\Delta x) - 2\cos(k\Delta x) + 1) + \left(\frac{c\Delta t}{\Delta x}\right)^2\sin^2(k\Delta x)\\
+        &= 1 + 2\left(\frac{c\Delta t}{\Delta x}\right)\cos(k\Delta x) - 2\left(\frac{c\Delta t}{\Delta x}\right) + \left(\frac{c\Delta t}{\Delta x}\right)^2(\cos^2(k\Delta x) + \sin^2(k \Delta x)) + \\
+        &- 2\left(\frac{c\Delta t}{\Delta x}\right)^2\cos(k\Delta x) + \left(\frac{c\Delta t}{\Delta x}\right)^2\\
+        &= 1 + 2\left(\frac{c\Delta t}{\Delta x}\right)\cos(k\Delta x) - 2\left(\frac{c\Delta t}{\Delta x}\right) + \left(\frac{c\Delta t}{\Delta x}\right)^2 - 2\left(\frac{c \Delta t}{\Delta x}\right)^2\cos(k\Delta x) + \left(\frac{c\Delta t}{\Delta x}\right)^2\\
+        &= 1 + 2\left(\frac{c\Delta t}{\Delta x}\right)\cos(k\Delta x) - 2\frac{c\Delta t}{\Delta x} + 2\left(\frac{c\Delta t}{\Delta x}\right)^2 - 2\left(\frac{c\Delta t}{\Delta x}\right)^2\cos(k\Delta x)\\
+        &= 1 + 2\left(\frac{c\Delta t}{\Delta x}\right)\left[\frac{c\Delta t}{\Delta x} - 1 - \frac{c\Delta t}{\Delta x}\cos(k\Delta x) + \cos(k\Delta x)\right]\\
+        &= 1 + 2\left(\frac{c\Delta t}{\Delta x}\right)\left[\left(\frac{c\Delta t}{\Delta x} - 1\right) - \cos(k\Delta x)\left(\frac{c\Delta t}{\Delta x} - 1\right)\right]\\
+        &= 1 + 2\left(\frac{c\Delta t}{\Delta x}\right)\left(\frac{c\Delta t}{\Delta x} - 1\right)[1 - \cos(k\Delta x)] \leq 1\\
+        &\implies 2\left(\frac{c\Delta t}{\Delta x}\right)\left(\frac{c\Delta t}{\Delta x} - 1\right)[1 - \cos(k\Delta x)] \leq 0
+    \end{align*}
+    which is satisfied whenever $0 \leq \frac{c\Delta t}{\Delta x} \leq 1$. Thus the scheme is conditionally stable whenever
+    \[\nu := \frac{c\Delta t}{\Delta x} \leq 1\]
+    as desired.
+
+
+
+    \pagebreak
+\end{itemize} 
+
+\end{document}
