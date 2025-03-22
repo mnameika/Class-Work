@@ -1,0 +1,268 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{empty}
+
+
+\title{Problem Set 3 (Analysis)}
+\author{Michael Nameika}
+\date{March 2022}
+
+\begin{document}
+
+\maketitle
+\begin{enumerate}
+    \item Let $(X,d)$ be a metric space and $A, B \subseteq X$. A point $p \in X$ is called an \textbf{exterior point} of $A$ provided there is an open ball $B_r(p)$ contained in $X \setminus A$.
+    
+    A point $p \in X$ is called a \textbf{boundary point} of $A$ provided every open ball $B_r(p)$ contains a point in $A$ and a point in $X \setminus A$.
+    
+    Denote respectively, by $A^{\circ}$, $A'$, ext($A$), and bd($A$), the set of interior, limit, exterior, and boundary points of $A$.
+    \begin{enumerate}
+        \item Prove the following:
+        \begin{enumerate}
+            \item $(A \cap B)^{\circ} = A^{\circ} \cap B^{\circ}$
+            
+            Proof: First let $x \in (A \cap B)^{\circ}$. By definition, there exists an open ball of radius $r > 0$ around $x$ that is contained complete in $A \cap B$. That is, 
+            \[B_r(x) \subseteq (A \cap B)\]
+            Then by definition of set intersection, we have that $B_r(x) \subseteq A$ and $B_r(x) \subseteq B$. Then by definition, $x$ is in the interior of $A$ and $B$. Thus, $x \in A^{\circ} \cap B^{\circ}$. So we have
+            \[(A \cap B)^{\circ} \subseteq A^{\circ} \cap B^{\circ}\]
+            
+            Now let $x \in A^{\circ} \cap B^{\circ}$. That is, there exists an $r_1, r_2 > 0$ such that $B_{r_1}(x) \subseteq A$ and $B_{r_2}(x) \subseteq B$. Let $r = \min{\{r_1,r_2\}}$. Then $B_r(x) \subseteq A$ and $B_r(x) \subseteq B$. So $B_r(x) \subseteq A \cap B$ and by definition of interior points, $x \in (A \ cap B)^{\circ}$. So we have
+            \[A^{\circ} \cap B^{\circ} \subseteq (A \cap B)^{\circ}\]
+            
+            And by double inclusion, we have that 
+            \[(A \cap B)^{\circ} = A^{\circ} \cap B^{\circ}\]
+            
+            \item $(A \cup B)' = A' \cup B'$
+            
+            Proof: First let $x \in (A \cup B)'$. That is, $x$ is a limit point of $A \cup B$. That is, for any $r > 0$, the open ball $B_r(x)$ contains at least one point in $A \cup B$ other than $x$. without loss of generality, assume that this point is in $A$. Then by definition, $x$ is a limit point for $A$, and thus, $x \in A'$. By definition of set union, we also have that $x \in A' \cup B'$. Now we have 
+            \[(A \cup B)' \subseteq A' \cup B'\]
+            
+            Now let $x \in A' \cup B'$. That is, $x$ is either a limit point of $A$ or a limit point of $B$. Without loss of generality, assume that $x$ is a limit point for $A$. That is, for any $r > 0$, the open ball $B_r(x)$ contains some point $y \neq x$, $y \in A$. By definition of set union, $y \in A \cup B$, so by definition, $x \in (A \cup B)'$. Then we have 
+            \[A' \cup B' \subseteq (A \cup B)'\]
+            By double inclusion, we have
+            \[(A \cup B)' = A' \cup B'\]
+            
+            \item $A \setminus \text{bd}(A) = A^{\circ}$
+            
+            Proof: First let $x \in A \setminus \text{bd}(A)$. By definition of set difference, $x \in A$ but $x \notin \text{bd}(A)$. By definition of boundary points, since $x$ is not a boundary point, we have that every open ball of $x$ will not contain points in and out of $A$. So either every open ball around $x$ is entirely contained in $A$ or entirely contained in $X \setminus A$. Well, since $x \in A$, every open ball of $x$ is in $A$. So by definition, $x$ is an interior point of $A$. Thus, $x \in A^{\circ}$, so 
+            \[A \setminus \text{bd}(A) \subseteq A^{\circ}\]
+            
+            Now let $x \in A^{\circ}$. Then by definition, every open ball around $x$ is contained in $A$. So $x \in A$, and since every open ball of $x$ is in $A$, $x$ cannot be a boundary point, hence $x \in A \setminus \text{bd}(A)$. So we have
+            \[A^{\circ} \subseteq A \setminus \text{bd}(A)\]
+            And by double inclusion,
+            \[A \setminus \text{bd}(A) = A^{\circ}\]
+            
+            \item bd($A$) is a closed set in $X$
+            
+            Proof: Consider $B = (\text{bd}(A))^c$. By definition, we have for $x \in B$, $B_r(x)$ will not contain points in both $A$ and $X \setminus A$ for some $r > 0$. That is, $B_r(x)$ is either in $A$ or $X \setminus A$. Without loss of generality, assume that $B_r(x) \subseteq A$ for some $r > 0$. Now if $B_r(x)$ contains some $y \in \text{bd}(A)$, consider the open ball $B_{r/2}(x)$. If this open ball contains a boundary point of $A$, continue reducing the radius by half until no boundary points are contained. Then we will have an open ball contained only in $A$, and so $B$ is open. 
+            
+            Thus, bd($A$) is a closed set in $X$.
+            
+            \item $A^{\circ} \cup \text{bd}(A) = A \cup A'$. Both define the closure $\overline{A}$.
+            
+            Proof: First let $x \in A^{\circ} \cup \text{bd}(A)$. Consider the following cases:
+            
+            Case 1: $x \in A^{\circ}$. Then $x \in A$ by definition, so by definition of set union, $x \in A \cup A'$ and $x \in A^{\circ} \cup \text{bd}(A)$. So we have 
+            \[A^{\circ} \cup \text{bd}(A) \subseteq A \cup A'\]
+            
+            Case 2: $x \in \text{bd}(A)$. By definition, for any $\epsilon > 0$, $B_{\epsilon}(x)$ contains points both in $A$ and $X \setminus A$. If $x \in A$, then we have $A^{\circ} \cup \text{bd}(A) \subseteq A \cup A'$. If $x \notin A$,by definition, $x$ is also a limit point of $A$, and so $x \in A'$. By definition of set unions, $x \in A \cup A'$. So $A^{\circ} \cup \text{bd}(A) \subseteq A \cup A'$.
+            
+            Now let $x \in A \cup A'$. Consider the following cases:
+            
+            Case 1: $x \in A$. If $A$ is open, we have $x \in A^{\circ}$. If $A$ is closed, then $x \in A^{\circ}$ or $x \in \text{bd}(A)$. If $A$ is neither open nor closed, we still have $x \in A^{\circ}$ or $x \in \text{bd}(A)$ since possibly $\text{bd}(A) \subset A$. Then $x \in A^{\circ} \cup \text{bd}(A)$, so
+            \[A \cup A' \subseteq A^{\circ} \cup \text{bd}(A)\]
+            
+            Case 2: $x \in A'$. That is, for any $r > 0$, $B_r(x)$ contains points in $A$ different from $x$. Notice if $x \in \text{bd}(A)$, by definition of the boundary, this statement is satisfied. Additionally, if $x \in A^{\circ}$, the above statement is also satisfied. 
+            
+            So we have
+            \[A \cup A' \subseteq A^{\circ} \cup \text{bd}(A)\]
+            And by double inclusion,
+            \[A \cup A' = A^{\circ} \cup \text{bd}(A)\]
+        \end{enumerate}
+        
+        \item Prove that if either A is open or it is closed, then $(bd(A))^{\circ} = \emptyset$. Give an example which shows that this assertion does not hold if $A$ is neither open nor closed.
+        
+        Proof: Let $A$ be a set that is either open, or closed. Assume by way of contradiction that $(bd(A))^{\circ} \neq \emptyset$. Let $x \in (\text{bd}(A))^{\circ}$. Then by definition of interior, there exists an open ball of radius $r$ such that $B_r(x) \subseteq \text{bd}(A)$. By definition of boundary, we have that $B_r(x)$ contains at least one point $p \in X \setminus A$. Let $d(x,p) = r' < r$ and consider $R = r - r'$, and form an open ball of radius $R$ around $p$, $B_R(p) \subseteq B_r(x)$, which contains no points in the boundary, contradicting that $B_r(x) \subseteq \text{bd}(A)$.
+        
+        Now consider $\mathbb{Q}$, which is neither open nor closed in $\mathbb{R}$ on the standard metric. Notice that $\text{bd}(\mathbb{Q}) = \mathbb{R}$, and so $(\text{bd}(\mathbb{Q}))^{\circ} = (\mathbb{R})^{\circ} = \mathbb{R}$.
+        
+    \end{enumerate}
+     
+     \item Let $(X,d)$ be a metric space and $A \subset X$.
+     \begin{enumerate}
+         \item Prove that $\overline{A}$ is the closure of $A$ if and only if $\overline{A}$ is the intersection of all closed subsets of $X$ containing $A$.
+         
+         Proof: Let $K_{\lambda}$ be the collection of all $X$-closed sets containing $A$ and consider the intersection of all $K_{\lambda}$:
+         \[K = \bigcap_{\lambda} K_{\lambda}\]
+         Since each $K_{\lambda}$ is closed, $K$ is also closed. And since $A \subseteq K_{\lambda}$ for all $\lambda$, $\overline{A} \subseteq K$.
+         
+         Now, since $\overline{A}$ is by definition a closed set that contains $A$, we have that $\overline{A} \in \{K_{\lambda}\}$. Thus,
+         \[K \subseteq \overline{A}\]
+         And by double inclusion, we have that 
+         \[\overline{A} = \bigcap_{\lambda} K_{\lambda}\]
+         
+         \item Show that $x \in \overline{A}$ if and only if $\inf_{y \in A} d(x,y) = 0$.
+         
+         Proof: Let $x \in \overline{A}$. We wish to show $\inf_{y \in A} d(x,y)$. Since $x \in \overline{A}$, $x \in A \cup A'$. If $x \in A$, $\inf_{y \in A} d(x,y)$ is obvious. 
+         
+         Now consider the case where $x \in A'$. By definition, for every $\epsilon > 0$, $B_{\epsilon}(x)$ contains a point in $A$. Then $0 < d(x,y) < \epsilon$. 
+         \[\ 0 \leq \inf_{y \in A} d(x,y) \leq \epsilon\]
+         Assume by way of contradiction that $inf_{y \in A} d(x,y) = \epsilon$
+         But since $x$ is a limit point of $A$, we have that the open ball of radius $\epsilon / 2$ will contain some $x_0 \in A$, thus 
+         \[d(x,x_0) < \epsilon / 2\]
+         A contradiction
+        so we have
+        \[\inf_{y \in A} d(x,y) = 0\]
+        Now assume that $\inf_{y \in A} d(x,y) = 0$. This is obvious if $x \in A$. We wish to show this to be true for $x \in A'$. 
+        
+        By definition of a limit point, for any $\epsilon > 0$, we have that $B_{\epsilon}(x)$ contains one point other than $x$ in $A$. That is, $B_{\epsilon}(x)$ contains a point in $A$ other than $x$. Assume by way of contradiction that $inf_{y \in A}d(x,y) = \epsilon$. But since $x$ is a limit point, we have that $B_{\epsilon / 2}(x)$ contains some point $x_0 \in A$. That is, $d(x,x_0) < \epsilon / 2$, a contradiction. So if $x \in A'$, we have that $inf_{y \in A} d(x,y) = 0$.
+        
+        \item Define the diameter $d(A) = \sup_{x,y \in A} d(x,y)$. Note that $d(A) < \infty$ if $A$ is bounded and $d(A) = \infty$ if $A$ is unbounded. Show that $d(A) = d(\overline{A})$.
+        
+        Proof: Consider the case where $d(A) = \infty$. Then $d(\overline{A}) = \infty$ and so $d(A) = d(\overline{A})$. Now consider the case where $A$ is closed. Then $A$ is equal to its own closure, so $d(\overline{A}) = d(A)$. Now consider the case where $A$ is not closed. Then there exists a limit point $x \in A'$ such that $x \notin A$. Then for any $\epsilon > 0$, there exists $y \in A$ such that $d(x,y) < \epsilon$. Then $\epsilon$ is an upper bound for $d(x,y)$. That is, 
+        \[\sup d(x,y) \leq \epsilon\]
+        Define an open ball of radius $d(A)$ and let $z \in B_{d(A)})(x)$. Then $d(x,z) < d(A)$. So $\sup d(x,y) \leq d(A)$, and thus $d(\overline{A}) \leq d(A)$, and clearly, $d(A) \leq d(\overline{A})$, so we have 
+        \[d(\overline{A}) = d(A)\]
+     \end{enumerate}
+    
+    \item For a metric space $(X,d)$, determine in each of the following cases whether the given subset $A \subseteq X$ is open, closed, or neither open nor closed in $X$. Rigorously justify your answer. 
+    \begin{enumerate}
+        \item The set of integers $\mathbb{Z} \subset \mathbb{R}$
+        
+        $\mathbb{Z}$ is closed. To see this, notice that $\mathbb{R} \setminus \mathbb{Z}$ = $\ldots \cup (-1,0) \cup (0,1) \cup \ldots$. For any $x \in \mathbb{R} \setminus \mathbb{Z}$, we can find an open ball around $x$ that is contained in $\mathbb{R} \setminus \mathbb{Z}$.
+        
+        \item $A = \{(x,y) \in \mathbb{R}^2 | y = x^2, x\in \mathbb{Q}\}$
+        $A$ is neither open nor closed. Notice that $(0,0) \in A$ and consider an open ball around $(0,0)$ of radius $1 > \epsilon > 0$. By density of the irrationals, there exists an irrational number $p \in (-\epsilon, \epsilon)$. Since $\epsilon < 1$, $p < 1$, so $p^2 < 1$, and so $(p, p^2) \in B_{\epsilon}((0,0))$.
+        
+        That is, there exists an element in $B_{\epsilon}((0,0))$ not in $A$. Then $A$ is not open.
+        
+        Now consider $A^c = \{(x,y) \in \mathbb{R}^2 | y = x^2, x \in \mathbb{R} \setminus \mathbb{Q}\}$. Using the density of the rationals, and the same argument as above, we can see that $A^c$ is not open. That is, $A$ is neither open nor closed.
+        
+        \item $A = \{(x,y,z) \in \mathbb{R}^3 | x^2 + y^2 + z^2 + 2z = 0\}$
+        $A$ is closed.
+        
+        Notice that $x^2 + y^2 + z^2 + 2z = 0$ can be rewritten as $x^2 + y^2 + (z+1)^2 = 1$. That is,
+        \[A = \{(x,y,z) \in \mathbb{R}^3 | x^2 + y^2 + (z+1)^2 = 1\}\]
+        Notice that $A$ is a sphere of radius 1 centered around the point $(0,0,-1)$. Consider the closed ball of radius 1 centered at $(0,0,-1)$, $\overline{B}_{1}((0,0,-1))$. Since $\overline{B}_1$ is closed, $\mathbb{R}^3 \setminus \overline{B}_1$ is open. Now, consider $(\overline{B}_1)^{\circ}$ which is open by definition. Notice that $A = \overline{B}_1 \setminus (\overline{B}_1)^{\circ}$.
+        
+        So $A$ is closed.
+        
+        \item $X = C[a,b]$ with $d(f,g) = \sup_{x \in [a,b]} |f(x) - g(x)|$. $A = \{f \in X | 0 < f(x) < 1, x \in [a,b]\}$
+        
+        $X$ is open. Let $f \in X$ and consider an open ball of radius $r$ centered at $f$: 
+        \[B_r(f)\]
+        and let $g \in B_r(f)$. That is, $d(f,g) < r$. Let $r' = r - d(f,g) > 0$ and let $h \in B_{r'}(g)$. Notice
+        \[d(f,h) \leq d(f,g) + d(g,h) < d(f,g) + r' = r\]
+        so
+        \[d(f,h) < r\]
+        and thus $h \in B_r(f)$. Then by definition, $X$ is open.
+        
+        \item $(X,d)$ same as in (d). $A = \{f \in X | \int_a^b f(x) dx = 0\}$.
+        
+        $X$ is closed. Let $\{f_n\}$ be a Cauchy sequence in $X$, that converges to some $f$. We wish to show that $f \in X$. Since $\{f_n\}$ is a Cauchy sequence, we have that for any $\epsilon > 0$, there exists a natural number $n > N \in \mathbb{N}$ such that 
+        \[d(f_n, f) < \epsilon\]
+        By the definition of this metric,
+        \[d(f_n, f) = \sup_{x \in [a,b]}|f_n(x) - f(x)| < \epsilon\]
+        Since $|f_n(x) - f(x)| < \epsilon$ for any $x \in [a,b]$, we have that $f_n$ converges to $f$ uniformly on $[a,b]$. Then by the dominated convergence theorem,
+        \[\lim_{n \to \infty} \int_a^b f_n(x) dx = \int_a^b(\lim_{n \to \infty} f_n(x))dx\]
+        And since $\{f_n\}$ is a sequence in $X$, we have that
+        \[\int_a^b f_n(x) dx = 0\]
+        thus 
+        \[\lim_{n \to \infty} \int_a^b f_n(x) dx = \lim_{n \to \infty} (0) = 0\]
+        so
+        \[\int_a^b (\lim_{n \to \infty} f_n(x))dx = \int_a^b f(x) dx = 0\]
+        so $f \in X$. Thus, $X$ is closed.
+        
+        \item $X = \mathbb{R}^2$ and let $f: \mathbb{R} \to \mathbb{R}$ be continuous. $A = \{(x,y) \in X | y = f(x)\}$.
+        
+        $A$ is closed. Consider a Cauchy sequence in $\mathbb{R}$, $\{x_n\}$. Since $\mathbb{R}$ is complete, we have that $\{x_n\} \to x \in \mathbb{R}$. Define a sequence of real numbers $\{y_n\} = \{f(x_n)\}$. Since $f$ is continuous, we have that 
+        \[y = \lim y_n = \lim f(x_n)  = f(\lim x_n) = f(x)\]
+        That is,
+        \[\lim y_n = f(x)\]
+        We have that $(x,y) \in A$, so $A$ is closed.
+    \end{enumerate}
+    
+    \item 
+    \begin{enumerate} 
+    \item Suppose $(X,d)$ is a complete metric space and $Y \subset X$ is nonempty. Prove that $(Y,d)$ is complete if and only if $Y$ is a closed subset of $X$.
+    
+    Proof: First assume that $(Y,d)$ is complete. We wish to show that $Y$ is closed. Assume by way of contradiction that a limit point $y$ of $Y$ is not in $Y$. That is, $y \in Y'$ but $y \notin Y$. By definition of limit points, we have that for any $\epsilon > 0$, the open ball $B_{\epsilon}(y)$ contains at least one other point in $Y$. Consider a sequence of open balls of radius $\frac{1}{n}$, and let $y_n \in B_{1/n}(y)$ be such that $y_n \in Y$. Then we have $d(y,y_n) < \frac{1}{n}$. Thus, the sequence $\{y_n\}$ converges to $y$. And since $(Y,d)$ is complete, we must have that $y \in Y$, contradicting our assumption that $y \notin Y$. Thus, $Y$ is closed.
+    
+    Now assume that $Y$ is a closed subset of $X$. We wish to show that $(Y,d)$ is complete. Since $Y$ is closed, $Y$ contains all of its limit points. Now consider a Cauchy sequence in $Y$, $\{y_n\}$. Since $Y$ is a subset of $X$ and $(X,d)$ is a closed metric space, we have that $y_n \to y$ for some $y \in X$. And since $Y$ is closed, $Y$ contains all of its limit points, and by definition, $y$ is a limit point of $Y$, so $y \in Y$. That is, any Cauchy sequence in $Y$ converges to some value in $Y$. Thus, $(Y,d)$ is complete.
+    
+    \item Suppose $(X,d)$ and $(Y,d')$ are metric spaces and $f: X \to Y$, $g: X \to Y$ are continuous functions. Prove that the set $A = \{x \in X | f(x) = g(x)\}$ is closed.
+    
+    Proof: First note that if $f(x) \neq g(x)$ for all $x \in X$, $A = \emptyset$ and is closed by definition. If $A$ contains finitely many points, then each point in $A$ is an isolated point, and so $A$ has no limit points, and so contains its limit points vacuously, so $A$ is closed. Now assume that $A \neq \emptyset$ and let $x_0 \in X$ and define a sequence $\{x_n\}$ in $A$ such that $d(x,x_0) < \frac{1}{n}$. Then $\{x_n\}$ converges to $x_0$, and since $f$ and $g$ are continuous, we have that $\lim f(x_n) = f( \lim x_n) = f(x_0)$ and $\lim g(x_n) = g( \lim x_n) = g(x_0)$. And since $\{x_n\}$ is a sequence in $A$, we have that $g(x_0) = f(x_0)$, so $x_0 \in A$. Thus, $A$ is closed by definition.
+    
+    
+    \end{enumerate}
+    
+    \item Let $(X,d)$ be a metric space and $Y \subset X$.
+    \begin{enumerate}
+        \item Prove that $Z \subseteq Y$ is closed if and only if there exists a closed subset $A \subseteq X$ such that $Z = A \cap Y$.
+        
+        Proof: To prove this, I will prove the following two lemmas. Also denote $B_{r,Y}(x)$ as an open ball of radius $r$ centered at $x$ in the set $Y$.
+        \begin{center}
+            Lemma 1: Let $(X,d)$ be a metric space and $Y$ a subspace of $X$. Let $z \in Y$ and $r > 0$. Then $B_{r,Y}(z) = B_{r,X}(z) \cap Y$
+        \end{center}
+        Proof of Lemma 1: Let $z \in Y$ and $B_{r,Y}(z)$ and $B_{r, X}(z)$ be open balls of radius $r$ centered at $z$ in $Y$ and $X$, respectively. By definition of open balls,
+        \[B_{r,X}(z) = \{x \in X | d(x,z) < r\}\]
+        Now consider $B_{r,X}(z) \cap Y$:
+        \[B_{r,X}(z) \cap Y = \{x \in X | d(x,z) < r\} \cap Y\]
+        \[ = \{x \in Y | d(x,z) < r\}\]
+        \[ = B_{r,Y}(z)\]
+        
+        \begin{center}
+            Lemma 2: $Z$ is open in $Y$ if and only if there exists an open set $G \subseteq X$ such that $Z = G \cap Y$
+        \end{center}
+        Proof of Lemma 2: Let $Z$ be open in $Y$. We wish to show that $Z = G \cap Y$ for some open set $G$ in $X$. Since $Z$ is open, by definition, $Z$ is the union of all open sets contained in $Z$. Consider an open ball around a point $z \in Z$. Since $Z \subseteq Y$, this is also an open ball in $Y$, call it $B_{r,Y}(z)$ where $r$ depends on $z$. Then
+        \[Z = \bigcup_{z \in Z} B_{r,Y}(z)\]
+        Since $Y \subseteq X$, each $B_{r,Y}(z) \subseteq X$, and by Lemma 1, we have that $B_{r,Y}(z) = B_{r,X}(z) \cap Y$. Thus
+        \[Z = \bigcup_{z \in Z} (B_{r,X}(z) \cap X)\]
+        \[ = (\bigcup_{z \in Z} B_{r, X}(z)) \cap X\]
+        Let $G = \bigcup_{z \in Z} B_{r,X}(z)$. Since $G$ is a union of open balls in $X$, $G$ is also an open set in $X$. Thus
+        \[Z = G \cap X\]
+        
+        Now assume that $Z = G \cap X$ for some open set $G \subseteq X$. Let $z \in G$, then $z \in Z$, and so there exists an open ball $B_{r,X}(z)$ such that, by Lemma 1,
+        \[B_{r, Y}(z) = B_{r,X} \cap Y\]
+        \[\subseteq G \cap X = Z\]
+        for an arbitrary point in $Z$, there exists an open ball around $z$ contained in $Z$. Thus, $Z$ is open.
+        
+        Now, to prove the main problem, first let $Z \subseteq Y$ be closed. Then by definition, $Y \setminus Z$ is open. Thus, for some open set $G \in X$, we have by Lemma 2 that 
+        \[Y \setminus Z = G \cap Y\]
+        Now take the complement of the above with respect to $X$:
+        \[X \setminus (Y \setminus Z) = (X \setminus G) \cup (X \setminus Y)\]
+        \[Z \cup (X \setminus Y) = (X \setminus G) \cup (X \setminus Y)\]
+        Now intersect each side with $Y$:
+        \[(Z \cup (X \setminus Y)) \cap Y = ((X \setminus G) \cup (X \setminus Y)) \cap Y\]
+        \[Z \cap Y = ((X \setminus G) \cap Y) \cup ((X \setminus Y) \cap Y)\]
+        \[Z = ((X \setminus G) \cap Y) \cup \emptyset\]
+        \[Z = (X \setminus G) \cap Y\]
+        Since $G$ is open in $X$, $X \setminus G$ is closed in $X$. Let $A = X \setminus G$. Then
+        \[Z = A \cap Y\]
+        for a closed set $A \subseteq X$.
+        
+        \item Show that every subset $Z \subseteq Y$ that is closed in $Y$ is also closed in $X$ if and only if $Y$ is a closed subset of $X$.
+        
+        Proof: First suppose that every closed subset of $Y$ is closed in $X$. Well, $Y$ is a closed subset of itself, so by assumption, $Y$ must be closed in $X$. Now assume that $Y$ is closed in $X$ and consider a closed subset $Z \subseteq Y$. By part (a), we have that for some closed subset $A \subseteq X$,
+        \[Z = A \cap Y\]
+        Since both $A$ and $Y$ are closed in $X$, and $Z$ is an intersection of closed sets in $X$, $Z$ must also be closed in $X$.
+        
+        \item Let $X = \mathbb{R}^2$ with the Euclidean metric, $Y = \{(x,0) | x\in \mathbb{R}\} \subset X$ with the induced metric, and $Z = \{(x,0)| 0 < x < 1\} \subset Y$. Show that $Z$ is an open subset of $Y$ but is \textit{not} an open subset of $X$.
+        
+        Proof: Let $x \in Z$ and $r > 0$. Consider the open ball of radius $1/2$ in $X$ centered at $(1/2,0)$ denoted by $B_{1/2}((1/2,0))$. Notice that 
+        \[B_{1/2} \cap Y = Z\]
+        and so by Lemma 2, we have that $Z$ is an open set in $Y$.
+        
+        To see that $Z$ is not open in $X$, consider the point $(x,y) = (1/2, 0) \in Y$ and consider an open ball of radius $r>0$, denoted by $B_r((1/2,0))$. Notice that the point $(1/2, r/2) \in B_r((1/2,0))$, but $(1/2, r/2) \notin Y$, so $Y$ is not open in $X$.
+    \end{enumerate}
+\end{enumerate}
+
+
+\end{document}

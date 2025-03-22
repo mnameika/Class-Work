@@ -1,0 +1,351 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+
+
+\title{Homework 1 (Analysis)}
+\author{Michael Nameika}
+\date{January 2022}
+
+\begin{document}
+
+\maketitle
+
+\section{}
+(a) Let $\{a_n\}$ be a sequence of real numbers such that $|a_{n+1}-a_n| < 3^{-n}$ for all $n \in \mathbb{N}$. Prove that ${a_n}$ is a convergent sequence.
+\newline\newline
+Proof: We will show that ${a_n}$ satisfies the Cauchy criterion. First, fix $\epsilon > 0$. Now take $m>n>N\in \mathbb{N}$ and consider $|a_m-a_n|$.
+\newline\newline
+Notice that 
+\begin{center}
+    $|a_m-a_n| = |a_m-a_{m-1}+a_{m-1}- \ldots + a_{n+1} - a_n|$
+\end{center}
+And by the triangle inequality,
+\begin{center}
+    $|a_m-a_{m-1}+a_{m-1}- \ldots + a_{n+1} - a_n| \leq |a_m-a_{m-1}| + |a_{m-1} - a_{m-2}| + \ldots + |a_{n+1} - a_n|$
+    \newline\newline
+    $< 3^{-(m-1)} + 3^{-(m-2)} + \ldots + 3^{-n}$\
+    \newline\newline
+    \[=\sum_{k=n}^{m-1}\frac{1}{3^k} \]
+    \[=\sum_{k=0}^{m-1}\frac{1}{3^k} - \sum_{k=0}^{n-1}\frac{1}{3^k}\]
+    \[=\frac{1-\frac{1}{3^m}}{1-\frac{1}{3}} - \frac{1-\frac{1}{3^n}}{1-\frac{1}{3}}\]
+    \[=\frac{3}{2}(1-\frac{1}{3^m}-1+\frac{1}{3^n})\]
+    \[=\frac{3}{2}(\frac{1}{3^n} - \frac{1}{3^m})\]
+    \[=\frac{1}{2}(\frac{1}{3^{n-1}} - \frac{1}{3^{m-1}})\]
+    
+\end{center}
+And since $m > n$, 
+
+\[3^{-(n-1)} > 3^{-(m-1)}\]
+Then
+\[\frac{1}{3^{n-1}} - \frac{1}{3^{m-1}} > 0  \]
+
+Additionally, since $m>n>N$, 
+\[3^{-(N-1)}>3^{-(m-1)}>3^{-(n-1)}>0 \]
+So
+\[0<\frac{1}{2}(\frac{1}{3^{n-1}} - \frac{1}{3^{m-1}}) < \frac{1}{2}(\frac{1}{3^{n-1}})<\frac{1}{2}(\frac{1}{3^{N-1}})\]
+Now let $\epsilon = \frac{1}{2}(\frac{1}{3^{N-1}})$
+\newline
+Now we have 
+\[|a_m-a_n|<\epsilon\]
+Satisfying the Cauchy criterion.
+\newline
+$\therefore {a_n}$ is a convergent sequence.
+\begin{flushright}
+    $\square$
+\end{flushright}
+
+(b) Let $\{a_n\}$ and $\{b_n\}$ be real sequences such that $|a_n-b_n| \leq \frac{1}{n}$ for all $n \in \mathbb{N}$, and $a_n \rightarrow L$. Then prove that $b_n \rightarrow L$.
+\newline\newline
+Proof: First note that by definition of convergence, for $\epsilon > 0$, and $n>N\in \mathbb{N}$,
+\[|a_n-L| < \epsilon\]
+We wish to show that for $n>N$,
+\[|b_n-L| < \epsilon ^*\]
+for some $\epsilon ^* > 0$
+\newline\newline
+Begin by noticing that 
+\[|b_n - L| = |b_n - a_n + a_n - L|\]
+And by the triangle inequality,
+\[|b_n-a_n+a_n-L| \leq |b_n-a_n| + |a_n-L|\]
+\[=|a_n-b_n| + |a_n-L|\]
+And assume that $n>N$, then
+\[|a_n-b_n| + |a_n-L| < |a_n-b_n| + \epsilon \]
+\[\leq \frac{1}{n} + \epsilon\]
+And since $n>N$, $\frac{1}{n} < \frac{1}{N}$, so
+\[\frac{1}{n}+\epsilon < \frac{1}{N} + \epsilon \]
+Let $\epsilon ^* = \frac{1}{N} + \epsilon > 0$
+\newline\newline
+Finally, we have
+\[|b_n-L|< \epsilon ^*\]
+and since $\epsilon ^*$ can be made arbitrarily small, by definition of convergence, $b_n \rightarrow L$.
+\begin{flushright}
+    $\square$
+\end{flushright}
+
+\section{}
+2. (a) A sequence of real numbers $\{a_n\}$ is defined by $a_1 = 0$ and $a_{n+1} = \sqrt{3a_n+4}, n \geq 1$. Prove that ${a_n}$ is a convergent sequence and find $\lim_{n \to \infty} a_n$. (Hint: Show that $a_n \leq 4 $ for all $n \geq 1$).
+\newline\newline
+Proof: First I will show $a_n \leq 4$ for all $n \geq 1$ by induction. The base case is obvious ($a_1 = 0 \leq 4)$. Assume this relationship to be true up to some natural number $k$. We must show the relation also holds for $k+1$.
+\newline
+By the induction assumption,
+\[a_k \leq 4\]
+\[3a_k \leq 12\]
+\[3a_k+4 \leq 16\]
+Then by the definition of $a_{n+1}$,
+\[a_{k+1}^2 \leq 16\]
+\[|a_{k+1}| \leq 4\]
+Thus $a_n \leq 4$ for all $n \geq 1$.
+\newline
+Now I will show ${a_n}$ is a decreasing sequence by induction.
+\newline
+Base case:
+\[a_2 = \sqrt{3*0+4} = \sqrt{4} = 2 \geq 0 = a_1\]
+Now assume this relationship to be true up to some natural number $k$. We must show the relationship also holds for $k+1$. By the induction assumption, 
+\[a_k \geq a_{k-1}\]
+\[3a_k \geq 3a_{k-1}\]
+\[3a_k + 4 \geq 3a_{k-1} + 4\]
+\[\sqrt{3a_k+4} \geq \sqrt{3a_{k-1}+4}\]
+\[a_{k+1} \geq a_k\]
+Which tells us that ${a_n}$ is an increasing sequence, provided $a_k \geq -\frac{4}{3}$ for all $k$. 
+\newline
+Notice that $a_1 = 0$, and ${a_n}$ is increasing for all non-negative terms, so we have that ${a_n}$ is an increasing sequence. Now Since ${a_n}$ is increasing, bounded above by $4$, and clearly bounded below by $0$, by the Monotone Convergence Theorem, ${a_n}$ is a convergent sequence. 
+\begin{flushright}
+    $\square$
+\end{flushright}
+Now that we have established that ${a_n}$ is a convergent sequence, let $\lim_{n \to \infty} a_n = a$. We must find $a$. Begin by applying the limit to the recursion relation:
+\[\lim_{n \to \infty}a_{n+1} = \lim_{n \to \infty} \sqrt{3a_n+4}\]
+\[a = \sqrt{3a+4}\]
+\[a^2 = 3a+4\]
+\[a^2-3a-4 = 0\]
+\[(a-4)(a+1) = 0\]
+So either $a = 4$ or $a = -1$. But since $a_n \geq 0$ for all $n$, we have that a=4. Thus, 
+\[\lim_{n \to \infty} a_n = 4\]
+(b) Define a sequence $\{x_n\}$ by $x_{n+1} = 1 - \sqrt{1-x_n}$, $n =$ 0,1,2, ... where $0 < x_0 < 1$. Find $x_2$ and $x_3$ in terms of $x_0$ and prove that the sequence $\{x_n\}$ converges.
+\newline\newline
+\[x_1 = 1 - \sqrt{1 - x_0}\]
+\[x_2 = 1 - \sqrt{1 - x_1} = 1 - \sqrt{1-(1-\sqrt{1-x_0})}\]
+\[= 1 - (1-x_0)^{\frac{1}{4}}\]
+\[x_3 = 1 - \sqrt{1-x_2} = 1 - \sqrt{1 - (1 - (1-x_0)^{\frac{1}{4}})}\]
+\[= 1 - (1-x_0)^{\frac{1}{8}}\]
+Proof: I will begin by showing $\{x_n\}$ is bounded. A simple induction argument will show 
+\[x_n = 1 - (1-x_0)^{\frac{1}{2^n}}\]
+Now consider $f_n(x_0) = 1 - (1 - x_0)^{\frac{1}{2^n}}$ on $0 < x_0 < 1$ and find its extreme values:
+\[\frac{df_n}{dx_0} = \frac{-1}{2^n}(1-x_0)^{\frac{1}{2^n}-1}(-1)\]
+\[= \frac{1}{2^n}(1-x_0)^{\frac{1}{2^n}-1}\]
+Notice that $\frac{df_n}{dx_0}$ contains no zeros on (0,1), so by the Extreme Value Theorem, we know that the extreme values must be at $x_0 = 0$ and $x_0 = 1$. Plugging these values into $f_n$:
+\[f_n(0) = 1 - \sqrt{1 - 0} = 1 - 1 = 0\]
+\[f_n(1) = 1 - \sqrt{1 - 1} = 1\]
+Now we have that $\sup f_n(x_0) = 1$ and $\inf f_n(x_0) = 0$, or in other words, $f_n(x_0)$ is bounded. Then $\{x_n\}$ is bounded. And notice that $\frac{df_n}{dx_0} \geq 0$, so $f_n(x_0)$ is increasing, then $\{x_n\}$ is increasing. Now by the Monotone Convergence Theorem, $\{x_n\}$ converges.
+\begin{flushright}
+    $\square$
+\end{flushright}
+
+\section{}
+3. (a) Let $\{a_k\}$ be a real sequence. Define $\sigma_n := \frac{a_1 + a_2 + \ldots + a_n}{n}$. If $\lim a_k = a$, prove that $\lim \sigma_n = a$. Show that the converse is false.
+\newline\newline
+Proof:We have $\lim{a_k} = a$, so by the definition of limits, for $\epsilon > 0$, $\exists N \in \mathbb{N}$ such that when $k > N$, 
+\[|a_k - a |< \epsilon\]
+We wish to show for some $\hat{\epsilon} > 0$, 
+\[|\sigma_n - a| < \hat{\epsilon} \: whenever \: n > N\]
+Well,
+\[|\sigma_n - a| = |\frac{a_1 + a_2 + \ldots + a_n}{n} - a|\]
+\[= |\frac{a_1 + a_2 + \ldots + a_n - na}{n}|\]
+\[= \frac{1}{n} |(a_1 - a) + (a_2 - a) + \ldots + (a_n - a)|\]
+\[\leq \frac{1}{n} (|a_1 - a| + |a_2 - a| + \ldots + |a_n - a|)\]
+\[< \frac{1}{n} (|a_1 - a| + |a_2 - a| + \ldots + |a_N - a| + (n-N)\epsilon)\]
+\[= \frac{1}{n} (|a_1 - a| + |a_2 - a| + \ldots + |a_N - a|)  + \frac{n-N}{n}\epsilon\]
+\[\leq \frac{1}{n}(|a_1 - a| + |a_2 - a| + \ldots + |a_N - a|) + \epsilon\]
+Now let $A = \max{\{|a_1 - a|, |a_2 - a|, \ldots, |a_N-a|\}}$. Now we have
+\[\frac{1}{n}(|a_1 - a| + |a_2 - a| + \ldots + |a_N - a|) + \epsilon \leq \frac{1}{n}(NA) + \epsilon\]
+\[= \frac{N}{n}A + \epsilon\]
+And by the Archimedean property, for $n$ large, $\frac{1}{n} < \epsilon^*$ for some $\epsilon^* > 0$. Now we have
+\[\frac{N}{n}A + \epsilon < NA\epsilon^* + \epsilon\]
+Now let $\hat{\epsilon} = NA\epsilon^* + \epsilon$, which can be made arbitrarily small. We finally have
+\[|\sigma_n - a| < \hat{\epsilon}\]
+And by the definition of the limit, $\lim{\sigma_n} = a$.
+\begin{flushright}
+    $\square$
+\end{flushright}
+Now consider $\{a_n\} = (-1)^n$. Then $\sigma_n = \frac{-1 + 1 -1 + 1 - \ldots + 1}{n}$. Notice that 
+\[\sigma_n = 0 \:n \:even\]
+\[\sigma_n = \frac{-1}{n} \:n \:odd\]
+Clearly,
+\[\lim{\sigma_n} = 0\]
+but $\lim{a_n}$ DNE. Thus, the converse is false.
+\begin{flushright}
+    $\square$
+\end{flushright}
+(b) For a real sequence $\{a_n\}$ define $d_n := a_{n+1} - a_n $ for $n \geq 1$. If $\lim nd_n = 0$ and the sequence $\{\sigma_n\}$ defined in part (a) converges, then prove that the sequence $\{a_n\}$ converges and $\lim a_n = \lim \sigma_n$. (Hint: Show that $\frac{1}{n}\sum_{k=1}^{n-1}kd_k = a_n - \sigma_n$ for $n > 1$).
+\newline\newline
+Proof: I will begin by showing that 
+\begin{equation}
+    \frac{1}{n}\sum_{k=1}^{n-1}kd_k = a_n - \sigma_n
+\end{equation}
+
+Using the definition of $\sigma_n$ in part a),
+\[a_n - \sigma_n = a_n - \frac{a_1 + a_2 + \ldots + a_n}{n}\]
+\[ = \frac{-a_1 - a_2 - \ldots + (n-1)a_n}{n}\]
+Now let's expand the left side of equation (1):
+\[\frac{1}{n}\sum_{k=1}^{n-1}kd_k = \frac{1}{n}(d_1 + 2d_2 + \ldots + (n-1)d_{n-1})\]
+\[ = \frac{1}{n}(a_2 - a_1 + 2a_3 - 2a_2 + \ldots + (n-1)a_{n})\]
+\[ = \frac{-a_1 - a_2 - \ldots + (n-1)a_{n}}{n}\]
+\[ = a_n - \sigma_n\]
+
+Now, since we are given that $\lim{nd_n} = 0$, from part a), we know that 
+\[\lim{(\frac{d_1+2d_2+\ldots+nd_n}{n})} = 0\]
+Now let's add and subtract $nd_n$ to the left side of (1):
+\[\frac{1}{n}\sum_{k=1}^{n-1}kd_k + nd_n - nd_n = a_n - \sigma_n\]
+Which simplifies to 
+\[\frac{1}{n}\sum_{k=1}^{n}kd_k - nd_n = a_n - \sigma_n\]
+Now apply the limit to each side:
+\[\lim{(\frac{1}{n}\sum_{k=1}^{n}kd_k)} - \lim{nd_n}= \lim{(a_n - \sigma_n)}\]
+Notice that 
+\[\frac{1}{n}\sum_{k=1}^{n}kd_k = \frac{d_1 + 2d_2 + 3d_3 + \ldots + nd_n}{n}\]
+And since 
+\[\lim{\frac{d_1 + 2d_2 + \ldots + nd_n}{n}} = 0,\]
+\[\lim{\frac{1}{n}\sum_{k=1}^{n} kd_k} = 0 \]
+Now we have
+\[-\lim{nd_n} = \lim{(a_n - \sigma_n)}\]
+And since $\lim{nd_n} = 0$,
+\[\lim{(a_n - \sigma_n)} = 0\]
+It is not entirely clear that $\{a_n\}$ converges. Assume by contradiction that $\{a_n\}$ diverges. And since $\{\sigma_n\}$ converges, say to $\sigma$, for $\epsilon > 0$,  $\exits n > N \in \mathbb{N}$, such that
+\[|\sigma_n - \sigma| < \epsilon\]
+Or, alternatively,
+\[\sigma - \epsilon < \sigma_n < \sigma + \epsilon\]
+And notice that 
+\[a_n + \sigma - \epsilon > a_n - \sigma_n > a_n - (\sigma - \epsilon) \]
+Now we have 
+\[0 = \lim{(a_n - \sigma_n)} > \lim{(a_n - (\sigma +\epsilon))}\]
+\[ = \lim{a_n} - \lim{\sigma + \epsilon}\]
+\[ = \lim{a_n} - (\sigma - \epsilon)\]
+\[ = + \infty\]
+So now we get 
+\[0 > +\infty\]
+A contradiction! Thus, $\{a_n\}$ must converge. In fact,
+\[\lim{(a_n - \sigma_n)} = 0\]
+\[\lim{a_n} - \lim{\sigma_n} = 0\]
+\[\lim{a_n} = \lim{\sigma_n}\]
+\begin{flushright}
+    $\square$
+\end{flushright}
+
+\section{}
+4. (a) Let $\{a_n\}$ be a strictly decreasing sequence of positive numbers. Assume $\sum_{n=1}^{\infty}a_n$ converges. Prove that $\lim na_n = 0$. (Hint: Use Cauchy convergence criterion for series).
+\newline\newline
+Proof: We have that $\sum_{n=1}^{\infty} a_n$ converges, so by Cauchy criterion for series, we have for $\epsilon > 0$, $\exists\: n>m>N \in \mathbb{N}$,
+\[|\sum_{k=1}^n a_k - \sum_{k=1}^m a_k| < \epsilon\]
+Or, equivalently,
+\[|\sum_{k=m+1}^n a_k| < \epsilon\]
+We also know that $\{a_n\}$ is a strictly decreasing sequence, so for $k = m+1, m+2. \ldots , n$, $a_n < a_i$ for all $i=k$. Then
+\[|\sum_{k=m+1}^n a_k| \geq |\sum_{k=m+1}^n a_n |\]
+\[= |a_n(n-m)|\]
+\[=|n a_n - ma_n|\]
+\[\geq |n a_n| - |ma_n|\]
+Additionally, by the test for divergence, we have that $\lim a_n = 0$, or by definition, for some $\epsilon^* > 0$, $n > N^* \in \mathbb{N}$,
+\[|a_n - 0| < \epsilon^*\]
+From above, we have that
+\[|n a_n| - |m a_n| < \epsilon\]
+\[|n a_n| < \epsilon + m|a_n|\]
+Now take $N^{max} = max\{N, N^*\}$ and assume $n > N^{max}$. Now we have
+\[|n a_n| < \epsilon + m \epsilon^*\]
+let $\hat{\epsilon} = \epsilon + m \epsilon^*$, which can get arbitrarily small. Now we have
+\[|n a_n| < \hat{\epsilon}\]
+\[|n a_n - 0| < \hat{\epsilon}\]
+And finally, by definition of limits, we have that $\lim n a_n = 0$.
+\begin{flushright}
+    $\square$
+\end{flushright}
+(b) Give an example of a strictly decreasing positive sequence $\{b_n\}$ such that $\lim_{n \to \infty} n b_n = 0$, but $\sum_{n=1}^{\infty} b_n \:\: diverges$. You must show the divergence of your example series.
+\newline\newline
+Consider $b_n = \frac{1}{n\ln{n}}$ for n = 2,3,... and $b_1 = 0$.
+Notice that 
+\[\lim_{n \to \infty} n b_n = \lim_{n \to \infty} \frac{n}{n\ln{n}}\]
+\[= \lim_{n \to \infty} \frac{1}{\ln{n}} = 0\]
+I will claim that $\sum_{n=1}^{\infty} b_n$ diverges. Quickly note that $\sum_{n=1}^{\infty} b_n = \sum_{n=2}^{\infty} b_n$ since $b_1 = 0$.
+\newline\newline
+Proof: Consider $f(x) = \frac{1}{x\ln{(x)}}$ on $x \geq 2$ and note that
+\[\int_2^{\infty} f(x) dx \leq \sum_{n=2}^{\infty} \frac{1}{n\ln{n}}\]
+Well,
+\[\int_2^{\infty}f(x)dx = \lim_{a \to \infty} \int_2^a \frac{1}{x\ln{x}}dx\]
+Now, let $u = \ln{x}$, then $du = \frac{1}{x} dx$ and the integral becomes
+\[\lim_{a \to \infty} \int_2^a \frac{1}{u} du\]
+\[=\lim_{a \to \infty} [\ln{|u|}]|_{\ln{2}}^{\ln{a}}\]
+\[=\lim_{a \to \infty}(\ln{(\ln{a})} - \ln{(\ln{2})})\]
+\[ = + \infty\]
+So by comparison, 
+\[\sum_{n=2}^{\infty} \frac{1}{n\ln{n}} \: diverges\] 
+\begin{flushright}
+    $\square$
+\end{flushright}
+
+\section{}
+5. (a) Use the Mean Value Theorem to show that $\frac{x}{1+x} \leq \ln{(1+x)} \leq x, \:\: x \geq 0$. Then set $x = \frac{1}{n}$ to obtain
+\[\frac{1}{n+1} \leq \ln{(1+\frac{1}{n})} \leq \frac{1}{n}\]
+Let $f(y) =\ln{(1+y)}$ and consider the interval $y \in [0, x], x > 0$. By the Mean Value Theorem, there exists a $c \in [0,x]$ such that
+\[\frac{f(x) - f(0)}{x - 0} = f'(c)\]
+Well, 
+\[f'(c) = \frac{1}{1+c}\]
+So now we have
+\[\frac{\ln{(1+x)}}{x} = \frac{1}{1+c}\]
+Notice since $c \geq 0$, $\frac{1}{1+c} \leq 1$. Now we have
+\[\frac{\ln{(1+x)}}{x} \leq 1\]
+\[\ln{(1+x)} \leq x\]
+Also notice that since $c \in [0,x]$, $x \geq c$, and 
+\[\frac{1}{1+c} \geq \frac{1}{1+x}\]
+Now,
+\[\frac{1}{1+x} \leq \frac{\ln{(1+x)}}{x}\]
+\[\frac{x}{1+x} \leq \ln{(1+x)}\]
+Putting these inequalities together, we have
+\[\frac{x}{1+x} \leq \ln{(1+x)} \leq x\]
+Now replace $x$ with $\frac{1}{n}$ to obtain
+\[\frac{\frac{1}{n}}{1+\frac{1}{n}} \leq \ln{(1+\frac{1}{n})} \leq \frac{1}{n}\]
+Which simplifies to 
+\[\frac{1}{n+1} \leq \ln{(1+\frac{1}{n})} \leq \frac{1}{n}\]
+
+
+(b) Define $\gamma_n = (1 + 1/2 + 1/3 + \ldots + 1/n) - \ln{n}$. Use part (a) to show that $\gamma_n \geq 0$ and that $\{\gamma_n\}$ is a decreasing sequence.
+\newline\newline
+Proof: Consider the sum
+\[\sum_{k=1}^{n-1} \ln{(1+\frac{1}{k})}\]
+And notice that 
+\[\ln{(1+\frac{1}{k})} = \ln{(\frac{k+1}{k})}\]
+\[= \ln{(k+1)} - \ln{k}\]
+Substituting this into the sum above, we get
+\[\sum_{k=1}^{n-1} (\ln{(k+1)} - \ln{k}) = \ln{2} - \ln{1} + \ln{3} - \ln{2} + \ldots + \ln{n} - \ln{(n-1)} \]
+\[= \ln{n}\]
+And by the inequality in part (a), 
+\[\sum_{k=1}^{n-1}(\ln{(k+1)}-\ln{k}) \leq \sum_{k=1}^{n-1} \frac{1}{k}\]
+\[\ln{n} \leq 1 + \frac{1}{2} + \ldots + \frac{1}{n-1}\]
+\[\ln{n} + \frac{1}{n} \leq 1 + \frac{1}{2} + \ldots + \frac{1}{n-1} + \frac{1}{n}\]
+\[0 \leq \frac{1}{n} \leq 1 + \frac{1}{2} + \ldots + \frac{1}{n} - \ln{n}\]
+So, from above, we have that 
+\[\gamma_n \geq 0\]
+\begin{flushright}
+    $\square$
+\end{flushright}
+Now we must show $\{\gamma_n\}$ is a decreasing sequence. That is, we must show $\gamma_{n+1} - \gamma_n \leq 0$. By definition of $\gamma_n$, 
+\[\gamma_{n+1} - \gamma_n = (1 + \frac{1}{2} + \ldots + \frac{1}{n} + \frac{1}{n+1}) - \ln{(n+1)} - [(1+\frac{1}{2} + \ldots + \frac{1}{n}) - \ln{n}]\]
+\[=\frac{1}{n+1} - \ln{(n+1)} + \ln{n}\]
+\[=\frac{1}{n+1} - \ln{(1+\frac{1}{n})}\]
+Notice by the inequality in part (a),
+\[\frac{1}{n+1} \leq \ln{(1+\frac{1}{n})}\]
+\[\frac{1}{n+1} - \ln{(1+\frac{1}{n})} \leq 0\]
+Then $\gamma_{n+1} - \gamma_n \leq 0$, meaning that $\{\gamma_n\}$ is a decreasing sequence.
+\begin{flushright}
+    $\square$
+\end{flushright}
+
+
+(c) Show that $\{\gamma_n\}$ converges. $\lim \gamma_n = \gamma$ is called Euler's constant.
+\newline\newline
+Since $\{\gamma_n\}$ is a decreasing sequence, $\gamma_1$ will be an upper bound for $\{\gamma_n\}$.
+\[\gamma_1 = 1 - \ln{1} = 1\]
+And since we showed that $\gamma_n \geq 0$ for all $n$, 
+\[0 \leq \gamma_n \leq 1\]
+Now we have that $\{\gamma_n\}$ is a bounded decreasing sequence, and so, by the Monotone Convergence Theorem, $\{\gamma_n\}$ converges.
+\begin{flushright}
+    $\square$
+\end{flushright}
+\end{document}
