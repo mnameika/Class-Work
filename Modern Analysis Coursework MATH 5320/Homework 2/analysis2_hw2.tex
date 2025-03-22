@@ -1,0 +1,329 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\graphicspath{{Imagesa/}}
+
+\title{Problem Set 2 (Analysis)}
+\author{Michael Nameika}
+\date{February 16 2022}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+    \item Determine if each of the following pairs $(X,d)$ define a metric space.
+    a) $X = \mathbb{R}$, $d(x,y) = \sqrt{|x - y|}$, $x,y \in \mathbb{R}$
+    \newline
+    Let us first check non-negativity: 
+    
+    Notice that $|x-y| \geq 0$, and so $\sqrt{|x-y|} \geq 0$. Now we must show that $\sqrt{|x - y|} = 0$ iff $x = y$. Start off by assuming $\sqrt{|x - y|} = 0$.
+    Then 
+    \[|x-y| = 0\]
+    \[x-y = 0\]
+    \[x = y\]
+    Now assume that $x = y$. Then
+    \[\sqrt{|x - y|} = \sqrt{|y - y|}\]
+    \[= \sqrt{0}\]
+    \[= 0\]
+    Now we will show symmetry holds:
+    \[\sqrt{|x - y|} = \sqrt{|(-1)(y - x)|}\]
+    \[ = \sqrt{|y - x|}\]
+    Thus symmetry holds.
+    
+    Now we will show that the triangle inequality holds.
+    
+    Let $x,y,z \in \mathbb{R}$. Start by considering $|x - y|$. Notice
+    \[|x - y| = |x - z + z - y|\]
+    \[\leq |x - z| + |z - y|\]
+    \[\sqrt{|x - y|} \leq \sqrt{|x-z| + |z - y|}\]
+    Now we need to show that $\sqrt{|x - z| + |z - y|} \leq \sqrt{|x - z|} + \sqrt{|z - y|}$. 
+    
+    Consider $a,b \in \mathbb{R^+} \cup \{ 0 \}$. we wish to show that $\sqrt{a + b} \leq \sqrt{a} + \sqrt{b}$. First consider
+    \[(\sqrt{a + b})^2 = a + b\]
+    Now consider
+    \[(\sqrt{a} + \sqrt{b})^2 = a + 2\sqrt{a}\sqrt{b} + b\]
+    Now take the difference between these two quantities:
+    \[(\sqrt{a + b})^2 - (\sqrt{a} + \sqrt{b})^2 = a + b - (a + 2\sqrt{a}\sqrt{b} + b)\]
+    \[ = -2\sqrt{a}\sqrt{b}\]
+    And since $0 \leq a,b$, $-2\sqrt{a}\sqrt{b} \leq 0$, which tells us that 
+    \[(\sqrt{a + b})^2 \leq (\sqrt{a} + \sqrt{b})^2\]
+    \[\sqrt{a + b} \leq \sqrt{a} + \sqrt{b}\]
+    Finally, we have
+    \[\sqrt{|x - y|} \leq \sqrt{|x - z|} + \sqrt{|z - y|}\]
+    \[d(x,y) \leq d(x,z) + d(z,y)\]
+    Thus, non-negativity, symmetry, and the triangle inequality all hold, sol $(X,d)$ forms a metric space.
+    \newline
+    
+    
+    b)$X = \mathbb{R}$, $d(x,y) = |x| + |x - y| + |y|$ when $x \neq y$, and $d(x,y) = 0$ when $x = y$, $x,y \in \mathbb{R}$
+    
+    We will begin by showing non-negativity. Let $x,y \in \mathbb{R}$. Then by definition of absolute value, $|x| \geq 0$, $|x - y| \geq 0$, and $|y| \geq 0$. Then
+    \[|x| + |x - y| + |y| \geq 0\]
+    Now we must show that $d(x,y) = 0$ iff $x = y$. Begin by assuming $x = y$. Then by the definition above, $d(x,y) = 0$. Now assume $d(x,y) = 0$. Then
+    \[|x| + |x - y| + |y| = 0\]
+    Since $|x|,|y|, |x-y| \geq 0$, we must have that $x = y = 0$. Thus, non-negativity holds. Now we will show that symmetry holds. Notice that
+    \[|x| + |x - y| + |y| = |y| + |(-1)(y - x)| + |x|\]
+    \[ = |y| + |y - x| + |x|\]
+    Thus, $d(x,y) = d(y,x)$, so symmetry holds. Now we will show that the triangle inequality holds. Let $x,y,z \in \mathbb{R}$. Notice
+    \[|x| + |x - y| + |y| = |x| + |x - z + z - y| + |z| + |z| + |y| - 2|z|\]
+    \[\leq |x| + |x - z| + |z| + |z| + |z - y| + |y| - 2|z|\]
+    \[ = d(x,z) + d(z,y) - 2|z|\]
+    Since $|z| \geq 0$,
+    \[d(x,z) + d(z,y) - 2|z| \leq d(x,z) + d(z,y)\]
+    Finally, we have
+    \[d(x,y) \leq d(x,z) + d(z,y)\]
+    So non-negativity, symmetry, and the triangle inequality hold. Thus, $(X,d)$ forms a metric space.
+    \newline
+    
+    c) $X = $ space of all Riemann integrable functions on $[a,b]$, $d(f,g) = \int_{a}^b |f(x) - g(x)|dx$, $f,g \in X$.
+    
+    I will claim that this is not a metric space. In particular, I will show that $d(f,g) = 0$ for some $f \neq g$, $f,g \in X$. Let
+    \[f(x) = 0, x \in [a,b]\]
+    \[ g(x) = \begin{cases}
+        0, x \neq x_i\\
+        1, x = x_i
+    \end{cases}
+    x_i \in [a,b]
+    \]
+    Clearly, $f(x) \neq g(x)$
+    
+    
+    We will show using Darboux sums that $\int_a^b |f(x) - g(x)|dx = 0$. Consider a partition $P$ of $[a,b]$, $P = \{a, a + \frac{1}{n}, a + \frac{2}{n}, \ldots, b - \frac{1}{n}, b\}$ and let $x_i \in P$. Now consider the upper Darboux sum of $|f - g|$ on $P$:
+    \[U(|f - g|, P) = \sum_{k=1}^{n-1}\sup_{x \in [x_{k}, x_{k+1}]}{(|f(x) - g(x)|)}(x_{k+1} - x_k)\]
+    Since $f(x) = 0$, and $g(x) = 0$ except at $x = x_i$, the above sum reduces to
+    \[U(|f - g|, P) = \frac{1}{n}\]
+    and in the limit, $U(|f - g|) = \lim_{n \to \infty}U(|f - g|, P) = \lim_{n \to \infty} \frac{1}{n} = 0$
+    Now we wish to show that the lower sum also goes to zero.
+    \[L(|f - g|, P) = \sum_{k = 1}^{n - 1} \inf_{x \in [x_k, x_{k+1}]}{(|f(x) - g(x)|)}(x_{k+1} - x_k)\]
+    Right away, $\inf{(|f(x) - g(x)|)} = 0$, so $L(|f - g|, P) = 0$. And in the limit, $L(|f - g|) = 0$.
+    So we have 
+    \[U(|f - g|) = L(|f - g|) = 0\]
+    So by definition of Darboux integrability,
+    \[\int_a^b |f(x) - g(x)|dx = 0\]
+    So $(X,d)$ does not form a metric space.
+    \newline
+    
+    d) Let $(U, d_U)$, $(V, d_V)$ be metric spaces. Define $X = U \times V$ as the set of ordered pairs $(u, v)$ with $u \in U$, $v \in V$, and $d((u_1,v_1), (u_2,v_2)) = \max(d_U(u_1,u_2), d_V(v_1,v_2))$.
+    
+    We will begin by showing that non-negativity holds:
+    
+    Notice that since $d((u_1, v_1), (u_2, v_2)) = \max(d_U(u_1,u_2), d_V(v_1,v_2))$, and $(U, d_U)$ and $(V, d_V)$ form metric spaces, so 
+    \[d_U(u_1,u_2), d_V(v_1,v_2) \geq 0\]
+    then
+    \[d((u_1, v_1), (u_2, v_2)) \geq 0\] 
+    Now we must show that 
+    \[d((u_1,v_1), (u_2,v_2)) = 0\] 
+    if and only if
+    \[(u_1, v_1) = (u_2, v_2)\] 
+    
+    Begin by assuming $d((u_1,v_1), (u_2,v_2)) = 0$. Then by the definition of our metric, $d_U(u_1,u_2) = d_V(v_1,v_2) = 0$, which implies $u_1 = u_2$ and $v_1 = v_2$. So $(u_1,v_1) = (u_2,v_2)$.
+    
+    Now assume that $(u_1, v_1) = (u_2, v_2)$. That is, $u_1 = u_2$ and $v_1 = v_2$. Then $d_U(u_1, u_2) = d_V(v_1, v_2) = 0$. So $\max(d_U(u_1,u_2), d_V(v_1,v_2)) = 0$, or equivalently, $d((u_1,v_1),(u_2,v_2)) = 0$.
+    \newline
+    
+    Now we must show that symmetry holds. Notice that 
+    \[d_U(u_1, u_2) = d_U(u_2, u_1)\] 
+    and 
+    \[d_V(v_1, v_2) = d_V(v_2, v_1)\] 
+    So 
+    \[\max(d_U(u_1, u_2), d_V(v_1, v_2)) = \max(d_U(u_2, u_1), d_V(v_2, v_1))\] 
+    or 
+    \[d((u_1, v_1), (u_2, v_2)) = d((u_2, v_2), (u_1, v_1))\]
+    
+    Now we must show that the triangle inequality holds. 
+    
+    Notice that for $(u_1, v_1), (u_2, v_2), (u_3, v_3) \in X$, either
+    \[\max(d_U(u_1,u_2), d_V(v_1, v_2)) = d_U(u_1, u_2) \leq d_U(u_1, u_3) + d_U(u_3, u_2)\]
+    or
+    \[\max(d_U(u_1, u_2), d_V(v_1, v_2)) = d_V(v_1, v_2) \leq d_V(v_1, v_3) + d_V(v_3, v_2)\]
+    Additionally, notice that 
+    \[d_U(u_1, u_3) + d_U(u_3, u_2) \leq \max(d_U(u_1,u_3), d_V(v_1, v_3)) + \max(d_U(u_3, u_2), d_V(v_3,v_2))\]
+    and
+    \[d_V(v_1, v_3) + d_V(v_3, v_2) \leq \max(d_U(u_1, u_3), d_V(v_1, v_3)) + \max(d_U(u_3, u_2), d_V(v_3, v_2))\]
+    Now, by transitivity, we have
+    \[\max(d_U(u_1, u_2), d_V(v_1,v_2)) \leq \max(d_U(u_1, u_3), d_V(v_1, v_2)) + \max(d_U(u_3, u_2), d_V(v_3,v_2))\]
+    \[d((u_1,v_1),(u_2,v_2)) \leq d((u_1,v_1), (u_3,v_3)) + d((u_3, v_3), (u_2, v_2))\]
+    Thus the triangle inequality holds, so $(X,d)$ forms a metric space.
+    
+    
+    
+    
+    
+    \item Let $(X,d)$ be a metric space.
+    
+    a) Let $E$ be a nonempty subset of $X$. Define the distance of $x \in X$ to $E$ by $\rho_E(x) := \inf_{y \in E}d(x,y)$. Prove that (i) $\rho_E(x) = 0$ if and only if $x \in E^c$ (ii) $\rho_E : X \to \mathbb{R}$ is uniformly continuous on $X$.
+    
+    
+    ii) We wish to show that $\rho_E(x)$ is uniformly continuous on $(X,d)$. Let $x,z \in X$ and $y \in E$. Fix $\delta > 0$ independent of $x$ be such that $d(x,z) < \delta$. We wish to show $|\rho_E(x) - \rho_E(z)| < \epsilon$ for $\epsilon > 0$. 
+    Start with $d(x,y)$:
+    \[d(x,y) \leq d(x,z) + d(z,y)\]
+    \[d(x,y) - d(z,y) \leq d(x,z)\]
+    \[d(y,x) - d(y,z) \leq d(x,z)\]
+    Now, we can see
+    \[-d(x,z) \leq d(y,x) - d(y,z)\]
+    So we can say
+    \[|d(y,x) - d(y,z)| \leq d(x,z)\]
+    \[|\rho_E(x) - \rho_E(z)| \leq d(x,z) < \delta\]
+    \[|\rho_E(x) - \rho_E(z)| < \delta\]
+    Now let $\epsilon = \delta$. So we have
+    \[|\rho_E(x) - \rho_E(z)| < \epsilon\]
+    So by definition of uniform continuity, $\rho_E(x)$ is uniformly continuous.
+    
+    b) Suppose $\{x_n\}$ and $\{y_n\}$ be two Cauchy sequences in $X$. Show that the sequence $a_n = d(x_n, y_n)$ converges in $\mathbb{R}$.
+    
+    Proof: By definition of Cauchy sequences in a metric space, for any $\epsilon > 0$, there exist natural numbers $n,m > N\in \mathbb{N}$ such that 
+    \[d(x_n, x_m) < \frac{\epsilon}{2}\]
+    \[d(y_n, y_m) < \frac{\epsilon}{2}\]
+    We wish to show that $a_n$ converges in $\mathbb{R}$. It suffices to show that $a_n$ is Cauchy in $\mathbb{R}$. That is, we wish to show that $|a_n - a_m| < \epsilon$.
+    \[|a_n - a_m| = |d(x_n, y_n) - d(x_m, y_m)|\]
+    By the triangle inequality,
+    \[d(x_n, y_n) \leq d(x_n, x_m) + d(x_m, y_n)\]
+    \[\leq d(x_n, x_m) + d(y_n, y_m) + d(x_m, y_m)\]
+    Then 
+    \[|d(x_n, y_n) - d(x_m, y_m)| \leq |d(x_n, x_m) + d(y_n, y_m) + d(x_m, y_m) - d(x_m, y_m)|\]
+    \[ = |d(x_n, x_m) + d(y_n, y_m)|\]
+    \[\leq |d(x_n, x_m)| + |d(y_n, y_m)| = d(x_n, x_m) + d(y_n, y_m)\]
+    \[ < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon\]
+    So we have 
+    \[|a_n - a_m| < \epsilon\]
+    which converges since $\mathbb{R}$ is complete. 
+    
+    
+    \item Let $X$ be the space of all bounded, real sequences, $\mathbf{x} = \{x_n\}$, $\mathbf{y} = \{y_n\} \in X$ with metric $d(\mathbf{x}, \mathbf{y}) = \sup_{n \geq 1}|x_n - y_n|$. Prove that each Cauchy sequence $\{\mathbf{x^{(m)}}\} \subset X$ converges to some $\mathbf{x} \in X$.
+    
+    By definition of Cauchy sequences, we have for any $\epsilon > 0$, there exist natural numbers $n > m \geq N \in \mathbb{N}$ (fix $m = N$) such that
+    \[d(\textbf{x}^{(n)}, \textbf{x}^{(N)}) < \epsilon\]
+    By the definition of our metric, 
+    \[\sup_{k \geq 1}|x_k^{(n)} - x_k^{(N)}| < \epsilon\]
+    
+    Notice that 
+    \[|x_k^{(n)} - x_k^{(N)}| \leq \sup_{k \geq 1} |x_k^{(n)} - x_k^{(N)}|  < \epsilon\]
+    That is, $\{x_k^{(n)}\}$ is a Cauchy sequence in $\mathbb{R}$ for every element $k$. Since $\mathbb{R}$ is complete, $x_k^{(n)}$ converges to some real number $x_k$. Define $\textbf{x} = \{x_k\}$. Since $\{\textbf{x}^{(m)}\}$ is Cauchy, and each element converges to $\{x_k\}$, we have for any $\epsilon > 0$, there exists natural numbers $n, N$ such that whenever $n \geq N$,
+    \[|x_n^{(m)} - x_n| < \epsilon\]
+    Since this is true for all $n > N$, 
+    \[\sup|x_n^{(m)} - x_n| < \epsilon\]
+    or, by the definition of our metric,
+    \[d(\textbf{x}^{(m)}, \textbf{x}) < \epsilon\]
+    So $\textbf{x}^{(m)}$ converges to $\textbf{x}$.
+    
+    
+    We have that $\textbf{x}$ is a real sequence, but we need to show that it's bounded. 
+    
+    Notice from the work above and the triangle inequality that 
+    \[|x_k^{(n)}| < |x_k^{(N)}| + \epsilon\]
+    Now since each $x_k^{(i)}$ is a bounded sequence, let $M_i \in \mathbb{R}$ be such that
+    \[|x_k^{(i)}| \leq M_i\]
+    then 
+    \[|x_k^{(N)}| \leq M_N \in \mathbb{R}\]
+    so we have
+    \[|x_k^{(n)}| < M_N + \epsilon\]
+    That is, $|x_k^{(n)}|$ is also bounded above for all $n$. Call this bound $M^*$. That is,
+    \[|x_k^{(n)}| \leq M^*\]
+    
+    Now since $\{\textbf{x}^{(k)}\}$ converges to a sequence $\textbf{x}$, we have for $k > N$
+    \[|x_k - x_k^{(n)}| < \epsilon\]
+    by the reverse triangle inequality,
+    \[|x_k| < |x_k^{(n)}| + \epsilon\]
+    by our work above, we have
+    \[|x_k| < M^* + \epsilon\]
+    That is, each $x_k$ is bounded. So we have that $\textbf{x}$ is a bounded sequence. And since $\textbf{x}$ is real and bounded, $\textbf{x} \in X$.
+    
+    \item Let $M_n(\mathbb{R})$ denote the set of all real, $n \times n$ matrices. For $A := (a_{ij})$, $B = (b_{ij}) \in M_n(\mathbb{R})$, define $d(A, B) = \max_{1 \leq i,j \leq n}|a_{ij} - b_{ij}|$.
+    a) Show that $d(A,B)$ is a metric on $M_n(\mathbb{R})$.
+    
+    We will begin by showing that non-negativity holds. Notice that
+    \[0 \leq |a_{ij} - b_{ij}| \leq \max_{1 \leq i,j \leq n}|a_{ij} - b_{ij}|\]
+    Now we must show that $d(A,B) = 0$ iff $A = B$. First assume that $d(A,B) = 0$. Then we have
+    \[\max_{1 \leq i,j \leq n}|a_{ij} - b_{ij}| = 0\]
+    since $0 \leq \max_{1 \leq i,j \leq n}|a_{ij} - b_{ij}|$, we must have that
+    \[|a_{ij} - b_{ij}| = 0\]
+    for every $i,j$. Thus, we have
+    \[a_{ij} = b_{ij}, \forall i,j\]
+    or $A = B$.
+    
+    
+    Now assume  $a_{ij} = b_{ij} \forall i,j$ That is, $A = B$. Then $a_{ij} - b_{ij} = 0 \forall i,j$. So clearly, $\max_{1 \leq i,j \leq n}|a_{ij} - b_{ij}| = 0$. So $d(A,B) = 0$. Thus, we have shown non-negativity to hold. Now we will show symmetry holds:
+    \[\max_{1 \leq i,j \leq n}|a_{ij} - b_{ij}| = \max_{1 \leq i,j \leq n}|(-1)(b_{ij} - a_{ij})|\]
+    \[ = \max_{1 \leq i,j \leq n}|b_{ij} - a_{ij}|\]
+    Or, equivalently,
+    \[d(A,B) = d(B,A)\]
+    so symmetry holds. Now we will show that the triangle inequality holds:
+    
+    Let $A,B,C \in M_n(\mathbb{R})$ where $A = (a_{ij})$, $B = (b_{ij})$, $C = (c_{ij})$. We wish to show that $d(A,B) \leq d(A,C) + d(C,B)$.
+    
+    Consider
+    \[|a_{ij} - b_{ij}| = |a_{ij} - c_{ij} + c_{ij} - b_{ij}|\]
+    \[\leq |a_{ij} - c_{ij}| + |c_{ij} - b_{ij}|\]
+    Clearly
+    \[\max_{1 \leq i,j \leq n}|a_{ij} - b_{ij}| \leq \max_{1 \leq i,j \leq n} |a_{ij} - c_{ij}| + \max_{1 \leq i,j \leq n}|c_{ij} - b_{ij}|\]
+    so
+    \[d(A,B) \leq d(A,C) + d(C,B)\]
+    
+    b) Let $\{A^{(k)}\}$ be a sequence in $M_n(\mathbb{R})$. Prove that $\{A^{(k)}\}$ is a convergent sequence if and only if $\{a_{ij}^{(k)}\}$ is a convergent sequence in $\mathbb{R}$.
+    
+    Proof: First assume that $\{a_{ij}^{(k)}\}$ is a convergent sequence in $\mathbb{R}$. That is, there exists a real number (since $\mathbb{R}$ is complete) $a_{ij}$ such that $a_{ij}^{(k)} \to a_{ij}$. Now let $A$ be a matrix defined by $A = a_{ij}$. Since each $\{a_{ij}^{(k)}\}$ converges to $a_{ij}$, we have that $\{A^{(k)}\}$ converges component wise to $A$. 
+    
+    Now assume that $\{A^{(k)}\}$ converges element wise to some matrix $A = (a_{ij})$. Let the elements of $\{A^{(k)}\}$ be defined by $a_{ij}^{(k)}$. Since $\{A^{(k)}\}$ converges element wise to $A$, each $\{a_{ij}^{(k)}\}$ must converge. Since $\mathbb{R}$ is complete, we have that $\{a_{ij}^{(k)}\}$ converges to a real number, so $\{a_{ij}^{(k)}\}$ is convergent in $\mathbb{R}$.
+    
+    
+    c) Show that $(M_n(\mathbb{R}), d)$ is a complete metric space.
+    
+    Proof: We wish to show for the Cauchy sequence $\{A^{(k)}\}$ in $M_n(\mathbb{R})$, that there exists a matrix $A \in M_n(\mathbb{R})$ such that $d(A^{(k)},A) \to 0$ as $k \to \infty$. 
+    
+    We have that $\{A^{(k)}\}$ is a Cauchy sequence. That is, for any $\epsilon > 0$, there exist natural numbers $n,m > N \in \mathbb{N}$ such that 
+    \[d(A^{(n)}, A^{(m)}) < \epsilon\]
+    by the definition of our metric:
+    \[d(A^{(n)}, A^{(m)}) = \max_{1 \leq i,j \leq n}|a_{ij}^{(n)} - a_{ij}^{(m)}| < \epsilon\]
+    Notice that for all $i,j$,
+    \[|a_{ij}^{(n)} - a_{ij}^{(m)}| \leq \max_{1 \leq i,j \leq n}|a_{ij}^{(n)} - a_{ij}^{(m)}| < \epsilon\]
+    then
+    \[|a_{ij}^{(n)} - a_{ij}^{(m)}| < \epsilon\]
+    That is, for all $i,j$, $\{a_{ij}^{(k)}\}$ is a convergent sequence in $\mathbb{R}$ since it is Cauchy in $\mathbb{R}$. Since $\mathbb{R}$ is complete, there exists some $a_{ij} \in \mathbb{R}$ such that 
+    \[a_{ij}^{(k)} \to a_{ij}\]
+    By our work in part b), since $\{a_{ij}^{(k)}\}$ is convergent in $\mathbb{R}$, we have that $\{A^{(k)}\}$ is a convergent sequence, say it converges to some matrix $A = (a_{ij})$. Now since every $a_{ij}^{(k)}$ converges to a real number, $\{A^{(k)}\}$ converges component wise to $A$, and so every component of $A$ is real, so $A \in M_n(\mathbb{R})$. Thus by definition, $(M_n(\mathbb{R}), d)$ is a complete metric space.
+    
+    
+    \item a) Suppose $\{f_n : [0,1] \to \mathbb{R}\}$ is a sequence of continuous functions that converges uniformly to $f$ on $[0,1]$. Let $g_n(x) = [f_n(x)]^2$. Prove that $\{g_n\}$ converges uniformly to $g(x) = [f(x)]^2$ on $ [0,1]$.
+    
+    Proof: Recall that the uniform limit of continuous functions is also continuous. That is, every $f_n$ and $f$ is continuous. Now since $f_n$ and $f$ are continuous on a closed, bounded interval, by the extreme value theorem, we have that each $f_n$ and $f$ is bounded, say by
+    \[|f_n| \leq M_n \in \mathbb{R}\]
+    \[|f| \leq M \in \mathbb{R}\]
+    By the Cauchy criterion of uniform continuity, fix $\epsilon > 0$ independent of $x$ and take $n > m \geq N \in \mathbb{N}$. In particular, take $m = N$. 
+    Now let $M' = \max\{M_1, M_2, \ldots, M_N\}$ be such that
+    \[|f_n - f_N| < \frac{\epsilon}{M' + M}\]
+    
+    By the reverse triangle inequality, notice
+    \[|f_n| < |f_N| + \epsilon\]
+    \[|f_n| < M' + \epsilon\]
+    Which tells us that $|f_n|$ is bounded above. Call this bound $M^*$.
+    
+    Now, we wish to show that $f_n^2$ converges to $f^2$ uniformly. Begin by considering
+    \[|f_n^2 - f^2| = |f_n - f| |f_n + f|\]
+    \[\leq |f_n - f| (|f_n| + |f|)\]
+    \[\leq |f_n - f| (M^* + M)\]
+    \[< \epsilon (M^* + M)\]
+    So we have
+    \[|f_n^2 - f^2| < \epsilon (M^* + M)\]
+    Thus, $g_n = f_n^2$ converges uniformly to $f^2$ on $[0,1]$.
+    
+    b) Proof: Fix $\epsilon > 0$. By definition of uniform continuity, there exists a $\delta > 0$ such that whenever $|x - y| < \delta$, $|f(x) - f(y)| < \epsilon$.
+    
+    Consider the interval $(0, \delta)$ and fix $y \in (0, \delta)$. Notice for any $x \in (0, \delta)$, $|x - y| < \delta$. Then by the definition above, 
+    \[|f(x) - f(y)| < \epsilon\]
+    by the reverse triangle inequality,
+    \[|f(x)| < |f(y)| + \epsilon\]
+    That is, $f(x)$ is bounded on $(0, \delta)$, say by a real number $M_1$. 
+    
+    Consider the interval $[\delta, 1]$. Since $f$ is uniformly continuous on $(0,1]$, $f$ is continuous on $[\delta, 1]$. By the extreme value theorem, we have that $f$ is bounded on $[\delta,1]$, say by a real number $M_2$.
+    
+    Now let $M = \max\{M_1,M_2\}$. Since $f$ is bounded by $M_1$ on $(0,\delta)$ and by $M_2$ on $[\delta, 1]$, $f$ is bounded by $M$ on $(0, 1]$.
+\end{enumerate}
+
+\end{document}

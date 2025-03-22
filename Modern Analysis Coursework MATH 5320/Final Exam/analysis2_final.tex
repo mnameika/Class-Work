@@ -1,0 +1,270 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{empty}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+
+\title{Analysis Final}
+\author{Michael Nameika}
+\date{May 2022}
+
+\begin{document}
+
+\maketitle
+\begin{enumerate}
+    \item \begin{enumerate}
+        \item Consider a sequence $\{x_n\}$ on the interval [0,1]. If every \textit{convergent} subsequence of $\{x_n\}$ has the same limit $x_0$. Prove that $\lim x_n = x_0$.
+        \newline
+        
+        Proof: Let $\{x_n\}$ be a sequence on $[0,1]$ and suppose that every convergent subsequence of $\{x_n\}$ has the same limit $x_0$. Suppose by way of contradiction that $\{x_n\}$ does not converge to $x_0$. Then for some subsequence $\{x_{n_{k}}\}$ of $\{x_n\}$, $\{x_{n_k}\}$ does not converge to $x_0$. 
+        
+        Fix $\epsilon > 0$. Then for some $n_k > N_1 \in \mathbb{N}$, since $\{x_{n_k}\}$ does not converge to $x_0$,
+        \[|x_{n_k} - x_0| \geq \epsilon\]
+        But since $\{x_{n_k}\}$ is a sequence on $[0,1]$, a closed, bounded interval, Bolzano-Weierstrass guarantees that there exists a convergent subsequence $\{x_{n_{k_m}}\}$ of $\{x_{n_k}\}$. But by the above inequality, we have that for some $n_{k_m} > N_2 \in \mathbb{N}$, 
+        \[|x_{n_{k_m}} - x_0| \geq \epsilon\]
+        That is, $\{x_{n_{k_m}}\}$ does not converge to $x_0$. But $\{x_{n_{k_m}}\}$ is a convergent subsequence of $\{x_n\}$, contradicting our hypothesis that every convergent subsequence of $\{x_n\}$ converges to $x_0$.
+        
+        \item Let $f_n(x) = x^n(1 - x^n)$. Show that $\{f_n\}$ is \textit{not} a convergent sequence in $C[0,1]$ with metric $d(f,g) = \sup_{x \in [0,1]}|f(x) - g(x)|$.
+        \newline
+        
+        To begin, we will find the maximum value of $f_n$. Using the first derivative test, we find
+        \[f_n' = nx^{n-1}(1 - x^n) - nx^{2n-1} = 0\]
+        and we find $f_n$ attains a maximum value at 
+        \[x_{max} = \left(\frac{1}{2}\right)^{1/n}\]
+        Plugging this value of $x$ into $f_n(x)$, we get
+        \[f_n(x_{max}) = \frac{1}{2}\left(1 - \frac{1}{2}\right)\]
+        \[ = \frac{1}{4}\]
+        That is, for every $n$, the maximum value of $f_n$ on $[0,1]$ is $\frac{1}{4}$. 
+        Now we will show that $f_n$ does not converge on $C[0,1]$. We will do so by showing that $\{f_n\}$ is not Cauchy. Let $\epsilon = \frac{1}{32}$ and let $m,n > N \in \mathbb{N}$ and consider
+        \[\sup_{x \in [0,1]} |f_n(x) - f_m(x)|\]
+        and notice that 
+        \[|f_n(x) - f_m(x)| \leq \sup_{x \in [0,1]} |f_n(x) - f_m(x)|\]
+        Now, choose $m = 2n$. Then
+        \[|f_n(x) - f_m(x)| = |f_n(x) - f_{2n}(x)| = |x^n(1 - x^n) - x^{2n}(1-x^{2n})|\]
+        Let's check the point $\left(\frac{1}{2}\right)^{1/n}$:
+        \[\Bigg|f_n\left(\frac{1}{2^{1/n}}\right) - f_{2n}\left(\frac{1}{2^{1/n}}\right)\Bigg| = \Bigg|\frac{1}{4} - \frac{3}{16}\Bigg|\]
+        \[ = \Bigg|\frac{1}{16}\Bigg| > \frac{1}{32}\]
+        So for any choice of $m,n > N$, choosing $m = 2n$, we get that $|f_n(x_{max}) - f_m(x_{max})| > \frac{1}{32}$
+        So $\{f_n\}$ is not Cauchy, and therefore does not converge.
+    \end{enumerate}
+    
+    \item \begin{enumerate}
+        \item Let $(X,d)$ be a metric space. Show that $\delta(x,y) = \frac{d(x,y)}{1+d(x,y)}$, $\forall \: x,y \in X$, defines a metric on $X$, and that every subset $E \subset X$ is bounded with respect to the metric $\delta$.
+        \newline
+        
+        Proof: To show $\delta(x,y)$ is a metric, we must show that symmetry, non-negativity, and the triangle inequality holds. To begin, we will show symmetry holds. Since $d(x,y)$ is a metric, notice that
+        \[\delta(x,y) = \frac{d(x,y)}{1 + d(x,y)} = \frac{d(y,x)}{1 + d(y,x)} = \delta(y,x)\]
+        So symmetry holds. Now we will show non-negativity holds. We have that $d(x,y) \geq 0$, so $1 + d(x,y) \geq 1$ and so $\delta(x,y) \geq 0$. Now we must show $\delta(x,y) = 0$ if and only if $x = y$. To begin, let $x = y$. Then
+        \[\delta(x,y) = \delta(x,x) = \frac{d(x,x)}{1 + d(x,x)} = \frac{0}{1} = 0\]
+        Now suppose $\delta(x,y) = 0$. Then $\frac{d(x,y)}{1 + d(x,y)} = 0$ and so we must have $d(x,y) = 0$. And since $d(x,y)$ is a metric, we have $x = y$.
+        So non-negativity holds. 
+        
+        Finally, we will show that $\delta(x,y)$ satisfies the triangle inequality. 
+        
+        To begin, let $x,y,z \in X$ and consider $\delta(x,z) = \frac{d(x,z)}{1 + d(x,z)}$ and $\delta(z,y) = \frac{d(z,y)}{1 + d(z,y)}$. Notice that since $d(x,y) \geq 0$ for any $x,y \in X$, we have that
+        \[\delta(x,z) = \frac{d(x,z)}{1 + d(x,z)} \geq \frac{d(x,z)}{1 + d(x,z) + d(z,y)}\]
+        similarly,
+        \[\delta(z,y) = \frac{d(z,y)}{1 + d(z,y)} \geq \frac{d(z,y)}{1 + d(z,y) + d(x,z)}\]
+        That is,
+        \[\frac{d(x,z) + d(z,y)}{1 + d(x,z) + d(z,y)} \leq \delta(x,z) + \delta(z,y)\]
+        Now notice if we divide the numerator and denominator on the left hand side of the above equation by $d(x,z) + d(z,y)$, we get
+        \[\frac{d(x,z) + d(z,y)}{1 + d(x,z) + d(z,y)} = \frac{1}{\frac{1}{d(x,z) + d(z,y)} + 1}\]
+        And since $d(x,y)$ is a metric,
+        \[d(x,y) \leq d(x,z) + d(z,y)\]
+        \[\frac{1}{d(x,y)} \geq \frac{1}{d(x,z) + d(z,y)}\]
+        \[\frac{1}{d(x,y)} + 1 \geq \frac{1}{d(x,z) + d(z,y)} + 1\]
+        \[\frac{1}{\frac{1}{d(x,y)} + 1} \leq \frac{1}{\frac{1}{d(x,z) + d(z,y)} + 1}\]
+        That is, 
+        \[\frac{d(x,y)}{1 + d(x,y)} \leq \frac{d(x,z) + d(z,y)}{1 + d(x,z) + d(z,y)} \leq \frac{d(x,z)}{1 + d(x,z)} + \frac{d(z,y)}{1 + d(z,y)}\]
+        Finally, we have
+        \[\delta(x,y) \leq \delta(x,z) + \delta(z,y)\]
+        And so the triangle inequality holds. Thus, $\delta(x,y)$ defines a metric.
+        
+        Quickly note that since $d(x,y) \geq 0$ for all $x,y \in X$, $\delta(x,y) = \frac{d(x,y)}{1 + d(x,y)} \leq d(x,y)$
+        
+        To see that any subset $E \subset X$ is bounded with respect to $\delta$, consider the following cases:
+        
+        Case 1: $E \subset X$ is bounded with respect to $d$. That is, for any $x,y \in E$, $\sup_{x,y \in E}{d(x,y)} < M$ for some $M \in \mathbb{R}$. Then since $\delta(x,y) \leq \sup_{x,y \in E} {\delta(x,y)} \leq \sup_{x,y \in E} {d(x,y)}$
+        \[\delta(x,y) \leq \sup_{x,y \in E} {\delta(x,y)} \leq \sup_{x,y \in E} {d(x,y)} = M\]
+        That is, $E$ is bounded with respect to $\delta$.
+        
+        Case 2: $E \subset X$ is unbounded with respect to $d$. That is, $\sup_{x,y \in E}{d(x,y)} = + \infty$. We wish to show that $E$ is bounded with respect to $\delta$. Notice the following:
+        \[\sup_{x,y \in E} {\delta(x,y)} = \sup_{x,y \in E} {\frac{d(x,y)}{1 + d(x,y)}}\]
+        \[ = \sup_{x,y \in E} {\frac{1}{\frac{1}{d(x,y)} + 1}}\]
+        and since $d(x,y) \to \infty$, we have that $\delta(x,y) \to \frac{1}{0 + 1} = 1$.
+        
+        So if $E$ is unbounded with respect to $d$, then $\sup_{x,y \in E} {\delta(x,y)} = 1$, meaning that $E$ is bounded with respect to $\delta$.
+        
+        
+        
+        \item Prove that $S = \{1, \frac{1}{2}, \frac{2}{3}, \frac{3}{4}, \ldots\} \subset \mathbb{R}$ is compact with the usual metric $d(x,y) = |x - y|$, $x,y \in \mathbb{R}$.
+        \newline
+        
+        Proof: We will use the Heine-Borel Theorem to show $S$ is compact. That is, we must show that $S$ is closed and bounded. We will begin by showing that $S$ is bounded. Notice that $S = \{\frac{n}{n+1}\}_{n \in \mathbb{N}} \cup \{1\}$ and that $n < n+1$, so $\frac{n}{n+1} < 1$. Additionally, $1 \leq 1$. That is, $1$ is an upper bound for $S$. I claim that $\frac{1}{2}$ is a lower bound for $S$. To show this, I will show that $\{\frac{n}{n+1}\}$ is increasing. Consider $\frac{n+1}{n+2} - \frac{n}{n+1}$ for any $n \in \mathbb{N}$:
+        \[\frac{n+1}{n+2} - \frac{n}{n+1} = \frac{(n+1)^2 - n(n+2)}{(n+1)(n+2)}\]
+        \[ = \frac{n^2 + 2n + 1 - n^2 - 2n}{(n + 2)(n + 1)}\]
+        \[ = \frac{1}{(n + 2)(n + 1)} \geq 0\]
+        
+        That is, $\{\frac{n}{n+1}\}$ is an increasing sequence for all $n \in \mathbb{N}$. So $\frac{1}{2}$ is a lower bound for $\{\frac{n}{n+1}\}$, and is therefore a lower bound for $S$. That is, for any element $s \in S$, $\frac{1}{2} \leq s \leq 1$. Or, in terms of the given metric, $\sup_{x,y \in S} d(x,y) = |1 - 1/2| = 1/2$. So $S$ is bounded.
+        
+        Now we must show that $S$ is closed. Consider $\mathbb{R} \setminus S$:
+        \[\mathbb{R} \setminus S = \left(-\infty, \frac{1}{2}\right) \cup \left(\frac{1}{2}, \frac{2}{3}\right) \cup \left(\frac{2}{3}, \frac{3}{4}\right) \cup \ldots \cup (1, \infty)\]
+        Notice that $\mathbb{R} \setminus S$ is a countable union of open sets, and since an arbitrary union of open sets is open, we have that $\mathbb{R} \setminus S$ is open. Then $S$ is closed.
+        
+        So we have that $S$ is closed and bounded, so by the Heine-Borel Theorem, we have that $S$ is compact.
+    \end{enumerate}
+    
+    \item \begin{enumerate}
+        \item Show that $f: \mathbb{R} \to \mathbb{R}$ defined by $f(x) = \sin{\left(\frac{\cos{x}}{2}\right)}$ is a contraction mapping. (Hint: Use MVT for derivatives.)
+        \newline
+        
+        Proof: Recall that $\cos{(x)}$ is continuous on $\mathbb{R}$, and thus $\frac{\cos{(x)}}{2}$ is also continuous on $\mathbb{R}$. Also recall that $\sin{(x)}$ is continuous on $\mathbb{R}$, so $f(x) = \sin{\left(\frac{\cos{(x)}}{2}\right)}$ is continuous on $\mathbb{R}$. 
+        
+        Now let $x, y \in \mathbb{R}$. We have that $f(x)$ is continuous on $[x,y]$, and so by the mean value theorem, there exists some $c \in (x,y)$ such that
+        \[f'(c) = \frac{f(x) - f(y)}{x - y}\]
+        Rearranging, we find
+        \[|f(x) - f(y)| = |f'(c)| |x - y|\]
+        Well, $f'(x) = -\frac{\sin{(x)}}{2}\sin{\left(\frac{\cos{(x)}}{2}\right)}$, and $|f'(x)| = |\frac{\sin{(x)}}{2}\sin{\left(\frac{\cos{(x)}}{2}\right)}| \leq \frac{1}{2}|\sin{\left(\frac{\cos{(x)}}{2}\right)}| \leq \frac{1}{2}$
+        That is, we have
+        \[|f(x) - f(y)| \leq \frac{1}{2} |x - y|\]
+        for some $x,y \in \mathbb{R}$. By definition, $f$ is a contraction map.
+        
+        \item Suppose $\gamma : [0,1] \to \mathbb{R}^3$ be continuous with $\gamma(0) = (0,0,0)$, $\gamma(1) = (1,1,1)$. Show that the curve $\gamma(t)$ intersects the plane $x + y + z = 2$ in $\mathbb{R}^3$.
+        \newline
+        
+        Proof: We have $\gamma: [0,1] \to \mathbb{R}$ is continuous. Let $f: \mathbb{R}^3 \to \mathbb{R} $ $f(x,y,z) = x + y + z$. 
+        $f$ is continuous since $f$ is the sum of polynomials, which are continuous. Since $\gamma$ and $f$ are continuous, we have that $f \circ \gamma$ is also continuous. Now, notice that
+        \[(f \circ \gamma)(0) = f((0,0,0)) = 0 + 0 + 0 = 0\]
+        and
+        \[(f \circ \gamma)(1) = f((1,1,1)) = 1 + 1 + 1 = 3\]
+        Then by the intermediate value theorem, there exists some value $c \in [0,1]$ such that $(f \circ \gamma)(c) = 2$. That is to say, for some $c$, $\gamma(c)$ will map to a point on the plane $x + y + z = 2$.
+    \end{enumerate}
+    
+    \item \begin{enumerate}
+        \item Suppose that $f: [0,1] \to \mathbb{R}$ is a continuous function such that $0 < f(x) < 1$ for all $0 \leq x < 1$, and $f(1) = 1$. Suppose in addition that $\lim_{x \to 1^{-}} \frac{f(1) - f(x)}{1 - x} = \ell > 1$. Prove that there is some number $c$ with $0 < c < 1$ such that $f(c) = c$. (Hint: Apply IVT to an appropriate function).
+        \newline
+        
+        Proof: Let $f: [0,1] \to \mathbb{R}$ be continuous with $0 < f(x) < 1$ for all $0 \leq x < 1$ and $f(1) = 1$, and in addition, $\lim_{x \to 1^{-}} \frac{f(1) - f(x)}{1 - x} = \ell > 1$. 
+        
+        Let $\{x_n\}$ be a sequence in $[0,1]$ converging to $1$. Then since $f$ is continuous, and from the given limit, for some $n > N \in \mathbb{N}$ $\frac{f(1) - f(x_n)}{1 - x_n} \geq 1$. Rearranging, we have 
+        \[1 - f(x_n) > 1 - x_n\]
+        \[x_n - f(x_n) > 0\]
+        Let $g(x) = x - f(x)$. Notice that $g$ is continuous since $f$ is continuous, and $x$ is a polynomial. Now, notice that $g(0) = 0 - f(0) = -f(0) < 0$.
+        Then we have the following inequality:
+        \[g(0) < 0 < g(x_n)\]
+        And by the intermediate value theorem, we have that there exists some $c \in (0,x_n)$ such that 
+        \[g(c) = 0\]
+        That is, $c - f(c) = 0$ or $f(c) = c$.
+        
+        
+        \item Suppose $f: \mathbb{R} \to \mathbb{R}$ is a continuous function with the property: $\lim_{x \to \infty} f(x) = \lim_{x \to -\infty} f(x) = 0$. Prove that $f$ is uniformly continuous.
+        \newline
+        
+        Proof: Let $f: \mathbb{R} \to \mathbb{R}$ be a continuous function with the property $\lim_{x \to \infty} f(x) = \lim_{x \to -\infty} f(x) = 0$ and fix $\epsilon > 0$. 
+        Since $\lim_{x \to \infty} f(x) = 0$, there exists some $m_1 \in \mathbb{R}$, whenever $x > m_1$, $m_1 > 0$ $|f(x) - 0| < \epsilon/3$. 
+        \newline
+    
+        Similarly, there exists some $m_2 \in \mathbb{R}$, $m_2 < 0$ such that whenever $x < m_2$, $|f(x) - 0| < \epsilon/3$.
+        
+        Now, let $M = \max{\{|m_1|, |m_2|\}}$ and consider the interval $[-M, M]$. Since this is a closed, bounded interval, and $f$ continuous on $\mathbb{R}$, we have that $f$ is uniformly continuous on $[-M,M]$.  
+        \newline
+        
+        That is, for some $\delta > 0$, whenever $|x - y| < \delta$ for $x,y \in [-M, M]$, $|f(x) - f(y)| < \epsilon/3$. 
+        To show $f$ is uniformly continuous continuous on $\mathbb{R}$, let $|x - y| < \delta$ for some $\delta > 0$ and consider the following three cases:
+        \newline
+        
+        Case 1: Both $|x| \geq M$ and $|y| \geq M$. Then $|f(x) - f(y)| \leq |f(x)| + |f(y)| < \epsilon/3 + \epsilon/3 = 2\epsilon/3 < \epsilon$.
+        \newline
+        
+        Case 2: Both $x,y \in [-M,M]$. Then from above, we have that $|f(x) - f(y)| < \epsilon/3 < \epsilon$
+        \newline
+        
+        Case 3: One of $x,y \in [-M, M]$ and the other in $(-\infty, -M) \cup (M, \infty)$. Without loss of generality, assume $x \in [-M,M]$ and $y \in (M, \infty)$. Then
+        \[|f(x) - f(y)| = |f(x) - f(M) + f(M) - f(y)|\]
+        \[\leq |f(x) - f(M)| + |f(M)| + |f(y)|\]
+        \[< \epsilon/3 + \epsilon/3 + \epsilon/3 = \epsilon\]
+        \newline
+        
+        In any of these cases, we have that $f$ is uniformly continuous on $\mathbb{R}$.
+        
+    \end{enumerate}
+    
+    \item Suppose a real valued function $f(x,y)$ is defined on an open set $U \in \mathbb{R}^2$. Assume that the first partial derivatives of $f(x,y)$ exist and are uniformly bounded on $U$. 
+    \begin{enumerate}
+        \item Prove that $f(x,y)$ is continuous on $U$.
+        \newline
+        
+        Proof: Let $x_0 \in U$ and since $U$ is open, we have for some $r > 0$, $B_r(x_0) \subseteq U$. Now let $\{\textbf{x}_n\}$ be a sequence in $B_r(x_0)$ such that $x_n$ converges to $x_0$. Let $\{\textbf{h}_n\}$ be a sequence in $B_r(x_0)$ defined by $\textbf{h}_n = \textbf{x}_n - x_0$. Notice that $\textbf{h}_n + x_0 = \textbf{x}_n \in B_r(x_0)$. Then by the mean value proposition, we have that
+        \[f(x_0 + \textbf{x}_n) - f(x_0) = h_n^1 \frac{\partial f}{\partial x}(z_1) + h_n^2\frac{\partial f}{\partial y}(z_2)\]
+        for some $z_1, z_2 \in B_r(x_0)$. Then since the first partial derivatives of $f$ are uniformly bounded, we have that 
+        \[\bigg| \frac{\partial f}{\partial x}\bigg| \leq M, \:\: \bigg| \frac{\partial f}{\partial y} \bigg| \leq M\]
+        for some $M \in \mathbb{R}$ for all $(x,y) \in U$. Define $\textbf{M} = [M, M]^T$. Then we have 
+        \[|f(x_0 + \textbf{h}_n) - f(x_0)| \leq \langle \textbf{M}, \textbf{h}_n \rangle\]
+        Now, as $n \to \infty$, we have $|\textbf{h}_n| \to 0$ so as $n \to \infty$,
+        \[|f(x_0 + \textbf{h}_n) - f(x_0)| \to 0\]
+        Then $f(x_0 + \textbf{h}_n) \to f(x_0)$ as $n \to \infty$. So $f$ is continuous at $x_0$. Since $x_0 \in U$ was arbitrary, we have that $f$ is continuous on $U$.
+        
+        \item Let $f(x,y) = \frac{xy^2}{x^2 + y^4}$ if $( x,y) \neq (0,0)$ and $f(0,0) = 0$. Show explicitly that the first partial derivatives of $f(x,y)$ exist but are \textit{not} bounded in an open neighborhood of $(0,0)$. Then show that $f(x,y)$ is not continuous at $(0,0)$.
+        \newline
+        
+        We wish to show that the first partial derivatives of $f$ exist. To do so, we must show that $\lim_{t \to 0} \frac{f(x_0 + t, y_0) - f(x_0, y_0)}{t}$ and $\lim_{t \to 0} \frac{f(x_0, y_0 + t) - f(x_0, y_0)}{t}$ exist for some point $(x_0, y_0) \in \mathbb{R}^2$. 
+        
+        To begin, we will show $\frac{\partial f}{\partial x}$ exists. To do so, consider
+        \[\lim_{t \to 0} \frac{f(x_0 + t, y_0) - f(x_0, y_0)}{t} = \lim_{t \to 0} \frac{\frac{(x_0 + t)y_0^2}{(x_0 + t)^2 + y^4} - \frac{x_0 y_0^2}{x_0^2 + y_0^4}}{t}\]
+        \[ = \lim_{t \to 0} \frac{(x_0y_0^2 + ty_0^2)(x_0^2 + y_0^4) - x_0y_0^2((x_0 + t)^2 + y_0^4)}{t(x_0^2 + y_0^4)((x_0+t)^2 + y_0^4)}\]
+        \[ = \lim_{t \to 0} \frac{x_0^3y_0^2 + tx_0^2y_0^2 + ty_0^6 + x_0y_0^6 - x_0^3y_0^2 - 2tx_0^2y_0^2 - x_0y_0^6}{t(x_0^2 + y_0^4)((x_0 + t)^2 + y_0^4)}\]
+        \[ = \lim_{t \to 0} \frac{y_0^6 - x_0^2y_0^2}{(x_0^2 + y_0^4)((x_0 + t)^2 + y_0^4)}\]
+        \[ = \frac{y_0^6 - x_0^2y_0^2}{(x_0^2 + y_0^4)^2}\]
+        so $\frac{\partial f}{\partial x}$ exists. It remains to be seen that $\frac{\partial f}{\partial x}|_{(x,y) = (0,0)}$ exists.
+        Using the limit definition of the derivative, 
+        \[\frac{\partial f}{\partial x} \bigg|_{(x,y) = (0,0)} = \lim_{t \to 0} \frac{f(t,0) - f(0,0)}{t} = \lim_{t \to 0} \frac{\frac{t(0)^2}{t^2 + 0^4} - 0}{t}\]
+        \[ = \lim_{t \to 0} \frac{0}{t}\]
+        \[\frac{\partial f}{\partial x}\bigg|_{(x,y) = (0,0)} = 0\]
+        Now we will show $\frac{\partial f}{\partial y}$ exists. Using the limit definition, we have
+        \[\frac{\partial f}{\partial y} = \lim_{t \to 0} \frac{f(x_0, y_0 + t) - f(x_0, y_0)}{t}\]
+        \[= \lim_{t \to 0} \frac{\frac{x_0(y_0 + t)^2}{x_0^2 + (y_0 + t)^4} - \frac{x_0y_0^2}{x_0^2 + y_0^4}}{t}\]
+        \[ = \lim_{t \to 0} \frac{\frac{x_0y_0^2 + 2ty_0x_0 + x_0t^2}{x_0^2 + (y_0 + t)^4} - \frac{x_0y_0^2}{x_0^2 + y_0^4}}{t}\]
+        \[ = \lim_{t \to 0} \frac{(x_0y_0^2 + 2tx_0y_0 + x_0t^2)(x_0^2 + y_0^4) - x_0y_0^2(x_0^2 + (y_0 + t)^4)}{t(x_0^2 + y_0^4)(x_0^2 + (y_0 + t)^4)}\]
+        \[ = \lim_{t \to 0} \frac{x_0^3y_0^2 + 2tx_0^3y_0 + x_0^3t^2 + x_0y_0^6 + 2tx_0y_0^5 + t^2x_0y_0^4 - x_0^3y_0^2 - x_0y_0^2(y_0 + t)^4}{t(x_0^2 + y_0^4)(x_0^2 + (y_0+t)^4)}\]
+        \[ = \lim_{t \to 0} \frac{2tx_0^3y_0 + t^2x_0^3 - 2tx_0y_0^5 + t^2x_0y_0^4 - 6t^2x_0y_0^4 - 4t^3y_0^3x_0 - t^4x_0y_0^2}{t(x_0^2 + y_0^4)(x_0^2 + (y_0 + t)^4)}\]
+        \[ = \lim_{t \to 0} \frac{2x_0^3y_0 + tx_0^3 - 2x_0y_0^5 + tx_0^4 - 6tx_0y_0^4 - 4t^2y_0^3x_0 - t^3x_0y_0^2 }{(x_0^2 + y_0^4)(x_0^2 + (y_0 + t)^4)}\]
+        \[ = \frac{2x_0^3y_0 - 2x_0y_0^5}{(x_0^2 + y_0^4)^2}\]
+        Now it remains to be seen that $\frac{\partial f}{\partial y}$ exists at $(0,0)$.
+        
+        Using the limit definition of partial derivatives,
+        \[\frac{\partial f}{\partial y} \bigg|_{(x,y) = (0,0)} = \lim_{t \to 0} \frac{f(0, t) - f(0,0)}{t}\]
+        \[ = \lim_{t \to 0} \frac{0(0)^2}{t(0^2 + t^4)}\]
+        \[ = \lim_{t \to 0} 0\]
+        \[ = 0\]
+        So $\frac{\partial f}{\partial x}$ and $\frac{\partial f}{\partial y}$ exist for all $(x,y) \in \mathbb{R}^2$. 
+        \newline
+        
+        Now we must show that $\frac{\partial f}{\partial x}$ and $\frac{\partial f}{\partial y}$ are unbounded in an open neighborhood around $(0,0)$. Let $B_r((0,0))$ be an open ball of radius $r > 0$ around $(0,0)$ and notice that $\left(0, \frac{r}{2n}\right) \in B_r((0,0))$ for all $n \in \mathbb{N}$. Similarly, $\left(\frac{r}{2n}, \frac{r}{2n}\right) \in B_r((0,0))$ for all $n \in \mathbb{N}$.
+        Using the expressions we found for $\frac{\partial f}{\partial x}$ and $\frac{\partial f}{\partial y}$ and the sequences above, notice
+        \[\lim_{n \to \infty} \bigg| \frac{\partial f}{\partial x}\left(0,\frac{r}{2n}\right)\bigg| = \lim_{n \to \infty} \frac{\left(\frac{r}{2n}\right)^6 - 0}{\left(\frac{r}{2n}\right)^8}\]
+        
+        \[ = + \infty\]
+        and
+        \[\lim_{n \to \infty} \bigg| \frac{\partial f}{\partial y}\left(\frac{r}{2n}, \frac{r}{2n}\right)\bigg| = 2\]??
+        (I've had trouble finding a sequence that causes $\frac{\partial f}{\partial y}$ to diverge near 0 :( )
+        
+        To see that $f(x,y)$ is discontinuous at $(0,0)$, it suffices to be shown that $\lim_{(x,y) \to (0,0)} f(x,y)$ does not exist. Consider the limit along the path $y = x$:
+        \[\lim_{(x,y) \to (0,0)} f(x,y) = \lim_{x \to 0} f(x,x) = \lim_{x \to 0} \frac{x^3}{x^2 + x^4}\]
+        \[ = \lim_{x \to 0} \frac{x}{1 + x^2}\]
+        \[ = 0\]
+        Now consider the path $y = \sqrt{x}$:
+        \[\lim_{(x,y) \to (0,0)} f(x,y) = \lim_{x \to 0} \frac{x^2}{x^2 + x^2}\]
+        \[ = \lim_{x \to 0} \frac{1}{2}\]
+        \[ = \frac{1}{2}\]
+        So $\lim_{(x,y) \to (0,0)} f(x,y)$ along the path $y = x$ does not equal the limit along the path $y = \sqrt{x}$. That is, $f(x,y)$ is discontinuous at $(0,0)$.
+    \end{enumerate}
+\end{enumerate}
+
+\textbf{Extra Credit} Show that $T: C[0,\pi / 2] \to C[0, \pi / 2]$ defined by $T(f)(x) = \int_0^x f(t) \sin{t}dt$ is \textit{not} a contraction map, yet it has a unique fixed point. Take $d(f,g) = \sup_{x \in [0, \pi/2]} |f(x) - g(x)|$ as the metric on $C[0, \pi / 2]$. (Hint: Check $T^2$.)
+\end{document}

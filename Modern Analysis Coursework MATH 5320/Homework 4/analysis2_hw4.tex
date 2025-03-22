@@ -1,0 +1,162 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{empty}
+
+
+\title{Homework 4 (Analysis)}
+\author{Michael Nameika}
+\date{April 2022}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+    \item Let $K$ be a nonempty sequentially compact subspace of a metric space $(X,d)$.
+    \begin{enumerate}
+        \item Let $p_0$ be a point in $K$. Prove that there exists a number $M > 0$ such that $K$ is contained in the open ball $\mathcal{B}_M(p_0)$ of radius $M$ about the point $p_0$.
+        
+        Proof: Since $K$ is sequentially compact, we have that $K$ is compact. And since $K$ is compact, $K$ is totally bounded and is therefore bounded. Let
+        \[M = \sup{\{d(x_1,x_2) \:|\: x_1, x_2 \in K\}}\]
+        Essentially, $M$ is the diameter of the set $K$.
+        +
+        Since $K$ is bounded, $M < \infty$. Now consider $B_M(p_0)$, the open ball of radius $M$ centered at $p_0$. By the definition of $M$ above, we have that
+        \[K \subseteq B_M(p_0)\]
+        
+        
+        
+        
+        \item Let $\mathcal{O}$ be an open set in $X$ that contains $K$. Prove that there exists an $r > 0$ such that for every point $p$ in $K$ the open ball $\mathcal{B}_r(p)$ is contained in $\mathcal{O}$.
+        
+        
+        Proof: Let $\mathcal{O}$ be an open set that contains $K$ and suppose by way of contradiction that there does not exist an $r > 0$ such that for every point $p \in K$, $B_r(p) \subseteq \mathcal{O}$. Let $\{x_n\}$ be a sequence in $K$. Since $K$ is sequentially compact, we have that there is a convergent subsequence of $\{x_n\}$, $\{x_{n_k}\}$ that converges to some $x_0 \in K$.
+        
+        Since there does not exist an $r > 0$ such that $B_r(x_0)$ is contained in $\mathcal{O}$, we have that for every $n_k$, $B_{1/n_k}(x_0)$ is not contained in $\mathcal{O}$. But since $\mathcal{O}$ is open, there exists some $\epsilon > 0$ such that $B_{\epsilon}(x_0) \subseteq \mathcal{O}$. 
+        But for $n_k > N \in \mathbb{N}$, the Archimedean property gives us that
+        \[\frac{1}{n_k} < \epsilon\]
+        That is, $B_{\epsilon}(x_0)$ is not contained in $\mathcal{O}$. Then since $\mathcal{O}$ is open, we have that $x_0 \notin \mathcal{O}$. But $x_0 \in K$ and $K \subseteq \mathcal{O}$, $x_0$ must be in $\mathcal{O}$, a contradiction.
+        
+        Thus, for every point $p \in K$, there exists an $r > 0$ such that $B_r(x_0) \subseteq \mathcal{O}$.
+    \end{enumerate}
+    
+    \item \begin{enumerate}
+        \item Let $f: \mathbb{R}^n \to \mathbb{R}$ be continuous and $f(\textbf{x}) \geq ||\textbf{x}||$ for all $\textbf{x} \in \mathbb{R}^n$. (Here $|| \cdot ||$ denote the Euclidean norm on $\mathbb{R}^n$). Prove that the inverse image $f^{-1}[0,1]$ is a compact subset of $\mathbb{R}^n$.
+        
+        Proof: Notice that $[0,1]$ is a closed subset of $\mathbb{R}$, and since $f$ is continuous, we have that $f^{-1}([0,1])$ is a closed subset of $\mathbb{R}^n$.
+        
+        Let $A = f^{-1}([0,1])$ and $A_i \in A$, $i \in I$ and let $a = \max{\{||A_i|| \:|\: A_i \in A, i\in I\}}$. Since $f(A) = [0,1]$, we have $a \leq \max{\{[0,1]\}}$, $0 \leq a \leq 1$, so $A$ is bounded. Then by the Heine-Borel Theorem, we have that $f^{-1}([0,1])$ is a compact subset of $\mathbb{R}^n$.
+        
+        \item Prove that $A = \{(x, \tan{(x)}) \: : \: 0 \leq x < \pi /2\}$ is closed in $\mathbb{R}^2$, but $A$ is not sequentially compact.
+        
+        Proof: Notice that as $x \to \pi /2$, $\tan{(x)} \to \infty$. That is, $A$ is unbounded above. Since $A$ is unbounded, the Heine-Borel Theorem gives us that $A$ cannot be compact, and is thus not sequentially compact. Now we must show that $A$ is closed in $\mathbb{R}^2$.
+        
+        Let $\{x_n\}$ be a convergent sequence on $[0, \pi/2)$. That is, $x_n \to x_0$ for some $x_0 \in [0,\pi/2)$. Since $\tan{(x)}$ is continuous on $[0,\pi/2)$, we have that $\tan{(x_n)} \to \tan{(x_0)}$. That is, $(x_0, \tan{(x_0)}) \in A$, so $A$ is closed.
+    \end{enumerate}
+    
+    
+    \item \begin{enumerate}
+        \item Let $(X,d)$ be a metric space. Prove that $X$ is sequentially compact if and only if $X$ satisfies \textit{both} of the following properties:
+        
+        (P1) $X$ is a complete metric space.
+        
+        (P2) Every sequence $\{x_n\}$ in $X$ has a Cauchy subsequence.
+        
+        Proof: First let $X$ be sequentially compact. That is, every sequence $\{x_n\}$ contains a convergent subsequence $\{x_{n_k}\}$ where $x_{n_k} \to x_{n_0} \in X$. Since $\{x_{n_k}\}$ converges, $\{x_{n_k}\}$ is a Cauchy sequence, and so (P2) is satisfied. 
+        
+        Now suppose that $X$ does not have a convergent Cauchy subsequence. That is, suppose that $X$ is compact but not complete. 
+        
+        Fix $\epsilon > 0$ and let $y \in X$ and $\{x_n\}$ a Cauchy sequence in $X$. Then $\{x_n\}$ does not converge to $y$, and so for $n > N \in \mathbb{N}$, 
+        \[d(x_n,y) \geq \epsilon\]
+        That is, the open ball of radius $\epsilon$ contains finitely many points in $\{x_n\}$.
+        
+        Now let $\epsilon_0 > 0$ depend on the choice for $y$. Then we have a cover for $X$:
+        \[X = \bigcup \{B_{\epsilon_0}(y) \: | \:y \in X\}\]
+        and since $X$ is compact, we have that there exists a finite subcover for the above cover:
+        \[X = \bigcup_{i = 1}^n \{B_{\epsilon_0}(y_i) \: | \: y_i \in X\}\]
+        And since each $B_{\epsilon_0}(y_i)$ contains finitely many points in $\{x_n\}$ and we have a finite subcover for $X$, $X$ must contain a finite number of points in $\{x_n\}$. But since $\{x_n\}$ is a Cauchy sequence in $X$, this cannot happen. 
+        
+        So we have that $X$ is complete.
+        \newline
+        
+        Now suppose that $X$ satisfies (P1) and (P2). By (P2) we have that every sequence in $X$ contains a Cauchy subsequence, and by (P1), we have that $X$ is complete, so we must have that every Cauchy sequence in $X$ converges to some point in $X$. That is, by definition, $X$ is sequentially compact.
+        
+        
+        \item Let $(X,d)$ be a sequentially compact metric space. Suppose $f: X \to \mathbb{R}$ is a continuous function with the property: for each $x \in X$, there exists $x' \in X$ such that $|f(x')| \leq \frac{1}{2} |f(x)|$. Prove that there exists a point $x_0 \in X$ such that $f(x_0) = 0$.
+        
+        Proof: Let $\{x_n\}$ be a sequence in $X$ such that $|f(x_{n+1})| \leq \frac{1}{2}|f(x_n)|$. Since $X$ is sequentially compact, we have that there exists a convergent subsequence of $\{x_n\}$, call it $\{x_{n_k}\}$ that converges to some $x_0 \in X$. Since $f$ is continuous, we have that $f(X)$ is sequentially compact, and so the sequence $f(x_{n_k})$ has a convergent subsequence. Since $f$ is continuous, $f(x_{n_k})$ converges to $x_0$.
+        
+        Now, using the recursion relation we defined above, notice the following:
+        \[|f(x_2)| \leq \frac{1}{2}|f(x_1)|\]
+        \[|f(x_3)| \leq \frac{1}{2}|f(x_2)| \leq \frac{1}{4}|f(x_1)|\]
+        And continuing up to some $n+1$, we'll find
+        \[|f(x_{n+1})| \leq \frac{1}{2^n}|f(x_1)|\]
+        And letting $n \to \infty$, notice
+        \[|f(x_0)| \leq 0\]
+        Since $\frac{1}{2^n}|f(x_1)| \to 0$ as $n \to \infty$ since $f(x_1)$ is a fixed value.
+        That is, we have for some $x_0$, $f(x_0) = 0.$
+     \end{enumerate}
+     
+     
+     \item Let $(X,d)$ be a metric space. Define the real valued function $f(x) := d(z_0, x), x \in X$ for any fixed $z_0 \in X$.
+     \begin{enumerate}
+         \item Prove that $f(x)$ is uniformly continuous on $X$.
+         
+         Proof: Fix $\epsilon > 0$ and let $x, y \in X$ such that $d(x,y) < \delta$ for some $\delta > 0$ and consider 
+         \[|f(x) - f(y)| = |d(z_0, x) - d(z_0,y)|\]
+         by the reverse triangle inequality, we have
+         \[|d(z_0,x) - d(z_0,y)| \leq d(x,y) < \delta\]
+         choose $\delta = \epsilon$. Then we have
+         \[|f(x) - f(y)| < \epsilon\]
+         so $f(x)$ is uniformly continuous by definition.
+         
+         
+         \item Let $K \subset X$ be a non-empty, compact subset of the metric space $(X,d)$. Using the basic properties of compactness and the result of part (a) prove that $\exists$   $x_0 \in K$ such that $d(z_0,x_0) = \inf_{x \in K}d(z_0,x)$.
+         
+         
+         Proof: We have $K \subset X$ is a compact subset. From part (a), we have that $f(x) = d(z_0,x), x \in X$ for any fixed $z_0 \in X$ is uniformly continuous. Since $f$ is uniformly continuous, $f$ is continuous. Then since $f$ is continuous and $K$ is compact, we have that $f$ posses the extreme value property on $K$, and so for some $x_0 \in K$,
+         \[f(x_0) = \inf_{x \in K} f(x)\]
+         Or equivalently,
+         \[d(z_0,x_0) = \inf_{x \in K} d(z_0,x)\]
+     \end{enumerate}
+     
+     \item \begin{enumerate}
+         \item Prove that an open, connected subset of $\mathbb{R}^n$ is path connected. 
+         
+         
+         To start, I will prove as a lemma that an open ball is path connected. 
+         
+         Lemma: For some $x_0 \in A$, $r > 0$, $B_r(x_0)$ is path connected.
+         
+         Proof: Let $r > 0$, $x_0, x_1 \in A$ and $B_r(x_0)$ be an open ball in $A$. Then the function
+         \[f: [0,1] \to B_r(x_0)\]
+         given by
+         \[f(t) = tx_1 + (1-t)x_0\]
+         is a path joining $x_0$ and $x_1$ in $B_r(x_0)$.
+         \newline
+         
+         Proof of (a): 
+         Let $A$ be an open, connected subset of $\mathbb{R}^n$ and $x, y, z \in A$. Let $\Omega \subseteq A$ be the set of all points that can be connected to $x$ with a path and let $y \in \Omega$. We wish to show that $\Omega$ is open. 
+         Since $A$ is open, there exists an $r > 0$ such that $B_r(x) \subseteq A$. But from the lemma above, we have that $B_r(x)$ is path connected, so for any $z \in B_r(x)$, $y$ can be joined to $z$ by a path, and hence can be joined to $x$ by a path. Since this holds for any $x \in \Omega$, we have that $\Omega$ is open. 
+         Now let $\Gamma = A \setminus \Omega$. We wish to show that $\Gamma$ is also open. Well, let $w \in \Gamma$. Then for some $r > 0$, $B_r(w) \subseteq A$. Let $p \in B_r(w)$. 
+         Since $B_r(w)$ is path connected by the lemma, $p$ cannot be joined to $x$ with a path. However, $p$ can be joined to $w$, and by similar logic above, we have that $\Gamma$ is open. 
+         Clearly, we have
+         \[\Omega \cap \Gamma = \emptyset\]
+         and
+         \[\Omega \cup \Gamma = A\]
+         But since $x \in \Omega$, we have that $\Omega \neq \emptyset$ and since $A$ is connected, $\Gamma = \emptyset$. Hence, $\Omega = A$ and $A$ is path connected.
+         
+         Thus, any open, connected subset of $\mathbb{R}^n$ is connected.
+         \newline
+         
+         \item Prove that a real continuous function on a closed interval $I \subset \mathbb{R}^2$ cannot be one-to-one.
+     \end{enumerate}
+     
+\end{enumerate}
+
+\end{document}
