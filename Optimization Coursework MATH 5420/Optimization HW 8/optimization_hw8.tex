@@ -1,0 +1,620 @@
+\documentclass{article}
+\usepackage{graphicx, mathtools, amsmath, amssymb, dirtytalk, mathrsfs}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{empty}
+
+\title{Optimization HW 8}
+\author{Michael Nameika}
+\date{April 2023}
+
+\begin{document}
+
+\maketitle
+
+\section*{Section 14.2 Problems}
+\textbf{1.} Consider the problem
+\begin{align*}
+    \text{minimize} \hspace{1.5em} &f(x) = x_1^2 + x_1^2x_3^2 + 2x_1x_2 + x_2^4 + 8x_2\\
+    \text{subject to} \hspace{1.5em} &2x_1 + 5x_2 + x_3 = 3.
+\end{align*}
+\begin{itemize}
+    \item[(i)] Determine which of the following points are stationary points: (a) $(0,0,2)^T$, (b) $(0,0,3)^T$; (c) $(1,0,1)^T$.
+    \newline\newline
+    Let us begin by computing the gradient of $f$:
+    \[\nabla f(x) = \begin{pmatrix*}[c]
+        2x_1 + 2x_1x_3^2 + 2x_2\\
+        2x_1 + 4x_2^3 + 8\\
+        2x_1^2x_3
+    \end{pmatrix*}\]
+    And we have our constraint matrix: $A = (2, 5, 1)$. We wish to find a basis for the null space of $A$. Well, solving $Ax = 0$ yields the following expression for a null space vector:
+    \[\begin{pmatrix}
+        x_1\\
+        x_2\\
+        x_3
+    \end{pmatrix}
+    = 
+    \begin{pmatrix}
+        x_1\\
+        x_2\\
+        -2x_1 - 5x_2
+    \end{pmatrix}\]
+    And so a basis for the null space of $A$ is given by
+    \[\text{basis}(\text{N}(A)) = \left\{ \begin{pmatrix*}[r]
+        1\\
+        0\\
+        -2
+    \end{pmatrix*}, \hspace{1em}
+    \begin{pmatrix*}[r]
+        0\\
+        1\\
+        -5
+    \end{pmatrix*}\right\}\]
+    So choose $Z = \begin{pmatrix*}[r] 1 & 0\\ 0 & 1\\ -2 & -5\end{pmatrix*}$. Now we may determine if the above points are stationary points of $f$:
+    \begin{itemize}
+        \item[(a)] Notice
+        
+        \[\nabla f(0,0,2) = \begin{pmatrix}
+            0\\
+            8\\
+            0
+        \end{pmatrix}\]
+        and so
+        \begin{align*}
+            Z^T\nabla f(0,0,2) &= \begin{pmatrix*}[r]
+                1 & 0 & -2\\
+                0 & 1 & -5
+            \end{pmatrix*}
+            \begin{pmatrix}
+                0\\
+                8\\
+                0
+            \end{pmatrix}\\
+            &= \begin{pmatrix}
+                0\\
+                8
+            \end{pmatrix}
+            \neq 0
+        \end{align*}
+        So $(0,0,2)^T$ is not a stationary point of $f$.
+
+
+        \item[(b)] Notice 
+        \[\nabla f(0,0,3) = \begin{pmatrix}
+            0\\
+            8\\
+            0
+        \end{pmatrix}\]
+        So from our work from part (a), we have that $(0,0,3)^T$ is not a stationary point of $f$.
+
+        \item[(c)] Notice
+        \[\nabla f(1,0,1) = \begin{pmatrix}
+            4\\
+            10\\
+            2
+        \end{pmatrix}\]
+        And so
+        \begin{align*}
+            Z^T\nabla f(1,0,1) &= \begin{pmatrix*}[r]
+                1 & 0 & -2\\
+                0 & 1 & -5
+            \end{pmatrix*}
+            \begin{pmatrix}
+                4\\
+                10\\
+                2
+            \end{pmatrix}\\
+            &= \begin{pmatrix}
+                0\\
+                0
+            \end{pmatrix}
+        \end{align*}      
+        So $(1,0,1)^T$ is a stationary point of $f$.
+    \end{itemize}
+
+    \item[(ii)] Determine whether each stationary point is a local minimizer, a local maximizer, or a saddle point.
+    \newline\newline
+    From part (i), we have the only stationary point of (a), (b), and (c) is $(1,0,01)^T$. To determine if this point is a local minimizer, maximizer, or saddle point, we must inspect the reduced Hessian $Z^T\nabla^2f(1,0,1)Z$. Well, 
+    \[\nabla^2f(x) = \begin{pmatrix}
+        2 + 2x_3^2 & 2 & 4x_1x_3\\
+        2 & 12x_2^2 & 0\\
+        4x_1x_3 & 0 & 2x_1^2
+    \end{pmatrix}\]
+    and so
+    \[\nabla^2f(1,0,1) = \begin{pmatrix}
+        4 & 2 & 4\\
+        2 & 0 & 0\\
+        4 & 0 & 2
+    \end{pmatrix}\]
+    Finally for the reduced Hessian:
+    \begin{align*}
+        Z^T\nabla^2f(1,0,1)Z &= \begin{pmatrix*}[r]
+            1 & 0 & -2\\
+            0 & 1 & -5
+        \end{pmatrix*}
+        \begin{pmatrix}
+            4 & 2 & 4\\
+            2 & 0 & 0\\
+            4 & 0 & 2
+        \end{pmatrix}
+        \begin{pmatrix*}[r]
+            1 & 0\\
+            0 & 1\\
+            -2 & -5
+        \end{pmatrix*}
+        \\
+        &= \begin{pmatrix*}[r]
+            1 & 0 & -2\\
+            0 & 1 & -5
+        \end{pmatrix*}
+        \begin{pmatrix*}[r]
+            -4 & -18\\
+            2 & 0\\
+            0 & -10
+        \end{pmatrix*}
+        \\
+        &= \begin{pmatrix*}
+            -4 & 2\\
+            2 & 50
+        \end{pmatrix*}
+    \end{align*}
+    Clearly, the reduced Hessian is not positive definite. Row reducing (simply add 1/2 of the first row to the second), we get the reduced Hessian in row echelon form:
+    \[(Z^T\nabla^2f(1,0,1)Z)_{REF} = \begin{pmatrix*}[r]
+        -4 & 2\\
+        0 & 49
+    \end{pmatrix*}\]
+    So the reduced Hessian is indefinite. That is, the stationary point $(1,0,1)^T$ is a saddle point of $f$.
+\end{itemize}
+\textbf{3.} Find all the values of the parameters $a$ and $b$ such that $(0,0)^T$ minimizes or maximizes the following function subject to the given constraint:
+\[f(x_1,x_2) = (a + 2)x_1 - 2x_2 \hspace{1em} \text{subject to} \hspace{1em} a(x_1 + e^{x_1}) + b(x_2 + e^{x_2}) = 1.\]
+Define $g(x) = a(x_1 + e^{x_1}) + b(x_2 + e^{x_2}) - 1 = 0$. Building the Lagrangian, we have 
+\begin{align*}
+    \mathscr{L}(x,\lambda) &= g(x) - \lambda g(x)\\
+    &= (a+2)x_1 - 2x_2 - \lambda(a(x_1 + e^{x_1}) + b(x_2 + e^{x_2}) - 1)
+\end{align*}
+At a stationary point, we require $\nabla_x\mathscr{L}(x,\lambda) = 0$. Well, since we wish to have a stationary point at $(0,0)^T$, we have
+\[\nabla_x\mathscr(x,\lambda) = \begin{pmatrix*}
+    a+2 - 2\lambda a\\
+    -2 - 2\lambda b
+\end{pmatrix*}
+=
+\begin{pmatrix}
+    0\\
+    0
+\end{pmatrix}\]
+Notice $\lambda \neq 0$ since if $\lambda = 0$, $\nabla_x\mathscr{L}(x,\lambda) \neq 0$. Then we find
+\[\lambda = -\frac{1}{b}\]
+and so 
+\[a + 2 = -\frac{2a}{b}\]
+And since $g(0) = 0$, we have $a + b = 1$ and we find 
+\begin{align*}
+    3 - b &= -2\left(\frac{1}{b} - 1\right)\\
+    1 - b &= -\frac{2}{b}\\
+    b^2 - b - 2  &= 0\\
+    (b-2)(b+1) &= 0
+\end{align*}
+So $b = 2$ or $b = -1$. Then for $b = 2$, $a = -1$ and for $b = -1$, $a = 2$. Additionally, for $b = 2$, $\lambda = -1/2$ so $(a,b) = (-1,2)$ corresponds to a local maximum. For $b = -1$, $\lambda = 1$, so $(a,b) = (2,-1)$ corresponds to a local minimum. Clearly, the min/max value at $(0,0)^T$ is $f(0,0) = 0$.
+\newline\newline\newline
+\textbf{7.} Let $A$ be a matrix of full row rank. Find the point in the set $Ax = b$ which minimizes $f(x) = \frac{1}{2}x^Tx$. 
+\newline\newline
+Let $A \in \mathbb{R}^{m \times n}$. We approach this problem using Lagrange multipliers. Recall that at an optimal point $x_*$, $\nabla f(x_*) = A^T\lambda_*$ where $\lambda_* \in \mathbb{R}^m$ are the Lagrange multipliers. The gradient of $f$ is given as
+\[\nabla f(x) = x\]
+and so $\nabla f(x_*) = x_*$. Thus, we have 
+\[x_* = A^T\lambda_*\]
+From the constraints $Ax = b$, we can see by multiplying the above equation on each side by $A$:
+\begin{align*}
+    Ax_* &= AA^T\lambda_*\\
+    b &= AA^T\lambda_*.
+\end{align*}
+Since $A$ is full row rank, we have $AA^T$ is nonsingular, so
+\[\lambda_* = (AA^T)^{-1}b.\]
+Multiplying the above equation on each side by $A^T$ we have 
+\[x_* = A^T(AA^T)^{-1}b\]
+But since $\nabla^2f(x) = I$, which is positive definite. 
+
+
+\section*{Section 14.4 Problems}
+\textbf{1.} Solve the problem 
+\begin{align*}
+    \text{minimize} \hspace{1.5em} &f(x) = \tfrac{1}{2}x_1^2 + x_2^2\\
+    \text{subject to} \hspace{1.5em} &2x_1 + x_2 \geq 2\\
+    &x_1 - x_2 \leq 1\\
+    &x_1 \geq 0.
+\end{align*}
+To begin, let us find the gradient and Hessian of $f$ as well as the constraint matrix $A$:
+\[\nabla f(x) = \begin{pmatrix}
+    x_1\\
+    2x_2
+\end{pmatrix}, \hspace{2em}
+\nabla^2f(x) = \begin{pmatrix}
+    1 & 0\\
+    0 & 2
+\end{pmatrix}, \hspace{2em}
+A = \begin{pmatrix*}[r]
+    2 & 1\\
+    1 & -1\\
+    1 & 0
+\end{pmatrix*}\]
+We must consider all possible combinations for the complementary slackness condition. 
+\newline
+\textbf{Case 1}: All constraints are active. Then there are no feasible points.
+\newline
+\textbf{Case 2}: Suppose the first and second constraints are active. Then $\lambda_3 = 0$ and
+\[\nabla f(x) = \begin{pmatrix}
+    x_1\\
+    2x_2
+\end{pmatrix} = \begin{pmatrix}
+    2\\
+    1
+\end{pmatrix}\lambda_1 + \begin{pmatrix*}[r]
+    1\\
+    -1
+\end{pmatrix*}\lambda_2\]
+And since the first and second constraints are active, it is easy to see that $x_1 = 1$ and $x_2 = 0$. For our Lagrange multipliers, we have $\lambda_1 = \lambda_2 = 1/3$. Additionally, $(1,0)^T$ is not a strict local minimizer since $Z_+ = 0$. 
+\newline\newline
+\textbf{Case 3}: Suppose the first and third constraints are active. Then $x_1 = 0$, $x_2 = 2$, and $\lambda_2 = 0$. Then
+\[\nabla f(x) = \begin{pmatrix}
+    0\\
+    4
+\end{pmatrix} = 
+\begin{pmatrix}
+    2\\
+    1
+\end{pmatrix}\lambda_1 + 
+\begin{pmatrix}
+    1\\
+    0
+\end{pmatrix}\lambda_3\]
+And so $\lambda_1 = 4$, $\lambda_3 = -8$, so this point is not optimal.
+\newline\newline
+\textbf{Case 4}: Suppose the second and last constraints are active. Then $x_1 = 0$ and $x_2 = -1$, which is infeasible.
+\newline\newline
+\textbf{Case 5}: Suppose the first constraint is the only active constraint. Then $2x_1 + x_2 = 2$ and $\lambda_2 = \lambda_3 = 0$. We have
+\[\nabla f(x) = \begin{pmatrix}
+    x_1\\
+    2x_2
+\end{pmatrix} = \begin{pmatrix}
+    2\\
+    1
+\end{pmatrix}\lambda_1\]
+Now we have $2\lambda_1 = x_1$ and $2x_2 = \lambda_1$, so using our active constraint, we find $x_1 = 8/9$ and $x_2 = 2/9$. At this point, two of our constraints are degenerate, so the submatrix $\hat{A}_+$ corresponding to the nondegenerate constraint is $\hat{A}_+ = (2,1)$. A basis $Z_+$ for the nullspace of $\hat{A}_+$ is $Z_+ = (1, -2)^T$. Checking the second order sufficiency condition, we have
+\begin{align*}
+    Z_+^T\nabla^2f(\tfrac{8}{9},\tfrac{2}{9})Z_+ &= (1,-2)\begin{pmatrix}
+        1 & 0\\
+        0 & 2
+    \end{pmatrix}\begin{pmatrix*}[r]
+        1\\
+        -2
+    \end{pmatrix*}\\
+    &= (1,-2)\begin{pmatrix*}[r]
+        1\\
+        -4
+    \end{pmatrix*}\\
+    &= 9 \geq 0
+\end{align*}
+So the point $x = (\frac{8}{9},\frac{2}{9})^T$ is a strict local minimizer.
+\newline\newline
+\textbf{Case 6}: Suppose the second constraint is the only active constraint. Then $x_1 - x_2 = 1$, $\lambda_1 = \lambda_3 = 0$, and
+\[\nabla f(x) = \begin{pmatrix}
+    x_1\\
+    2x_2
+\end{pmatrix} = \begin{pmatrix*}[r]
+    1\\
+    -1
+\end{pmatrix*}\lambda_2\]
+So $x_1 = \lambda_2$ and $2x_2 = -\lambda_2$ and so we find $x_1 = 2/3$ and $x_2 = -1/3$ which is infeasible.
+\newline\newline
+\textbf{Case 7}: Suppose the third constraint is the only active constraint. Then $x_1 = 0$, $\lambda_1 = \lambda_2 = 0$ and
+\[\nabla f(x) = \begin{pmatrix*}
+    x_1\\
+    2x_2
+\end{pmatrix*} = \begin{pmatrix}
+    1\\
+    0
+\end{pmatrix}\lambda_3\]
+Then $x_2 = 0$ which is infeasible.
+\newline\newline
+\textbf{Case 8}: Now suppose all constraints are inactive. Then $\lambda_1 = \lambda_2 = \lambda_3 = 0$ and
+\[\nabla f(x) = \begin{pmatrix}
+    x_1\\
+    2x_2
+\end{pmatrix} = \begin{pmatrix}
+    0\\
+    0
+\end{pmatrix}\]
+So $x_1 = x_2 = 0$ which is infeasible.
+\newline\newline
+Then the minimizer to this problem is $x_* = (8/9, 2/9)^T$ with an associated minimum value of $f(x_*) = 4/9$.
+\newline\newline\newline
+\textbf{4.} Consider the linear program 
+\begin{align*}
+    \text{minimize} \hspace{1.5em} &f(x) = c^Tx\\
+    \text{subject to} \hspace{1.5em} &Ax \geq b.
+\end{align*}
+\begin{itemize}
+    \item[(i)] Write the first- and second-order necessary conditions for a local solution.
+    \newline\newline
+    We require
+    \begin{itemize}
+        \item $Ax_* \geq b$
+
+        \item $\nabla f(x_*) = A^T\lambda_*$ or equivalently, $c = A^T\lambda_*$
+
+        \item $\lambda_* \geq 0$
+
+        \item $\lambda_*^T(Ax_* - b) = 0$
+
+        \item $Z^T\nabla^2f(x_*)Z$ is positive semidefinite for $Z$ a nullspace matrix of the active constraints at $x_*$. Notice for this problem, $\nabla^2f(x) = 0$, so this condition is trivially satisfied. 
+    \end{itemize}
+
+    \item[(ii)] Show that the second-order sufficiency conditions do not hold anywhere, but that any point $x_*$ satisfying the first-order necessary conditions is a global minimizer. (\textit{Hint}: Show that there are no feasible directions of descent at $x_*$, and that this implies that $x_*$ is a global minimizer.)
+    \newline\newline
+    The second order sufficiency condition states that $Z^T\nabla^2f(x)Z$ is positive definite. However, from above, we have that $\nabla^2f(x) = 0$, so $Z^T\nabla^2f(x)Z = 0$ for all $x$, $Z$. Then the second order sufficiency condition is never satisfied. 
+    \newline
+    Suppose that $x_*$ is a point satisfying the first-order necessary conditions and suppose by way of contradiction that $p$ is a direction of descent at $x_*$. That is, $f(x_* + p) < f(x_*)$. Then notice that
+    \[f(x_* + p) = c^T(x_* + p) = c^Tx_* + c^Tp = f(x_*) + c^Tp\]
+    then
+    \[f(x_* + p) - f(x_*) = c^Tp\]
+    That is, we must have that $c^Tp < 0$. Additionally, for $p$ to be a feasible direction of descent, we must have
+    \begin{align*}
+        A(x_* + p) &\geq b\\
+        Ax_* + Ap &\geq b\\
+        Ap &\geq b - Ax_* \geq 0
+    \end{align*}
+    But from the first order conditions, we have $c = A^T\lambda_*$, or equivalently, $c^T = \lambda_*^TA$. Putting it together, we find
+    \begin{align*}
+        \lambda^TAp < 0
+    \end{align*}
+    but since $Ap \geq 0$, that means that there must be some element $\lambda_i$ in $\lambda_*$ that is less than zero, contradicting out necessary condition $\lambda \geq 0$.
+    \newline\newline
+\end{itemize}
+\textbf{5.} Consider the quadratic problem
+\begin{align*}
+    \text{minimize} \hspace{1.5em} &f(x) = \tfrac{1}{2}x^TQx - c^Tx\\
+    \text{subject to} \hspace{1.5em} &Ax \geq b.
+\end{align*}
+Where $Q$ is a symmetric matrix.
+\begin{itemize}
+    \item[(i)] Write the first- and second-order necessary optimality conditions. State all assumptions that you are making.
+    \newline
+    \begin{itemize}
+        \item $Ax_* \geq b$
+
+        \item $\nabla f(x_*) = A^T\lambda_*$ or equivalently, $Qx_* - c = A^T\lambda_*$
+
+        \item $\lambda_* \geq 0$
+
+        \item $\lambda_*^T (Ax_* - b) = 0$
+
+        \item $Z^T\nabla^2f(x_*)Z$ is positive semi definite for $Z$ a nullspace matrix of the active constraints at $x_*$. 
+    \end{itemize}
+    Notice $\nabla^2f(x_*) = Q$, so we require $Z^TQZ$ to be positive semidefinite.
+    
+
+    \item[(ii)] Is it true that any local minimum to the problem is also a global minimium?
+    \newline\newline
+    No, consider the problem 
+    \begin{align*}
+        \text{minimize} \hspace{1em} &f(x) = -x^2\\
+        \text{subject to}\hspace{1em} &x \geq -1
+    \end{align*}
+    Clearly, the problem has a local minimum of $-1$ at $x = -1$ but no global minimizer. The problem is unbounded below!
+    
+\end{itemize}
+
+
+\section*{Section 14.5 Problems}
+\textbf{3.} Solve the problem
+\begin{align*}
+    \text{minimize} \hspace{1.5em} &f(x) = x_1 + x_2\\
+    \text{subject to} \hspace{1.5em} &\log(x_1) + 4\log(x_2) \geq 1.
+\end{align*}
+Let $g(x) = \log(x_1) + 4\log(x_2) - 1 \geq 0$ so that our constraint is in the \say{$\geq 0$} form. Define the Lagrangian $\mathscr{L}(x,\lambda)$:
+\[\mathscr{L}(x, \lambda) = f(x) - \lambda g(x)\]
+For a stationary point, we require $\nabla_x\mathscr{L}(x,\lambda) = \nabla f(x) - \lambda\nabla g(x) = 0$. Notice
+\begin{align*}
+    \nabla f(x) &= \begin{pmatrix*}[c]
+        1\\
+        1
+    \end{pmatrix*}\\
+    \nabla g(x) &= \begin{pmatrix*}[c]
+        1/x_1\\
+        4/x_2
+    \end{pmatrix*}
+\end{align*}    
+so 
+\[\nabla_x\mathscr{L} = \begin{pmatrix*}[c]
+    1 - \lambda/x_1\\
+    1 - 4\lambda/x_2
+\end{pmatrix*}\]
+We now consider the following cases.
+\newline\newline
+\textbf{Case 1}: The constraint is inactive. Then $\lambda = 0$ and $\nabla_x\mathscr{L} \neq 0$, so no stationary points exist in this case.
+\newline\newline
+\textbf{Case 2}: The constraint is active. Then $\lambda \neq 0$ and from $\nabla_x\mathscr{L}(x,\lambda) = 0$, we have
+\begin{align*}
+    1 &= \frac{\lambda}{x_1}\\
+    1 &= \frac{4\lambda}{x_2}
+\end{align*}
+From this, we can see $4x_1 = x_2$. And since the constraint is active, we have $\log(x_1) + 4\log(x_2) = 1$, or equivalently, $\log(x_1) + 4\log(4x_1) = 1$. Solving,
+\begin{align*}
+    5\log(x_1) +4\log(4) &= 1\\
+    5\log(x_1) &= 1 - 4\log(4)\\
+    \log(x_1) &= \frac{1 - 4\log(4)}{5}\\
+    x_1 &= \text{exp}\left(\frac{1 - 4\log(4)}{5}\right)
+\end{align*}
+and so
+\[x_2 = 4\text{exp}\left(\frac{1 - 4\log(4)}{5}\right)\]
+And since $g(x) = 0$ at this point, and $\lambda = x_1 > 0$, the second order sufficiency condition is vacuously satisfied, so this point is a minimizer for $f$ with an associated minimal value of 
+\[f\left(\text{exp}\left(\frac{1-4\log(4)}{5}\right), \text{exp}\left(\frac{1-4\log(4)}{5}\right)\right) = 5\exp{\left(\frac{1-4\log(4)}{5}\right)}\]
+\newline\newline
+\textbf{6.} Let $Q$ be an $n \times n$ symmetric matrix.
+\begin{itemize}
+    \item[(i)] Find all stationary points of the problem 
+    \begin{align*}
+        \text{maximize} \hspace{1.5em} &f(x) = x^TQx\\
+        \text{subject to} \hspace{1.5em} &x^Tx = 1
+    \end{align*}
+    Notice we may rewrite the constraint as $g(x) = x^Tx - 1 = 0$. Using this, define the Lagrangian $\mathscr{L}(x,\lambda) = f(x) - \lambda^Tg(x)$. Since there is only one constraint function $g(x)$, we have $\lambda \in \mathbb{R}$, so $\mathscr{L}(x,\lambda) = f(x) - \lambda g(x)$. For a stationary point of $f$ over the given constraint, we require $\nabla_x\mathscr{L} = 0$. So
+    \begin{align*}
+        \nabla_x\mathscr{L}(x_*,\lambda_*) &= \nabla f(x_*) - \lambda_*\nabla g(x_*) = 0\\
+        \nabla f(x_*) &= \lambda_*\nabla g(x_*)\\
+        Qx_* &= \lambda_*x_*
+    \end{align*}
+    That is, the stationary points of $f$ over the constraint $g$ are the (normalized) eigenvectors of $Q$.
+    \item[(ii)] Determine which of the stationary points are global maximizers.
+    \newline\newline
+    Notice
+    \begin{align*}
+        f(x_*) &= x_*^TQx_*\\
+        &= x_*^T(\lambda_*)x^*\\
+        &= \lambda_*x_*^Tx_*\\
+        &= \lambda_*
+    \end{align*}
+    Then the maximizer of $f$ is the eigenvector corresponding to the maximum eigenvalue of $Q$. Let $v$ be the (normalized) eigenvector of $Q$ that corresponds to the maximum eigenvalue of $Q$. Then $v$ and $-v$ are maximizers to the optimization problem since $v^Tv = 1$ and $(-v)^T(-v) = v^Tv = 1$. 
+
+    \item[(iii)] How do your results in part (i) change if the constraint is replaced by 
+    \[x^TAx \leq 1,\]
+    where $A$ is positive definite?
+    \newline\newline
+    Since $A$ is positive definite, we have that $A$ is invertible. Let $g(x) = 1 - x^TAx = 0$ be the constraint function. Building our Lagrangian, we have
+    \[\mathscr{L}(x,\lambda) = f(x) - \lambda g(x)\]
+    and we require $\nabla_x\mathcal{L}(x,\lambda) = 0$ for a stationary point. Then
+    \begin{align*}
+        \nabla_x\mathscr{L}(x,\lambda) &= Qx + \lambda Ax = 0\\
+        Qx &= -A(\lambda x)\\
+        -A^{-1}Qx &= \lambda x
+    \end{align*}
+    That is, the eigenvectors of $-A^{-1}Q$ are stationary points for the problem with the new constraint.
+    \newline\newline
+\end{itemize}
+\textbf{7.} Use the optimality conditions to find all local solutions to the problem
+\begin{align*}
+    \text{minimize} \hspace{1em} &f(x) = x_1 + x_2\\
+    \text{subject to} \hspace{1em} &(x_1 - 1)^2 + x_2^2 \leq 2\\
+    &(x_1 + 1)^2 + x_2^2 \geq 2.
+\end{align*}
+To begin, let us rewrite the constraints to be of the \say{$\geq 0$} type. That is, the first constraint, call it $g_1(x)$, is 
+\[g_1(x) = 2 - (x_1 - 1)^2 - x_2^2 \geq 0\]
+Similarly, for the second constraint, calling it $g_2(x)$, we have
+\[g_2(x) = (x_1 + 1)^2 + x_2^2 -2 \geq 0\]
+Define the Lagrangian 
+\begin{align*}
+    \mathscr{L}(x,\lambda) &= f(x) - \lambda^Tg(x)
+\end{align*}
+For a stationary point of $f$ to exist on the given constraint, we require $\nabla_x\mathscr{L}(x,\lambda) = 0$. That is,
+\begin{align*}
+    \begin{pmatrix}
+        1 + 2\lambda_1(x_1 - 1) - 2\lambda_2(x_1 + 1)\\
+        1 + 2\lambda_1x_2 - 2\lambda_2x_2
+    \end{pmatrix}
+    &= \begin{pmatrix}
+        0\\
+        0
+    \end{pmatrix}
+\end{align*}
+We now consider the following cases:
+\newline\newline
+\textbf{Case 1}: Both constraints are inactive.
+\newline
+Then $\lambda_1 = \lambda_2 = 0$ and so $\nabla_x \mathscr{L} \neq 0$, so no stationary points exist in this case.
+\newline\newline
+\textbf{Case 2}: The first constraint is active.
+\newline
+Then $\lambda_2 = 0$ and from $\nabla_x\mathscr{L}(x,\lambda) = 0$, we have
+\begin{align*}
+    1 &= -2\lambda_1(x_1 - 1)\\
+    1 &= -2\lambda_1x_2
+\end{align*}
+From this, we have $x_2 = x_1 - 1$. Since the first constraint is active, 
+\begin{align*}
+    (x_1 - 1)^2 + x_2^2 &= 2\\
+    2x_2^2 &= 2\\
+    x_2 &= \pm 1
+\end{align*}
+Then we find the following points: $x = (2, 1)^T$ and $x = (0,-1)^T$. For $x = (2, 1)^T$, $\lambda_1 = -1/2 < 0$ so $(2,1)^T$ is not optimal. Additionally, from the second constraint, we can see that $x = (0, -1)^T$ is infeasible.
+\newline\newline
+\textbf{Case 3}: The second constraint is active.
+\newline
+Then $\lambda_1 = 0$ and from $\nabla_x \mathscr{L}(x, \lambda) = 0$, we have
+\begin{align*}
+    1 &= 2\lambda_2(x_1 + 1)\\
+    1 &= 2\lambda_2x_2
+\end{align*}
+From this, we can see $x_1 + 1 = x_2$ and since the second constraint is active, we have
+\begin{align*}
+    (x_1 + 1)^2 + x_2^2 &= 2\\
+    2x_2^2 &= 2\\
+    x_2 &= \pm 1
+\end{align*}
+Which gives us the following points: $x = (0, 1)^T$ and $x = (-2, -1)^T$. From the first constraint, $x = (-2,-1)^T$ is infeasible. For the first point, we find $\lambda_2 = 1/2$, so now we need to check the sufficient minimum condition. Notice that 
+\[\nabla_{xx}^2\mathscr{L}(x,\lambda) = \begin{pmatrix*}[r]
+    -1 & 0\\
+    0 & -1
+\end{pmatrix*}\]
+and
+\[\nabla g(x) = \begin{pmatrix*}[r]
+    2 & -2\\
+    2 & 2
+\end{pmatrix*}\]
+Since $\lambda_1 = 0$, the first constraint is degenerate, so we must find a null space basis matrix $Z_+$ for $(2,-2)^T$. Clearly, $Z_+ = (1,1)^T$ will work. Now, let us check the second order sufficiency condition:
+\begin{align*}
+    Z_+^T\nabla_{xx}^2\mathscr{L}(x, \lambda)Z_+ &= (1,1)\begin{pmatrix*}[r]
+        -1 & 0\\
+        0 & -1
+    \end{pmatrix*}
+    \begin{pmatrix}
+        1\\
+        1
+    \end{pmatrix}\\
+    &= (1,1)\begin{pmatrix*}[r]
+        -1\\
+        -1
+    \end{pmatrix*}\\
+    &= -2 < 0
+\end{align*}
+So $x = (0,1)^T$ is not a minimizer of $f$.
+\newline\newline
+\textbf{Case 4}: Both constraints are active.
+\newline
+Then 
+\begin{align*}
+    (x_1 - 1)^2 + x_2^2 &= 2\\
+    (x_1 + 1)^2 + x_2^2 &= 2
+\end{align*}
+Subtracting the second from the first, we have 
+\[(x_1 - 1)^2 = (x_1 + 1)^2\]
+so 
+\[x_1 - 1 = \pm (x_1 + 1).\]
+If $x_1 - 1 = x_1 + 1$, we find $2 = 0$, a contradiction. Then $x_1 - 1 = -x_1 - 1$, which gives us $x_1 = 0$. Then $x_2 = \pm 1$. From case 3, we saw $x = (0,1)^T$ is not a minimizer so we must check $x = (0,-1)^T$. For this point, and the fact $\nabla_x\mathscr{L}(x,\lambda) = 0$, we find $\lambda_1 = 1/2$, $\lambda_2 = 0$. Then the second constraint is degenerate. With these values of $\lambda$, we have
+\[\nabla_{xx}^2\mathscr{L}(x, \lambda) = \begin{pmatrix}
+    1 & 0\\
+    0 & 1
+\end{pmatrix}\]
+Since the second constraint is degenerate, we must find a null space matrix $Z_+$ for the second row of $\nabla g(x)$:
+\[\nabla g(x) = \begin{pmatrix*}[r]
+    2 & 2\\
+    2 & -2
+\end{pmatrix*}\]
+Then $Z_+ = (1,1)^T$, the same as in case 3. Finally, we must check the second order sufficiency condition:
+\begin{align*}
+    Z_+\nabla_{xx}^2\mathscr{L}(x,\lambda)Z &= (1,1)\begin{pmatrix}
+        1 & 0\\
+        0 & 1
+    \end{pmatrix}
+    \begin{pmatrix}
+        1\\
+        1
+    \end{pmatrix}\\
+    &= (1,1)\begin{pmatrix}
+        1\\
+        1
+    \end{pmatrix}\\
+    &= 2 > 0
+\end{align*}
+So the second order sufficiency conditions are satisfied. So $x = (0,-1)^T$ is a minimizer for $f$ with respect to the given constraints with an associated minimum value of
+\[f(0,-1) = -1\]
+\end{document}
