@@ -1,0 +1,114 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{empty}
+
+
+\title{Solid State Physics HW 9}
+\author{Michael Nameika}
+\date{December 2022}
+
+\begin{document}
+
+\maketitle
+
+\textbf{6. \textit{Frequency Dependence of the electrical conductivity.} } Use the equation $m(dv/dt + v/\tau) = -eE$ for the electron drift velocity $v$ to show that the conductivity at frequency $\omega$ is
+\[\sigma(\omega) = \sigma(0)\left(\frac{1 + i\omega\tau}{1 + (\omega\tau)^2}\right)\]
+where $\sigma(0) = ne^2\tau/m$.
+\newline\newline
+To begin, suppose $v = v_0e^{-i\omega t}$. then $E = E_0e^{-i\omega t}$ since the drift velocity is directly related to the electric field. Now, from the differential equation above, we have
+\begin{align*}
+    &m\left(\frac{dv}{dt} + \frac{v}{\tau}\right) = -eE \\
+    &m\left(\frac{d}{dt}(v_0e^{-i\omega t}) + \frac{v_0e^{-i\omega t}}{\tau}\right) = -eE \\
+    &m\left(-i\omega v_0 e^{-i\omega  t} + \frac{v_0e^{-i\omega t}}{\tau}\right) = -eE_0e^{-i\omega t} \\
+    &m\left(-i\omega v_0 + \frac{v_0}{\tau}\right) = -eE_0 \\
+\end{align*}
+Recall that $J = \sigma E$ and $J = nq\mathbf{v}$ (here, $q = -e$) and so 
+\[\mathbf{v} = \frac{\sigma E}{-ne}\]
+Using this, our above equation becomes
+\begin{align*}
+    &\frac{-im\omega E_0}{ne}\sigma + \frac{mE_0}{ne\tau}\sigma = -eE_0 \\
+    &\frac{-im\omega}{-ne}\sigma + \frac{m}{-ne\tau}\sigma = -e \\
+    &-i\omega\tau\sigma + \sigma = \frac{ne^2\tau}{m} \\
+    &\sigma(1-i\omega\tau) = \sigma(0) \\
+    &\sigma(\omega) = \sigma(0)\left(\frac{1}{1-i\omega\tau}\right) \\
+    &\sigma(\omega) = \sigma(0)\left(\frac{1 + i\omega\tau}{1 + (\omega\tau)^2}\right) \\
+\end{align*}
+
+\textbf{9. \textit{Static magnetoconductivity tensor.}} For the drift velocity theory of (51), show that the static current density can be written in matrix form as 
+\[\begin{pmatrix}
+    j_x \\
+    j_y \\
+    j_z \\
+\end{pmatrix}
+ = \frac{\sigma_0}{1 + (\omega_c\tau)^2}\begin{pmatrix}
+    1 & -\omega_c\tau & 0 \\
+    \omega_c\tau & 1 & 0 \\
+    0 & 0 & 1 + (\omega_c\tau)^2
+ \end{pmatrix}
+ \begin{pmatrix}
+    E_x \\
+    E_y \\
+    E_z \\
+ \end{pmatrix}\]
+From the drift velocity theory of (51), we have
+\begin{align*}
+    m\left(\frac{d}{dt} + \frac{1}{\tau}\right)v_x &= -e\left(E_x + \frac{B}{c}v_y\right) \\
+    m\left(\frac{d}{dt} + \frac{1}{\tau}\right)v_y &= -e\left(E_y - \frac{B}{c}v_x\right) \\
+    m\left(\frac{d}{dt} + \frac{1}{\tau}\right)v_z &= -eE_z
+\end{align*}
+For static current density, we have $d\textbf{v}/dt = 0$; using this and rearranging the above equations to solve for $v_x, v_y,$ and $v_z$, we find
+\begin{align*}
+    v_x &= \frac{1}{1 + (\omega_c\tau)^2}\left(\frac{-e\tau}{m}(E_x + \omega_c\tau E_y)\right) \\
+    v_y &= \frac{1}{1 + (\omega_c\tau)^2}\left(\frac{-e\tau}{m}(E_y + \omega_c\tau E_x)\right) \\
+    v_z &= -\frac{-e\tau E_z}{m} \\
+\end{align*}
+Further recall that current density is defined by
+\[j = nq\textbf{v}\]
+here, $q = -e$. Using this and the equations we found above for $v_x, v_y, $ and $v_z$, and writing the current density in matrix notation, we find
+\[\begin{pmatrix}
+    j_x \\
+    j_y \\
+    j_z \\
+\end{pmatrix}
+= \frac{\sigma_0}{1 + (\omega_c\tau)^2}\begin{pmatrix}
+    1 & -\omega_c\tau & 0 \\
+    \omega_c\tau & 1 & 0 \\
+    0 & 0 & 1 + (\omega_c\tau)^2
+\end{pmatrix}
+\begin{pmatrix}
+    E_x \\
+    E_y \\
+    E_z \\
+\end{pmatrix}
+\]
+Where $\sigma_0 = ne^2\tau/m$, which is what we sought to show. 
+\newline\newline
+Now, we wish to show in the limit $\omega_c\tau \gg 1$, we have that
+\[\sigma_{yx} = \frac{nec}{B} = -\sigma_{xy}\]
+To begin, rewriting the matrix system above in tensor notation, we have
+\[j_{i} = \sigma_{ij}E_j\]
+Thus, 
+\[j_{y} = \sigma_{yx}E_x + \sigma_{yy}E_y + \sigma_{yz}E_z\]
+Then 
+\begin{align*}
+    \sigma_{yx} &= \frac{\sigma_0\omega_c\tau}{1 + (\omega_c\tau)^2} \\
+    &= \frac{ne^2\tau(\omega_c\tau)}{m(1 + (\omega_c\tau))^2} \\
+    &= \frac{ne^2\tau}{m(1/(\omega_c\tau) + \omega_c\tau)} \\
+    &= \frac{ne^2\tau}{m(1/(\omega_c\tau)+eB/(mc)\tau)} \\
+    &= \frac{ne^2\tau}{m(eB/(mc))\tau} \;\;\; (\omega_c\tau \gg 1)\\
+    &= \frac{nec}{B} \\
+\end{align*}
+Now, notice that
+\[\sigma_{xy} = \frac{-\sigma_0\omega_c\tau}{1 + (\omega_c\tau)^2}\]
+so by the same process as above, we have that 
+\[\sigma_{yx} = -\sigma_{xy}\]
+which is what we wanted to show.
+\end{document}

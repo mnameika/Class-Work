@@ -1,0 +1,163 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{empty}
+
+
+\title{Solid State Physics HW 8}
+\author{Michael Nameika}
+\date{November 2022}
+
+\begin{document}
+
+\maketitle
+
+\textbf{6.1 \textit{Kinetic energy of electron gas. }}Show that the kinetic energy of a three-dimensional gas of $N$ free electrons at $0$ K is
+\[U_0 = \frac{3}{5}N\epsilon_F\]
+Proof: To show this result, we must find the average of $\epsilon_k$ over the volume of the Fermi sphere. To begin, recall
+\[\epsilon_k = \frac{\hbar^2}{2m}k^2\]
+and so the average over the Fermi sphere is given by
+\[\langle \epsilon_k \rangle_{\Omega} = \frac{\frac{\hbar^2}{2m}\iiint_{\Omega}k^2d\Omega}{\iiint_{\Omega}d\Omega}\]
+where $\Omega$ is the region (volume) occupied by the Fermi sphere. Rewriting, we have
+\begin{align*}
+    \langle \epsilon_k \rangle_{\Omega} &= \frac{\hbar^2}{2m}\frac{\int_0^{2\pi}\int_0^{\pi}\int_0^{k_F}k^4\sin{(\phi)}dkd\phi d\theta}{4/3\pi k_F^3} \\
+    &= \frac{\hbar^2}{2m}\frac{3}{4\pi k_F^3}\int_0^{2\pi}d\theta\int_0^{\pi}\sin{(\phi)}d\phi\int_0^{k_F}k^4dk \\
+    &= \frac{\hbar^2}{2m}\frac{3}{4\pi k_F^3}(2\pi)(2)\left(\frac{k_F^5}{5}\right) \\
+    &= \frac{3}{5}\frac{\hbar^2}{2m}k_F^2 \\
+    &= \frac{3}{5}\epsilon_F \\
+\end{align*}
+Now, this result is for a single electron, so for a gas of $N$ electrons, we have
+\[\langle \epsilon_k \rangle_{\Omega} = \frac{3}{5}N\epsilon_F\]
+Which is what we wanted to show.
+\newline\newline
+\textbf{6.2 \textit{Pressure and bulk modulus of an electron gas.}} (a) Derive a relation connecting the pressure and volume of an electron gas at $0$ K. Hint: Use the result of Problem 1 and the relation between $\epsilon_F$ and electron concentration. The result may be written as $p = \frac{2}{3}(U_0/V)$. (b) Show that the bulk modulus $B = -V(\partial p/\partial V)$ of an electron gas at $0$ K is $B = 5p/3 = 10U_0/9V$. (c) Estimate for potassium, using Table 1, the value of the electron gas contribution to $B$.
+\begin{itemize}
+    \item[(a)] Recall that pressure is given by 
+    \[p = - \frac{dU_0}{dV}\]
+    From our result in Problem 1, we have
+    \[U_0 = \frac{3}{5}N\epsilon_F\]
+    and we have that
+    \[\epsilon_F = \frac{\hbar^2}{2m}\left(\frac{3\pi^2N}{V}\right)^{2/3}\]
+    so
+    \[U_0 = \frac{3}{5}N\frac{\hbar^2}{2m}\left(\frac{3\pi^2N}{V}\right)^{2/3}\]
+    Differentiating with respect to $V$:
+    \begin{align*}
+        -\frac{dU_0}{dV} &= -\frac{3}{5}N\frac{\hbar^2}{2m}(3\pi^2N)^{2/3}\left(\frac{2}{3}\frac{1}{V^{-1/3}}\frac{-1}{V^2}\right) \\
+        &= \frac{2}{3}\cdot\frac{3}{5}N\frac{\hbar^2}{2m}(3\pi^2N)^{2/3}\left(\frac{V^{1/3}}{V^2}\right) \\
+        &= \frac{2}{3}\left(\frac{3}{5}N\frac{\hbar^2}{2m}\left(\frac{3\pi^2N}{V}\right)^{2/3}\right)\frac{1}{V} \\
+        &= \frac{2}{3}\frac{U_0}{V} \\
+    \end{align*}
+    
+    \item[(b)] From Problem 2, we have
+    \[p = \frac{2}{3}\frac{U_0}{V}\]
+    Rewriting $U_0$ to be in terms of $V$, we find 
+    \[p = \frac{N\hbar^2}{5m}(3\pi^2N)^{2/3}\left(\frac{1}{V^{5/3}}\right)\]
+    Differentiating, we see
+    \[\frac{\partial p}{\partial V} = -\frac{N\hbar^2}{3m}(3\pi^2N)^{2/3}V^{-8/3}\]
+    \begin{align*}
+        -V\frac{\partial p}{\partial V} &= \frac{N\hbar^2}{3m}(3\pi^2N)^{2/3}V^{-5/3} \\
+        &= \left(\frac{3}{5}\right)\left(\frac{5}{3}\right)\left(\frac{2}{3}\right)\frac{\hbar^2}{2m}N\left(\frac{3\pi^2N}{V}\right)^{2/3}\frac{1}{V} \\
+        &= \frac{10}{9}\frac{U_0}{V} \\
+        &= \frac{5}{3}p \\
+    \end{align*}
+    Which is what we wanted to show.    
+    
+    \item[(c)] From Table 1, we find the following values for potassium:
+    \begin{align*}
+        \epsilon_F &= 2.12 \text{ eV} \\
+        v_F &= 0.86 \times 10^8 \;\; \frac{\text{cm}}{\text{s}} \\
+        \rho_e &= 1.4 \times 10^{22} \;\; \frac{\text{electrons}}{\text{cm}^3} \\
+    \end{align*}
+    
+    where $\rho_e$ is the electron density. Then the number of electrons in sample of potassium containing is given by
+    \[N = \rho_eV\]
+    Thus, 
+    \begin{align*}
+        B &= \frac{10}{9}\frac{U_0}{V} \\
+        &= \frac{2}{3}\rho_e\epsilon_F \\
+        &= \frac{2}{3}(2.12)(1.4\times 10^{22} \text{ cm}^{-3})(1.602\times 10^{-19}\text{ J}) \\
+        &\approx 3.169 \times 10^9 \;\;\frac{\text{N}}{\text{m}^2} \\
+    \end{align*}
+    From Table 3.3, we find that the bulk modulus for potassium is given as
+    \[B = 3.2 \times 10^9 \;\; \frac{\text{N}}{\text{m}^2}\]
+    So we can see that the majority of the bulk modulus for potassium is a result of the electron gas.
+    
+    
+\end{itemize}
+
+\textbf{6.4. \textit{Fermi gases in astrophysics.}} (a) Given $M_{\odot} = 2\times 10^{33}$ g for the mass of the Sun,estimate the number of electrons in the Sun. In a white dwarf star this number of electrons may be ionized and contained in a sphere of radius $2 \times 10^9$ cm; find the Fermi energy of the electrons in electron volts. (b) The energy of an electron in the relativistic limit $\epsilon \gg mc^2$ is related to the wave vector as $\epsilon \approx pc = \hbar kc$. Show that the Fermi energy in this limit is $\epsilon_F \approx \hbar c(N/V)^{1/3}$, roughly. (c) If the above number of electrons were contained within a pulsar of radius 10 km, show that the Fermi energy would be $\approx 10^8$ eV. This value explains why pulsars are believed to be comprised largely of neutrons rather than of protons and electrons, for the energy release in the reaction $n \to p + e^{-}$ is only $0.8 \times 10^6$ eV, which is not large enough to enable many electrons to form a Fermi sea. The neutron decay proceeds only until the electron concentration builds up enough to create a Fermi level of $0.8 \times 10^6$ eV, at which point the neutron, proton, and electron concentrations are in equilibrium.
+
+\begin{itemize}
+    \item[(a)] To begin, let us make the following approximations: the sun is comprised entirely of hydrogen and for each hydrogen atom, there is exactly one electron. Given the mass of the sun, and that the mass of hydrogen is approximately 1 amu, let us calculate the number of hydrogen atoms in the sun:
+    \begin{align*}
+        N_H &= \frac{2\times 10^{33} \text{ g}}{1.661 \times 10^{-24} \text{ g}} \\
+        &\approx 1.204\times 10^{57} \\
+    \end{align*}
+    Thus, there are approximately $1.204 \times 10^{57}$ hydrogen atoms, and by our approximation, we have the same number of electrons. Denote the number of electrons in the sun by $N$. Now, in a white dwarf of radius $2\times 10^9 \text{ cm}$, we have the following Fermi energy:
+    \begin{align*}
+        \epsilon_F &= \frac{(1.05459 \times 10^{-34} \text{ Js})^2}{2(9.69\times 10^{-31} \text{ kg}}(3\pi^2)^{2/3}\left(\frac{1.204\times 10^{57}}{(32/3)\pi\times 10^{21}\text{ m}^3}\right)^{2/3} \\
+        &\approx 5.98\times 10^{-15} \text{J} \\
+        &\approx 3.73 \times 10^4 \text{ eV} \\
+    \end{align*}
+    So the Fermi energy of a white dwarf with the same number of electrons as the sun is approximately $\epsilon_F = 3.73 \times 10^4$ eV.
+    
+    
+    \item[(b)] Very roughly speaking, we should not expect k-space to be effected by relativistic effects, and since $k_F = (3\pi^2N/V)^{1/3}$, $k_F \approx (N/V)^{1/3}$ and so 
+    \[\epsilon_F \approx \hbar c \left(\frac{N}{V}\right)^{1/3}\]
+    
+    
+    \item[(c)] Given a neutron star of radius of 10 km ($10^4$ m), using the relativistic formula we found in part (b) (since some neutron stars rotate at relativisic speeds), and the number of electrons in part (a), we find the following for the Fermi energy:
+    \begin{align*}
+        \epsilon_F &= (1.055\times 10^{-34} \text{ Js})(3\times 10^8 \text{ ms}^{-1})\left(\frac{1.204\times 10^{57}}{(4/3)\pi\times 10^8 \text{ m}^3}\right)^{1/3}\\
+        &\approx 2.08 \times 10^{-12} \text{ J} \\
+        &\approx 1.298\times 10^8 \text{ eV} \\
+    \end{align*}
+    so we find the Fermi energy to be $\epsilon_F \approx 1.298 \times 10^8$ eV, which is on the order of $10^8$ eV, which is what we sought to show.
+    
+    
+\end{itemize}
+
+\textbf{6.5. \textit{Liquid He}}$^3$\textbf{.} The atom $\text{He}^3$ has spin $\frac{1}{2}$ and is a fermion. The density of liquid $\text{He}^3$ is $0.081$ g $\text{cm}^{-3}$ near absolute zero. Calculate the Fermi energy $\epsilon_F$ and the Fermi temperature $T_F$.
+\newline\newline
+To begin, $\text{He}^3$ has an atomic mass of $3.016 \text{ amu}$, and since $1 \text{ amu} = 1.661\times 10^{-27} \text{ kg}$, we have that an atom of $\text{He}^3$ has mass
+\begin{align*}
+    m_{\text{He}^3} &= (3.016)(1.661\times 10^{-27} \text{ kg}) \\
+    &\approx 5.01 \times 10^{-27} \text{ kg} \\
+\end{align*}
+And since we are given the density of $\text{He}^3$, we may calculate how many $\text{He}^3$ atoms there are per centimeter cubed. Thus,
+\begin{align*}
+    0.081 \text{ g} &= M(5.01\times 10^{-24} \text{ g}) \\
+    M &= 1.617 \times 10^{25}\\
+\end{align*}
+Here, $M$ is the number of atoms.
+\newline
+So there are approximately $1.617 \times 10^{25}$ $\text{He}^3$ atoms in a sample of mass $0.081 \text{ g}$. Now, our density becomes
+\begin{align*}
+    \rho &= 1.617 \times 10^{25} \;\;\frac{\text{atoms}}{\text{cm}^3} \\
+\end{align*}
+Then the number of atoms in a given sample of volume $V$ is 
+\[N = \rho V\]
+So the equation for Fermi energy becomes
+\[\epsilon_F = \frac{\hbar^2}{2m}(3\pi^2\rho)^{2/3}\]
+Evaluating, we find
+\begin{align*}
+        \epsilon_F &= \frac{(1.0546\times 10^{-34} \text{ Js})^2}{2(3.215\times 10^{-27} \text {kg}}(3\pi^2)^{2/3}(1.617 \times 10^{31} \text{ m}^{-3})^{2/3} \\
+        &\approx 1.05857 \times 10^{-22} \text{ J} \\
+\end{align*}
+Recall that the Fermi temperature is related to the Fermi energy by the following expression:
+\[T_F = \frac{\epsilon_F}{k_B}\]
+Thus,
+\begin{align*}
+    T_F &= \frac{1.05857\times 10^{-22} \text{ J}}{1.38062\times 10^{-23} \text{ JK}^{-1}} \\
+    &\approx 7.667 \text{ K} \\
+\end{align*}
+Thus our Fermi energy is approximately $7.667$ K.
+\end{document}

@@ -1,0 +1,170 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{empty}
+
+
+
+\title{Solid State Physics HW4}
+\author{Michael Nameika}
+\date{October 2022}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+From Table 1 in Chapter 3 of Kittel, we see that copper and gold have similar cohesive energies, and likewise from Table 2 in Chapter 1, we see that copper and gold have similar lattice constants and both crystallize in the face centered cubic system. That is, it is reasonable to expect that a copper-gold alloy will crystallize in the face centered cubic system as well. By the attached drawings, we can see that the expected concentrations of copper-gold are 3:1, 1:1, 1:3. That is, we expect alloys of concentration of $25\%/75\%$, $50\%/50\%$, and $75\%/25\%$ copper/gold.
+
+For an experiment to determine if the alloy is ordered or not, 
+
+
+\section*{Problem 2}
+
+\textbf{\textit{Structure factor of diamond.}}
+\newline
+(a) Find the structure factor $S$ of this basis.
+\newline
+Recall the formula for the structural factor
+\[S = \sum_i f_i e^{-i\textbf{r}_i\cdot \textbf{G}}\]
+where we sum over all atoms of the basis. Recall that the crystal structure of diamond is face centered cubic with an additional face centered cubic lattice displaced by $\left(\frac{1}{4},\frac{1}{4}, \frac{1}{4}\right)$ from the original. Further recall that a face centered cubic lattice has 4 basis atoms, so the diamond crystal structure will have 8 basis atoms. Additionally, since diamond consists only of carbon atoms, each $f_i$ is the same, so we may factor it out of the sum. Then our structure factor for diamond takes the following form:
+\[S_{\text{diamond}} = f(1 + e^{-i\pi(v_1 + v_2)} + e^{-i\pi(v_1 + v_3)} + e^{-1\pi(v_2 + v_3)} + e^{-i\pi/2(v_1 + v_2 + v_3)} + e^{-i\pi/2(3v_1 + 3v_2 + v_3)} + \cdots  \]
+\[e^{-i\pi/2(3v_1 + v_2 + 3v_3)} + e^{-i\pi/2(v_1 + 3v_2 + 3v_3)})\]
+(b) Find the zeros of $S$ and show that the allowed reflections of the diamond structure satisfy $v_1 + v_2 + v_3 = 4n$, where all indices are even and $n$ is any integer, or else all indices are odd.
+\newline
+Notice we may rewrite the equation for $S_{\text{diamond}}$ in the following way:
+\[S_{\text{diamond}} = f (1 + e^{-i\pi(v_1 + v_2)} + e^{-i\pi(v_1 + v_3)} + e^{-1\pi(v_2 + v_3)} + e^{-i\pi/2(v_1 + v_2 + v_3)}(1 + e^{-i\pi(v_1 + v_2)} + e^{-i\pi(v_1 + v_3)} + e^{-1\pi(v_2 + v_3)}))\]
+factoring, we find
+\[S_{\text{diamond}} = f(1 + e^{-i\pi(v_1 + v_2)} + e^{-i\pi(v_1 + v_3)} + e^{-1\pi(v_2 + v_3)})(1 + e^{-i\pi/2(v_1 + v_2 + v_3)})\]
+Notice that the first factor is simply the structure factor for a face centered cubic lattice, and so is nonzero if and only if all $v_1,v_2,v_3$ are either odd or even. Now we must find when the second factor, $1 + e^{-i\pi/2(v_1 + v_2 + v_3)}$ is equal to zero given the above condition.
+\newline
+
+\textbf{Case 1}: $v_1 = 2h$, $v_2 = 2k$, $v_3 = 2l$ for some $h,k,l \in \mathbb{Z}$.
+\newline
+Then 
+\[1 + e^{-i\pi/2(v_1 + v_2 + v_3)} = 1 + e^{-i\pi(h + k + l)}\]
+Notice that if $h + k + l = 2m + 1$ for some $m \in \mathbb{Z}$, then the above equation equals zero. Likewise, if $h + k + l = 2n$ for some $n \in \mathbb{Z}$, then the above equation is nonzero. Then the structure factor is nonzero whenever
+\[v_1 + v_2 + v_3 = 2h + 2k + 2l = 2(h + k + l) = 2(2n) = 4n\]
+for some $n \in \mathbb{Z}$.
+\newline
+
+\textbf{Case 2}: $v_1 = 2h + 1$, $v_2 = 2k + 1$, $v_3 = 2l + 1$, for some $h,k,l \in \mathbb{Z}$.
+\newline
+Then $v_1 + v_2 + v_3 = 2(h + k + l + 1) + 1$ and
+\[1 + e^{-i\pi/2(v_1 + v_2 + v_3)} = 1 + e^{-i\pi/2(2(h + k + l + 1) + 1)}\]
+\[ = 1 + e^{-i\pi(h + k + l + 1)}e^{-i\pi/2}\]
+\[ = 1 \pm i\]
+
+
+So we can see that the structure factor for diamond is nonzero whenever all indices are odd, or $v_1 + v_2 + v_3 = 4n$ for some $n \in \mathbb{Z}$ whenever $v_1,v_2,v_3 \in 2\mathbb{Z}$.
+
+\section*{Problem 3}
+
+Consider ceramic material of AB type with a known mass density of 2.65 $\text{g/cm}^3$ and a unit cell of cubic symmetry with a lattice constant of 0.43 nm. The atomic weights of the A and B elements are 86.6 and 40.3 g/mol, respectively. Determine the possible crystal structures for this material among the rock salt, cesium chloride, and zincblende structures.
+\newline
+
+We are given the material has a mass density $\rho = 2.65 \text{g/cm}^3$ with cubic symmetry with a lattice constant of $a = 4.3 \text{\AA}$ where the atomic weight of the A element is $86.6 \text{g/mol}$ and the atomic weight of the B element is $40.3 \text{g/mol}$. To begin, let us convert the mass density from $\text{g/cm}^3$ to $\text{g/\AA}^3$. Recall an angstrom is $10^{-10} \text{m}$ and a centimeter is $10^{-2} \text{m}$. Then it follows that there are $10^8 \text{\AA}$ per centimeter. Then there are $10^{24} \text{\AA}^3$ per $\text{cm}^3$. Now our mass density becomes
+\begin{align*}
+    \rho &= 2.65 \frac{\text{g/cm}^3}{10^{24} \text{\AA}^3/\text{cm}^3} \\
+    &= 2.65 \times 10^{-24} \text{g/\AA}^3
+\end{align*}
+Now, let us find the atomic mass of A and B in terms of g/atoms. Recall that $1 \text{mol} = 6.02 \times 10^{23} \text{atoms}$. Denote the atomic weight of A and B as $w_A$ and $w_B$, respectively. Then
+\begin{align*}
+    w_A &= \frac{86.6 \text{g}}{6.02\times 10^{23} \text{atoms}} \\
+    &= 1.43854\times 10^{-22} \text{g/atom} \\
+    w_B &= \frac{40.3 \text{g}}{6.02 \times 10^{23} \text{atoms}} \\
+    &= 6.69435 \times 10^{-23} \text{g/atom} \\
+\end{align*}
+Now, since the material is of cubic symmetry, the volume of a unit cell is simply given by $V = a^3$. Then the volume of the unit cell is
+\begin{align*}
+    V &= (4.3 \text{\AA})^3 \\
+    &= 79.507 \text{\AA}^3 \\
+\end{align*}
+And our mass per unit cell is given by
+\begin{align*}
+    m &= \rho V \\
+    &= (2.65 \times 10^{-24} \text{g/\AA}^3)(79.507 \text{\AA}^3) \\
+    &= 2.107 \times 10^{-22} \text{g} \\
+\end{align*}
+Now that we have the atomic mass of A and B, and the mass per unit cell, we may analyze the rock salt, zincblende, and cesium chloride structures to determine which structure this material crystallizes in. 
+Let us begin with the rock salt structure. Recall that the rock salt structure is face centered cubic with an additional face centered cubic lattice displaced by $(1/2,1/2,1/2)$, and thus will have 4 A and 4 B atoms in the basis. 
+That is, the total mass of the rock salt structure for the AB material will be given by
+\begin{align*}
+    m_{rs} &= 4w_A + 4w_B \\
+    &= 4(1.43854 \times 10^{-22} \text{g}) + 4(6.69435 \times 10^{-23} \text{g}) \\
+    &= 5.75416 \times 10^{-22} \text{g} + 2.67774 \times 10^{-22} \text{g} \\
+    &= 8.4319 \times 10^{-22} \text{g} \\
+    &\neq m \\
+\end{align*}
+So AB does not crystallize in the rock salt structure. Now let us analyze the zincblende structure. 
+Recall that zincblende crystallizes in the diamond crystal structure, which is a face centered cubic lattice with an additional face centered cubic lattice displaced by $(1/4,1/4,1/4)$. 
+
+Then there are 4 A atoms and 4 B atoms per basis, the same number of basis atoms as in the rock salt structure. 
+Then the mass of AB in the zincblende structure will the same as in the rock salt structure, so AB does not crystallize in the zincblende structure.
+
+Finally, let us analyze the cesium chloride structure. Recall that the cesium chloride structure is a simple cubic lattice with an additional simple cubic lattice displaced by $(1/2,1/2,1/2)$.
+Then there will be 1 A and 1 B atom per unit cell. Denote the mass of AB in the cesium chloride structure as $m_{CsCl}$ and let us calculate the mass of this unit cell:
+\begin{align*}
+    m_{CsCl} &= w_A + w_B \\
+    &= 1.43854 \times 10^{-22} \text{g} + 6.69435 \times 10^{-23} \text{g} \\
+    &= 2.10798 \times 10^{-22} \text{g} \\
+    &\approx m \\
+\end{align*}
+So we can see that the AB material crystallizes in the cesium chloride structure.
+\newline
+
+
+\section*{Problem 4}
+At 300K, Al has an FCC structure with a lattice constant of 0.405 nm. The coefficient of thermal expansion for Al is $\alpha = 25 \times 10^{-6} \text{K}^{-1}$. During the diffraction experiment, we employed $\text{CuK}_{\alpha 1}$ radiation which has a wavelength of $\lambda = 0.15406$ nm. Our goal was to study the change $\Delta \theta$ in $\theta $ due to the change of temperature from 300 to 600K.
+\begin{enumerate}
+    \item Derive an expression for $\Delta \theta$ in terms of $\theta$. 
+    \newline
+    From Bragg's law, we have $\sin{(\theta)} = \frac{\lambda\sqrt{h^2 + k^2 + l^2}}{2a}$. Differentiating with respect to $T$ and using the fact that $\frac{da}{dT} = \alpha a$ (thermal expansion), we find
+    \begin{align*}
+        \cos{(\theta)}\frac{d\theta}{dT} &= \frac{\lambda\sqrt{h^2 + k^2 + l^2}}{2}(-a^{-2})\frac{da}{dT} \\
+        \frac{d\theta}{dT} &= -\sec{(\theta)}\frac{\lambda\sqrt{h^2+k^2+l^2}}{2a}(\alpha) \\
+        \Delta \theta &= -\sec{(\theta)}\frac{\lambda \sqrt{h^2 + k^2 + l^2}}{2a}(\alpha \Delta T) \\
+    \end{align*}
+    
+    \item For the (111), (333), and (442) reflections, evaluate $\Delta \theta$.
+    \newline
+    To begin, let us calculate the angle that corresponds to the (111) plane. Using Bragg's law, we get
+    \begin{align*}
+        \theta &= \arcsin{\left(\frac{1.5406(\sqrt{3}) \text{\AA}}{2(4.05) \text{\AA}}\right)} \\
+        &\approx 19.23^{\circ} \\
+    \end{align*}
+    Plugging this value into the equation we found for $\Delta \theta$, we find
+    \[\Delta \theta \approx -0.15^{\circ}\]
+    That is, the diffraction lines will move approximately $.15^{\circ}$ left. Now, let us find the angle that corresponds to the plane (333):
+    \begin{align*}
+        \theta &= \arcsin{\left( \frac{1.5406(3\sqrt{3}) \text{\AA}}{8.1 \text{\AA}} \right)} \\
+        &\approx 81.23^{\circ} \\
+    \end{align*}
+    Plugging this value into the equation we found for $\Delta \theta$, we get
+    \[\Delta \theta = -0.056^{\circ}\]
+    That is, the diffraction lines will move approximately $0.056^{\circ}$ to the left. Finally, let us find the angle that corresponds to the plane (442):
+    \newline
+    Plugging it in, I found a complex number for the angle. Something is not right here...
+    \[\theta = \arcsin{\left(\frac{1.5406*6}{8.1}\right)}\]
+    ?
+    
+    \item Based on the results from the previous two tasks, how would you design the experiment to measure the thermal expansion coefficient for an unknown compound?
+    \newline
+    
+    Suppose we perform an x-ray diffraction experiment on some (cubic) material at some temperature (eg. room temperature), and we calculate the Miller indices. 
+    Then suppose we increase the temperature by a fixed amount, and perform the x-ray diffraction experiment again, and we find the difference between the initial temperature's angles and the new temperature's angles. 
+    
+    Then using the equation we found in part 1, we may rearrange the terms to solve for the thermal expansion coefficient $\alpha$. 
+    
+\end{enumerate}
+
+
+
+\end{document}

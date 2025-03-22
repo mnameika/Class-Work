@@ -1,0 +1,128 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{empty}
+
+
+\title{Solid State Physics HW 5}
+\author{Michael Nameika}
+\date{October 2022}
+
+\begin{document}
+
+\maketitle
+
+\section*{3.2 \textit{Cohesive energy of bcc and fcc neon.}}
+Using the Lennard-Jones potential, calculate the ratio of the cohesive energies of neon in the bcc and fcc structures. The lattice sums for the bcc structures are
+\[\sum_j p_{ij}^{-12} = 9.11418 \: ; \:\:\:\:\:\: \sum_j p_{ij}^{-6} = 12.2533\]
+To begin, recall the Lennard-Jones potential:
+\[U_{LJ} = \frac{1}{2}N(4\epsilon)\left[\sum_j \left(\frac{\sigma}{p_{ij}R}\right)^{12} - \sum_j \left(\frac{\sigma}{p_{ij}R}\right)^6\right]\]
+Additionally, we are given the lattice sums for the fcc structure:
+\[\sum_j p_{ij}^{-12} = 12.13188 \: ; \:\:\:\:\:\: \sum_j p_{ij}^{-6} = 14.45392\]
+Now, let us calculate the ratio $R_0/\sigma$ for the fcc structure. That is, we wish to minimize the Lennard-Jones potential. Then
+\begin{align*}
+    \frac{dU_{LJ}}{dR} &= -2N\epsilon \left[(12)(12.13188)\frac{\sigma^{12}}{R_0^{13}} - (6)(14.45392)\frac{\sigma^6}{R_0^7}\right] = 0 \\
+    (12)(12.13188) \frac{\sigma^{12}}{R_0^{13}} &= (6)(14.45392)\frac{\sigma^6}{R_0^7} \\
+    \frac{R_0}{\sigma} &= \left(\frac{2(12.13188)}{14.45392}\right)^{1/6} \\
+    &\approx 1.0902\\
+\end{align*}
+Doing the same for the bcc structure, we find
+\begin{align*}
+    \frac{R_0}{\sigma} &= \left(\frac{2(9.11418)}{12.2533}\right)^{1/6} \\
+    &\approx 1.0684\\
+\end{align*}
+Now we may find the ratio of the cohesive energies of the bcc lattice and fcc lattice. Taking the ratio of $U_{LF}$ for bcc and fcc, we find
+\begin{align*}
+    \frac{U_{LJ,bcc}}{U_{LJ,fcc}} &= \frac{2N\epsilon\left[(1.0684)^{-12}(9.11418) -  (1.0684)^{-6}(12.2533)\right]}{2N\epsilon\left[(1.0902)^{-12}(12.1
+    3188) - (1.0902)^{-6}(14.45392)\right]} \\
+    &\approx 0.957 \\
+\end{align*}
+Which is roughly the answer given by the book (0.958). 
+
+\section*{3.3 \textit{Solid molecular hydrogen.}}
+For $\text{H}_2$ one finds from measurements on the gas that the Lennard-Jones parameters are $\epsilon = 50 \times 10^{-16} \text{erg}$ and $\sigma = 2.96 \text{\AA}$. Find the cohesive energy in kJ per mole of $\text{H}_2$: do the calculation for an fcc structure. Treat each $\text{H}_2$ molecule as a sphere. The observed value of the cohesive energy is 0.751 kJ/mol, much less than we calculated; thus, quantum corrections must be very important.
+\newline\newline
+Calculating for the Lennard-Jones potential for fcc $\text{H}_2$, we have
+\begin{align*}
+    |U_{LJ}| &= \bigg|2N\epsilon \left[(12.13188)\frac{\sigma^{12}}{R^{12}} - (14.45392)\frac{\sigma^6}{R^6}\right]\bigg| \\
+    &= 2\left(6.02 \times 10^{23} \frac{\text{atoms}}{\text{mol}}\right)(50\times 10^{-16} \text{erg})\left[|(12.13188)(1.09)^{-12} - (14.45392)(1.09)^{-6}|\right] \\
+    &\approx 2.592\times 10^{10} \frac{\text{erg}}{\text{mol}} \\
+    &= 2.592 \times 10^3 \frac{\text{J}}{\text{mol}} \\
+    &= 2.592 \frac{\text{kJ}}{\text{mol}} \\
+\end{align*}
+
+\section*{3.6 \textit{Cubic ZnS structure.}}
+Using $\lambda$ and $\rho$ from Table 7 and the Madelung constants given in the text, calculate the cohesive energy of KCl in the cubic ZnS structure described in Chapter 1. Compare the value calculated for KCl in the NaCl structure.
+\newline\newline
+To begin, we are given from Table 7 that $R_0 = 3.147 \text{\AA}$, $z\lambda = 2.05 \times 10^{-8} \text{erg}$, and $\rho = 0.326 \text{\AA}$. Using these, along with equation (23):
+\[R_0^2 \exp{(-R_0/\rho)} = \rho \alpha q^2/(z\lambda)\]
+we may solve for $q^2$, and thus solve for the cohesion energy of KCl in the NaCl structure. Rearranging the above equation, notice
+\begin{align*}
+    q^2 &= \frac{z\lambda e^{-R_0/\rho}}{\rho \alpha} \\
+\end{align*}
+For NaCl structure, $\alpha = 1.747565$. Then plugging in our values for $z\lambda$, $\rho$, $\alpha$, and $R_0$, we find
+\[q^2 \approx 2.28818 \times 10^{-11}\]
+Using equation (24) to solve for the cohesive energy of KCl in the NaCl structure, we have
+\begin{align*}
+    U_{NaCl} &= -\frac{\alpha q^2}{R_0}\left(1 - \frac{\rho}{R_0}\right) \\
+    &\approx 1.139 \times 10^{-11} \text{erg} \\
+    \end{align*}
+Additionally, the NaCl structure has six nearest neighbors, so $\lambda = 0.342 \times 10^{-8} \text{erg}$. Further notice that the zincblende structure has four nearest neighbors. Making the substitution $x = \frac{R_0}{\rho}$ into equation (23) for the zincblende structure, we find
+\[x^2e^{-x} = \frac{\alpha q^2}{z\lambda \rho}\]
+Plugging in the value we found for $q^2$, and the value for $\alpha$ for zincblende structure and our values for $\lambda$ and $\rho$, we find
+\[x^2e^{-x} = 8.405\times 10^{-5}\]
+This is a trancendental equation, so we must use a numerical method to solve this problem. Using Newton's method to solve the problem, we find
+\begin{align*}
+    x &\approx 9.222 \\
+    \frac{R_0}{\rho} &= 9.222 \\
+    R_0 &\approx 3.006 \text{\AA} \\
+\end{align*}
+And using equation (24) to find the cohesive energy of KCl in the zincblende structure, we have 
+\begin{align*}
+    U_{ZnS} \approx 1.112 \times 10^{-11} \text{erg} \\
+\end{align*}
+Finding the ratio between the two cohesive energies, we find
+\begin{align*}
+    \frac{U_{ZnS}}{U_{NaCl}} &= \frac{1.112 \times 10^{-11} \text{erg}}{1.139 \times 10^{-11} \text{erg}} \\
+    &\approx 0.9763\\
+\end{align*}
+That is, the cohesive energies between the NaCl and Zincblende structures for KCl is only different by about 2.5\% !
+
+\section*{Problem 4}
+For NaCl the bulk modules ($B = -V\frac{dP}{dV}$, where P is the pressure and V is the volume) is $B = 2.4 \times 10^{11} \text{dyn/cm}^2$. The equilibrium (zero pressure) distance between the Na and Cl ions is $d = 2.82 \text{\AA}$, respectively. Assume that the interaction between the ions is described by the potential 
+\[\Phi_{ij} = \pm e^2/r_{ij} + \beta /(r_{ij})^n\]
+Using the given values, calculate $\beta$ and $n$.
+\newline\newline
+Recall that another definition for the bulk modulus is given by
+\[B = V\frac{d^2\Phi}{dV^2}\]
+And for a cubic lattice, $V = a^3$ and $a = 2R$ where $R$ is the nearest neighbor distance. Also, $r_{ij} = Rp_{ij}$ Now, summing $\Phi_{ij}$ over $j$, we have
+\[\Phi_i = \frac{\alpha e^2}{R} + \frac{\beta}{R^n}\sum_{j\neq i}p_{ij}^{-n}\]
+where $\alpha = 1.747565$ is the Madelung constant for NaCl. Taking the derivative and and solving for $\beta$ for the equilibrium position
+\[\beta = \frac{-R^{n-1}\alpha e^2}{n \sum_{j\neq i}p_{ij}^{-n}}\]
+Now, we wish to solve for $n$. To begin, let us express $\Phi_{i}$ as a function of $V$. 
+\[\Phi_i = \frac{2\alpha e^2}{V^{1/3}} + \frac{2^n\alpha e^2}{V^{n/3}}\sum_{j\neq i} p_{ij}^{-n}\]
+Taking the second derivative with respect to $V$ and multiplying the result by $V$, we have
+\[V \frac{d^2\Phi_i}{dV^2} = \frac{8\alpha e^2}{9 V^{4/3}}\ + \frac{n}{3}\left(\frac{n}{3} + 1\right)\frac{2^n \beta }{V^{n/3 + 1}} = B\]
+Then solving for $n$, we have
+\begin{align*}
+    n &= 1 - \frac{72 R_0^4 B}{\alpha e^2} \\
+    &= 1 - \frac{72 (2.82\times 10^{-8})^4(2.4\times 10^{11})}{1.747565(4.80325\times10^{-10})^2} \\
+    &\approx -26??? \\
+\end{align*}
+Taking the absolute value, we have $n = 26$ (I strongly believe this calculation is incorrect but I could not locate the cause of error). Then since $\sum_{j\neq i} p_{ij}^{-n}$ converges rapidly to 12 in the NaCl structure, 
+\[\sum_{j \neq i}p_{ij}^{-26} \approx 12\]
+So 
+\begin{align*}
+    \beta &= -\frac{(2.82\times 10^{-8})^{25}(1.747565)(4.80325\times 10^{-10})^2}{(26)(12)} \\
+    &\approx 2.3312 \times 10^{-210} \\
+\end{align*}
+I was expecting to find $n = 6$ or $n = 12$ since the book gave us the lattice sums for those values (and seemed like reasonable guesses for the NaCl structure), but as previously stated, I could not locate the cause of the error.
+
+\end{document}
