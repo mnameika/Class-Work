@@ -1,0 +1,60 @@
+\documentclass{article}
+\usepackage{graphicx, amsmath, amssymb, mathtools, fancyhdr} % Required for inserting images
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{fancy}
+
+
+\begin{document}
+
+\begin{center}
+    {\huge Problem 3.4}
+    \vspace{0.5cm}
+
+    {\large Michael Nameika}
+\end{center}
+\begin{itemize}
+    \item[3.4] For the differential-difference, free Schr{\"o}dinger equation,
+    \[i\frac{\partial u_n}{\partial t} + \frac{u_{n+1} - 2u_n + u_{n-1}}{h^2} = 0,\]
+    with $h > 0$ constant, find the long-time solution in the regions $|nh^2/2t| > 1$ and near $nh^2/2t = \pm 1$.
+    \newline\newline
+    \textit{Soln.} We show the solution for the case $|nh^2/2t| > 1$. From the $Z-$transform, we have
+    \begin{align*}
+        u_n = \frac{1}{2\pi i}\oint_{|z| = 1}\tilde{u} z^{n-1}dz.
+    \end{align*}
+    Putting this into the semidiscrete Schr{\"o}dinger equation, we find
+    \begin{align*}
+        \frac{1}{2\pi}\oint_C \frac{\partial \tilde{u}}{\partial t}z^{n-1}dz + \frac{1}{2\pi i h^2}\oint_C \left[\tilde{u}z^n - 2\tilde{u}z^{n-1} + \tilde{u}z^{n-2}\right]dz &= 0\\
+        \implies \frac{1}{2\pi}\oint_C\left[\frac{\partial \tilde{u}}{\partial t}z^{n-1} + \frac{1}{ih^2}\tilde{u}\left(z^n - 2z^{n-1} + z^{n-2}\right)\right]dz &= 0\\
+        \implies \oint_Cz^{n-1}\left[\frac{\partial\tilde{u}}{\partial t} + \frac{\tilde{u}}{ih^2}\left(z - 2 + \frac{1}{z}\right)\right]dz &= 0\\
+        \implies \frac{\partial \tilde{u}}{\partial t} + \frac{\tilde{u}}{ih^2}\left(z - 2 + \frac{1}{z}\right) &= 0.
+    \end{align*}
+    Since this holds on the unit circle, $z = e^{ikh}$, $k \in \left[-\frac{\pi}{h}, \frac{\pi}{h}\right]$. Thus
+    \begin{align*}
+        \frac{\partial\tilde{u}}{\partial t} &= \frac{2}{ih^2}(1 - \cos(kh))\tilde{u}\\
+        \implies \tilde{u} &= \tilde{u}_0e^{2/(ih^2)(1 - \cos(kh))t}\\
+        \implies u_n &= \frac{h}{2\pi}\int_{-\pi/h}^{\pi/h}\tilde{u}_0(e^{ikh})e^{i(knh + 2/h^2(\cos(kh) - 1)t)}dk.
+    \end{align*}
+    Let $\phi(k) = i\left(\frac{knh}{t} + \frac{2}{h^2}(\cos(kh) - 1)\right)$. Then $\phi'(k) = \frac{nh}{t} - \frac{2}{h}\sin(kh) = 0 \implies \sin(k_0h) = \frac{nh^2}{2t}$. Since $|nh^2/(2t)| > 1$, $k_0 \in \mathbb{C}$. Note $\phi''(k_0) = -2\cos(k_0h) \neq 0$. Using the Pythagorean identity,
+    \begin{align*}
+        -2i\cos(k_0h) &= -2i\left(\pm\sqrt{1 - \sin^2(k_0h)}\right)\\
+        &= \mp 2i\sqrt{1 - \frac{n^2h^4}{4t^2}}\\
+        &= \pm2\sqrt{\frac{n^2h^4}{4t^2}-1}.
+    \end{align*}
+    Thus $\phi(k) \sim \phi(k_0) - \frac{|\phi''(k_0)|}{2}(k - k_0)^2$ as $k \to k_0$ with $|\phi''(k_0)| = 2\sqrt{\frac{n^2h^4}{4t^2}-1}$. To apply the method of steepest descent, we take the contributions from the positive root in the previous equation to ensure exponential decay. We now seek the descent directions. Recall the descent directions are given by
+    \begin{align*}
+        \theta &= \frac{2\ell + 1}{2}\pi - \frac{\pi}{2}, \hspace{0.5cm} \ell \in \{0,1\}.\\
+        \implies \theta&= 0,\pi.
+    \end{align*}
+    Thus by method of steepest descent, 
+    \begin{align*}
+        u_n(t) &\sim \frac{h\tilde{u}(e^{ik_0h})}{2\pi}e^{t\phi(k_0)}\int_{-\infty}^{\infty}e^{-\frac{|\phi''(k_0)|}{2}t(k - k_0)^2}dk\\
+        &= \frac{h\tilde{u}(e^{ik_0h})}{\sqrt{2\pi t |\phi''(k_0)|}}e^{t\phi(k_0)}.
+    \end{align*}
+    Thus the leading order asymptotic behavior for the solution of the discrete Schr{\"o}dinger equation is
+    \[u_n(t) \sim \frac{\tilde{u}(e^{ik_0h})}{\sqrt{2\pi t |\phi''(k_0)|}}e^{t\phi(k_0)}.\]
+\end{itemize}
+\end{document}

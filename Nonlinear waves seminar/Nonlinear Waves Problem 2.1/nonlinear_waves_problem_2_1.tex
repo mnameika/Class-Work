@@ -1,0 +1,150 @@
+\documentclass{article}
+\usepackage{graphicx, amsmath, amssymb, mathtools, fancyhdr, float}
+
+\graphicspath{{Images/}}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{fancy}
+
+
+
+\begin{document}
+
+\begin{center}
+    {\huge Nonlinear Waves Problem 2.1}
+    \vspace{0.5cm}
+
+    {\large Michael Nameika}
+\end{center}
+
+\begin{itemize}
+    \item[2.1] Solve the following equations using Fourier transforms.
+    \begin{itemize}
+        \item[(a)] $u_t + u_{5x} = 0$, $u(x,0) = f(x)$.
+
+        \item[(b)] $u_t + \int K(x - \xi)u(\xi,t)d\xi = 0$, $u(x,0) = f(x)$, $\hat{K}(k) = e^{-k^2}$.
+
+        \item[(c)] $u_{tt} + u_{4x} = 0$, $u(x,0) = f(x)$. $u_t(x,0) = g(x)$.
+
+        \item[(d)] $u_{tt} - c^2u_{xx} - m^2u(x,t) = 0$, $u(x,0) = f(x)$, $u_t(x,0) = g(x)$. Contrast this solution with that of the standard Klein-Gordon equation.
+    \end{itemize}
+    \textit{Soln.} Throughout, let $\hat{f}(k) = \mathcal{F}(f(x))$, $\hat{g}(k) = \mathcal{F}(g(x))$, and $\hat{u}(k,t) = \mathcal{F}(u(x,t))$. We also use Leibniz's Integral rule which allows us to interchange the temporal derivative with the integral.
+    \begin{itemize}
+        \item[(a)] Taking the Fourier transform of the differential equation yields
+        \begin{align*}
+            \mathcal{F}(u_t) + \mathcal{F}(u_{5x}) &= 0\\
+            \frac{\partial }{\partial t}\hat{u} + (ik)^5\hat{u} &= 0\\
+            \frac{\partial \hat{u}}{\partial t} + ik^5\hat{u} &= 0.
+        \end{align*}
+        Note that this is an ODE in $t$, and separating variables gives
+
+        \begin{align*}
+            \int\frac{\partial \hat{u}}{\hat{u}} &= -ik^5\int dt\\
+            \implies \log(\hat{u}) &= -ik^5t + C_0(k)\\
+            \implies \hat{u}(k,t) &= C_1(k)e^{-ik^5t}.
+        \end{align*}
+        Where $C_0(k)$ is a function of integration independent of $t$. Setting $t = 0$ in the above equality yields
+        \begin{align*}
+            \hat{u}(k,0) &= C_1(k)\\
+            \implies \hat{f}(k) &= C_1(k).
+        \end{align*}
+        Thus
+        \begin{align*}
+            \hat{u}(k,t) &= \hat{f}(k)e^{-ik^5t}\\
+            \implies u(x,t) &= \frac{1}{2\pi}\int_{-\infty}^{\infty} \hat{f}(k)e^{i(kx - k^5t)}dk.
+        \end{align*}
+
+
+        \item[(b)] Taking the Fourier transform of the differential equation and invoking the convolution theorem gives
+        \begin{align*}
+            \mathcal{F}(u_t) + \mathcal{F}\left(\int_{-\infty}^{\infty}K(x - \xi)u(\xi,t)d\xi\right) &= 0\\
+            \frac{\partial \hat{u}}{\partial t} + \hat{K}(k)\hat{u}(k) &= 0\\
+            \frac{\partial \hat{u}}{\partial t} + e^{-k^2}\hat{u}(k) &= 0.
+        \end{align*}
+        As in part $(a)$, separation of variables gives
+        \begin{align*}
+            \int\frac{d\hat{u}}{\hat{u}} &= -\int e^{-k^2}dt\\
+            \implies \log(\hat{u}) &= -e^{-k^2}t + C_0(k)\\
+            \implies \hat{u}(k,t) &= C_1(k)e^{-te^{-k^2}}
+        \end{align*}
+        and setting $t = 0$ yields
+        \begin{align*}
+            \hat{u}(k,0) &= C_1(k)\\
+            \implies \hat{f}(k) &= C_1(k)
+        \end{align*}
+        so that 
+        \begin{align*}
+            \hat{u}(k,t) &= \hat{f}(k)e^{-te^{-k^2}}\\
+            \implies u(x,t) &= \frac{1}{2\pi}\int_{-\infty}^{\infty} \hat{f}(k)e^{ikx - te^{-k^2}}dk.
+        \end{align*}
+
+        \item[(c)] Taking the Fourier transform of the differential equation yields
+        \begin{align*}
+            \mathcal{F}(u_{tt}) + \mathcal{F}(u_{xx}) &= 0\\
+            \frac{\partial^2\hat{u}}{\partial t^2} + (ik)^4\hat{u} &= 0\\
+            \implies\frac{\partial^2\hat{u}}{\partial t^2} + k^4\hat{u} &= 0.
+        \end{align*}
+        From here, we seek solutions of the form
+        \begin{align*}
+            \hat{u}(k,t) &= h(k)e^{rt}
+        \end{align*}
+        so that, putting this ansatz into the above differential equation gives
+        \begin{align*}
+            r^2h(k)e^{rt} + k^4h(k)e^{rt} &= 0\\
+            \implies r &= \pm ik^2.
+        \end{align*}
+        Then 
+        \begin{align*}
+            \hat{u}(k,t) &= h_1(k)e^{ik^2t} + h_2(k)e^{-ik^2t}\\
+            \implies \hat{u}_t(k,t) &= ik^2h_1(k)e^{ik^2t} - ik^2h_2(k)e^{-ik^2t}.
+        \end{align*}
+        From our initial conditions, we find
+        \begin{align*}
+            h_1(k) + h_2(k) &= \hat{f}(k)\\
+            h_1(k) - h_2(k) &= -\frac{i}{k^2}\hat{g}(k)\\
+            \implies h_1(k) &=\frac{1}{2}\left(\hat{f}(k) - \frac{i}{k^2}\hat{g}(k)\right)\\
+            h_2(k) &= \frac{1}{2}\left(\hat{f}(k) + \frac{i}{k^2}\hat{g}(k)\right).
+        \end{align*}
+        Thus
+        \begin{align*}
+            \hat{u}(k,t) &= \frac{1}{2}\left[\left(\hat{f}(k) - \frac{i}{k^2}\hat{g}(k)\right)e^{ik^2t} + \left(\hat{f}(k) + \frac{i}{k^2}\hat{g}(k)\right)e^{-ik^2t}\right]
+        \end{align*}
+        and taking the inverse Fourier transform gives us the solution to the PDE:
+        \begin{align*}
+            u(x,t) &= \frac{1}{4\pi}\int_{-\infty}^{\infty}\left(\hat{f}(k) - \frac{i}{k^2}\hat{g}(k)\right)e^{i(kx + k^2t)}dk + \frac{1}{4\pi}\int_{-\infty}^{\infty}\left(\hat{f}(k) + \frac{i}{k^2}\hat{g}(k)\right)e^{i(kx - k^2t)}dk
+        \end{align*}
+
+        \item[(d)] Taking the Fourier transform of the PDE gives
+        \begin{align*}
+            \mathcal{F}(u_{tt}) - c^2\mathcal{F}(u_{xx}) - m^2\mathcal{F}(u) &= 0\\
+            \frac{\partial^2\hat{u}}{\partial t^2} + c^2k^2\hat{u} - m^2\hat{u} &= 0\\
+            \implies\frac{\partial^2\hat{u}}{\partial t^2} + (c^2k^2 - m^2)\hat{u} &= 0.
+        \end{align*}
+        As in part (c), consider the ansatz $\hat{u}(k,t) = h(k)e^{rt}$. Plugging this ansatz into our above differential equation yields
+        \begin{align*}
+            h(k)r^2e^{rt} + (c^2k^2 - m^2)h(k)e^{rt} &= 0\\
+            \implies r &= \pm i\sqrt{c^2k^2 - m^2}.
+        \end{align*}
+        Let $\omega(k) = \sqrt{c^2k^2 - m^2}$. Then The general solution to our ODE in $\hat{u}$ is 
+        \begin{align*}
+            \hat{u}(k,t) &= h_1(k)e^{i\omega(k) t} + h_2(k) e^{-i\omega(k) t}.
+        \end{align*}
+        From our initial conditions, we have
+        \begin{align*}
+            h_1(k) + h_2(k) &= \hat{f}(k)\\
+            i\omega(k)h_1(k) - i\omega(k)h_2(k) &= \hat{g}(k)\\
+            \implies h_1(k) &= \frac{1}{2}\left(\hat{f}(k) - \frac{i}{\omega(k)}\hat{g}(k)\right)\\
+            h_2(k) &= \frac{1}{2}\left(\hat{f}(k) + \frac{i}{\omega(k)}\hat{g}(k)\right).
+        \end{align*}
+        Thus
+        \[\hat{u}(k,t) = \frac{1}{2}\left(\hat{f}(k) - \frac{i}{\omega(k)}\hat{g}(k)\right)e^{i\omega(k)t} + \frac{1}{2}\left(\hat{f}(k) + \frac{i}{\omega(k)}\hat{g}(k)\right)e^{-i\omega(k) t}.\]
+        Taking the inverse transform yields
+        \[u(x,t) = \frac{1}{4\pi}\int_{-\infty}^{\infty} \left(\hat{f}(k) - \frac{i}{\omega(k)}\hat{g}(k)\right)e^{i(kx + \omega(k) t)}dk + \frac{1}{4\pi}\int_{-\infty}^{\infty}\left(\hat{f}(k) + \frac{i}{\omega(k)}\hat{g}(k)\right)e^{i(kx - \omega(k) t)}dk\]
+        with $\omega(k) = \sqrt{c^2k^2 - m^2}$. Note that if $c^2k^2 \geq  m^2$, $\omega(k) \in \mathbb{R}$, and for $c^2k^2 < m^2$, $\omega(k) \in \mathbb{C}$. In the latter case, we have exponential behavior. Note that this differs from the Klein-Gordon equation since $\omega(k) \in \mathbb{R}$ for all cases.
+    \end{itemize}
+\end{itemize}
+
+\end{document}

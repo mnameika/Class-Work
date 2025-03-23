@@ -1,0 +1,603 @@
+\documentclass{article}
+\usepackage{graphicx, amsmath, amssymb, mathtools, fancyhdr, float,bm} % Required for inserting images
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{fancy}
+
+\fancyfoot{}
+\fancyhead[R]{\thepage}
+\fancyhead[L]{MAE 5130}
+
+
+\title{Incompressible Flow HW 2}
+\author{mnameikascorp17 }
+\date{February 2025}
+
+\begin{document}
+
+\begin{center}
+    {\huge Incompressible Flow HW 2}
+    \vspace{0.5cm}
+
+    {\large Michael Nameika}
+\end{center}
+
+\begin{itemize}
+    \item[1)] Kundu 3.4: For the two-dimensional steady flow having velocity components $u = Sy$ and $v = Sx$, determine the following when $S$ is a positive real constant having units of inverse time.
+    \begin{itemize}
+        \item[a)] equations for the streamlines with a sketch of the flow pattern
+        \newline\newline
+        \textit{Soln.} By definition of streamlines, we seek a parameterization of $x(t,s)$, $y(t,s)$ so that $(x(t,s),y(t,s))$ is everywhere tangent to the velocity field $\mathbf{u}$. To this end, we must solve the system of ODEs:
+        \begin{align*}
+            \frac{d x}{d s} &= Sy\\
+            \frac{d y}{d s} &= Sx.
+        \end{align*}
+        Differentiating each equation with respect to $s$ yields
+        \begin{align*}
+            \frac{d^2x}{ds^2} &= S^2x\\
+            \frac{d^2y}{d s^2} &= S^2y
+        \end{align*}
+        which has general solutions 
+        \begin{align*}
+            x(s) &= A_1\cosh(S^2s) + B_1\sinh(S^2s)\\
+            y(s) &= B_1\cosh(S^2s) + A_1\sinh(S^2s).
+        \end{align*}
+        Now, we may choose $s$ such that when $s = 0$, $x(0) = x_0$, $y(0) = y_0$. Then $A_1 = x_0$ and $B_1 = y_0$.
+        \begin{align*}
+            x(s) &= x_0\cosh(S^2s) + y_0\sinh(S^2s)\\
+            y(s) &= y_0\cosh(S^2s) + x_0\sinh(S^2s).
+        \end{align*}
+        Now, notice 
+        \begin{align*}
+            x^2 - y^2 &= (x_0^2 - y_0^2)\cosh^2(S^2s) - (x_0^2 - y_0^2)\sinh^2(S^2s)\\
+            \implies x^2-y^2&= x_0^2 - y_0^2.
+        \end{align*}
+        If $x_0 = y_0$, then $y = \pm x$ and if $|x_0| > |y_0|$, the streamlines are hyperbolas centered on the $x-$axis and if $|y_0|>|x_0|$, the streamlines are hyperbolas centered on the $y-$axis.
+        \pagebreak
+
+        \item[b)] the components of the strain-rate tensor
+        \newline\newline
+        \textit{Soln.} Recall $S_{ij} = \frac{1}{2}\left(\frac{\partial u_{i}}{\partial x_j} + \frac{\partial u_j}{\partial x_i}\right)$. Then
+        \begin{align*}
+            S_{11} &= \frac{\partial (Sy)}{\partial x}\\
+            &= 0;\\
+            S_{22} &= \frac{\partial (Sx)}{\partial y}\\
+            &= 0;\\
+            S_{12} &= \frac{1}{2}\left(\frac{\partial (Sy)}{\partial y} + \frac{\partial (Sx)}{\partial x}\right)\\
+            &= \frac{1}{2}(S + S)\\
+            &= S.
+        \end{align*}
+        And by $S_{ij} = S_{ji}$, we have
+        \[\mathbf{S} = \begin{pmatrix}
+            0 & S\\
+            S & 0
+        \end{pmatrix}\]
+        
+
+        \item[c)] the components of the rotation tensor
+        \newline\newline
+        \textit{Soln.} Recall $R_{ij} = \left(\frac{\partial u_{i}}{\partial x_j} - \frac{\partial u_j}{\partial x_i}\right)$. By anti-symmetry, we need only compute $R_{12}$:
+        \begin{align*}
+            R_{12} &= \frac{\partial (Sy)}{\partial y} - \frac{\partial (Sx)}{\partial x}\\
+            &= S - S\\
+            &= 0.
+        \end{align*}
+        Thus $\mathbf{R} = \mathbf{0}$. 
+
+        \item[d)] the coordinate rotation that diagonalizes the strain-rate tensor, and the principal strain rates.
+        \newline\newline
+        \textit{Soln.} We seek to diagonalize $\mathbf{S}$. By inspection, the eigenvalues of $\mathbf{S}$ are $\lambda = \pm S$. From the systems $A - \lambda I$, we have
+        \begin{align*}
+            \begin{pmatrix}
+                -S & S\\
+                S & -S
+            \end{pmatrix} &= \begin{pmatrix}
+                0\\
+                0
+            \end{pmatrix}\\
+            \begin{pmatrix}
+                S & S\\
+                S & S
+            \end{pmatrix} &= \begin{pmatrix}
+                0\\
+                0
+            \end{pmatrix}
+        \end{align*}
+        from which it follows the eigenvectors are
+        \[v_1 = \begin{pmatrix}
+            1/\sqrt{2}\\
+            -1/\sqrt{2}
+        \end{pmatrix}, \hspace{0.5cm} v_2 = \begin{pmatrix}
+            1/\sqrt{2}\\
+            1/\sqrt{2}
+        \end{pmatrix}.\]
+        The matrix 
+        \[L = \frac{1}{\sqrt{2}}\begin{pmatrix}
+            1 & 1\\
+            1 & -1
+        \end{pmatrix}\]
+        is an orthogonal matrix and so the diagonalization of $\mathbf{S}$ is given by
+        \[\mathbf{S} = \begin{pmatrix}
+            1/\sqrt{2} & 1/\sqrt{2}\\
+            1/\sqrt{2} & -1/\sqrt{2}
+        \end{pmatrix}\begin{pmatrix}
+            S & 0\\
+            0 & -S
+        \end{pmatrix}\begin{pmatrix}
+            1/\sqrt{2} & 1/\sqrt{2}\\
+            1/\sqrt{2} & -1/\sqrt{2}
+        \end{pmatrix}.\]
+        Note that the diagonalization corresponds to a $\frac{\pi}{4}$ radian rotation.
+        Finally, principal strain rates are $S$ and $-S$.
+    \end{itemize}
+    \pagebreak
+
+    \item[2)] Kundu 3.9: Compute and compare the streamline, path line, and streak line that pass through $(1,1,0)$ at $t = 0$ for the following Cartesian velocity field $\mathbf{u} = (x,-yt,0)$.
+    \newline\newline
+    \textit{Soln.} To compute the streamlines, we follow the same process as in problem 1): parameterize $x = x(s)$, $y = y(s)$, $z = z(s)$ such that $x(0) = x_0$, $y(0) = y_0$, and $z(0) = z_0$. By assumption, we have $x_0 = y_0 = 1$, and $z_0 = 0$. To solve for $x(s),y(s), z(s)$, we must solve the following system of ODEs:
+    \begin{align*}
+        \frac{d x}{ds} &= x\\
+        \frac{dy}{ds} &= -yt\\
+        \frac{dz}{ds} &= 0.
+    \end{align*}
+    From this, we have $z(s) = c_3 \equiv $ constant, and by $z_0 = 0$, we have $c_3 = 0$. From the ODEs for $x$ and $y$, we have (after using the initial conditions)
+    \begin{align*}
+        x(s) &= e^{s}\\
+        y(s) &= e^{-ts}.
+    \end{align*}
+    Eliminating the variable $s$ yields
+    \[y = \frac{1}{x^t}.\]
+    At the initial time $t = 0$, we find the streamline to be simply
+    \[y = 1.\]
+    To compute the pathlines, we simply need to integrate the velocity field with respect to time. Doing so yields 
+    \begin{align*}
+        \frac{dx}{dt} &= x \implies x(t) = e^t\\
+        \frac{dy}{dt} &= -ty \implies y(t) = e^{-t^2/2}\\
+        z(t) &= 0.
+    \end{align*}
+    From the above equations, we have $\log(x) = t$ and substituting this into the equation for $y$ yields
+    \[y = e^{-\log^2(x)/2}.\]
+    Since this expression is independent at time, this gives us the pathline at $t = 0$.
+    \newline\newline
+
+    Finally, for the streakline, we use the equation for the pathline with the initial condition at some time $t_0 > 0$ rather than $t_0 = 0$. Doing so yields 
+    \begin{align*}
+        x(t;t_0) &= e^{t - t_0}\\
+        y(t;t_0) & = e^{-1/2(t^2 - t_0^2)}.
+    \end{align*}
+    Evaluating at $t = 0$ gives 
+    \begin{align*}
+        x(0;t_0) &= e^{-t_0}\\
+        y(0;t_0) &= e^{t_0^2/2}.
+    \end{align*}
+    Solving for $t_0$ yields $-\log(x_0) = t_0$ and substituting this into our equation for $y$ gives
+    \[y = e^{\log^2(x)/2}.\]
+    Putting them together, we have the equations for the path, stream, and streaklines at $t = 0$ and $(1,1,0)$ are given by
+    \begin{align*}
+        \text{Streamline:} \hspace{0.4cm} y &= 1\\
+        \text{Pathline : } \hspace{0.4cm} y &= e^{-\log^2(x)/2}\\
+        \text{Streak Line:} \hspace{0.4cm} y &= e^{\log^2(x)/2}.
+    \end{align*}
+    
+    
+    
+    \pagebreak
+    \item[3)] Kundu 3.11: The velocity components in an unsteady plane flow are given by $u = x/(1 + t)$ and $v = 2y/(2 + t).$ Determine equations for the streamlines and path lines subject to $\mathbf{x} = \mathbf{x}_0$ at $t = 0$. 
+    \newline\newline
+    \textit{Soln.} We first compute the $x$-component of the streamlines:
+    \begin{align*}
+        \frac{\partial x}{\partial s} &= \frac{x}{1 + t}\\
+        \implies x(s,t) &= c_1(t)e^{s/(1+t)}.
+    \end{align*}
+    Choose $x(0,t) = x_0(t) = x_0$ so that $c_1(t) = x_0$. Then
+    \[x(s,t) = x_0e^{s/(1+t)}.\]
+    Solving for the $y$-component gives
+    \begin{align*}
+        \frac{\partial y}{\partial s} &= \frac{2y}{1 + t}\\
+        \implies y(s,t) &= c_2(t)e^{2s/(2+t)}.
+    \end{align*}
+    Taking $y(0,t) = y_0$ gives $c_2(t) = y_0$ and so
+    \[y(s,t) = y_0e^{2s/(2+t)}.\]
+    Now, we wish to eliminate $s$-dependence in the above two equations. Starting with the $x$-equation, notice
+    \begin{align*}
+    e^s &= \left(\frac{x}{x_0}\right)^{1+t}\\
+    \implies e^{2s} &= \left(\frac{x}{x_0}\right)^{2+2t}\\
+    \implies e^{2s/(2+t)} &= \left(\frac{x}{x_0}\right)^{(2+2t)/(2+t)}\\
+    \implies y &= y_0\left(\frac{x}{x_0}\right)^{(2+2t)/(2+t)}.
+    \end{align*}
+    Thus the equation for the streamline passing through $\mathbf{x}_0 = (x_0,y_0)$ at $t = 0$ is given by
+    \[y = y_0\left(\frac{x}{x_0}\right).\]
+    We now compute the $x$-component of the pathline passing through $\mathbf{x}_0$:
+    \begin{align*}
+        \frac{dx}{dt} &= \frac{x}{1 + t}\\
+        \implies \int\frac{dx}{x} &= \int\frac{dt}{1+t}\\
+        \implies \log(|x|) &= \log(|1 +t|) + c_1\\
+        \implies x &= C_1(1+t).
+    \end{align*}
+    Setting $t = 0$ yields $C_1 = x_0$. Computing the $y$-component gives
+    \begin{align*}
+        \frac{dy}{dt} &= \frac{2y}{2 + t}\\
+        \implies \int\frac{dy}{y} &= \int\frac{2dt}{2+t}\\
+        \implies \log(|y|) &= 2\log(|2+t|) + c_2\\
+        \implies y &= C_2(2+t)^2.
+    \end{align*}
+    Setting $t = 0$ yields $4C_2 = y_0 \implies C_2 = y_0/4$. Thus the $x$- and $y$- components of the pathline is given by
+    \begin{align*}
+        x(t) &= x_0(1 + t)\\
+        y(t) &= \frac{y_0}{4}(2 + t)^2.
+    \end{align*}
+    We may further solve for $y$ explicitly in terms of $x$. Doing so yields
+    \begin{align*}
+        \left(\frac{x}{x_0} + 1\right)^2 &= (2+t)^2\\
+        \implies y = \frac{y_0}{4}\left(\frac{x}{x_0} + 1\right)^2.
+    \end{align*}
+
+
+    \pagebreak
+    \item[4)] Kundu 3.13: Determine the unsteady, $\partial\mathbf{u}/\partial t$, and advective, $(\mathbf{u} \cdot\nabla)\mathbf{u}$, fluid acceleration terms for the following flow fields specified in Cartesian coordinates.
+    \begin{itemize}
+        \item[a)] $\mathbf{u} = (u(y,z,t),0,0)$
+        \newline\newline
+        \textit{Soln.} Computing the unsteady acceleration yields
+        \begin{align*}
+            \frac{\partial \mathbf{u}}{\partial t} &= \frac{\partial }{\partial t}\begin{pmatrix}
+                u(y,z,t)\\
+                0\\
+                0
+            \end{pmatrix}\\
+            &= \begin{pmatrix}
+                u_t(y,z,t)\\
+                0\\
+                0
+            \end{pmatrix}.
+        \end{align*}
+        And for the advective acceleration, we find
+        \begin{align*}
+            (\mathbf{u}\cdot \nabla)\mathbf{u} &= u(y,z,t)\frac{\partial}{\partial x}(u(y,z,t),0,0)\\
+            &= \mathbf{0}.
+        \end{align*}
+        Thus
+        \[\frac{\partial \mathbf{u}}{\partial t} = \begin{pmatrix}
+            u_t(y,z,t)\\
+            0\\
+            0
+        \end{pmatrix},\hspace{0.7cm} (\mathbf{u}\cdot\nabla)\mathbf{u} = \mathbf{0}.\]
+        
+
+        \item[b)] $\mathbf{u} = \mathbf{\Omega} \times \mathbf{x}$ where $\mathbf{\Omega} = (0,0,\Omega_{z}(t))$
+        \newline\newline
+        \textit{Soln.} We first use index notation to compute $\mathbf{\Omega}\times \mathbf{x}$:
+        \begin{align*}
+            (\mathbf{\Omega}\times\mathbf{x})_k &= \varepsilon_{ijk}\Omega_ix_j\\
+            &= \varepsilon_{3jk}\Omega_z(t)x_j
+        \end{align*}
+        from which we it is not difficult to see
+        \[\mathbf{\Omega}\times \mathbf{x} = \begin{pmatrix}
+            -x_2\Omega_z(t)\\
+            x_1\Omega_z(t)\\
+            0
+        \end{pmatrix}.\]
+        Thus, computing the unsteady acceleration gives
+        \begin{align*}
+            \frac{\partial \mathbf{u}}{\partial t} &= \frac{\partial}{\partial t}\begin{pmatrix}
+                -x_2\Omega_z(t)\\
+                x_1\Omega_z(t)\\
+                0
+            \end{pmatrix}\\
+            &= \begin{pmatrix}
+                -x_2\frac{\partial\Omega_z}{\partial t}\\
+                x_1\frac{\partial \Omega_z}{\partial t}\\
+                0
+            \end{pmatrix}.
+        \end{align*}
+        We now wish to compute the advective acceleration. We begin by computing the operator $\mathbf{u}\cdot \nabla$:
+        \begin{align*}
+            \mathbf{u}\cdot\nabla &= -x_2\Omega_z(t)\frac{\partial }{\partial x_1} + x_1\Omega_z(t)\frac{\partial }{\partial x_2}.
+        \end{align*}
+        Thus, the advective acceleration is given by
+        \begin{align*}
+            (\mathbf{u}\cdot \nabla)\mathbf{u} &= \Omega_z(t)\left(-x_2\frac{\partial }{\partial x_1} + x_1\frac{\partial }{\partial x_2}\right)\begin{pmatrix}
+                -x_2 \Omega_z(t)\\
+                x_1 \Omega_z(t)\\
+                0
+            \end{pmatrix}\\
+            &= \Omega_z^2(t)\begin{pmatrix}
+                -x_2\frac{\partial x_2}{\partial x_1} + x_1\frac{\partial x_2}{\partial x_2}\\
+                -x_2\frac{\partial x_1}{\partial x_1} + x_1\frac{\partial x_1}{\partial x_2}\\
+                0
+            \end{pmatrix}\\
+            &= \Omega_z^2(t)\begin{pmatrix}
+                -x_1\\
+                -x_2\\
+                0
+            \end{pmatrix}.
+        \end{align*}
+        Thus, the unsteady and advective accelerations are given by
+        \[\frac{\partial \mathbf{u}}{\partial t} = \begin{pmatrix}
+            -x_2\frac{\partial \Omega_z}{\partial t}\\
+            x_1\frac{\partial \Omega_z}{\partial t}\\
+            0
+        \end{pmatrix}, \hspace{0.7cm} (\mathbf{u}\cdot \nabla)\mathbf{u} = -\Omega_z^2(t)\begin{pmatrix}
+            x_1\\
+            x_2\\
+            0
+        \end{pmatrix}.\]
+
+        \item[c)] $\mathbf{u} = A(t)(x,-y,0)$
+        \newline\newline
+        \textit{Soln.} Computing the unsteady acceleration gives
+        \begin{align*}
+            \frac{\partial \mathbf{u}}{\partial t} &= A_t(t)\begin{pmatrix}
+                x\\
+                -y\\
+                0
+            \end{pmatrix}.
+        \end{align*}
+        As in part b), for the advective acceleration, we begin by computing the operator $\mathbf{u}\cdot \nabla$:
+        \begin{align*}
+            \mathbf{u}\cdot\nabla &= A(t)\left(x\frac{\partial}{\partial x} - y\frac{\partial }{\partial y}\right)\\
+            \implies (\mathbf{u}\cdot\nabla)\mathbf{u} &= A^2(t)\begin{pmatrix}
+                x\frac{\partial x}{\partial x} - y\frac{\partial x}{\partial y}\\
+                -x\frac{\partial y}{\partial x} + y\frac{\partial y}{\partial y}\\
+                0
+            \end{pmatrix}\\
+            &=A^2(t) \begin{pmatrix}
+                x\\
+                y\\
+                0
+            \end{pmatrix}.
+        \end{align*}
+        Thus the unsteady and advective accelerations are given by
+        \[\frac{\partial \mathbf{u}}{\partial t} = A_t\begin{pmatrix}
+            x\\
+            -y\\
+            0
+        \end{pmatrix}, \hspace{0.7cm} (\mathbf{u}\cdot\nabla)\mathbf{u} = A^2(t)\begin{pmatrix}
+            x\\
+            y\\
+            0
+        \end{pmatrix}.\]
+
+        \item[d)] $\mathbf{u} = (U_0 + u_0\sin(kx - \Omega t),0,0)$ where $U_0$, $u_0$, $k$, and $\Omega$ are positive constants.
+        \newline\newline
+        \textit{Soln.} We begin by finding the unsteady acceleration:
+        \begin{align*}
+            \frac{\partial \mathbf{u}}{\partial t} &= \frac{\partial}{\partial t}\begin{pmatrix}
+                U_0 + u_0\sin(kx - \Omega t)\\
+                0\\
+                0
+            \end{pmatrix}\\
+            &= \begin{pmatrix}
+                -\Omega u_0\cos(kx - \Omega t)\\
+                0\\
+                0
+            \end{pmatrix}.
+        \end{align*}
+        Computing the advective acceleration yields
+        \begin{align*}
+            \mathbf{u}\cdot\nabla &= (U_0 + u_0\sin(kx - \Omega t))\frac{\partial}{\partial x}\\
+            \implies (\mathbf{u}\cdot\nabla)\mathbf{u} &= (U_0 + u_0\sin(kx - \Omega t))\begin{pmatrix}
+                ku_0\cos(kx - \Omega t)\\
+                0\\
+                0
+            \end{pmatrix}\\
+            &= \begin{pmatrix}
+                U_0ku_0\cos(kx - \Omega t) + \frac{1}{2}ku_0^2\sin(2(kx - \Omega t))\\
+                0\\
+                0
+            \end{pmatrix}.
+        \end{align*}
+        Thus the unsteady and advective accelerations are given by
+            \[\frac{\partial \mathbf{u}}{\partial t} = \begin{pmatrix}
+                -\Omega u_0 \cos(kx - \Omega t)\\
+                0\\
+                0
+            \end{pmatrix}, \hspace{0.7cm} (\mathbf{u}\cdot\nabla)\mathbf{u} = \begin{pmatrix}
+                U_0ku_0\cos(kx - \Omega t) + \frac{1}{2}ku_0^2\sin(2(kx - \Omega t))\\
+                0\\
+                0
+            \end{pmatrix}.\]
+    \end{itemize}
+
+
+    \pagebreak
+    \item[5)] Kundu 3.15: If a velocity field is given by $u = ay$ and $v = 0$, compute the circulation around a circle of radius $r_0$ that is centered on the origin. Check the result by using Stokes' theorem.
+    \newline\newline
+    \textit{Soln.} Recall that the circulation $\Gamma$ is defined by
+    \[\Gamma = \oint_C \mathbf{u}\cdot d\mathbf{s}\]
+    and, for a smooth surface $A$ with boundary $\partial A = C$, Stokes' theorem gives
+    \[\Gamma = \iint_A(\nabla\times \mathbf{u})\cdot d\mathbf{A}.\]
+    For the line integral, since $C$ is a circle of radius $r_0$ centered at the origin, we will convert the velocity field to polar coordinates. In Cartesian coordinates, the differential line element $d\mathbf{s} = dx\mathbf{i} + dy \mathbf{j}$. A simple geometric exercise will reveal that
+    \begin{align*}
+        \mathbf{x} &= \cos(\theta)\mathbf{r} - \sin(\theta)\bm{\theta}\\
+        d\mathbf{s} &= dr\mathbf{r} + rd\theta\bm{\theta}.
+    \end{align*}
+    Thus our line integral in polar coordinates takes the form
+    \begin{align*}
+        \oint_C\mathbf{u}\cdot d\mathbf{s} &= \oint_C ar_0(\sin(\theta)\cos(\theta)\mathbf{r} - \sin^2(\theta)\bm{\theta})\cdot(dr\mathbf{r} + rd\theta\bm{\theta})\\
+        &= \oint_Car_0(\sin(\theta)\cos(\theta)dr - r\sin^2(\theta)d\theta)\\
+        &= ar_0\left(\int_{r_0}^{r_0}\sin(\theta)\cos(\theta)dr - r_0\int_0^{2\pi}\sin^2(\theta)d\theta\right)\\
+        &= -\frac{ar_0^2}{2}\int_0^{2\pi}(1 - \cos(2\theta))d\theta\\
+        &= -\frac{ar_0^2}{2}\left[\theta - \frac{\sin(2\theta)}{2}\right]\bigg|_0^{2\pi}\\
+        &= -a\pi r_0^2.
+    \end{align*}
+    Thus $\Gamma = -a\pi r_0^2$. We now verify this computation with Stokes' theorem. Let the surface $A$ be the hemisphere above the $x$-$y$ plane with radius $r_0$. Then $\partial A = C$, and since the hemisphere is a smooth surface, Stokes' theorem applies. We will compute the surface integral in spherical coordinates. First, let us compute the curl of $\mathbf{u}$ in Cartesian coordinates, and then convert to spherical (here I use $\phi$ as the complementary altitude and $\theta$ as the azimuthal angle):
+    \begin{align*}
+        \nabla\times \mathbf{u} &= \left|\begin{matrix}
+            \mathbf{i} & \mathbf{j} & \mathbf{k}\\
+            \frac{\partial }{\partial x} & \frac{\partial}{\partial y} & \frac{\partial }{\partial z}\\
+            ay & 0 & 0
+        \end{matrix}\right|\\
+        &= 0\mathbf{i} - \mathbf{j}\left(0 - a\frac{\partial y}{\partial z}\right) + \mathbf{k}\left(-a\frac{\partial y}{\partial y}\right)\\
+        &= -a\mathbf{k}.
+    \end{align*}
+    Another simple geometric exercise reveals the following:
+    \begin{align*}
+        \mathbf{k} &= \cos(\phi)\bm{\rho} - \sin(\phi)\bm{\phi}\\
+        d\mathbf{A} &= \rho^2\sin(\phi)d\phi d\theta \bm{\rho}
+    \end{align*}
+    and so our surface integral becomes
+    \begin{align*}
+        \iint_A(\nabla\times \mathbf{u})\cdot d\mathbf{A} &= \iint_A (-a\cos(\phi)\bm{\rho} + a\sin(\phi)\bm{\phi})\cdot (\rho^2\sin(\phi)d\phi d\theta \bm{\rho})\\
+        &= \int_0^{2\pi}\int_0^{\pi/2}-\frac{a}{2}r_0^2\sin(2\phi)d\phi d\theta\\
+        &= -a\pi r_0^2\int_0^{2\pi}\sin(2\phi)d\phi\\
+        &= -a\pi r_0^2\left[-\frac{\cos(2\phi)}{2}\right]\bigg|_0^{\pi/2}\\
+        &= -a\pi r_0^2\left(-\frac{\cos(\pi)}{2} + \frac{\cos(0)}{2}\right)\\
+        &= -a\pi r_0^2 
+    \end{align*}
+    which agrees with our line integral computation.
+
+
+    \pagebreak
+    \item[6)] Kundu 3.16: Consider a plane Couette flow of a viscous fluid confined between two flat plates a distance $b$ apart. At steady state the velocity distribution is $u = Uy/b$ and $v = w = 0$, where the upper plate at $y = b$ is moving parallel to itself at speed $U$, and the lower plate is held stationary. Find the rates of linear strain, the rate of shear strain, and vorticity in this flow.
+    \newline\newline
+    \textit{Soln.} Recall the linear strain rates are given by the diagonal elements of the strain rate tensor $S_{ij}$:
+    \begin{align*}
+        S_{11} &= \frac{\partial u_1}{\partial x_1}\\
+        &= \frac{\partial }{\partial x}\left(\frac{Uy}{b}\right)\\
+        &= 0\\
+        S_{22} &= \frac{\partial u_2}{\partial x_2}\\
+        &= \frac{\partial}{\partial y}\left(0\right)\\
+        &= 0\\
+        S_{33} &= \frac{\partial u_3}{\partial x_3}\\
+        &= \frac{\partial }{\partial x_3}\left(0\right)\\
+        &= 0.
+    \end{align*}
+    Thus the linear strain rates of this flow are identically zero. The shear strain rates are given by the off-diagonal terms of the strain rate tensor, so we wish to compute
+    \[\frac{\partial u_1}{\partial x_2}, \hspace{0.3cm} \frac{\partial u_1}{\partial x_3}, \hspace{0.3cm} \frac{\partial u_2}{\partial x_3}.\]
+    Since $u_2 = 0$, it follows that $\frac{\partial u_2}{\partial x_3} = 0$. Now, 
+    \begin{align*}
+        \frac{\partial u_1}{\partial x_1} &= \frac{\partial }{\partial x}\left(\frac{U}{b}y\right)\\
+        &= 0\\
+        \frac{\partial u_1}{\partial x_2} &= \frac{\partial }{\partial y}\left(\frac{U}{b}y\right)\\
+        &= \frac{U}{b}.
+    \end{align*}
+    Thus the shear strains of the flow are given by
+    \begin{align*}
+        \frac{\partial u_1}{\partial x_1} &= 0\\
+        \frac{\partial u_1}{\partial x_2} &= \frac{U}{b}\\
+        \frac{\partial u_2}{\partial x_3} &= 0.
+    \end{align*}
+    
+    
+    Finally, using that the vorticity of the flow is given by $\nabla \times \mathbf{u}$:
+    \begin{align*}
+        \nabla \times \mathbf{u} &= \left|\begin{matrix}
+            \mathbf{i} & \mathbf{j} & \mathbf{k}\\
+            \frac{\partial }{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z}\\
+            \frac{U}{b}y & 0 & 0
+        \end{matrix}\right|\\
+        &= 0\mathbf{i} - \mathbf{j}\left(-\frac{U}{b}\frac{\partial y}{\partial z}\right) + \mathbf{k}\left(-\frac{\partial }{\partial y}\left(\frac{U}{b}y\right)\right)\\
+        &= -\frac{U}b{\mathbf{k}}.
+    \end{align*}
+    Thus vorticity in ths flow is zero about the $x-$ and $y-$axes, but is non-zero about the $z-$axis with value $-\frac{U}{b}$.
+
+
+    \pagebreak
+    \item[7)] Kundu 3.17: For the flow field $\mathbf{u} = \mathbf{U} + \mathbf{\Omega}\times \mathbf{x}$, where $\mathbf{U}$ and $\mathbf{\Omega}$ are constant linear- and angular-velocity vectors, use Cartesian coordinates to a) show that $S_{ij}$ is zero, and b) determine $R_{ij}$.
+    \newline\newline
+    \textit{Soln.}
+    \begin{itemize}
+        \item[a)] We begin by expressing $\mathbf{u}$ in index notation:
+        \[u_k = U_k + \varepsilon_{mnk}\Omega_mx_n.\]
+        Recall the components of $S_{ij}$ are given by
+        \[S_{ij} = \frac{1}{2}\left(\frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i}\right).\]
+        Notice
+        \begin{align*}
+            \frac{\partial u_i}{\partial x_j} &= \varepsilon_{mni}\Omega_m\delta_{nj}\\
+            &= \Omega_m\varepsilon_{imn}\delta_{nj}\\
+            &= \Omega_m\varepsilon_{imj}\\
+            &= \varepsilon_{jim}\Omega_m\\
+            \frac{\partial u_j}{\partial x_i} &= \varepsilon_{mnj}\Omega_m\delta_{ni}\\
+            &= \Omega_m\varepsilon_{jmn}\delta_{ni}\\
+            &= \Omega_m\varepsilon_{jmi}\\
+            &= \varepsilon_{ijm}\Omega_m\\
+            \implies S_{ij} &= \frac{1}{2}(\varepsilon_{ijm}\Omega_m + \varepsilon_{jim}\Omega_m)\\
+            &= \frac{1}{2}(\varepsilon_{ijm}\Omega_m - \varepsilon_{ijm}\Omega_m)\\
+            &= 0.
+        \end{align*}
+        Since $i,j$ were chosen arbitrarily, we conclude
+        \[\mathbf{S} = \mathbf{0}\]
+        as desired.
+        \newline\newline
+        \item[b)] Recall the components of $R_{ij}$ are given by
+        \[R_{ij} = \frac{\partial u_i}{\partial x_j} - \frac{\partial u_j}{\partial x_i}.\]
+        Thus, from our work in part a), we have
+        \begin{align*}
+            R_{ij} &= \varepsilon_{jim}\Omega_m - \varepsilon_{ijm}\Omega_m\\
+            &= -\varepsilon_{ijm}\Omega_m - \varepsilon_{ijm}\Omega_m\\
+            &= -2\varepsilon_{ijm}\Omega_m\\
+            &= -2(\varepsilon_{ij1}\Omega_1 + \varepsilon_{ij2}\Omega_2 + \varepsilon_{ij3}\Omega_3).
+        \end{align*}
+        By antisymmetry of $R_{ij}$, it is sufficient to inspect $R_{12},R_{13},$ and $R_{23}$. From our work above:
+        \begin{align*}
+            R_{12} &= -2(\varepsilon_{121}\Omega_1 + \varepsilon_{122}\Omega_2 + \varepsilon_{123}\Omega_3)\\
+            &= -2\varepsilon_{123}\Omega_3\\
+            &= -2\Omega_3\\
+            R_{13} &= -2(\varepsilon_{131}\Omega_1 + \varepsilon_{132}\Omega_2 + \varepsilon_{133}\Omega_3)\\
+            &= -2\varepsilon_{132}\Omega_2\\
+            &= 2\Omega_2\\
+            R_{23} &= -2(\varepsilon_{231}\Omega_1 + \varepsilon_{232}\Omega_2 + \varepsilon_{233}\Omega_3)\\
+            &= -2\varepsilon_{231}\Omega_1\\
+            &= -2\Omega_1.
+        \end{align*}
+        Thus, we have
+        \[\mathbf{R} = 2\begin{pmatrix}
+            0 & -\Omega_3 & \Omega_2\\
+            \Omega_3 & 0 & -\Omega_1\\
+            -\Omega_2 & \Omega_1 & 0
+        \end{pmatrix}.\]
+    \end{itemize}
+
+    \pagebreak
+    \item[8)] Watch the film, ``Flow Visualization" by the National Committee for Fluid Mechanics Films (NCFMF) and answer the following questions:
+    \begin{itemize}
+        \item[a)] List at least three different experimental methods for visualizing the flow of a fluid. Why is flow visualization important in fluid mechanics?
+        
+        \begin{itemize}
+            \item[1.] Surface powder
+
+            \item[2.] Dye injection
+
+            \item[3.] Electrolysis
+
+            \item[4.] Neutrally buoyant beads
+        \end{itemize}
+        Flow visualization is important to observe the velocity fields of a given fluid. Without visualization, it can be difficult, if not impossible, to measure the velocity field at different points throughout a fluid, making data collection and verification of simulations difficult.
+
+
+        \item[b)] Explain if it is possible to experimentally visualize the streamlines in a flow. If so, how can it be done and for what types of flow?
+        \newline\newline
+        For steady flow, since the streamlines, pathlines, and streak lines are identical, any method described in part a) that reveals the pathlines or streak lines will also reveal the streamlines. 
+        \newline
+        For unsteady flow, methods to approximate the velocity field, such as releasing many small fluid elements and comparing their positions at times $t$ and $t + \Delta t$ can be used to approximate the velocity field, then drawing lines tangent to the velocity field will show the streamlines.
+        \newline\newline
+
+        \item[c)] As the angle of the walls of a diffuser are increased from $0^{\circ}$ to a modest angle, describe qualitatively how the boundary layer changes near the walls. What is responsible for this change?
+        \newline\newline
+        The boundary layer thickens, that is, the boundary layer grows down stream of the diffuser, and the flow in the boundary layer is turbulent. The increased cross sectional area in the diffuser causes the flow to decelerate, and as the boundary layer thickens, the flow further decelerates near the boundary layer, causing the observed turbulence.
+        \newline\newline
+
+        \item[d)] As the diffuser angle walls are increased to still larger angles, describe qualitatively some of the flow patterns that arise throughout the diffuser. Are these patters predictable by theory?
+        \newline\newline
+        For larger diffuser angles, the flow is a lot more chaotic; there appears to be mini-vortices forming near the center of the diffuser and near the top wall, while the flow near the bottom oscillates up and down stream. According to the video, the patterns are seldom predictable by theory.
+        \newline\newline
+
+        \item[e)] For a diffuser with a relatively large angle, describe what modification is made in the video to eliminate the stall downstream.
+        \newline\newline
+        A set of fins is introduced into the diffuser to effectively turn the diffuser into several diffusers with smaller angles in parallel so that each of the ``mini diffusers" admit flows without stalls.
+        \newline\newline
+        
+        \item[f)] For the visualizations shown of the flow near the wall of the diffuser, explain some of the flow patterns that arise and how these are generated.
+        \newline\newline
+        Near the wall of the diffuser, the flow pattern is essentially laminar. By adding a couple ``trips" near the slit, the flow becomes turbulent. Removing one of the trips reveals some turbulence and some laminar flow. This is because placing the trips at the wall change the boundary layer from being completely uniform to nonuniform.
+    \end{itemize}
+
+
+    
+\end{itemize}
+
+\end{document}

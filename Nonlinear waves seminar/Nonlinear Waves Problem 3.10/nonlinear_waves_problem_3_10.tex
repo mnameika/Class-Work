@@ -1,0 +1,119 @@
+\documentclass{article}
+\usepackage{graphicx, amsmath,amssymb, mathtools, fancyhdr} % Required for inserting images
+
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{fancy}
+
+\fancyhead[]{}
+\fancyfoot[]{}
+
+\begin{document}
+
+\begin{center}
+    {\huge Nonlinear Waves Problems 3.10}
+    \vspace{0.5cm}
+
+    {\large Michael Nameika}
+\end{center}
+
+\begin{itemize}
+
+    %\item[4.] For the differential-difference, free Schr{\"o}dinger equation,
+    %\[i\frac{\partial u_n}{\partial t} + \frac{u_{n+1} - 2u_n + u_{n-1}}{h^2} = 0\]
+    %with $h > 0$ constant, find the long-time solution in the regions $|nh^2/2t|>1$ and near $nh^2/2t = \pm 1$. 
+    %\newline\newline
+    %\textit{Soln.} WIP.
+
+    \item[10.] Solve the linear one-dimensional linear Schr{\"o}dinger equation with quadratic potential (the ``simple harmonic oscillator")
+    \[iu_t = u_{xx} - V_0x^2u,\]
+    with $V_0 > 0$ constant and $u(x,0) = f(x)$ where $f(x)$ decays rapidly as $|x| \to \infty$. In what sense is the ``ground state" (i.e., the lowest eigenvalue) the most important solution in the long-time limit?
+    \newline\newline
+    \textit{Soln.} Using separation of variables, we assume
+    \[u(x,t) = T(t)X(x)\]
+    and putting this into the differential equation gives
+    \begin{align*}
+        iT'(t)X(x) &= T(t)X''(x) - V_0x^2T(t)X(x)\\
+        \implies i\frac{T'(t)}{T(t)} &= \frac{X''(x)}{X(x)} - V_0x^2
+    \end{align*}
+    since the left hand side is a function of $t$ and the right hand side is a function of $x$, there exists a constant $\mu$ such that
+    \begin{align*}
+        i\frac{T'(t)}{T(t)} &= \mu\\
+        \implies iT' &= \mu T\\
+        \implies T(t) &= C_1e^{-i\mu t}\\
+        \frac{X''(x)}{X(x)} -V_0x^2 &= \mu\\
+        \implies X''(x) - (\mu + V_0x^2)X(x) &= 0.
+    \end{align*}
+    Note that the above ODE is a Sturm-Liouville type equation with weighting function $w(x) = 1$. Now make the transformation $X(x) = e^{-\sqrt{V_0}x^2/2}y(x)$ and so 
+    \begin{align*}
+        X'(x) &= -\sqrt{V_0}xe^{-\sqrt{V_0}x^2/2}y(x) + e^{-\sqrt{V_0}x^2/2}y'(x)\\
+        X''(x) &= -\sqrt{V_0}e^{-\sqrt{V_0}x^2/2}y' - 2\sqrt{V_0}xe^{-\sqrt{V_0}x^2/2}y + V_0x^2e^{-\sqrt{V_0}x^2/2} + e^{-\sqrt{V_0}x^2/2}y''.
+    \end{align*}
+    Plugging this into the ODE gives
+    \begin{align*}
+        -\sqrt{V_0}e^{-\sqrt{V_0}x^2/2}y - 2\sqrt{V_0}e^{-\sqrt{V_0}x^2/2} + V_0x^2 e^{-\sqrt{V_0}}y + e^{-\sqrt{V_0}x^2/2}y'' - (\mu + V_0x^2)e^{-\sqrt{V_0}x^2/2}y &= 0\\
+        -\sqrt{V_0}y - 2\sqrt{V_0}xy' + y'' - \mu y &= 0\\
+        y'' - 2\sqrt{V_0}xy' - (\mu + \sqrt{V_0})y &= 0.
+    \end{align*}
+    For the above ODE, we assume a series solution
+    \begin{align*}
+        y(x) &= \sum_{n = 0}^{\infty}a_nx^n\\
+        y'(x) &=\sum_{n = 1}^{\infty} a_n nx^{n-1}\\
+        y''(x) &= \sum_{n = 2}^{\infty} a_n n (n-1)x^{n-2}.
+    \end{align*}
+    Plugging this into the ODE, we have
+    \begin{align*}
+        &\sum_{n = 2}^{\infty}a_n n(n-1)x^{n-2} - 2\sqrt{V_0}\sum_{n=1}^{\infty}a_n n x^n - (\mu + \sqrt{V_0})\sum_{n = 0}^{\infty}a_nx^n = 0\\
+        \implies &2a_2 + 6a_3x + 12a_4x^2 + \cdots\\
+        &- 2\sqrt{V_0}(a_1x + 2a_2x^2 + 3a_3x^3 + \cdots)\\
+        &-(\mu + \sqrt{V_0})(a_0 + a_1x + a_2x^2 + \cdots) = 0
+    \end{align*}
+    collecting terms order-by-order gives
+    \begin{align*}
+        \mathcal{O}(1): 2a_2 - (\mu + \sqrt{V_0})a_0 &= 0\\
+        \implies a_2 &= \frac{\mu + \sqrt{V_0}}{2}a_0\\
+        \mathcal{O}(x): 6a_3 - 2\sqrt{V_0}a_1-(\mu + \sqrt{V_0})a_1 &= 0\\
+        \implies a_3 &= \frac{\mu + 3\sqrt{V_0}}{6}a_1\\
+        \mathcal{O}(x^2): 12a_4 - 4\sqrt{V_0}a_2 - (\mu + \sqrt{V_0})a_2 &= 0\\
+        \implies a_4 &= \frac{\mu + 5\sqrt{V_0}}{12}a_2\\
+        &= \left(\frac{\mu + 5\sqrt{V_0}}{12}\right)\left(\frac{\mu + \sqrt{V_0}}{2}\right)a_0.
+    \end{align*}
+    Then the two solutions to the differential equation are 
+    \begin{align*}
+        y_1(x) &= a_0\left(1 + \frac{\mu + \sqrt{V_0}}{2}x^2 + \left(\frac{\mu+\sqrt{V_0}}{2}\right)\left(\frac{\mu + 5\sqrt{V_0}}{12}\right)x^4 + \cdots\right)\\
+        y_2(x) &= a_1\left(x + \frac{\mu + 3\sqrt{V_0}}{6}x^3 + \left(\frac{\mu + 3\sqrt{V_0}}{6}\right)\left(\frac{\mu + 7\sqrt{V_0}}{20}\right)x^5 + \cdots\right).
+    \end{align*}
+    Rewriting as
+    \begin{align*}
+        y_1(x) &= a_0\left(1 + b_2x^2 + b_4x^4 + \cdots\right)\\
+        y_2(x) &= a_1(x + b_3x^3 + b_5x^5 + \cdots)
+    \end{align*}
+    where
+    \begin{align*}
+        b_{2n} &= \frac{1}{(2n)!}\prod_{k = 1}^n \left(\mu + (4k-3)\sqrt{V_0}\right)\\
+        b_{2n+1} &= \frac{1}{(2n+1)!}\prod_{k = 1}^n\left(\mu + (4k-2)\sqrt{V_0}\right).
+    \end{align*}
+    
+    Now consider the following cases:
+    \begin{align*}
+        (\mu_0 = -\sqrt{V_0}): y_1(x) &= a_0\\
+        (\mu_1 = -3\sqrt{V_0}): y_2(x) &= a_1x\\
+        (\mu_2 = -5\sqrt{V_0}): y_1(x) &= a_0(1 - \sqrt{V_0}x^2)\\
+        (\mu_3 = -7\sqrt{V_0}): y_2(x) &= a_1(x - \frac{2\sqrt{V_0}}{3}x^3)\\
+        &\vdots
+    \end{align*}
+    and note that we find one of the solutions of the ODE related to the Hermite polynomials. Let $H_n(x)$ be the $n^{\text{th}}$ Hermite polynomial generated from the differential equation for eigenvalues $\mu_n = -(2n-1)\sqrt{V_0}$. Now let $\psi_n(x) = e^{-\sqrt{V_0}x^2/2}H_n(x)$. Then a general solution to the PDE is given as 
+    \[u(x,t) = \sum_{n = 0}^{\infty}c_ne^{-i\mu_nt}\psi_n(x).\]
+    From the initial condition, we have
+    \begin{align*}
+        u(x,0) = f(x) &= \sum_{n = 0}^{\infty} c_n\psi_n(x)
+    \end{align*}
+    and by orthogonality, we find
+    \[c_n = \frac{\int_{-\infty}^{\infty}f(x)\psi_n(x)dx}{\int_{-\infty}^{\infty}\psi_n^2(x)dx}.\]
+    In the long time limit, note that all the temporal nodes cause oscillatory behavior, and for the smallest eigenvalue $\mu_0$, the first term in the expansion will have the smallest temporal and spatial oscillatory behavior.
+\end{itemize}
+
+\end{document}
