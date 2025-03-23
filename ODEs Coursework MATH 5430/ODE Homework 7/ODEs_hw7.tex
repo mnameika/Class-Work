@@ -1,0 +1,268 @@
+\documentclass{article}
+\usepackage{graphicx, amsmath, amssymb, mathtools, fancyhdr}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{fancy}
+
+\fancyfoot{}
+\fancyhead[R]{\thepage}
+\fancyhead[L]{MATH 5430}
+
+
+\begin{document}
+\begin{center}
+    {\Huge Homework 7}
+    \vspace{0.5cm}
+
+    {\Large Michael Nameika}
+\end{center}
+\begin{itemize}
+    \item[1.] Consider the non-Sturm-Liouville differential equation
+    \[\frac{d^2\phi}{dx^2} + \alpha(x)\frac{d\phi}{dx} + [\lambda \beta(x) + \gamma(x)]\phi = 0.\]
+    Multiply this equation by $H(x)$. Determine $H(x)$ such that the equation may be reduced to the standard Sturm-Liouville form:
+    \[\frac{d}{dx}\left[p(x)\frac{d\phi}{dx}\right] + [\lambda \sigma(x) + q(x)]\phi = 0.\]
+    Given $\alpha(x), \beta(x)$, and $\gamma(x)$, what are $p(x), \sigma(x)$, and $q(x)$?
+    \newline\newline
+    \textit{Soln.} To find $H(x)$, let us inspect $\frac{d^2\phi}{dx^2} + \alpha(x)\frac{d\phi}{dx}$ since we want something of the form $\frac{d}{dx}[p(x)\frac{d\phi}{dx}]$. That is, we want
+    \[H(x)\frac{d^2\phi}{dx^2} + H(x)\alpha(x)\frac{d\phi}{dx} = \frac{d}{dx}\left[p(x)\frac{d\phi}{dx}\right].\]
+    Expanding the right hand side of the above equation yields
+    \[\frac{d}{dx}\left[p(x)\frac{d\phi}{dx}\right] = p'(x)\frac{d\phi}{dx} + p(x)\frac{d^2\phi}{dx^2}\]
+    which gives us
+    \begin{align*}
+        H(x) &= p(x)\\
+        p'(x) &= H(x)\alpha(x)\\
+        \implies H'(x) &= H(x)\alpha(x)\\
+        \implies \int\frac{dH}{H(x)}dx &= \int\alpha(x)dx\\
+        \implies H(x) &= e^{\int\alpha(x)dx}
+    \end{align*}
+    hence
+    \begin{align*}
+        p(x) &= e^{\int \alpha(x) dx}\\
+        \sigma(x) &= \beta(x) e^{\int\alpha(x)dx}\\
+        q(x) &= \gamma(x) e^{\int\alpha(x)dx}
+    \end{align*}
+    \pagebreak
+
+    \item[2.] For the Sturm-Liouville eigenvalue problem,
+    \[\frac{d^2\phi}{dx^2} + \lambda \phi = 0 \hspace{0.7cm} \text{with} \hspace{0.7cm} \frac{d\phi}{dx}(0) = 0 \hspace{0.5cm} \text{and} \hspace{0.5cm} \frac{d\phi}{dx}(L) = 0,\]
+    verify the following general properties:
+    \begin{itemize}
+        \item[(a)] There is an infinite number of eigenvalues with a smallest, but no largest.
+        \newline\newline
+        \textit{Soln.} We seek solutions of the form $\phi = e^{mx}$ and obtain the relationship
+        \[m^2 + \lambda = 0\]
+        for $\lambda > 0$, we find
+        \[\phi(x) = c_1\cos(\sqrt{\lambda}x) + c_2\sin(\sqrt{\lambda}x)\]
+        which yields, from the boundary conditions
+        \begin{align*}
+            \frac{d\phi}{dx} &= -\sqrt{\lambda}c_1\sin(\sqrt{\lambda}x) + \sqrt{\lambda}c_2\cos(\sqrt{\lambda}x)\\
+            \implies \frac{d\phi}{dx}(0) &= \sqrt{\lambda}c_2 = 0\\
+            \implies c_2 &= 0\\
+            \implies \frac{d\phi}{dx}(L) &= -\sqrt{\lambda}c_1\sin(\sqrt{\lambda}L) = 0\\
+            \implies \sqrt{\lambda}L &= n\pi \tag{$n \in \mathbb{Z}$}\\
+            \implies \lambda_n &= \left(\frac{n\pi}{L}\right)^2 \tag{$n \in \mathbb{N}$}
+        \end{align*}
+        We note that the case $\lambda \leq 0$ yields the trivial solution $\phi = 0$ (which is not an eigenfunction by definition) from the boundary conditions, so that $\lambda \leq 0$ are not eigenvalues. From the above equation, we see that $\lambda_1 = \frac{\pi^2}{L^2}$ is the smallest eigenvalue and there is no largest eigenvalue since $\lambda_n \propto n^2$.
+        \newline\newline
+
+        \item[(b)] The $n^{\text{th}}$ eigenfunction has $n$ zeros.
+        \newline\newline
+        \textit{Soln.} Consider the $n^{\text{th}}$ eigenfunction $\phi_n(x) = \cos\left(\frac{n\pi}{L}x\right)$. Notice that 
+        \[\cos\left(\frac{n\pi}{L}x\right) = 0 \implies \frac{n\pi}{L}x = \frac{\pi}{2} + k\pi, \hspace{0.5cm} k \in \mathbb{Z}\]
+        and we wish to find the zeros that are within the interval $[0,L]$ immediately, we have $k \in \mathbb{N}\cup \{0\}$ and notice
+        \begin{align*}
+            x &= \frac{L}{2n} + \frac{kL}{n} < L\\
+            \implies \frac{1}{2} + k &< n
+        \end{align*}
+        holds for $k = 0, 1, \dots, n-1$. Thus, the $n^{\text{th}}$ eigenfunction has $n$ zeros.
+
+        \item[(c)] The eigenfunctions are orthogonal.
+        \newline\newline
+        \textit{Soln.} Notice
+        \begin{align*}
+            \int_0^L \cos\left(\frac{n\pi}{L}x\right)\cos\left(\frac{m\pi}{L}x\right)dx &= \frac{1}{2}\int_0^L \left(\cos\left(\frac{\pi}{L}(n - m)x\right) + \cos\left(\frac{\pi}{L}(n + m)x\right)\right) \tag{$n \neq m$}\\
+            &= \frac{1}{2}\left[\frac{1}{\pi/L(n - m)}\sin\left(\frac{\pi}{L}(n-m)x\right) + \frac{1}{\pi/L(n + m)}\sin\left(\frac{\pi}{L}(n + m)x\right)\right]\bigg|_0^L\\
+            &= \frac{1}{2}\left[\frac{1}{\pi/L(n - m)}\sin(\pi(n - m)) + \frac{1}{\pi/L(n + m)}\sin(\pi(n + m))\right]\\
+            &= 0
+        \end{align*}
+        since $n-m \in \mathbb{Z}$ and $n + m \in \mathbb{Z}$.
+        \newline\newline
+
+        \item[(d)] The solution can be expressed in terms of an eigenfunction expansion.
+        \newline\newline
+        \textit{Soln.} From part (a), we have that $\phi_n(x) = \cos\left(\frac{n\pi}{L}x\right)$ and by principle of superposition, 
+        \[\sum_{n = 1}^{\infty} a_n \cos\left(\frac{n\pi}{L}\right).\]
+        
+
+        \item[(e)] What does the Rayleigh quotient say concerning negative and zero eigenvalues?
+        \newline\newline
+        \textit{Soln.}For this problem, we have $p(x) = 1$, $q(x) = 0$, $\sigma(x) = 1$, so from the Rayleigh quotient, we have
+        \begin{align*}
+            \lambda &= \frac{\phi\frac{d\phi}{dx}\big|_a^b + \int_a^b\left(\frac{d\phi}{dx}\right)^2dx}{\int_a^b\phi^2dx}\\
+            &= \frac{\phi(b)\frac{d\phi}{dx} - \phi(a)\frac{d\phi}{dx}(a) + \int_a^b\left(\frac{d\phi}{dx}\right)^2dx}{\int_a^b\phi^2dx}\\
+            &= \frac{\int_a^b \left(\frac{d\phi}{dx}\right)^2dx}{\int_a^b \phi^2dx} \geq 0. \tag{B.C.s}
+        \end{align*}
+        So we have that the eigenvalues of this problem are nonnegative, and notice that $\lambda = 0$ whenever $\phi = $ constant, but from the boundary conditions, we get $\phi \equiv 0$, so that $\lambda = 0$ is not an eigenvalue.
+    \end{itemize}
+    \pagebreak
+
+    \item[3.] Redo Problem 2 for the Sturm-Liouville eigenvalue problem
+    \[\frac{d^2\phi}{dx^2} + \lambda \phi = 0 \hspace{0.7cm} \text{with} \hspace{0.7cm} \frac{d\phi}{dx}(0) = 0 \hspace{0.5cm} \text{and} \hspace{0.5cm} \phi(L) = 0.\]
+    \begin{itemize}
+        \item[(a)] \textit{Soln.} Consider the following cases:
+        \newline
+        Case 1: $\lambda > 0$. Then
+        \[\phi(x) = c_1\cos(\sqrt{\lambda}x) + c_2\sin(\sqrt{\lambda}x)\]
+        and from the boundary conditions, we find
+        \begin{align*}
+            \frac{d\phi}{dx} &= -\sqrt{\lambda}c_1\sin(\sqrt{\lambda}x) + \sqrt{\lambda}c_2\cos(\sqrt{\lambda}x)\\
+            \implies \frac{d\phi}{dx}(0) &= c_2\sqrt{\lambda} = 0 \\
+            \implies c_2 &= 0\\
+            \implies \phi(L) &= c_1\cos(\sqrt{\lambda}L) = 0\\
+            \implies \sqrt{\lambda}L &= \frac{\pi}{2} + n\pi \tag{$n \in \mathbb{N} \cup \{0\}$}\\
+            \implies \lambda_n &= \frac{\left(\frac{\pi}{2} + n\pi\right)^2}{L^2}.
+        \end{align*}
+        And note that from the boundary conditions, the case $\lambda \leq 0$ yields $\phi = 0$, so that $\lambda \leq 0$ are not eigenvalues. Notice that the smallest eigenvalue is given by
+        \[\lambda_1 = \frac{\pi^2}{4L^2}\]
+        and has no largest since $\lambda_n \propto n^2$.
+        \newline\newline
+
+        \item[(b)] \textit{Soln.} Notice that, for the $n^{\text{th}}$ eigenfunction, we have
+        \begin{align*}
+            \cos\left(\frac{\frac{\pi}{2} + n\pi}{L}x\right) &= 0\\
+            \implies \frac{\frac{\pi}{2} + n\pi}{L}x &= \frac{\pi}{2} + k\pi\\
+            \implies \left(\frac{1}{2} + n\right)x &= \frac{1}{2} + k\\
+            \implies x &= \frac{\frac{1}{2} + k}{\frac{1}{2} + n}
+        \end{align*}
+        and notice that $x \in (0, L)$ whenever $k = 0, 1, \dots, n-1$ so that $\phi_n(x)$ has $n$ zeros on $(0,L)$.
+
+        \item[(c)] \textit{Soln.} We consider
+        \begin{align*}
+            \int_0^L \phi_n(x)\phi_m(x)dx &= \int_0^L \cos\left(\frac{\pi/2 + n\pi}{L}x\right)\cos\left(\frac{\pi/2 + m\pi}{L}x\right)dx\\
+            &= \frac{1}{2}\int_0^L\left[\cos\left(\frac{\pi}{L}(n + m + 1)x\right) + \cos\left(\frac{\pi}{L}(n - m)x\right)\right]dx\\
+            &= \frac{1}{2}\left[\frac{1}{\pi/L(n + m + 1)}\sin\left(\frac{\pi}{L}(n + m + 1)x\right) + \frac{1}{\pi/L(n - m)}\sin\left(\frac{\pi}{L}(n - m)x\right)\right]\bigg|_0^L\\
+            &= \frac{1}{2}\left[\frac{1}{\pi/L(n + m - 1)}\sin(\pi (n + m + 1)) + \frac{1}{\pi/L(n - m)}\sin(\pi(n - m))\right]\\
+            &= 0 
+        \end{align*}
+        since $n + m + 1 \in \mathbb{Z}$ and $n - m \in \mathbb{Z}$. Thus, the eigenfunctions are orthogonal.
+
+        \item[(d)] \textit{Soln.} From part (a) we have 
+        \[\phi_n(x) = \cos\left(\frac{\pi/2 + n\pi}{2}x\right)\]
+        is a solution to the differential equation for all $n \in \mathbb{N}$ and, by principle of super position, we have
+        \[\phi(x) = \sum_{n = 1}^{\infty} a_n\cos\left(\frac{\pi/2 + n\pi}{2}x\right)\]
+        is also a solution.
+
+        \item[(e)] \textit{Soln.} For this problem, we have $p(x) = 1$, $q(x) = 0$, $\sigma(x) = 1$, so from the Rayleigh quotient, we have
+        \begin{align*}
+            \lambda &= \frac{\phi\frac{d\phi}{dx}\big|_a^b + \int_a^b\left(\frac{d\phi}{dx}\right)^2dx}{\int_a^b\phi^2dx}\\
+            &= \frac{\phi(b)\frac{d\phi}{dx} - \phi(a)\frac{d\phi}{dx}(a) + \int_a^b\left(\frac{d\phi}{dx}\right)^2dx}{\int_a^b\phi^2dx}\\
+            &= \frac{\int_a^b \left(\frac{d\phi}{dx}\right)^2dx}{\int_a^b \phi^2dx} \geq 0. \tag{B.C.s}
+        \end{align*}
+        So we have that the eigenvalues of this problem are nonnegative, and notice that $\lambda = 0$ whenever $\phi = $ constant, but from the boundary conditions, that must mean $\phi \equiv 0$, so $\lambda = 0$ is not an eigenvalue.
+    \end{itemize}
+
+    \pagebreak
+    \item[4.] Show that $\lambda \geq 0$ for the eigenvalue problem
+    \[\frac{d^2\phi}{dx^2} + (\lambda - x^2)\phi = 0 \hspace{0.7cm} \text{with} \hspace{0.7cm} \frac{d\phi}{dx}(0) = 0 \hspace{0.5cm} \text{and} \hspace{0.5cm} \frac{d\phi}{dx}(1) = 0.\]
+    Is $\lambda = 0$ an eigenvalue?
+    \newline\newline
+    \textit{Proof:} Note that the above differential equation is a regular Sturm-Liouville equation with $p(x) = 1$, $\sigma(x) = 1$, $q(x) = -x^2$. Inspecting the Rayleigh coefficient, we find
+    \begin{align*}
+        \lambda &= \frac{-p(x)\phi(x)\frac{d\phi}{dx}\big|_0^L + \int_0^L \left[p(x)\left(\frac{d\phi}{dx}\right)^2 - q(x)\phi^2\right]dx}{\int_0^L \phi^2\sigma dx}\\
+        &= \frac{-\phi(L)\frac{d\phi}{dx}(L) + \phi(0)\frac{d\phi}{dx} + \int_0^L \left[\left(\frac{d\phi}{dx}\right)^2 + x^2\phi^2\right]dx}{\int_0^L\phi^2dx}\\
+        &= \frac{\int_0^L \left[\left(\frac{d\phi}{dx}\right)^2 + (x\phi)^2\right]dx}{\int_0^L \phi^2dx}
+    \end{align*}
+    and since $\phi^2 \geq 0$, $\left(\frac{d\phi}{dx}\right)^2 \geq 0$, and $(x\phi)^2 \geq 0$, we have
+    \[\lambda \geq 0.\]
+    Now, I claim that $\lambda \neq 0$. To see this, notice, by setting $\lambda = 0$ in the Rayleigh quotient,
+    \begin{align*}
+        \frac{\int_0^L \left[\left(\frac{d\phi}{dx}\right)^2 + (x\phi)^2\right]dx}{\int_0^L \phi^2 dx} &= 0\\
+        \implies \int_0^L\left(\frac{d\phi}{dx}\right)^2dx &= -\int_0^L (x\phi)^2dx
+    \end{align*}
+    and since $\int_0^L \left(\frac{d\phi}{dx}\right)^2dx, \int_0^L (x\phi)^2dx \geq 0$, by the above equality, it must be the case that $\int_0^L\left(\frac{d\phi}{dx}\right)^2dx = \int_0^L (x\phi)^2 dx = 0 \implies x\phi = 0 \implies \phi = 0$, which is not an eigenvector by definition. Hence, $\lambda = 0$ is not an eigenvalue of this problem. 
+
+    \pagebreak
+    \item[5.] A Sturm-Liouville eigenvalue problem is called self-adjoint if 
+    \[p\left(u\frac{dv}{dx} - v\frac{du}{dx}\right)\bigg|_a^b = 0\]
+    since then $\int_a^b \{uL[v] - vL[u]\}dx = 0$ for any two functions $u$ and $v$ satisfying the boundary conditions. Show that the following yield self-adjoint problems.
+    \begin{itemize}
+        \item[(a)] $\phi(a) = 0$ and $\phi(b) = 0$
+        \newline\newline
+        \textit{Soln.} For the remainder of the problem, let $u, v$ satisfy the given boundary conditions. For this problem, notice
+        \begin{align*}
+            p\left(u\frac{dv}{dx} - v\frac{du}{dx}\right)\bigg|_a^b &= p(b)\left(u(b)\frac{dv}{dx}(b) - v(b)\frac{du}{dx}(b)\right) - p(a)\left(u(a)\frac{dv}{dx}(a) - v(a)\frac{du}{dx}(a)\right)\\
+            &= p(b)\left(0\cdot\frac{dv}{dx}(b) - 0\cdot\frac{du}{dx}(b)\right) - p(a)\left(0\cdot\frac{dv}{dx}(a) - 0\cdot \frac{du}{dx}(a)\right)\\
+            &= 0
+        \end{align*}
+        so that these boundary conditions yield a self-adjoint problem.
+
+        \item[(b)] $\frac{d\phi}{dx}(a) = 0$ and $\phi(b) = 0$
+        \newline\newline
+        \textit{Soln.} Notice
+        \begin{align*}
+            p\left(u\frac{dv}{dx} - v\frac{du}{dx}\right)\bigg|_a^b &= p(b)\left(u(b)\frac{dv}{dx}(b) - v(b)\frac{du}{dx}(b)\right) - p(a)\left(u(a)\frac{dv}{dx}(a) - v(a)\frac{du}{dx}(a)\right)\\
+            &= p(b)\left(0\cdot \frac{dv}{dx}(b) - 0\cdot \frac{du}{dx}(b)\right) - p(a) \left(u(a)\cdot 0 - v(a)\cdot 0\right)\\
+            &= 0
+        \end{align*}
+        so that the boundary conditions yield a self-adjoint problem.
+
+        \item[(c)] $\frac{d\phi}{dx}(a) - h\phi(a) = 0$ and $\frac{d\phi}{dx}(b) = 0$
+        \newline\newline
+        \textit{Soln.} Notice
+        \begin{align*}
+            p\left(u\frac{dv}{dx} - v\frac{du}{dx}\right)\bigg|_a^b &= p(b)\left(u(b)\frac{dv}{dx}(b) - v(b)\frac{du}{dx}(b)\right) - p(a)\left(u(a)\frac{dv}{dx}(a) - v(a)\frac{du}{dx}(a)\right)\\
+            &= p(b)\left(u(b)\cdot 0 - v(b)\cdot 0\right) - p(a) \left(u(a)\cdot hv(a) - v(a) \cdot hu(a)\right)\\
+            &= 0 - p(a)(hv(a)u(a) - hv(a)u(a))\\
+            &= 0
+        \end{align*}
+        so that these boundary conditions yield a self-adjoint problem.
+        
+
+        \item[(d)] $\phi(a) = \phi(b)$ and $p(a)\frac{d\phi}{dx}(a) = p(b)\frac{d\phi}{dx}(b)$
+        \newline\newline
+        \textit{Soln.}
+        \begin{align*}
+            p\left(u\frac{dv}{dx} - v\frac{du}{dx}\right)\bigg|_a^b &= p(b)\left(u(b)\frac{dv}{dx}(b) - v(b)\frac{du}{dx}(b)\right) - p(a)\left(u(a)\frac{dv}{dx}(a) - v(a)\frac{du}{dx}(a)\right)\\
+            &= \left(u(a)p(b)\frac{dv}{dx}(b) - v(a)p(b)\frac{du}{dx}(b)\right) - \left(u(a)p(a)\frac{dv}{dx}(a) - v(a)p(a)\frac{du}{dx}(a)\right)\\
+            &= \left(u(a)p(a)\frac{dv}{dx}(a) - v(a)p(a)\frac{du}{dx}(a)\right) - \left(u(a)p(a)\frac{dv}{dx}(a) - v(a)p(a)\frac{du}{dx}(a)\right)\\
+            &= 0
+        \end{align*}
+        so that these boundary conditions yield a self-adjoint problem.
+
+        
+        \item[(e)] $\phi(a) = \phi(b)$ and $\frac{d\phi}{dx}(a) = \frac{d\phi}{dx}(b)$ (self-adjoint only if $p(a) = p(b)$)
+        \newline\newline
+        \textit{Soln.}
+        \begin{align*}
+            p\left(u\frac{dv}{dx} - v\frac{du}{dx}\right)\bigg|_a^b &= p(b)\left(u(b)\frac{dv}{dx}(b) - v(b)\frac{du}{dx}(b)\right) - p(a)\left(u(a)\frac{dv}{dx}(a) - v(a)\frac{du}{dx}(a)\right)\\
+            &= p(a)\left(u(a)\frac{dv}{dx}(a) - v(a)\frac{du}{dx}(a)\right) - p(a)\left(u(a)\frac{dv}{dx}(a) - v(a)\frac{du}{dx}(a)\right)\\
+            &= 0
+        \end{align*}
+        so that these boundary conditions yield a self-adjoint problem.
+
+        \item[(f)] $\phi(b) = 0$ and (in the situation with $p(a) = 0$) $\phi(0)$ bounded and $\lim_{x \to a}p(x)\frac{d\phi}{dx} = 0$
+        \newline\newline
+        \textit{Soln.} We first consider the case $\phi(b) = 0$ and $p(a) = 0$. Notice 
+        \begin{align*}
+            p\left(u\frac{dv}{dx} - v\frac{du}{dx}\right)\bigg|_a^b &= p(b)\left(u(b)\frac{dv}{dx}(b) - v(b)\frac{du}{dx}(b)\right) - p(a)\left(u(a)\frac{dv}{dx}(a) - v(a)\frac{du}{dx}(a)\right)\\
+            &= p(b)\left(0\cdot\frac{dv}{dx}(b) - 0\cdot \frac{du}{dx}(b)\right) - 0\cdot \left(0\cdot \frac{dv}{dx}(a) - 0\cdot \frac{du}{dx}(a)\right)\\
+            &= 0
+        \end{align*}
+        so that the problem is self adjoint.
+        \newline
+        Now consider the case $\phi(b) = 0$, $\phi(a)$ bounded and $\lim_{x \to a} p(x)\frac{d\phi}{dx} = 0$:
+        \begin{align*}
+            p\left(u\frac{dv}{dx} - v\frac{du}{dx}\right)\bigg|_a^b &= p(b)\left(u(b)\frac{dv}{dx}(b) - v(b)\frac{du}{dx}(b)\right) - \lim_{x \to a} \left(p(x)\left(u(x)\frac{dv}{dx}(x) - v(x)\frac{du}{dx}(x)\right)\right)\\
+            &= p(b)\left(0\cdot\frac{dv}{dx}(b) - 0\cdot \frac{du}{dx}(b)\right) - \lim_{x \to a}\left(p(x)\left(u(x)\frac{dv}{dx}(x) - v(x)\frac{du}{dx}(x)\right)\right)\\
+            &= -\lim_{x \to a} p(x)\left(u(x)\frac{dv}{dx}(x) - v(x)\frac{du}{dx}(x)\right)\\
+            &= -u(a)\lim_{x \to a} p(x)\frac{dv}{dx}(x) + v(a)\lim_{x \to a }p(x)\frac{du}{dx} \tag{$\phi(a)$ bounded}\\
+            &= 0
+        \end{align*}
+        so that this situation yields a self-adjoint operator.
+    \end{itemize}
+\end{itemize}
+
+\end{document}

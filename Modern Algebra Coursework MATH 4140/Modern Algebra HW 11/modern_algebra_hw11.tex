@@ -1,0 +1,83 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{empty}
+
+\title{Modern Algebra HW 11}
+\author{Michael Nameika}
+\date{November 2022}
+
+\begin{document}
+
+\maketitle
+
+\section*{Section 26 Problems}
+\textbf{12.} Give an example to show that a factor ring of an integral domain may be a field. 
+\newline\newline
+Let $p$ be prime and note that $\mathbb{Z}$ is an integral domain. Then $\mathbb{Z}/p\mathbb{Z}$ is a field.
+\newline\newline
+\textbf{13.} Give an example to show that a factor ring of an integral domain may have divisors of 0. 
+\newline\newline
+Note that $\mathbb{Z}$ is an integral domain and consider the factor ring $\mathbb{Z}/4\mathbb{Z} \cong \mathbb{Z}_4$. Notice that $2\cdot 2 = 0$ in $\mathbb{Z}_4$, so the factor ring $\mathbb{Z}/4\mathbb{Z}$ has a divisor of 0.
+
+
+
+\section*{1)}
+\textbf{Prove: If $I$ is an ideal of $R$, and $1_R$ is in $I$, then $I = R$.}
+
+Proof: Let $I$ be an ideal of $R$ and suppose $1_R \in I$. We wish to show that $I = R$. Well, since $I$ is an ideal, the absorption property holds. 
+Using the fact that $1_R \in I$ and the absorption property, we have for $r \in R$, $r\cdot 1_R \in I$ and $1_R \cdot r \in I$ and further, $r\cdot 1_R = 1_R \cdot r = r$ since $1_R$ is the multiplicative identity of $R$. That is, we have for any $r \in R$, $r \in I$. 
+And since $I$ is an ideal of $R$, we have $\langle I, + \rangle \leq \langle R, + \rangle$ and so $I = R$. 
+
+\section*{2)}
+\textbf{Prove: Let $F$ be a field. Then the only ideals of $F$ are $\{0\}$ and $F$.}
+
+Proof: To begin, I will show that $\{0\}$ and $F$ are ideals of $F$. For $\{0\}$, for any $f \in F$, we have $0\cdot f = f \cdot 0 = 0$, so $\{0\}$ is clearly an ideal for $F$. 
+On a similar vein, for any $f_1, f_2 \in F$, $f_1 \cdot f_2, f_2 \cdot f_1 \in F$ since $F$ is a field. 
+Thus, $F$ is also an ideal of $F$. Now suppose by way of contradiction that there exists some ideal $I$ of $F$ where $I \neq \{0\}$ and $I \neq F$. 
+Since $I$ is assumed to be an ideal, the absorption property holds. But $F$ is also a field, so $\langle F^{\neq 0}, \cdot \rangle$ is a group and so every element in the multiplicative group has an inverse. 
+And since $I$ is an ideal of $F$, we have for any $i \in I$, $i \in F$. 
+Then $i^{-1} \in F$ is the multiplicative inverse of $i$ and so 
+\[i^{-1}\cdot i = 1_F \in I\]
+And by problem 1), we have that $I = F$, a contradiction. 
+
+\section*{3)}
+\begin{itemize}
+    \item[a)] For any pair of integers $a,b$ in $\mathbb{Z}$, it turns out that $a\mathbb{Z} \cap b\mathbb{Z} = c\mathbb{Z}$ for some integer $c$. What is $c$? 
+    \newline\newline
+    $c = \text{lcm}(a,b)$ where lcm$(a,b)$ denotes the least common multiple between $a$ and $b$. See scratch work below.
+    \newline\newline
+    By inspection, if $a$ does not divide $b$, we have $a\mathbb{Z} \cap b\mathbb{Z} = \{\cdots, -2ab, -ab, 0, ab, 2ab, \cdots \}$. However, if $a$ does divide $b$, then the smallest non-zero value in $a\mathbb{Z} \cap b\mathbb{Z}$ is $\text{lcm}(a,b)$. Notice in the case where $a$ and $b$ are relatively prime, $\text{lcm}(a,b) = ab$.
+    
+    \item[b)] For any pair of integers $a,b$ in $\mathbb{Z}$, it turns out that $a\mathbb{Z} + b\mathbb{Z} = c\mathbb{Z}$ for some integer $c$. What is $c$?
+    \newline\newline
+    $c = \gcd{(a,b)}$. See scratch work below.
+    \newline\newline
+    Begin with $3\mathbb{Z} + 2\mathbb{Z}$:
+    \begin{align*}
+        3\mathbb{Z} &= \{\cdots, -9, -6, -3, 0, 3, 6, 9, \cdots\} \\
+        6\mathbb{Z} &= \{\cdots, -6, -4, -2, 0, 2, 4, 6, \cdots\} \\
+        3\mathbb{Z} + 6\mathbb{Z} &= \{\cdots, 0, 1, 2, 3, 4, 5, 6, 7, \cdots\} \\
+        &= \mathbb{Z} \\
+    \end{align*}
+    and notice $\gcd{(3,2)} = 1$.
+    \newline
+    Now inspect $6\mathbb{Z} + 8\mathbb{Z}$:
+    \begin{align*}
+        6\mathbb{Z} &= \{\cdots, -18, -12, -6, 0, 6, 12, 18, \cdots\} \\
+        8\mathbb{Z} &= \{\cdots, -24, -16, -8, 0, 8, 16, 24, \cdots\} \\
+        6\mathbb{Z} + 8\mathbb{Z} &= \{\cdots, 0, 2, 4, 6, 8, 10, \cdots\} \\
+        &= 2\mathbb{Z} \\
+    \end{align*}
+    and notice $\gcd{(6,8)} = 2$. 
+    
+\end{itemize}
+
+\end{document}

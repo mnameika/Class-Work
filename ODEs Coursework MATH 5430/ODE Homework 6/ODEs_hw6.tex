@@ -1,0 +1,442 @@
+\documentclass{article}
+\usepackage{graphicx, amsmath, amssymb, mathtools, fancyhdr}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{fancy}
+
+\fancyfoot{}
+\fancyhead[R]{\thepage}
+\fancyhead[L]{MATH 5430}
+
+
+\begin{document}
+
+\begin{center}
+    {\Huge Homework 6}
+    \vspace{0.5cm}
+
+    {\Large Michael Nameika}
+\end{center}
+
+\begin{itemize}
+    \item[1.] Determine the radius of convergence of the given power series
+    \begin{itemize}
+        \item[(a)] $\sum_{n = 0}^{\infty} (x - 3)^n$
+        \newline\newline
+        \textit{Soln.} Notice that, for this power series, $a_n = 1$ for all $n$. By the ratio test, we have 
+        \begin{align*}
+            R &= \lim_{n \to \infty} \left|\frac{a_n}{a_{n+1}}\right|\\
+            &= \lim_{n \to \infty} 1\\
+            &= 1
+        \end{align*}
+        so that the radius of convergence is $R = 1$.
+
+        \item[(b)] $\sum_{n = 1}^{\infty} \frac{(x - x_0)^n}{n}$
+        \newline\newline
+        \textit{Soln.} Notice that for this power series, $a_n = \tfrac{1}{n}$. By the ratio test, we find
+        \begin{align*}
+            R &= \lim_{n \to \infty} \left|\frac{a_n}{a_{n+1}}\right|\\
+            &= \lim_{n \to \infty} \frac{\frac{1}{n}}{\frac{1}{n+1}}\\
+            &= \lim_{n \to \infty} \frac{n+1}{n}\\
+            &= 1
+        \end{align*}
+        so that the radius of convergence is $R = 1$.
+
+        \item[(c)] $\sum_{n = 1}^{\infty} \frac{(-1)^n n^2 (x + 2)^n}{3^n}$
+        \newline\newline
+        \textit{Soln.} Notice that $a_n = \frac{(-1)^n n^2}{3^n}$ and so, by the ratio test, we have
+        \begin{align*}
+            R &= \lim_{n \to \infty} \left|\frac{a_n}{a_{n+1}}\right|\\
+            &= \lim_{n \to \infty} \left|\frac{\frac{(-1)^nn^2}{3^n}}{\frac{(-1)^{n+1}(n+1)^2}{3^{n+1}}}\right|\\
+            &= \lim_{n \to \infty} \frac{3^{n+1}n^2}{3^n(n+1)^2}\\
+            &= 3\lim_{n \to \infty} \left(\frac{n}{n+1}\right)^2\\
+            &= 3
+        \end{align*}
+        so that the radius of convergence is $R = 3$.
+    \end{itemize}
+    \pagebreak
+    \item[2.] Find the power series solution about the given point $x_0$. Find the first four terms in each of the two solutions $y_1$ and $y_2$. By evaluating the Wronskian $W(y_1, y_2)(x_0)$ show that $y_1$ and $y_2$ form a fundamental set of solutions.
+    \begin{itemize}
+        \item[(a)] $y'' - xy' - y = 0$, \hspace{0.5cm} $x_0 = 0$
+        \newline\newline
+        \textit{Soln.} Assume that $y$ may be expressed as a power series $y = {\displaystyle \sum_{n = 0}^{\infty} a_n x^n}$ that converges for $|x| < \rho$ for some $\rho > 0$. Then 
+        \begin{align*}
+            y' &= \sum_{n = 0}^{\infty} na_nx^{n-1}\\
+            y'' &= \sum_{n = 0}^{\infty} n(n-1)a_nx^{n-2}
+        \end{align*}
+        and so, by plugging this in to our differential equation, we have
+        \begin{align*}
+            \sum_{n = 0}^{\infty} n(n-1)a_nx^{n-2} - x\sum_{n = 1}^{\infty} na_n x^{n-1} - \sum_{n = 0}^{\infty}a_nx^n &= 0\\
+            \implies \sum_{n = 0}^{\infty} n(n-1)a_nx^{n-2} &= \sum_{n = 0}^{\infty} (n + 1)a_nx^n
+        \end{align*}
+        and by re-indexing, we find
+        \[\sum_{n = 0}^{\infty}n(n-1)a_nx^{n-2} = \sum_{n = 0}^{\infty}(n+2)(n+1)a_{n+2}x^n\]
+        so that the above series representation of the differential equation becomes
+        \[\sum_{n = 0}^{\infty}(n+2)(n+1)a_{n+2}x^n = \sum_{n = 0}^{\infty} (n+1)a_nx^n\]
+        which gives us the following recurrence relation:
+        \[a_{n+2} = \frac{a_n}{n+2}.\]
+        For the first few even terms, notice
+        \begin{align*}
+            a_2 &= \frac{a_0}{2}\\
+            a_4 &= \frac{a_2}{4} = \frac{a_0}{4\cdot 2}\\
+            a_6 &= \frac{a_4}{6} = \frac{a_0}{6\cdot 4 \cdot 2}\\
+            a_8 &= \frac{a_6}{8} = \frac{a_0}{8 \cdot 6 \cdot 4 \cdot 2}\\
+            &\vdots
+        \end{align*}
+        and likewise for the odd terms,
+        \begin{align*}
+            a_3 &= \frac{a_1}{3}\\
+            a_5 &= \frac{a_3}{5} = \frac{a_1}{5\cdot 3}\\
+            a_7 &= \frac{a_5}{7} = \frac{a_1}{7 \cdot 5 \cdot 3}\\
+            a_9 &= \frac{a_7}{9} = \frac{a_1}{9 \cdot 7 \cdot 5 \cdot 3}\\
+            &\vdots
+        \end{align*}
+        which gives us 
+        \[a_{2k} = \frac{a_0}{(2k)!!}, \hspace{1cm} a_{2k+1} = \frac{a_1}{(2k + 1)!!}\]
+        where $(\cdot)!!$ denotes the double factorial. Thus, the solution to our differential equation is given by $y = a_0y_1 + a_1y_2$ with
+        \[y_1 = \sum_{n = 0}^{\infty} \frac{x^{2n}}{(2n)!!}, \hspace{1cm} y_2 = \sum_{n = 0}^{\infty} \frac{x^{2n+1}}{(2n+1)!!}.\]
+        To see that $y_1$ and $y_2$ form a fundamental set of solutions, let us inspect the Wronskian $W(y_1,y_2)(x_0)$:
+        \begin{align*}
+            W(y_1,y_2)(x_0) &= \left|\begin{matrix}
+                y_1(x_0) & y_2(x_0)\\
+                y_1'(x_0) & y_2'(x_0)
+            \end{matrix}\right|\\
+            &= y_1(x_0)y_2'(x_0) - y_1'(x_0)y_2(x_0)
+        \end{align*}
+        and notice that $y_2(x_0) = 0$, and that $y_1(x_0) = 1$, $y_2'(x_0) = 1$ so that
+        \[W(y_1,y_2)(x_0) = 1 \neq 0\]
+        so that $y_1$ and $y_2$ form a fundamental solution set. Also notice that both series converge for all real numbers since
+        \[\lim_{n \to \infty} \frac{(n + 1)!!}{n!!} = \infty\]
+
+        \item[(b)] $(1 - x)y'' + y = 0$, \hspace{0.34cm} $x_0 = 0$
+        \newline\newline
+        \textit{Soln.} Assume that we may express $y$ as a power series ${\displaystyle y = \sum_{n=0}^{\infty}a_nx^n}$ that converges for $|x| < \rho$ for some $\rho > 0$. Then
+        \[y'' = \sum_{n = 0}^{\infty} n(n-1)a_nx^{n-2}\]
+        and so, by plugging this into our differential equation, we find
+        \begin{align*}
+            (1 - x)\sum_{n = 0}^{\infty} n(n-1)a_nx^{n-2} + \sum_{n = 0}^{\infty}a_nx^n &= 0\\
+            \implies \sum_{n = 0}^{\infty} n(n-1)a_nx^{n-2} + \sum_{n = 0}^{\infty}n(n-1)a_nx^{n-1} + \sum_{n=0}^{\infty} a_nx^n &= 0
+        \end{align*}
+        which, after re-indexing, becomes
+        \begin{align*}
+            \sum_{n = 0}^{\infty}(n+2)(n+1)a_{n+2}x^n - \sum_{n = 0}^{\infty}(n+2)(n+1)a_{n+2}x^{n+1} + &\sum_{n = 0}^{\infty} a_n x^n = 0
+        \end{align*}
+        Equating terms, we find
+        \[a_2 = -\frac{1}{2}a_0\]
+        and in general,
+        \[a_{n+3} = \frac{n+1}{n+3}a_{n+2} - \frac{1}{(n + 3)(n + 2)}a_{n+1}\]
+        
+        
+    \end{itemize}
+    \pagebreak
+    \item[3.] The Chebyshev differential equation is
+    \[(1 - x^2)y'' - xy' + \alpha^2y = 0,\]
+    where $\alpha$ is a constant. (a) Determine two solutions in powers of $x$ for $|x| < 1$ and show that the form a fundamental set of solutions. (b) Show that if $\alpha$ is a nonnegative integer $n$, then there is a polynomial solution of degree $n$. These polynomials, when properly normalized, are called the Chebyshev polynomials. They are useful in problems that require a polynomial approximation defined on $-1 \leq x \leq 1$. (c) Find a polynomial solution for the cases $\alpha = n = 0, 1, 2, 3$.
+    \newline\newline
+    \textit{Soln.} (a) Assume that we may express the solution $y$ of the differential equation in a power series
+    \[y = \sum_{n = 0}^{\infty}a_n x^n\]
+    for $|x| < \rho$ for some $\rho > 0$. Now, 
+    \begin{align*}
+        y' &= \sum_{n = 0}^{\infty} na_n x^{n-1}\\
+        y'' &= \sum_{n = 0}^{\infty} n(n-1)a_n x^{n-2}
+    \end{align*}
+    so that the differential equation becomes
+    \begin{align*}
+        (1-x^2)\sum_{n = 0}^{\infty} n(n-1)a_nx^{n-2} - &x\sum_{n = 0}^{\infty} na_nx^{n-1} + \alpha^2 \sum_{n = 0}^{\infty} a_nx^n = 0\\
+        \sum_{n = 0}^{\infty} n(n-1)a_nx^{n-2} - \sum_{n = 0}^{\infty}n(n-1)x^{n-1} - &\sum_{n = 0}^{\infty} na_nx^n - \sum_{n = 0}^{\infty} a_nx^n = 0\\
+        \implies \sum_{n = 0}^{\infty} n(n-1)a_nx^{n-2} &= \sum_{n = 0}^{\infty} a_nx^n[n(n-1) + n - \alpha^2]\\
+        \implies \sum_{n = 0}^{\infty} n(n-1)a_nx^{n-2} &= \sum_{n = 0}^{\infty} a_nx^n(n^2 - \alpha^2)
+    \end{align*}
+    and by re-indexing the left hand side, we find
+    \[\sum_{n = 0}^{\infty} (n+2)(n+1)a_{n+2}x^n = \sum_{n = 0}^{\infty} a_nx^n(n^2 - \alpha^2)\]
+    which gives us the recurrence relation
+    \[a_{n+2} = a_n \frac{n^2 - \alpha^2}{(n + 2)(n+1)}.\]
+    Writing out the first few even terms, we find
+    \begin{align*}
+        a_2 &= a_0\frac{-\alpha^2}{2!}\\
+        a_4 &= a_2\frac{2^2 - \alpha^2}{4\cdot3} = a_0\frac{(2^2 - \alpha^2)(0^2 - \alpha^2)}{4!}\\
+        a_6 &= a_4\frac{4^2 - \alpha^2}{6\cdot5} = a_0\frac{(4^2 - \alpha^2)(2^2 - \alpha^2)(0^2 - \alpha^2)}{6!}\\
+            &\vdots
+    \end{align*}
+    and the first few odd terms:
+    \begin{align*}
+        a_3 &= a_1\frac{1^2 - \alpha^2}{3!}\\
+        a_5 &= a_3\frac{3^2 - \alpha^2}{5\cdot4} = a_1\frac{(3^2 - \alpha^2)(1^2 - \alpha^2)}{5!}\\
+        a_7 &= a_5\frac{5^2 - \alpha^2}{7\cdot6} = a_1\frac{(5^2 - \alpha^2)(3^2 - \alpha^2)(1^2 - \alpha^2)}{7!}\\
+            &\vdots
+    \end{align*}
+    which gives us the general forms
+    \begin{align*}
+        a_{2k} &= \frac{a_0}{(2k)!}\prod_{n = 1}^k[(2n-2)^2 - \alpha^2]\\
+        a_{2k + 1} &= \frac{a_1}{(2k+1)!}\prod_{n = 1}^k [(2n - 1)^2 - \alpha^2]
+    \end{align*}
+    so that our solution takes the form $y = a_0y_1 + a_1y_2$ with
+    \begin{align*}
+        y_1 &= 1 + \sum_{n = 1}^{\infty} \frac{x^{2n}}{(2n)!}\prod_{k = 1}^n[(2k - 2)^2 - \alpha^2]\\
+        y_2 &= x + \sum_{n = 1}^{\infty} \frac{x^{2n + 1}}{(2n + 1)!}\prod_{k = 1}^n [(2k - 1)^2 - \alpha^2].
+    \end{align*}
+    Now, to see that $y_1$ and $y_2$ form a linearly independent solution set, consider $W(y_1,y_2)(0)$:
+    \[W(y_1,y_2)(0) = y_1(0)y_2'(0) - y_1'(0)y_2(0)\]
+    and notice that $y_1(0) = 1$, $y_2(0) = 0$ and that $y_2' = 1 + \sum_{n = 1}^{\infty} \frac{x^{2n}}{(2n)!}\prod_{k = 1}^n[(2k - 1)^2 - \alpha^2)]$ so that $y_2'(0) = 1$. Thus,
+    \[W(y_1,y_2)(0) = 1 \neq 0\]
+    and so $y_1$ and $y_2$ form a fundamental solution set.
+    \newline\newline
+    (b) Let $\alpha = \ell \in \mathbb{Z}$ and consider the following cases:
+    \newline
+    Case I: $\ell$ is even. Then for $n \geq \ell/2 + 1$, the terms in the series expansion truncate due to the appearance of $\ell^2 - \alpha^2$ in the terms. That is, 
+    \[y_1 = 1 + \sum_{n = 1}^{\ell/2}\frac{x^{2n}}{(2n)!}\prod_{k = 1}^n[(2k - 2)^2 - \alpha^2]\]
+    Case II: $\ell$ is odd. Same story for Case I, except now $y_2$ truncates for $n > (\ell-1)/2$:
+    \[y_2 = x + \sum_{n = 1}^{(\ell - 1)/2}\frac{x^{2n+1}}{(2n + 1)!}\prod_{k = 1}^n [(2k - 1)^2 - \alpha^2]\]
+    (c) For $\alpha = 0$, we find
+    \[y_1 = 1\]
+    and for $\alpha = 1$:
+    \[y_2 = x\]
+    and $\alpha = 2$:
+    \[y_1 = 1 - 2x^2\]
+    and finally for $\alpha = 3$:
+    \[y_2 = x - \frac{4x^3}{3}\]
+    
+    
+    \pagebreak
+    \item[4.] Consider the Euler equations
+    \[x^2y'' + \alpha xy' + \beta y = 0\]
+    with repeated roots solutions, i.e. $(\alpha - 1)^2 = 4\beta$. Derive the general solution.
+    \newline\newline
+    \textit{Soln.} Begin with the ansatz $y = x^r$. Then $y' = rx^{r - 1}$ and $y'' = r(r - 1)x^{r - 2}$ and plugging this into the equation yields
+    \begin{align*}
+        r(r - 1) + \alpha r + \beta &= 0\\
+        r^2 + (\alpha - 1)r + \beta &= 0\\
+        \implies r &= \frac{1 - \alpha\pm \sqrt{(\alpha - 1)^2 - 4\beta}}{2}\\
+        \implies r &= \frac{1 - \alpha}{2}
+    \end{align*}
+    so that 
+    \[y_1 = x^{\frac{1 - \alpha}{2}}\]
+    Now, since the roots are repeated, we use reduction of order to seek a solution of the form
+    \[y_2 = c(x)y_1\]
+    and notice
+    \begin{align*}
+        y_2' &= c'(x)y_1 + c(x)y_1'\\
+        y_2'' &= c''(x)y_1 + 2c'(x)y_1' + c(x)y_1''
+    \end{align*}
+    and plugging this into our differential equation yields
+    \begin{align*}
+        x^2c''(x)y_1 + 2x^2c'(x)y_1' + x^2c(x)y_1'' + \alpha c'(x)y_1 + \alpha c(x)y_1' + \beta c(x)y_1 &= 0\\
+        x^2y_1c''(x) + 2x^2c'(x) (\tfrac{1 - \alpha}{2})y_1x^{-1} + \alpha c'(x)y_1 + c(x)[x^2y_1'' + \alpha xy_1' + \beta y_1] &= 0
+    \end{align*}
+    and since $y_1$ is a solution to the differential equation, we are left with
+    \begin{align*}
+        x^2y_1c''(x) + x(1 - \alpha)y_1c'(x) + \alpha y_1 c'(x) &= 0\\
+        \implies x^2c''(x) + xc'(x) &= 0\\
+        \implies xc''(x) + c'(x) &= 0
+    \end{align*}
+    let $v = c'$ so that $v' = c''$ and the above differential equation
+    \begin{align*}
+        xv' + v &= 0\\
+        \implies \int \frac{dv}{v} &= -\int \frac{1}{x}dx\\
+        \implies \ln(v) &= -\ln(x) + C\\
+        \implies v(x) &= \frac{C}{x}\\
+        \implies c(x) &= C\ln(x)
+    \end{align*}
+    so that the second solution is given by
+    \[y_2 = \ln(x)y_1.\]
+    Thus, the general solution for repeated roots is given by
+    \[y = a_1y_1 + a_2\ln(x)y_1.\]
+    
+    
+    \pagebreak
+    \item[5.] Consider the differential equation 
+    \[x^2y'' + xy' + (x - 2)y = 0.\]
+    \begin{itemize}
+        \item[(a)] Show that the differential equation has a regular singular point at $x = 0.$
+        \newline\newline
+        \textit{Soln.} Begin by dividing the differential equation through by $x^2$:
+        \[y'' + \frac{1}{x}y' + \frac{(x - 2)}{x^2}y = 0\]
+        and notice that $p(x) = \frac{1}{x}$ and $q(x) = \frac{x - 2}{x^2}$ and that
+        \begin{align*}
+            \lim_{x \to 0} xp(x) &= \lim_{x \to 0} 1 = 1\\
+            \lim_{x \to 0} x^2q(x) &= \lim_{x \to 0} (x - 2) = -2
+        \end{align*}
+        so that $x = 0$ is a regular singular point of the differential equation. \newline\newline
+
+        \item[(b)] Determine the indicial equation, the recurrence relations, and the roots of the indicial equation.
+        \newline\newline
+        \textit{Soln.} Notice that the power series expansions for $xp(x)$ and $x^2q(x)$ are given as
+        \[xp(x) = 1, \hspace{1cm} x^2q(x) = -2 + x\]
+        so that the corresponding Euler equation is
+        \[x^2y'' + xy' - 2y = 0.\]
+        Seek solutions of the form $y = x^r$. Then $y' = rx^{r - 1}$ and $y'' = r(r-1)x^{r - 2}$ so that, by plugging this into the differential equation, we find
+        \[x^r[r(r - 1) + r - 2] = 0\]
+        which gives us the indicial equation
+        \[r^2 - 2 = 0\]
+        so that the roots of the indicial equation are $r = \pm \sqrt{2}$. Now seek the Frobenius solution 
+        \[y = \sum_{n = 0}^{\infty} a_n x^{r + n}\]
+        so that $y' = \sum_{n = 0}^{\infty} (r + n) a_n x^{r + n - 1}$, $y'' = \sum_{n = 0}^{\infty} (r + n)(r + n-1)a_n x^{r + n-2}$, and by plugging these into our differential equation, we find
+        \begin{align*}
+            x^2y'' + xy' + (x - 2)y &= \sum_{n = 0}^{\infty} (r + n)(r + n - 1)a_nx^{r + n} + \sum_{n = 0}^{\infty} (r+ n)a_n x^{r + n} + \sum_{n = 1}^{\infty}a_{n - 1}x^{r + n} - 2\sum_{n = 0}^{\infty} a_nx^{r + n}\\
+            &= a_0x^r [r(r - r) + r - 2] + \sum_{n = 1}^{\infty}x^{r+ n} [(r + n)(r + n - 1)a_n + (r+n)a_n -2a_n + a_{n-1}]\\
+            &= a_0x^r[r^2 - 2] + \sum_{n = 1}^{\infty} x^{r + n}[((r+n)^2 - 2)a_n + a_{n-1}] = 0
+        \end{align*}
+        so that we find the recurrence relation for the coefficients:
+        \[a_n = -\frac{1}{(r + n)^2-2}a_{n - 1}\]
+        which gives us
+        \[a_n = \frac{(-1)^n}{((r + n)^2 - 2)((r + n-1)^2 - 2)\cdots ((r + 1)^2-2)}a_0\]
+        
+
+        \item[(c)] Find the two series solutions for $x > 0$.
+        \newline\newline
+        \textit{Soln.} We find the first solution from $r = \sqrt{2}$, so that
+        \[y_1 = x^{\sqrt{2}} \left(1 + \sum_{n = 1}^{\infty}\frac{(-1)^nx^n}{\prod_{k = 1}^n ((k + \sqrt{2})^2 - 2)}\right)\]
+        and for $r = -\sqrt{2}$, we find
+        \[y_2 = x^{-\sqrt{2}} \left(1 + \sum_{n = 1}^{\infty} \frac{(-1)^nx^n}{\prod_{k = 1}^n ((k - \sqrt{2})^2 - 2)}\right)\]
+    \end{itemize}
+
+    \pagebreak
+    \item[6.] (i) Show that $x = 0$ is a regular singular point of the given differential equation.
+    \newline
+    (ii) Find the exponents at the singularity point $x = 0$.
+    \newline
+    (iii) Find the first three nonzero terms in each of the two solutions about $x = 0$
+    \begin{itemize}
+        \item[(a)] $xy'' + y' - y = 0$
+        \newline\newline
+        \textit{Soln.}
+        \begin{itemize}
+            \item[(i)] Begin by dividing the differential equation by $x$:
+            \[y'' + \frac{1}{x}y' - \frac{1}{x}y = 0\]
+            and let $p(x) = \frac{1}{x}$, $q(x) = -\frac{1}{x}$ and notice
+            \begin{align*}
+                \lim_{x \to 0} xp(x) &= \lim_{x \to 0} 1 = 1\\
+                \lim_{x \to 0} x^2q(x) &= \lim_{x \to 0} x = 0
+            \end{align*}
+            so that $x = 0$ is a regular singular point of the differential equation. 
+            \newline\newline
+
+            \item[(ii)] To find the exponents at the singularity $x = 0$, notice that the series expansions for $xp(x)$ and $x^2q(x)$ are 
+            \begin{align*}
+                xp(x) &= 1\\
+                x^2q(x) &= x
+            \end{align*}
+            so that the corresponding Euler equation is 
+            \[x^2y'' + xy' = 0\]
+            we assume solutions of the form $y = x^r$ and plug into the differential equation and find
+            \[r(r - 1)x^r + rx^r = 0\]
+            and so $r^2 = 0 \implies r = 0$. Thus, the exponents at the singularity point $x = 0$ are $r_1 = r_2 = 0$.
+            \newline\newline
+
+            \item[(iii)] We seek Frobenius solution of the form $y = \sum_{n = 0}^{\infty} a_n x^{n + r}$ so that $y' = \sum_{n = 0}^{\infty} (n + r)a_n x^{n + r - 1}$ and $y'' = \sum_{n = 0}^{\infty} (r + n)(r + n - 1)a_nx^{n + r - 2}$ and plugging this into the differential equation yields
+            \begin{align*}
+                x\sum_{n = 0}^{\infty} (n + r)(n + r - 1)a_n x^{n + r - 2} + \sum_{n = 0}^{\infty} (n + r)a_n x^{n + r - 1} - &\sum_{n = 0}^{\infty} a_n x^{n + r} = 7\\
+                \implies (r(r - 1) + r)a_0 + \sum_{n = 0}^{\infty} (n + r + 1)^2a_{n+1}x^{n + r} - a_nx^{n + r} &= 0
+            \end{align*}
+            which gives us the recurrence relation
+            \[a_{n + 1} = \frac{a_n}{n + 1 + r}.\]
+            Hence, since $r = 0$, we find
+            \[a_n = \frac{a_0}{(n!)^2}\]
+            so that one solution to the differential equation is 
+            \[y_1 = \sum_{n = 0}^{\infty} \frac{x^n}{(n!)^2}.\]
+            Since the roots of the indicial equation are repeated, we have that the other equation of the differential equation will be of the form
+            \[y_2 = \sum_{n = 1}^{\infty} a_n'(0) x^n + \ln(x) y_1\]
+            where $a_n'(0) = \frac{da_n}{dr}\big|_{r = 0}$. Notice
+            \begin{align*}
+                a_1'(0) &= \left(\frac{d}{dr}\frac{a_0}{(1 + r)^2}\right)\bigg|_{r = 0}\\
+                &= -2a_0\\
+                a_2'(0) &= \left(\frac{d}{dr}\frac{a_0}{(1 + r)^2(2 + r)^2}\right)\bigg|_{r = 0}\\
+                &= a_0\left(\frac{-2}{2^2} - \frac{2}{2^3}\right)\\
+                &= a_0\left(-\frac{1}{2} - \frac{1}{4}\right)\\
+                &= -\frac{3}{4}a_0\\
+                a_3'(0) &= \left(\frac{d}{dr}\frac{a_0}{(1 + r)^2(2 + r)^2(3 + r)^2}\right)\bigg|_{r = 0}\\
+                &= a_0\left(-\frac{-2}{2^2\cdot 3^2} - \frac{2}{2^3\cdot 3^2} - \frac{2}{2^2\cdot 3^3}\right)\\
+                &= -2a_0\left(\frac{1}{36} + \frac{1}{72} + \frac{1}{108}\right)\\
+                &= -\frac{11}{108}a_0
+            \end{align*}
+            so that the first three nonnegative terms of the two solutions are
+            \begin{align*}
+                y_1 &= 1 + x + \frac{x^2}{4} + \cdots\\
+                y_2 &= -2x - \frac{3}{4}x^2 - \frac{11}{108}x^3 + \ln(x)\left(1 + x + \frac{x^2}{4}\right) + \cdots
+            \end{align*}
+        \end{itemize}
+
+        \item[(b)] $xy'' + 2xy' + 6e^xy = 0$
+        \newline\newline
+        \textit{Soln.}
+        \begin{itemize}
+            \item[(i)] Begin by dividing the differential equation by $x$:
+            \[y'' + 2y' + \frac{6e^x}{x}y = 0\]
+            and let $p(x) = 2$, $q(x) = \frac{6e^x}{x}$ and notice
+            \begin{align*}
+                \lim_{x \to 0} xp(x) &= \lim_{x \to 0}2x = 0\\
+                \lim_{x \to 0} x^2q(x) &= \lim_{x \to 0} 6xe^x = 0
+            \end{align*}
+            so that $x = 0$ is a regular singular point of the differential equation.
+
+            \item[(ii)] To find the exponents of the singularity $x = 0$, notice that the series expansions for $xp(x)$ and $x^2q(x)$ are given as
+            \begin{align*}
+                xp(x) &= 2x\\
+                x^2q(x) &= 6x + 6x^2 + 3x^3 + x^4 + \cdots
+            \end{align*}
+            so that the local Euler equation is 
+            \[x^2y'' = 0.\]
+            Assume solutions of the form $y = x^r$. Then $y' = rx^{r-1}$ and $y'' = r(r-1)x^{r-2}$ so that plugging this into the local Euler equation gives us
+            \[x^r[r(r-1)] = 0\]
+            which gives us
+            \begin{align*}
+                r(r-1) &= 0\\
+                \implies r_1 &= 1, \hspace{0.7cm} r_2 = 0
+            \end{align*}
+            so that the exponents of the singularity $x = 0$ are $r_1 = 1$ and $r_2 = 0$.
+            \newline\newline
+
+            \item[(iii)] Begin by noticing that $r_1 - r_2 = 1 \in \mathbb{Z}^+$. We first seek a solution of the form $y = \sum_{n = 0}^{\infty} a_nx^{n + r}$. Then $y' = \sum_{n = 0}^{\infty} (n + r)a_n x^{n + r - 1}$ and $y'' = \sum_{n = 0}^{\infty} (n + r)(n + r - 1)a_nx^{n + r - 2}$ and plugging this into our differential equation yields
+            \begin{align*}
+                \sum_{n = 0}^{\infty} (n + r)(n + r - 1)a_nx^{n + r - 1} + 2\sum_{n = 0}^{\infty} (n + r)a_nx^{n+ r} + &6e^x\sum_{n = 0}^{\infty}a_nx^{n + r} = 0\\
+                \implies r(r - 1)a_0 x^{r - 1} + \sum_{n = 0}^{\infty}(n + r + 1)(n + r)a_{n + 1}x^{n + r} + 2\sum_{n = 0}^{\infty} (n + r)a_n x^{n + r} + &6e^x\sum_{n = 0}^{\infty} a_n x^{n + r} = 0\\
+            \end{align*}
+            by using the expansion $e^x = \sum_{n = 0}^{\infty} \frac{x^n}{n!}$ and collecting powers of $x^{n + r}$, we find the first few coefficients:
+            \begin{align*}
+                (r + 1)(r)a_1 + 2r a_0 + 6a_0 &= 0\\
+                \implies a_1 &= -a_0\frac{2r + 6}{r(r + 1)}\\
+                \implies a_1 &= -4a_0 \tag{$r = 1$}\\
+                (r+2)(r+1)a_2 + 2(r+1)a_1 + 6a_1 + 6a_0 &= 0\\
+                \implies (r+2)(r+1)a_2 &= -2a_1(r + 4) - 6a_0\\
+                \implies a_2 &= a_0 \frac{8r + 26}{(r + 2)(r + 1)}\\
+                \implies a_2 &= \frac{17}{3}a_0 \tag{$r = 1$}
+            \end{align*}
+            Thus, the first few nonzero terms of $y_1$ are given by
+            \[y_1 = x\left(1 - 4x + \frac{17}{3}x^2 + \cdots\right) = x - 4x^2 + \frac{17}{3}x^3 + \cdots\]
+            Now since $r_1 - r_2 = 1$, we seek a second solution of the form
+            \[y_2 = a\ln(x)y_1 + \sum_{n = 0}^{\infty}b_n x^n\]
+            where 
+            \[a = \lim_{r \to 0} ra_1(r) = \lim_{r \to 0} -a_0\frac{2r + 6}{r+1} = -6a_0\]
+            so 
+            \[y_2 = -6\ln(x)y_1 + \sum_{n = 0}^{\infty} b_n x^n.\]
+            We now seek to find $b_n$. Differentiating $y_2$ yields
+            \begin{align*}
+                y_2' &= -\frac{6}{x}y_1 - 6\ln(x)y_1' + \sum_{n = 0}^{\infty}nb_nx^{n -1}\\
+                y_2'' &= \frac{6}{x^2}y_1 - \frac{12}{x}y_1' - 6\ln(x)y_1'' + \sum_{n = 0}^{\infty} n(n-1)b_nx^{n - 2} 
+            \end{align*}
+            plugging this into the differential equation gives us
+            \begin{align*}
+                \frac{6}{x}y_1 - 12y_1' - 6x\ln(x)y_1'' + \sum_{n = 0}^{\infty} n(n-1)b_nx^{n-1} - 12y_1 - 12\ln(x)y_1' + &\cdots\\
+               \cdots + 2\sum_{n = 0}^{\infty} nb_nx^n - 36e^x\ln(x)y_1 + 6e^x\sum_{n = 0}^{\infty}b_nx^n& = 0\\
+               -6\ln(x)[xy_1'' + 2xy_1' + 6e^xy_1] + \frac{6}{x}y_1 - 12y_1' - 12y_1 + \sum_{n = 0}^{\infty} n(n-1)b_nx^{n-1} + &\cdots\\
+               \cdots + 2\sum_{n = 0}^{\infty} nb_nx^n +6e^x\sum_{n = 0}^{\infty} b_nx^n& = 0\\
+            \end{align*}
+            $-6\ln(x)[xy_1'' + 2xy_1' + 6e^xy_1] = 0$ since $y_1$ satisfies the ODE, so we are left with
+            \[\frac{6}{x}y_1 - 12y_1' - 12y_1 + \sum_{n = 0}^{\infty} n(n-1)b_nx^{n-1} + 2\sum_{n = 0}^{\infty} nb_nx^n + 6e^x\sum_{n = 0}^{\infty} b_nx^n = 0\]
+            using the series expansion $e^x = \sum_{n = 0}^{\infty} \frac{x^n}{n!}$ and the expansion for $y_1$ and collecting like powers of $x$, we find
+            \begin{align*}
+                b_0 &= a_0\\
+                b_2 + 4b_1 &= -33a_0\\
+                6b_3 + 10b_2 + 6b_1 &= 119a_0
+            \end{align*}
+            
+        \end{itemize}
+    \end{itemize}
+
+    
+\end{itemize}
+
+\end{document}

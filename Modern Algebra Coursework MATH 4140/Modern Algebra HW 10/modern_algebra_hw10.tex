@@ -1,0 +1,99 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{tabto}
+\newcommand\showdiv[1]{\overline{\smash{)}#1}}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{empty}
+
+
+\title{Modern Algebra HW 10}
+\author{Michael Nameika}
+\date{November 2022}
+
+\begin{document}
+
+\maketitle
+
+\section*{Section 23 Problems}
+2. Find $q(x)$ and $r(x)$ as described by the division algorithm so that $f(x) = g(x)q(x) + r(x)$ with $r(x) = 0$ or of degree less than degree of $g(x)$.
+\newline\newline
+$f(x) = x^6 + 3x^5 + 4x^2 - 3x + 2$ and $g(x) = 3x^2 + 2x - 3$ in $\mathbb{Z}_7[x]$.
+\newline\newline
+To find $q(x)$ and $r(x)$, we will proceed by using long division. Notice
+\begin{align*}
+    &\; 5x^4  + 5x^2 - x\\
+    3x^2 + 2x - 3&\showdiv{x^6 + 3x^5 + 0x^4 + 0x^3 + 4x^2 - 3x + 2} \\
+    -&(\underline{x^6 + 3x^5 - x^4}) \\
+    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; x^4 + 0x^3 + 4x^2 - 3x + 2 \\
+    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;-(\underline{x^4 + 3x^3 - x^2}) \\
+    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;-3x^3 + 5x^2 - 3x + 2 \\
+    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;-(\underline{-3x^3 - 2x^2 + 3x}) \\
+    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;-6x + 2 \\
+\end{align*}
+So 
+\[x^6 + 3x^5 + 4x^2 - 3x + 2 = g(x)q(x) + r(x)\]
+where $g(x) = 3x^2 + 2x - 3$, $q(x) = 5x^4 + 5x^2 - x$, and $r(x) = -6x + 2$.
+\newline\newline
+12. Is $x^3 + 2x + 3$ an irreducible polynomial of $\mathbb{Z}_5[x]$? Why? Express it as a product of irreducible polynomials of $\mathbb{Z}_5[x]$.
+\newline\newline
+Let $f(x) = x^3 + 2x + 3$ and let us begin by checking whether each element of $\mathbb{Z}_5$ gives us $f(x) = 0$:
+\begin{align*}
+    f(0) &= 3 \\
+    f(1) &= 1 \\
+    f(2) &= 0 \\
+    f(3) &= 1 \\
+    f(4) &= 3 \\
+\end{align*}
+From this, we can see that $(x - 2)$ is a factor of $f(x)$. Let us find the quotient of $f(x)$ under division by $(x - 2)$ by means of long division:
+\begin{align*}
+    &\; x^2 + 2x + 1\\
+    x-2 &\showdiv{x^3 + 0x^2 + 2x + 3} \\
+    -&(\underline{x^3 - 2x^2}) \\
+    &\;\;\;\;\;\;\;\;\;\; 2x^2 + 2x + 3 \\
+    &\;\;\;\;\;-(\underline{2x^2 - 4x}) \\
+    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; x + 3 \\
+    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; -(\underline{x - 2}) \\
+    &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; 0 \\
+\end{align*}
+So $f(x)$ factors to $(x - 2)(x^2 + 2x + 1)$. Now let $g(x) = x^2 + 2x + 1$. Notice that $x^2 + 2x + 1 = (x + 1)^2$, so our factorization for $f(x)$ is:
+\[f(x) = (x-2)(x+1)^2\]
+16. Demonstrate that $x^3 + 3x^2 - 8$ is irreducible over $\mathbb{Q}$.
+\newline\newline
+Notice that the coefficients for $x^3 + 3x^2 - 8$ are (in order of descending power): $1, 3, 0, -8$. Further notice that $1 \not\equiv 0 \mod 3$, $3 \equiv 0 \mod 3$, $0 \equiv 0 \mod 3$, and $-8 \not\equiv 0 \mod 3^2$. Then by the Eisenstein Criterion, we have that $x^3 + 3x^2 - 8$ is irreducible over $\mathbb{Q}$.
+\newline\newline
+17. Demonstrate that $x^4 - 22x^2 + 1$ is irreducible over $\mathbb{Q}$.
+\newline\newline
+Notice that the only zeros of this function in $\mathbb{Z}$ must be $x = \pm 1$. Testing these values for $f(x) = x^4 - 22x^2 + 1$, we find
+\begin{align*}
+    f(1) &= 1 - 22 + 1 = -20 \\
+    f(-1) &= 1 - 22 + 1 = -20 \\
+\end{align*}
+Then $f(x)$ is irreducible in $\mathbb{Z}$, and so by theorem 23.11, we have that $f(x)$ is irreducible over $\mathbb{Q}$.
+\newline\newline
+28. Find all irreducible polynomials of degree 3 in $\mathbb{Z}_2[x]$.
+\newline\newline
+Let us begin by listing all the degree 3 polynomials in $\mathbb{Z}_2[x]$:
+\begin{align*}
+    &x^3 \\
+    &x^3 + 1 \\
+    &x^3 + x \\
+    &x^3 + x + 1 \\
+    &x^3 + x^2 \\
+    &x^3 + x^2 + 1 \\
+    &x^3 + x^2 + x \\
+    &x^3 + x^2 + x + 1\\
+\end{align*}
+Immediately, we can see that $x^3$, $x^3 + x$, $x^3 + x^2$, $x^3 + x^2 + x$ are reducible (factor out an $x$!). Upon further inspection, we can see $x^3 + 1$ and $x^3 + x^2 + x + 1$ have factors of $x - 1$ and are thus irreducible. So the irreducible polynomials of degree 3 in $\mathbb{Z}_2$ are 
+\begin{align*}
+    &x^3 + x^2 + 1 \\
+    &x^3 + x + 1 \\
+\end{align*}
+
+\end{document}

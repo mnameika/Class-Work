@@ -1,0 +1,97 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{empty}
+
+
+\title{Modern Algebra HW 12}
+\author{Michael Nameika}
+\date{November 2022}
+
+\begin{document}
+
+\maketitle
+
+\section*{Section 27 Problems}
+18. Is $\mathbb{Q}[x]/\langle x^2 - 5x + 6 \rangle$ a field? Why?
+\newline\newline
+$\mathbb{Q}[x]/\langle x^2 - 5x + 6\rangle$ is not a field because we may factor $x^2 - 5x + 6$ as $(x - 3)(x - 2)$ which shows us that $x^2 - 5x + 6$ is reducible in $\mathbb{Q}[x]$, and thus, $\mathbb{Q}[x]/\langle x^2 - 5x + 6 \rangle$ is not a field.
+\newline\newline
+19. Is $\mathbb{Q}[x]/\langle x^2 - 6x + 6 \rangle$ a field? Why?
+\newline\newline
+$\mathbb{Q}[x]/\langle x^2 - 6x + 6\rangle$ is a field. By the Eisenstein principle, let $p = 3$ and notice that 3 does not divide $a_2 = 1$ and 3 divides $a_1 = -6$ and $a_0 = 6$ but $3^2 = 9$ does not divide $a_0 = 6$. Thus, by the Eisenstein principle, $(x^2 - 6x + 6)$ is irreducible in $\mathbb{Q}$ and so $\mathbb{Q}[x]/\langle x^2 - 6x + 6 \rangle$ is a field.
+
+
+\section*{Section 29 Problems}
+18. a. Show that the polynomial $x^2 + 1$ is irreducible in $\mathbb{Z}_3[x]$.
+\newline\newline
+By the low degree test, it suffices to show that any element of $\mathbb{Z}_3$ is not a zero for $x^2 + 1$ in $\mathbb{Z}_3[x]$. Denote $f(x) = x^2 + 1$ and notice the following:
+\begin{align*}
+    f(0) &= 0^2 + 1 = 1 \\
+    f(1) &= 1^2 + 1 = 1 + 1 = 2 \\
+    f(2) &= 2^2 + 1 = 1 + 1 = 2 \\
+\end{align*}
+So $x^2 + 1$ is irreducible in $\mathbb{Z}_3[x]$.
+\newline
+b. Let $\alpha$ be a zero of $x^2 + 1$ in an extension field of $\mathbb{Z}_3$. As in Example 29.19, give the multiplication and addition tables for the nine elements of $\mathbb{Z}_3(\alpha)$, written in the order 0,1 2, $\alpha$, $2\alpha$, $1 + \alpha$, $1 + 2\alpha$, $2 + \alpha$, and $2 + 2\alpha$.
+\newline\newline
+Quickly note that in $\mathbb{Z}_3(\alpha)$, $\alpha^2 = \overline{-1}$. Now let us inspect the addition and multiplication tables.
+\newline\newline
+\begin{center}
+    \begin{tabular}{c||c|c|c|c|c|c|c|c|c}
+        + & 0 & 1 & 2 & $\alpha$ & $2\alpha$ & $1 + \alpha$ & $1 + 2\alpha$ & $2 + \alpha$ & $2 + 2\alpha$ \\
+        \hline\hline
+        0 & 0 & 1 & 2 & $\alpha$ & $2\alpha$ & $1 + \alpha$ & $1 + 2\alpha$ & $2 + \alpha$ & $2 + 2\alpha$ \\
+        \hline
+        1 & 1 & 2 & 0 & $1 + \alpha$ & $1 + 2\alpha$ & $2 + \alpha$ & $2 + 2\alpha$ & $\alpha$ & $2\alpha$ \\
+        \hline
+        2 & 2 & 0 & 1 & $2 + \alpha$ & $2 + 2\alpha$ & $\alpha$ & $2\alpha$ & $1 + \alpha$ & $1 + 2\alpha$ \\
+        \hline
+        $\alpha$ & $\alpha$ & $1 + \alpha$ & $2 + \alpha$ & $2\alpha$ & 0 & $1 + 2\alpha$ & 1 & $2 + 2\alpha$ & 2 \\
+        \hline
+        $2\alpha$ & $2\alpha$ & $1 + 2\alpha$ & $2 + 2\alpha$ & 0 & $\alpha$ & 1 & $1 + \alpha$ & 2 & $2 + \alpha$ \\
+        \hline
+        $1 + \alpha$ & $1 + \alpha$ & $2 + \alpha$ & $\alpha$ & $1 + 2\alpha$ & 1 & $2 + 2\alpha$ & 2 & $2\alpha$ & 0 \\
+        \hline
+        $1 + 2\alpha$ & $1 + 2\alpha$ & $2 + 2\alpha$ & $2\alpha$ & 1 & $1 + \alpha$ & 2 & $2 + \alpha$ & 0 & $\alpha$ \\
+        \hline
+        $2 + \alpha$ & $2 + \alpha$ & $\alpha$ & $1 + \alpha$ & $2 + 2\alpha$ & 2 & $2\alpha$ & 0 & $1 + 2\alpha$ & 1 \\
+        \hline
+        $2 + 2\alpha$ & $2 + 2\alpha$ & $2\alpha$ & $1 + 2\alpha$ & 2 & $2 + \alpha$ & 0 & $\alpha$ & 1 & $1 + \alpha$ \\
+    \end{tabular}
+
+    \begin{tabular}{c||c|c|c|c|c|c|c|c|c}
+        $\cdot$ & 0 & 1 & 2 & $\alpha$ & $2\alpha$ & $1 + \alpha$ & $1 + 2\alpha$ & $2 + \alpha$ & $2 + 2\alpha$ \\
+        \hline\hline
+        0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+        \hline
+        1 & 0 & 1 & 2 & $\alpha$ & $2\alpha$ & $1 + \alpha$ & $1 + 2\alpha$ & $2 + \alpha$ & $2 + 2\alpha$ \\
+        \hline
+        2 & 0 & 2 & 1 & $2\alpha$ & $\alpha$ & $2 + 2\alpha$ & $2 + \alpha$ & $1 + 2\alpha$ & $ 1 + \alpha$ \\
+        \hline
+        $\alpha$ & 0 & $\alpha$ & $2\alpha$ & 2 & 1 & $2 + \alpha$ & $1 + \alpha$ & $2 + 2\alpha$ & $1 + 2\alpha$ \\
+        \hline
+        $2\alpha$ & 0 & $2\alpha$ & $\alpha$ & 1 & 2 & $1 + 2\alpha$ & $2 + 2\alpha$ & $1 + \alpha$ & $2 + \alpha$ \\
+        \hline
+        $1 + \alpha$ & 0 & $1 + \alpha$ & $2 + 2\alpha$ & $2 + \alpha$ & $1 + 2\alpha$ & $2\alpha$ & 2 & 1 & $\alpha$ \\
+        \hline
+        $1 + 2\alpha$ & 0 & $1 + 2\alpha$ & $2 + \alpha$ & $1 + \alpha$ & $2 + 2\alpha$ & 2 & $\alpha$ & $2\alpha$ & 1 \\
+        \hline
+        $2 + \alpha$ & 0 & $2 + \alpha$ & $1 + 2\alpha$ & $2 + 2\alpha$ & $1 + \alpha$ & 1 & $2\alpha$ & $\alpha$ & 2 \\
+        \hline
+        $2 + 2\alpha$ & 0 & $2 + 2\alpha$ & $1 + \alpha$ & $1 + 2\alpha$ & $2 + \alpha$ & $\alpha$ & 1 & 2 & $2\alpha$ \\
+        
+        
+        
+    \end{tabular}
+\end{center}
+
+
+\end{document}

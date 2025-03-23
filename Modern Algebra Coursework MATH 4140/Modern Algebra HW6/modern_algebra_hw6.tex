@@ -1,0 +1,223 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{empty}
+
+\title{Modern Algebra HW6}
+\author{Michael Nameika}
+\date{October 2022}
+
+\begin{document}
+
+\maketitle
+
+\section*{Section 14 Problems}
+12. Find the order of $(3,1) + \langle (1,1) \rangle$ in $(\mathbb{Z}_4 \times \mathbb{Z}_4)/\langle (1,1) \rangle$.
+\newline\newline
+To begin, notice that $\langle (1,1) \rangle = \{(0,0), (1,1), (2,2), (3,3)\}$. To find the order of $(3,1) + \langle (1,1) \rangle$, it is sufficient to compute $(3,1) + (3,1) + \cdots$ until we reach an element in  $\langle (1,1) \rangle$. Well,
+\begin{align*}
+    (3,1) + (3,1) = (2,2) \in \langle (1,1) \rangle \\
+\end{align*}
+We only needed to add $(3,1)$ to itself once to find an element in $\langle (1,1) \rangle$. That is, $(3,1) + \langle (1,1) \rangle$ has order 2 in $(\mathbb{Z}_4 \times \mathbb{Z}_4)/\langle (1,1) \rangle$.
+\newline\newline
+21. A student is asked to show that if $H$ is a normal subgroup of an abelian group $G$, then $G/H$ is abelian. The student's proof starts as follows:
+\newline
+We must show that $G/H$ is abelian. Let $a$ and $b$ be two elements of $G/H$.
+\begin{enumerate}
+    \item[\textbf{a.}] Why does the instructor reading this proof expect to find nonsense from here on in the student's paper?
+    \newline\newline0
+    The instructor can expect to find nonsense from here because $a$ and $b$ should be elements of $G$. Also, the student should reiterate what $G,H$ and $G/H$ are. 
+    \newline
+    \item[\textbf{b.}] What should the student have written?
+    \newline\newline
+    Let $H$ be a normal subgroup of an abelian group $G$ and let $a,b \in G$. We wish to show that $G/H$ is abelian. 
+    \newline
+    \item[\textbf{c.}] Complete the proof.
+    \newline\newline
+    Continuing off of part \textbf{c}, since $a,b \in G$, $aH$ and $bH$ are cosets of $H$ and thus, $aH, bH \in G/H$. We must show $(aH)(bH) = (bH)(aH)$. Well, from the definition of the binary operation on $G/H$, we have $(aH)(bH) = (ab)H$. Since $G$ is abelian, we have $ab = ba$ so $(ab)H = (ba)H$. Again by the definition of the binary operation on $G/H$, we have $(ba)H = (bH)(aH)$, thus $(aH)(bH) = (bH)(aH)$.
+\end{enumerate}
+40. Use the properties $\text{det}(AB) = \text{det}(A)\text{det}(B)$ and $\text{det}(I_n) = 1$ for $n \times n$ matrices to show the following:
+\begin{enumerate}
+    \item[\textbf{a.}] The $n \times n$ matrices with determinant 1 form a normal subgroup of $GL(n, \mathbb{R})$. 
+    \newline\newline
+    Let $H$ be the set of $n\times n$ matrices with real entries having determinant 1. To begin, we must show $H \leq Gl(n, \mathbb{R})$. Let $A,B \in H$ and consider $AB$. Since $A,B$ both have real entries, by definition of matrix multiplication and closure of $\mathbb{R}$, we have $AB$ has real entries. Additionally, $\text{det}(AB) = \text{det}(A)\text{det}(B) = (1)(1) = 1$, so $AB \in H$. That is, $H$ is closed. Now we must show that $I_n \in H$. Well, $I_n$ has real entries and $\text{det}(I_n) = 1$, so $I_n \in H$. Finally, we must show for any $A \in H$, $A^{-1} \in H$. Well, since $\text{det}(A) = 1$, $A^{-1}$ exists and $\text{det}(A^{-1}) = 1/\text{det}(A) = 1/1 = 1$, so $A^{-1} \in H$. So $H$ is a subgroup of $GL(n, \mathbb{R})$.
+    \newline
+    Now, to show $H$ is a normal subgroup of $GL(n, \mathbb{R})$, let $g \in GL(n, \mathbb{R})$, $h \in H$ and consider $ghg^{-1}$. Well, $det(ghg^{-1}) = \text{det}(g)\text{det}(h)\text{det}(g^{-1}) = \text{det}(g)(1)(1/\text{det}(g)) = 1$, so $ghg^{-1} \in H$. Then by theorem 14.13, $H$ forms a normal subgroup of $GL(n, \mathbb{R})$.
+\end{enumerate}
+
+\section*{Bonus Problems!!!}
+1. Let $K$ denote the subgroup $\langle \rho_1 \rangle$ in the group $D_4$.
+\begin{enumerate}
+    \item[(a)] True or false? For every $a \in D_4$ and every $k \in K$ the equation $ak = ka$ is valid.
+    \newline\newline
+    False. Consider $k = \rho_1$ and $a = \mu_1$. Notice
+    \[ak = \mu_1 \rho_1 = \delta_2\]
+    and
+    \[ka = \rho_1\mu_1 = \delta_1\]
+    so $ak \neq ka$.
+    
+    \item[(b)] List all the right cosets of $K$ in $D_4$.
+    \newline\newline
+    Since $\langle \rho_1 \rangle = \{\rho_0, \rho_1, \rho_2, \rho_3\}$, $|\langle \rho_1 \rangle| = 4$, so the index of $K$ in $D_4$ is 2, since $|D_4| = 8$. Now, $K = K\rho_0$ is one of the cosets, so we need only find the other. Notice
+    \begin{align*}
+        K\mu_1 = \{\mu_1, \delta_1, \mu_2, \delta_2\} \\
+    \end{align*}
+    So the two right cosets of $K$ in $D_4$ are 
+    \begin{align*}
+        &\{\mu_1, \delta_1, \mu_2, \delta_2\} \: ; \:\:\:\:\: \{\rho_0, \rho_1, \rho_2, \rho_3\} \\
+    \end{align*}
+    
+    \item[(c)] Prove that $K$ is a normal subgroup of $D_4$. 
+    \newline\newline
+    Proof: To do so, it suffices to show that each left coset is also a right coset. To begin, it is clear that $\rho_0 K = K \rho_0$. Let us inspect the remaining cosets:
+    \begin{align*}
+        \rho_1K &= \{\rho_1, \rho_2, \rho_3, \rho_0\} \\
+        K\rho_1 &= \{\rho_1, \rho_2, \rho_3, \rho_0\} = \rho_1K\\ \\
+        \rho_2K &= \{\rho_2, \rho_3, \rho_0, \rho_1\} \\
+        K\rho_2 &= \{\rho_2, \rho_3, \rho_0, \rho_1\} = \rho_2K\\ \\
+        \rho_3K &= \{\rho_3, \rho_0, \rho_1, \rho_2\} \\
+        K\rho_3 &= \{\rho_3, \rho_0, \rho_1, \rho_2\} = \rho_3K \\ \\
+        \mu_1K &= \{\mu_1, \delta_2, \mu_2, \delta_1\} \\
+        K\mu_1 &= \{\mu_1, \delta_1, \mu_2, \delta_2\} = \mu_1K \\ \\
+        \mu_2K &= \{\mu_2, \delta_1, \mu_1, \delta_2\} \\
+        K\mu_2 &= \{\mu_2, \delta_2, \mu_1, \delta_1\} = \mu_2K \\ \\
+        \delta_1K &= \{\delta_1, \mu_1, \delta_2, \mu_2\} \\
+        K\delta_1 &= \{\delta_1, \mu_2, \delta_2, \mu_1\} = \delta_1K \\ \\
+        \delta_2K &= \{\delta_2, \mu_2, \delta_1, \mu_1\} \\
+        K\delta_2 &= \{\delta_2, \mu_1, \delta_1, \mu_2\} = \delta_2K
+    \end{align*}
+    So all left cosets are also right cosets. Then by definition, $K$ is a normal subgroup of $D_4$.
+    
+    \item[(d)] Give the group table of the factor group $D_4/K$.
+    \newline\newline
+    Let the coset $K$ be denoted by $\rho_0K$ and likewise the coset $\{\mu_1, \delta_1, \mu_2, \delta_2\}$ be denoted by $\mu_1K$. Then the group table for the factor group $D_4/K$ is as follows:
+    \begin{center}
+    \begin{tabular}{c||c|c}
+        $D_4/K$ & $\rho_0K$ & $\mu_1K$ \\
+         \hline\hline
+        $\rho_0K$ & $\rho_0K$ & $\mu_1K$ \\
+        \hline
+        $\mu_1K$ & $\mu_1K$ & $\rho_0K$ \\
+    \end{tabular}
+    \end{center}
+    \item[(e)] Find the order of the element $K\delta_1$ in the group $D_4/K$.
+    \newline\newline
+    Well, notice from the work in part (c) that $K\delta_1 = \mu_1K$, and from the group table in part (d), we can see that $(\mu_1K)(\mu_1K) = \rho_0K$, so the order of $K\delta_1$ is 2 in $D_4/K$.
+    
+    
+    \item[(f)] To what "known" group is the group $D_4/K$ isomorphic? Justify appropriately.
+    \newline\newline
+    $D_4/K \cong \mathbb{Z}_2$. To see this, let us inspect the group table for $\mathbb{Z}_2$:
+    \begin{center}
+        \begin{tabular}{c||c|c}
+            $\mathbb{Z}_2$ & 0 & 1 \\
+             \hline\hline
+            0 & 0 & 1 \\
+            \hline
+            1 & 1 & 0 \\
+        \end{tabular}
+    \end{center}
+    Notice from the group tables that $D_4/K$ and $\mathbb{Z}_2$ have the same structure. Thus, $D_4 \cong \mathbb{Z}_2$.
+    
+\end{enumerate}
+
+
+2. Let $H$ denote the subgroup $\langle \rho_2 \rangle$ in the group $D_4$.
+\begin{enumerate}
+    \item[(a)] List all the right cosets of $H$ in $D_4$.
+    \newline\newline
+    Notice $H = \{\rho_0, \rho_2\}$ and so $|H| = 2$, thus we will have 4 cosets since $|D_4| = 8$. Then the right cosets of $H$ in $D_4$ are
+    \[\{\rho_0, \rho_2\} \:\: ; \:\:\:\: \{\rho_1, \rho_2\} \:\: ; \:\:\:\: \{\mu_1, \mu_2\} \:\: ; \:\:\:\: \{\delta_1, \delta_2\}\]
+    where $\{\rho_0, \rho_2\} = H\rho_0$ $\{\rho_1,\rho_2\} = H\rho_1$, $\{\mu_1, \mu_2\} = H\mu_1$, and $\{\delta_1, \delta_2\} = H\delta_1$. 
+    
+    
+    \item[(b)] Give the group table of the factor group $D_4/H$.
+    \newline\newline
+    \begin{center}
+        \begin{tabular}{c||c|c|c|c}
+            $D_4/H$ & $H\rho_0$ & $H\rho_1$ & $H\mu_1$ & $H\delta_1$\\
+            \hline\hline
+            $H\rho_0$ & $H\rho_0$ & $H\rho_1$ & $H\mu_1$ & $H\delta_1$ \\
+            \hline
+            $H\rho_1$ & $H\rho_1$ & $H\rho_0$ & $H\delta_1$ & $H\mu_1$ \\
+            \hline
+            $H\mu_1$ & $H\mu_1$ & $H\delta_1$ & $H\rho_0$ & $H\rho_1$ \\
+            \hline
+            $H\delta_1$ & $H\delta_1$ & $H\mu_1$ & $H\rho_1$ & $H\rho_0$ \\
+        \end{tabular}
+    \end{center}
+    
+    \item[(c)] Find the order of the element $H\delta_1$ in the group $D_4/H$.
+    \newline\newline
+    From the group table above, we can see that $(H\delta_1)(H\delta_1) = H\rho_0$, so the order of $H\delta_1$ in $D_4/H$ is 2.
+    
+    \item[(d)] To what 'known' group is the group $D_4/H$ isomorphic? Justify appropriately.
+    \newline\newline
+    $D_4/H$ is isomorphic to $V$, the Klein 4-group. To see this, let us inspect the group table of $V$:
+    \begin{center}
+        \begin{tabular}{c||c|c|c|c}
+            $V$ & $e$ & $a$ & $b$ & $c$ \\
+             \hline\hline
+            $e$ & $e$ & $a$ & $b$ & $c$ \\
+            \hline
+            $a$ & $a$ & $e$ & $c$ & $b$ \\
+            \hline
+            $b$ & $b$ & $c$ & $e$ & $a$ \\
+            \hline
+            $c$ & $c$ & $b$ & $a$ & $e$ \\
+        \end{tabular}
+    \end{center}
+    and note that $V$ and $D_4/H$ have the same structure.
+    
+\end{enumerate}
+
+
+3. Let $L$ denote the subgroup $\langle \mu_1 \rangle$ in the group $D_4$.
+\begin{enumerate}
+    \item[(a)] List all the right cosets of $L$ in $D_4$.
+    \newline\newline
+    Notice $\langle \mu_1 \rangle = \{\rho_0, \mu_1\}$ has order 2, so there will be 4 right cosets of $\langle \mu_1 \rangle$ in $D_4$. Then the right cosets are
+    \begin{align*}
+        L\rho_0 &= \{\rho_0, \mu_1\} \\
+        L\rho_1 &= \{\rho_1, \delta_1\} \\
+        L\rho_2 &= \{\rho_2, \mu_2\} \\
+        L\rho_3 & = \{\rho_3, \delta_2\} \\
+    \end{align*}
+    
+    
+    \item[(b)] Prove that $L$ is NOT a normal subgroup of $D_4$. 
+    \newline\newline
+    Proof: We need only find a left coset of $L$ that is not also a right coset of $L$ in $D_4$. From part (a), we have $L\rho_1 = \{\rho_1, \delta_1\}$. Now let us compute $\rho_1L$:
+    \begin{align*}
+        \rho_1L &= \{\rho_1, \delta_2\} \neq L\rho_1 \\
+    \end{align*}
+    So $L$ is not a normal subgroup of $D_4$.
+    
+    
+    \item[(c)] Give examples of specific elements $a,b,c,d$ in $D_4$ which have the properties:
+    \[La = Lb \:\:\: \text{and  } Lc = Ld, \:\:\: \text{but  } Lac \neq Lbd \]
+    \newline\newline
+    Notice $L\delta_2 = \{\delta_2, \rho_3\} = L\rho_3$ and $L\mu_1 = \{\mu_1, \rho_0\} = L\rho_0$ and that $\delta_2\mu_1 = \rho_1$ and $\rho_3\rho_0 = \rho_3$, so
+    \[L\delta_2\mu_1 = L\rho_1 = \{\rho_1, \delta_1\}\]
+    and
+    \[L\rho_3\rho_0 = L\rho_3 = \{\rho_3, \delta_2\} \neq L\delta_2\mu_1\]
+    
+    \item[(d)] Give examples of specific elements $x$ and $y$ in $D_4$ for which the product of cosets $Lx * Ly$ is NOT a right coset of $L$.
+    \newline\newline
+    Let $x = \rho_1$ and $y = \rho_2$ and consider $Lx = \{\rho_1, \delta_1\}$ and $Ly = \{\rho_2, \mu_2\}$. Now consider $Lx * Ly$:
+    \begin{align*}
+        Lx * Ly &= \{\rho_1, \delta_1\} * \{\rho_2, \mu_2\} \\
+        &= \{\rho_1\rho_2, \delta_1\mu_2\} \\
+        &= \{\rho_3, \rho_1\} \\
+    \end{align*}
+    Which is not a right coset of $L$ in $D_4$.
+\end{enumerate}
+
+\end{document}

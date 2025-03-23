@@ -1,0 +1,137 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{empty}
+
+\title{Modern Algebra HW5}
+\author{Michael Nameika}
+\date{October 2022}
+
+\begin{document}
+
+\maketitle
+
+\section*{Section 11 Problems}
+\textbf{16.} Are the groups $\mathbb{Z}_2 \times \mathbb{Z}_{12}$ and $\mathbb{Z}_4 \times \mathbb{Z}_6$ isomorphic? Why or why not?
+\newline
+
+Yes, $\mathbb{Z}_2 \times \mathbb{Z}_{12}$ and $\mathbb{Z}_3 \times \mathbb{Z}_6$ are isomorphic. To see this, notice that $\mathbb{Z}_{12} \cong \mathbb{Z}_{3} \times \mathbb{Z}_4$ and that $\mathbb{Z}_6 \cong \mathbb{Z}_2 \times \mathbb{Z}_3$. Then we have
+\[\mathbb{Z}_2 \times \mathbb{Z}_{12} \cong \mathbb{Z}_2 \times \mathbb{Z}_3 \times \mathbb{Z}_4\]
+and
+\begin{align*}
+    \mathbb{Z}_4 \times \mathbb{Z}_6 &\cong \mathbb{Z}_4 \times \mathbb{Z}_3 \times \mathbb{Z}_2 \\
+    &= \mathbb{Z}_2 \times \mathbb{Z}_3 \times \mathbb{Z}_4 \\
+\end{align*}
+So we have
+\[\mathbb{Z}_2 \times \mathbb{Z}_{12} \cong \mathbb{Z}_4 \times \mathbb{Z}_6\]
+\textbf{24.} Find all abelian groups up to isomorphism, of order 720. 
+\newline
+
+Notice that the prime factorization of 720 is $720 = 2^43^25$ and so all abelian groups up to isomorphism of order 720 are given by the following:
+\begin{align*}
+    &\mathbb{Z}_{16} \times \mathbb{Z}_9 \times \mathbb{Z}_5 \\
+    &\mathbb{Z}_{8} \times \mathbb{Z}_2 \times \mathbb{Z}_9 \times \mathbb{Z}_5 \\
+    &\mathbb{Z}_4 \times \mathbb{Z}_2 \times \mathbb{Z}_2 \times \mathbb{Z}_9 \times \mathbb{Z}_5 \\
+    &\mathbb{Z}_2 \times \mathbb{Z}_2 \times \mathbb{Z}_2 \times \mathbb{Z}_2 \times \mathbb{Z}_9 \times \mathbb{Z}_5 \\
+    &\mathbb{Z}_4 \times \mathbb{Z}_4 \times \mathbb{Z}_9 \times \mathbb{Z}_5 \\
+    &\mathbb{Z}_{16} \times \mathbb{Z}_3 \times \mathbb{Z}_3 \times \mathbb{Z}_5 \\
+    &\mathbb{Z}_8 \times \mathbb{Z}_2 \times \mathbb{Z}_3 \times \mathbb{Z}_3 \times \mathbb{Z}_5 \\
+    &\mathbb{Z}_4 \times \mathbb{Z}_4 \times \mathbb{Z}_3 \times \mathbb{Z}_3 \times \mathbb{Z}_5 \\
+    &\mathbb{Z}_4 \times \mathbb{Z}_2 \times \mathbb{Z}_2 \times \mathbb{Z}_3 \times \mathbb{Z}_3 \times \mathbb{Z}_5 \\
+    &\mathbb{Z}_2 \times \mathbb{Z}_2 \times \mathbb{Z}_2 \times \mathbb{Z}_2 \times \mathbb{Z}_3 \times \mathbb{Z}_3 \times \mathbb{Z}_5 \\
+\end{align*}
+
+
+\section*{Section 13 Problems}
+
+\textbf{6.} Determine whether the following is a homomorphism: $\phi \: : \: \mathbb{R} \to \mathbb{R}^*$, where $\mathbb{R}$ is additive and $\mathbb{R}^*$ is multiplicative, be given by $\phi(x) = 2^x$.
+\newline
+
+I claim that $\phi$ is a homomorphism. 
+\newline
+Proof: Let $x,y \in \mathbb{R}$ and consider $\phi(xy)$:
+\begin{align*}
+    \phi(x+y) &= 2^{x+y} \\
+    &= 2^x2^y \\
+    &= \phi(x)\phi(y) \\
+\end{align*}
+So $\phi$ is a homomorphism.
+\newline\newline\newline
+\textbf{8.} Let $G$ be any group and let $\phi \: : \: G \to G$ be given by $\phi(g) = g^{-1}$ for $g \in G$.
+\newline
+
+I claim that $\phi$ is a homomorphism if and only if $G$ is abelian.
+\newline
+Proof: Begin by supposing $G$ is abelian and let $x,y \in G$ and consider $\phi(xy)$:
+\begin{align*}
+    \phi(xy) &= (xy)^{-1} \\
+    &= y^{-1}x^{-1} \\
+    &= x^{-1}y^{-1} \\
+    &= \phi(x)\phi(y) \\
+\end{align*}
+Now suppose $\phi$ is a homomorphism. We wish to show $G$ is abelian. Well, since $\phi$ is a homomorphism, we have $\phi(xy) = \phi(x)\phi(y)$. That is,
+\begin{align*}
+    \phi(xy) &= x^{-1}y^{-1} \\
+    &= (xy)^{-1} \\
+    &= y^{-1}x^{-1} \\
+\end{align*}
+So we have 
+\[y^{-1}x^{-1} = x^{-1}y^{-1}\]
+which holds so long as $G$ is Abelian. So $\phi$ is a homomorphism if and only if $G$ is abelian.
+\newline\newline\newline
+\textbf{29.} Prove that for $G$ a group, $g \in G$, define $\phi_g \: : \: G \to G$ be defined by $\phi_g(x) = gxg^{-1}$ for $x \in G$. 
+\newline
+Proof: Let $G$ be a group, $g \in G$ and $\phi_g \: : \: G \to G$ defined by $\phi_g(x) = gxg^{-1}$. Let $x,y \in G$, $e \in G$ be the identity element and consider $\phi(xy)$:
+\begin{align*}
+    \phi_g(xy) &= gxyg^{-1} \\
+    &= gxeyg^{-1} \\
+    &= gxg^{-1}gyg^{-1} \\
+    &= (gxg^{-1})(gyg^{-1}) \\
+    &= \phi_g(x)\phi_g(y) \\
+\end{align*}
+So $\phi_g$ is a homomorphism.
+\newline\newline\newline
+\textbf{47.} Show that any group homomorphism $\phi \: : \: G \to G'$ where $|G|$ is prime must be either the trivial homomorphism or a one-to-one map.
+\newline
+Proof: Let $\phi \: : \: G \to G'$ be a group homomorphism where $|G|$ is prime. Let us begin by inspecting $\text{Ker}(\phi)$. Since $\phi$ is a group homomorphism, we have that $\text{Ker}(\phi)$ is a normal subgroup of $G$. Then by Lagrange's theorem, we have $|\text{Ker}(\phi)|$ divides $|G|$. Then since $|G|$ is prime, either $|\text{Ker}(\phi)| = 1$ or $|\text{Ker}(\phi)| = |G|$. Let us inspect each of these cases:
+\newline\newline
+\textbf{Case 1:} $|\text{Ker}(\phi)| = 1$
+\newline
+Then we must have $\text{Ker}(\phi) = \{e\}$ and so is one-to-one by corollary 13.18.
+\newline\newline
+\textbf{Case 2:} $|\text{Ker}| = |G|$
+\newline
+Then for all $g \in G$, $\phi(g) = e'$ where $e' \in G'$ is the identity. So by definition, $\phi$ is the trivial homomorphism.
+\newline\newline\newline
+\textbf{Additional Problem:} Let $\phi$ be a homomorphism from $G$ to $G'$. Prove that $\text{Ker}(\phi)$ is a subgroup of $G$.
+\newline\newline
+Proof: Let $\phi$ be a group homomorphism from $G$ to $G'$. We wish to show that $\text{Ker}(\phi)$ is a subgroup of $G$. To begin, let $x,y \in \text{Ker}(\phi)$ and consider $xy$. Since $x,y \in \text{Ker}(\phi)$, we have $\phi(x) = \phi(y) = e'$ where  $e'$ is the identity of $G'$. Now, since $\phi$ is a homomorphism, we have
+\begin{align*}
+    \phi(xy) &= \phi(x)\phi(y) \\
+    &= e'e' \\
+    &= e' \\
+\end{align*}
+So we have $xy \in \text{Ker}(\phi)$. Now we must show that $e \in \text{Ker}(\phi)$. Well, for any $g \in G$,
+\begin{align*}
+    g &= ge\\
+\end{align*}
+so
+\begin{align*}
+    \phi(g) &= \phi(ge) \\
+    &= \phi(g)\phi(e) \\
+\end{align*}
+then it must be the case that $\phi(e) = e'$, so $e \in \text{Ker}(\phi)$. Finally, we must show for any $g \in \text{Ker}(\phi)$, $g^{-1} \in \text{Ker}(\phi)$. Well, 
+\begin{align*}
+    \phi(g^{-1}) &= (\phi(g))^{-1} \\
+    &= e'^{-1} \\
+    &= e' \\
+\end{align*}
+So $g^{-1} \in \text{Ker}(\phi)$. So by the subgroup theorem, $\text{Ker}(\phi)$ is a subgroup of $G$.
+\end{document}

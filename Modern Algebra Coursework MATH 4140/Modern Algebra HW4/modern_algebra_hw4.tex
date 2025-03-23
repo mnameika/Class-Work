@@ -1,0 +1,161 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{empty}
+
+\title{Modern Algebra HW4}
+\author{Michael Nameika}
+\date{October 2022}
+
+\begin{document}
+
+\maketitle
+
+\section*{Section 10 Problems}
+
+\textbf{6.} Find all left cosets of the subgroup $\{\rho_0, \mu_2\}$ of the group $D_4$ given by Table 8.12. 
+\newline
+
+Let us begin by finding $\rho_0\{\rho_0, \mu_2\}$, $\rho_1\{\rho_0, \mu_2\}$, $\rho_2\{\rho_0, \mu_2\}$, and $\rho_3\{\rho_0, \mu_2\}$:
+\begin{align*}
+    \rho_0\{\rho_0, \mu_2\} &= \{\rho_0\rho_0, \rho_0\mu_2\} = \{\rho_0, \mu_2\} \\ 
+    \rho_1\{\rho_0, \mu_2\} &= \{\rho_1\rho_0, \rho_1\mu_2\} = \{\rho_1, \delta_2\} \\
+    \rho_2\{\rho_0, \mu_2\} &= \{\rho_2\rho_0, \rho_2\mu_2\} = \{\rho_2, \mu_1\} \\
+    \rho_3\{\rho_0, \mu_2\} &= \{\rho_3\rho_0, \rho_3\mu_2\} = \{\rho_3, \delta_1\} \\
+\end{align*}
+Recall that cosets of a subgroup $H$ of $G$ partition $G$, so we may observe that we have found all partitions of $G$ under the cosets of $H$. That is, the left cosets of $\{\rho_0, \mu_2\}$ of $D_4$ are the following:
+\[\{\rho_0, \mu_2\} \:\:  \:\: \{\rho_1, \delta_2\} \:\:  \:\: \{\rho_2, \mu_1\} \:\:  \:\: \{\rho_3, \delta_1\}\]
+To verify this, let's find 
+$\mu_1\{\rho_0, \mu_2\}$, $\mu_2\{\rho_0, \mu_2\}$, $\delta_1\{\rho_0, \mu_2\}$, and $\delta_2\{\rho_0, \mu_2\}$:
+\begin{align*}
+    \mu_1\{\rho_0, \mu_2\} &= \{\mu_1\rho_0, \mu_1\mu_2\} = \{\mu_1, \rho_2\} \\
+    \mu_2\{\rho_0, \mu_2\} &= \{\mu_2\rho_0, \mu_2\mu_2\} = \{\mu_2, \rho_0\} \\
+    \delta_1\{\rho_0, \mu_2\} &= \{\delta_1\rho_0, \delta_1\mu_2\} = \{\delta_1, \rho_3\} \\
+    \delta_2\{\rho_0, \mu_2\} &= \{\delta_2\rho_0, \delta_2\mu_2\} = \{\delta_2, \rho_1\} \\
+\end{align*}
+Which we notice to be the same as the cosets created by $\rho_0$, $\rho_1$, $\rho_2$, and $\rho_3$.
+\newline\newline
+\textbf{7.}  Repeat the preceding exercise, but find the right cosets this time. Are they the same as the left cosets?
+\newline
+
+As in problem 6, let us begin by finding the right cosets of $\{\rho_0, \mu_2\}$ for each $\rho$:
+\begin{align*}
+    \{\rho_0, \mu_2\}\rho_0 &= \{\rho_0\rho_0, \mu_2\rho_0\} = \{\rho_0, \mu_2\} \\
+    \{\rho_0, \mu_2\}\rho_1 &= \{\rho_0\rho_1, \mu_2\rho_1\} = \{\rho_1, \delta_1\} \\
+    \{\rho_0, \mu_2\}\rho_2 &= \{\rho_0\rho_2, \mu_2\rho_2\} = \{\rho_2, \mu_1\} \\
+    \{\rho_0, \mu_2\}\rho_3 &= \{\rho_0\rho_3, \mu_2\rho_3\} = \{\rho_3, \delta_2\} \\
+\end{align*}
+So the right cosets of $\{\rho_0, \mu_2\}$ in $D_4$ are 
+\[\{\rho_0, \mu_2\} \:\:\:\: \{\rho_1, \delta_1\} \:\:\:\: \{\rho_2, \mu_1\} \:\:\:\: \{\rho_3, \delta_2\}\]
+These are NOT the same cosets as in problem 6. For example, the right coset $\{\rho_1, \delta_1\}$ is not a left coset of $\{\rho_0, \mu_2\}$ in $D_4$.
+\newline\newline
+\textbf{9.} Repeat Exercise 6 for the subgroup $\{\rho_0, \rho_2\}$ of $D_4$. 
+\newline
+
+Let us begin by finding $\mu_1\{\rho_0, \rho_2\}$, $\rho_1\{\rho_0, \rho_2\}$, $\delta_1\{\rho_0, \rho_2\}$, and $\rho_0\{\rho_0, \rho_2\}$:
+\begin{align*}
+    \mu_1\{\rho_0, \rho_2\} &= \{\mu_1\rho_0, \mu_1\rho_2\} = \{\mu_1, \mu_2\} \\
+    \rho_1\{\rho_0, \rho_2\} &= \{\rho_1\rho_0, \rho_1\rho_2\} = \{\rho_1, \rho_3\} \\
+    \delta_1\{\rho_0, \rho_2\} &= \{\delta_1\rho_0, \delta_1\rho_2\} = \{\delta_1, \delta_2\} \\
+    \rho_0\{\rho_0, \rho_2\} &= \{\rho_0\rho_0, \rho_0\rho_2\} = \{\rho_0, \rho_2\} \\
+\end{align*}
+So the left cosets of $\{\rho_0, \rho_2\}$ in $D_4$ are 
+\[\{\rho_0, \rho_2\} \:\:\:\: \{\mu_1, \mu_2\} \:\:\:\: \{\rho_1, \rho_3\} \:\:\:\: \{\delta_1, \delta_2\}\]
+\newline\newline
+\textbf{10.} Repeat the preceding exercise, but find the right cosets this time. Are they the same as the left coests?
+\newline
+
+Repeating problem 9 to find the right cosets, we find
+\begin{align*}
+    \{\rho_0, \rho_2\}\mu_1 &= \{\rho_0\mu_1, \rho_2\mu_1\} = \{\mu_1, \mu_2\} \\
+    \{\rho_0, \rho_2\}\rho_1 &= \{\rho_0\rho_1, \rho_2\rho_1\} = \{\rho_1, \rho_3\} \\
+    \{\rho_0, \rho_2\}\delta_1 &= \{\rho_0\delta_1, \rho_2\delta_1\} = \{\delta_1, \delta_2\} \\
+    \{\rho_0, \rho_2\}\rho_0 &= \{\rho_0\rho_0, \rho_2\rho_0\} = \{\rho_0, \rho_2\} \\
+\end{align*}
+So the right cosets of $\{\rho_0, \rho_2\}$ in $D_4$ are
+\[\{\rho_0, \rho_2\} \:\:\:\: \{\mu_1, \mu_2\} \:\:\:\: \{\rho_1, \rho_3\} \:\:\:\: \{\delta_1, \delta_2\}\]
+which are the same as the left cosets we fond in exercise 9.
+\newline\newline
+\textbf{28.} Let $H$ be a subgroup of a group $G$ such that $g^{-1}hg \in H$ for all $g \in G$ and all $h \in H$. Show that every left coset of $gH$ is the same as the right coset $Hg$.
+\newline
+
+Proof: Let $H$ be a subgroup of a group $G$ such that $g^{-1}hg \in H$ for all $g \in G$. We will proceed by double inclusion. That is, we will show that $gH \subseteq Hg$ and $Hg \subseteq gH$. Begin by considering $gh \in gH$. Notice that we may rewrite $gh$ as $ghg^{-1}g$ and further as $((g^{-1})^{-1}hg^{-1})g$. Then let $a = g^{-1} \in G$. We find
+\[(g^{-1})^{-1}hg^{-1} = a^{-1}ha\]
+substituting, we have
+\[((g^{-1})^{-1}hg^{-1})g = (a^{-1}ha)g\]
+and since $a \in G$, $a^{-1}ha \in H$ by hypothesis, and by definition, $(a^{-1}ha)g \in Hg$. That is, $gh \in Hg$, so we have
+\[gH \subseteq Hg\]
+Now consider $hg \in Hg$. Similar to above, we may rewrite $hg$ as $hg = gg^{-1}hg = g(g^{-1}hg)$. By hypothesis, $g^{-1}hg \in H$, so $g(g^{-1}hg) \in gH$ by definition. Then we have
+\[Hg \subseteq gH\]
+Finally, by double inclusion, we have $Hg = gH$.
+\newline\newline
+\textbf{40.} Show that if a group $G$ with identity $e$ has finite order $n$, then $a^n = e$ for all $a \in G$.
+\newline
+
+Proof: Let $G$ be a group with identity $e$ and suppose $|G| = n$ and let $a \in G$. Consider $\langle a \rangle$ and suppose $|\langle a \rangle | = m$ for some $m \in \mathbb{Z}$. That is, $m$ is the smallest integer such that $a^m = e$. By Lagrange's theorem, we have have that $m \big| n$ since $\langle a \rangle \leq G$. Then for some $k \in \mathbb{Z}$, we have $n = mk$. Now consider $a^n$:
+\[a^n = a^{mk} = (a^{m})^k = e^k = e\]
+Which is what we sought to show.
+
+\section*{Section 11 Problems}
+
+\textbf{1.} List the elements of $\mathbb{Z}_2 \times \mathbb{Z}_4$. Find the order of each of the elements. Is this group cyclic?
+
+The elements of $\mathbb{Z}_2 \times \mathbb{Z}_4$ are as follows:
+\[(0,0) \:\: (0,1) \:\: (0,2) \:\: (0,3)\]
+\[(1,0) \:\: (1,1) \:\: (1,2) \:\: (1,3)\]
+This group is not cyclic. In light of theorem 11.5, we may observe that $\text{gcd}(2,4) = 2$, so $\mathbb{Z}_2 \times \mathbb{Z}_4$ is not cyclic. Alternatively, notice that there are eight elements in $\mathbb{Z}_2 \times \mathbb{Z}_4$, and that each element has the following orders:
+\newline
+\begin{center}
+    \begin{tabular}{c|c}
+        $|(0,0)| = 1$ & $|(1,0)| = 2$ \\
+        $|(0,1)| = 2$ & $|(1,1)| = 4$ \\
+        $|(0,2)| = 2$ & $|(1,2)| = 2$ \\
+        $|(0,3)| = 4$ & $|(1,3)| = 4$ \\
+    \end{tabular}
+\end{center}
+Since there are eight elements and the highest order of an element of $\mathbb{Z}_2 \times \mathbb{Z}_4$ is four, we cannot generate the group from a single element, so $\mathbb{Z}_2 \times \mathbb{Z}_4$ is not cyclic.
+\newline\newline
+\textbf{2.} Repeat Exercise 1 for the group $\mathbb{Z}_3 \times \mathbb{Z}_4$
+\newline
+
+The elements of $\mathbb{Z}_3 \times \mathbb{Z}_4$ are as follows:
+\[(0,0) \:\: (0,1) \:\: (0,2) \:\: (0,3)\]
+\[(1,0) \:\: (1,1) \:\: (1,2) \:\: (1,3)\]
+\[(2,0) \:\: (2,1) \:\: (2,2) \:\: (2,3)\]
+By theorem 11.5, since $\text{gcd}(3,4) = 1$, we have that $\mathbb{Z}_3 \times \mathbb{Z}_4$ is cyclic. Alternatively, notice that the elements have the following orders:
+\begin{center}
+    \begin{tabular}{c|c|c|c}
+        $|(0,0)| = 1$ &$|(0,1)| = 4$ & $|(0,2)| = 2$ & $|(0,3)| = 4$ \\
+        $|(1,0)| = 2$ & $|(1,1)| = 12$ & $|(1,2)| = 6$ & $|(1,3)| = 12$ \\
+        $|(2,0)| = 3$ & $|(2,1)| = 12$ & $|(2,2)| = 6$ & $|(2,3)| = 12$ \\
+    \end{tabular}
+\end{center}
+Notice four elements have order 12, and since $\mathbb{Z}_3 \times \mathbb{Z}_4$ has 12 elements, we can see that $\mathbb{Z}_3 \times \mathbb{Z}_4$ is cyclic. 
+\newline\newline
+\textbf{14.} Fill in the blanks.
+\begin{enumerate}
+    \item[\textbf{a.}] The cyclic subgroup of $\mathbb{Z}_{24}$ generated by 18 has order 4.
+    \newline
+    To begin, we must find the greatest common divisor of 24 and 18. Well, $\text{gcd}(24,18) = 6$, so the cyclic subgroup of $\mathbb{Z}_{24}$ generated by 18 has order $24/6 = 4$.
+    \newline
+    \item[\textbf{b.}] $\mathbb{Z}_3 \times \mathbb{Z}_4$ is of order 12.
+    See problem 2. 
+    \item[\textbf{c.}] The element $(4,2)$ of $\mathbb{Z}_{12} \times \mathbb{Z}_8$ has order 12.
+    \newline
+    We must find the least common multiple of the greatest common divisors of 4 and 12, and 2 and 8, respectively. Begin with 4 and 12:
+    \[\text{gcd}(4,12) = 4\]
+    So 4 has order 12/4 = 3 for $\mathbb{Z}_{12}$. Now for 2 and 8:
+    \[\text{gcd}(2,8) = 2\]
+    So 2 has order 8/2 = 4 for $\mathbb{Z}_8$. Now we must find the least common multiple between 3 and 4:
+    \[\text{lcm}(3,4) = \frac{3\cdot 4}{\text{gcd}(3,4)} = \frac{12}{1} = 12\]
+    \item[\textbf{d.}] The Klein 4-group is isomorphic to $\mathbb{Z}_2 \times \mathbb{Z}_2$.
+\end{enumerate}
+
+\end{document}
