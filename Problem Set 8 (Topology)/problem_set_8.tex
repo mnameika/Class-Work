@@ -1,0 +1,107 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{accents}
+
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{empty}
+\renewcommand \d{\displaystyle}
+\renewcommand \a{\shortstack{$\rightarrow$\\$u$}}
+\renewcommand \b{\shortstack{$\rightarrow$\\$v$}}
+
+\begin{document}
+\noindent Math 4510
+
+\noindent Topology
+
+\vspace{.2in}
+\begin{center}
+Problem Set 8
+\end{center}
+
+ \begin{enumerate}%\setlength{\itemindent}{-1.5em}
+ \item(\#5 in 6.2) Prove Theorem 6.2.4: Let $A_{\tau_A}$ be a connected subspace of a space $X_{\tau}$, and let $B$ be a subset of $X$ with $A\subseteq B\subseteq \text{Cl($A$)}$. Then $B$ is also connected in the subspace topology.
+ 
+ Proof: Let $A_{\tau_A}$ be a connected subspace of a space $X_{\tau}$ and $B$ be a subset of $X$ with $A \subseteq B \subseteq \text{Cl}(A)$. By theorem 6.2.3, we also know that $\text{Cl}(A)$ is connected.
+ 
+ Assume by way of contradiction that $B$ is disconnected. That is, there exist non-empty subsets of $B$, $\beta_1$, $\beta_2$ open in $\tau_B$ such that $\beta_1 \cup \beta_2 = B$ and $\beta_1 \cap \beta_2 = \emptyset$.
+ 
+ Since $\beta_1$ and $\beta_2$ are $\tau_B$-open, there exist $\tau$-open sets $U_1, U_2$ such that
+ \[\beta_1 = U_1 \cap B\]
+ \[\beta_2 = U_2 \cap B\]
+ And since $A \subseteq B$, we have that $A = A \cap B$. So 
+ \[A = A \cap [(U_1 \cap B) \cup (U_2 \cap B)]\]
+ \[ = (A \cap (U_1 \cap B)) \cup (A \cap (U_2 \cap B))\]
+ \[ = (A \cap B \cap U_1) \cup (A \cap B \cap U_2)\]
+ \[ = (A \cap U_1) \cup (A \cap U_2)\]
+\[ = A \cap (U_1 \cup U_2)\]
+ Let $V_1 = A \cap U_1$ and $V_2 = A \cap U_2$; which are open in $\tau_A$ since $U_1$ and $U_2$ are $\tau$-open. So we have
+ \[A = V_1 \cup V_2\]
+ 
+ Now we will show that $V_1, V_2$ are non-empty. Recall that $\text{Cl}(A) = A \cup A'$.
+ 
+ Since $\beta_1 \neq \emptyset$ and $\beta_1 = U_1 \cap B$, we have that $U_1$ is nonempty. Let $x_0 \in B$. Then $x_0 \in \beta_1 \cup \beta_2$, and since $\beta_1 \cap \beta_2 = \emptyset$, $x_0$ is either exclusively in $\beta_1$ or $\beta_2$. Suppose without loss of generality that $x_0 \in \beta_1$. 
+ Then $x_0 \in U_1 \cap B$, and so $x_0 \in U_1$. Additionally, since $B \subseteq \text{Cl}(A)$, $x_0 \in \text{Cl}(A)$. Then every neighborhood $N_{x_0}$ of $x_0$ intersects $A$ nontrivially, so $x_0 \in A$. Then we have $x_0 \in A$ and $x_0 \in U_1$, so $x_0 \in A \cap U_1 = V_1$.
+ 
+ So we have that $V_1 = A \cap U_1$ is non-empty. A similar argument holds for $V_2$.
+ 
+ Recall that $\beta_1 \cap \beta_2 = \emptyset$ and that $\beta_1 = U_1 \cap B$ and $\beta_2 = U_2 \cap B$, so
+ \[\beta_1 \cap \beta_2 = (U_1 \cap B) \cap (U_2 \cap B)\]
+ \[ = U_1 \cap B \cap U_2 \cap B\]
+ \[ = B \cap B \cap (U_1 \cap U_2)\]
+ \[ = B \cap (U_1 \cap U_2)\]
+ \[ = \emptyset\]
+ and since $B \neq \emptyset$, we have that $U_1 \cap U_2 = \emptyset$.
+ 
+ Notice that
+ \[V_1 \cap V_2 = (A \cap U_1)  \cap (A \cap U_2)\]
+ \[ = A \cap A \cap U_1 \cap U_2\]
+ \[ = A \cap (U_1 \cap U_2)\]
+ \[ = A \cap \emptyset\]
+ \[ = \emptyset \]
+ So we have two $\tau_A$-open sets $V_1, V_2$ such that $V_1 \cup V_2 = A$ and $V_1 \cap V_2 = \emptyset$. So by definition, we have that $A$ is disconnected, which contradicts the hypothesis that $A$ is connected, and thus, $B$ must be a connected space of $X_{\tau}$.
+ 
+ 
+ 
+ 
+\item Let $X_{\tau}$ be a space with the property that given any $x\in X$ and any neighborhood $U$ of $x$, there is a neighborhood $V$ of $x$ such that Cl($V$) is a proper subset of $U$. 
+\begin{enumerate}
+\item Give an example that shows that $X$ need not be connected. 
+\newline
+
+Consider a set $X$ equipped with the discrete topology and let $x \in X$. Then any subset $U \subseteq X$ that contains $x$ is a neighborhood of $x$. Then for any proper subset $V$ of $U$, $\text{Cl}(V) = V$ in the discrete topology, and so we have $\text{Cl}(V) \subset U$. So $X_{\mathcal{D}}$ satisfies these conditions. Additionally, as long as $\text{Card}(X) \geq 2$, we have that $X_{\mathcal{D}}$ is disconnected.
+\newline
+
+
+
+\item If we add the condition that for every $x\in X$ and every neighborhood $U$ of $x$ there is a connected neighborhood $V_x$ of $x$ such that $x\in V_x\subseteq \text{Cl($V_x$)}\subseteq U$, is this sufficient to make $X$ connected? Explain.
+\newline
+
+No. Let $X$ be a space equipped with the discrete topology where $\text{Card}(X) > 2$. Let $x \in X$ and $U$ be a neighborhood of $x$. Let $V_x = \{x\}$ be the neighborhood of $x$ that contains only $x$. Since $X$ is equipped with the discrete topology, $\text{Cl}(V_x) = V_x$ and notice that $V_x$ is trivially connected and $x \in \{x\} \subseteq U$. However, since $X$ is a discrete topological space, we have that $X$ is disconnected.
+
+
+\end{enumerate}
+%\item (\#2 in 6.4) Is $\mathbb{R}_{\mathcal{L}}$ path-connected? Justify your conclusion.
+\item(\#6 in 6.4) Prove that if $X_{\tau}$ is path-connected and $\tau' \subseteq \tau$, then $X_{\tau'}$ is also path-connected.
+
+Proof: Let $X_{\tau}$ and $X_{\tau'}$ be topological spaces where $\tau' \subseteq \tau$ and $X_{\tau}$ is path-connected. 
+Since $\tau' \subseteq \tau$, we have that the identity map $i_x: X_{\tau} \to X_{\tau'}$ is continuous. And since $X_{\tau}$ is path-connected, we have that $X_{\tau'}$ is also path-connected since $X_{\tau'}$ is the continuous image of a path-connected space.
+
+
+
+\item Prove that any quotient space of a path-connected space is path-connected. That is, if $X_{\tau}$ is a path-connected space and $\sim$ is an equivalence relation on $X$, then the quotient space $X/\sim$ is path-connected.
+
+Proof: Let $X_{\tau}$ be a path-connected space, $\sim$ be an equivalence relation of $X$ and let $X/\sim$ be the quotient space.
+Let $\nu: X_{\tau} \to X_{/\sim}$ be the natural map. We have that $\nu$ is continuous, and we wish to show that $\nu$ is surjective. Suppose by way of contradiction that $\nu$ is not surjective. That is, there exists some element $[x] \in X_{/\sim}$ such that $\nu^{-1}([x]) = \emptyset$. But from the definition of the natural map, $\nu^{-1}([x]) = x \in X$. So $\nu$ is surjective. Since path-connectedness is a strong topological property and $\nu$ is continuous, we have that $X_{/\sim}$ is also path-connected.
+
+
+\end{enumerate}
+
+\noindent \textbf{Bonus} Show that if $U$ is an open connected subset of $\mathbb{R}^2$, then $U$ is path-connected. (Hint: Show that given a point $x_0\in U$, the set of points in $U$ that can be joined to $x_0$ by a path in $U$ is both open and closed.)
+\end{document}

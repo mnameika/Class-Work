@@ -1,0 +1,165 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{accents}
+
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{empty}
+\renewcommand \d{\displaystyle}
+\renewcommand \a{\shortstack{$\rightarrow$\\$u$}}
+\renewcommand \b{\shortstack{$\rightarrow$\\$v$}}
+
+\begin{document}
+\noindent Math 4510
+
+\noindent Topology
+
+\vspace{.2in}
+\begin{center}
+Problem Set 6
+\end{center}
+
+ \begin{enumerate}%\setlength{\itemindent}{-1.5em}
+ %\item (\#1\&\#2 in 4.4) Given the following subsets of $\mathbb{R}$:\\
+%$A=\{1,2,3\}$\\
+%$B=(0,1)\cap\mathbb{Q}$\\
+%$C=[0,1]\cup(2,3]\cup\{4\}$
+%begin{enumerate}
+%\item Find the interior of each subset when considered as subsets of $\mathbb{R}_{\mathcal{U}}$.
+%\item Find the interior of each subset when considered as subsets of $\mathbb{R}_{\mathcal{RR}}$.
+%\end{enumerate}
+
+\item Prove Theorem 4.4.3: For any subset $A$ of a topological space $X_{\tau}$,\\ $\text{Cl($A$)}=\text{Int($A$)}\cup\text{Bdy($A$)}$. 
+
+Let $A$ be a subset of a topological space $X_{\tau}$ and consider the case where $A = \emptyset$. Then $\text{Cl}(A) = \emptyset$ since $\emptyset$ is both open and closed in $\tau$. And since $\text{Int}(A) \subseteq A \subseteq \text{Cl}(A)$, we have that $\text{Int}(A) = \emptyset$. 
+Additionally, since $A = \emptyset$, we have that there are no points $x \in A$ such that a neighborhood $V_x$ of $x$ does not satisfy the conditions for $x \in \text{Bd}(A)$. That is, $\text{Bd}(A) = \emptyset$.
+
+In this case, $\text{Cl}(A) = \text{Int}(A) \cup \text{Bd}(A)$
+
+Now consider the case where $A \neq \emptyset$ and let $x \in \text{Cl}(A)$. By definition, for some neighborhood $V_x$ in $x$, $V_x \cap A \neq \emptyset$. If $V_x \subseteq A$, then $x \in \text{Int}(A)$. If $V_x$ is not a subset of $A$, then $V_x \cap A \neq \emptyset$ and $V_x \cap (X \setminus A) \neq \emptyset$, and so $x \in \text{Bd}(A)$. Thus, 
+\[\text{Cl}(A) \subseteq \text{Int}(A) \cup \text{Bd}(A)\]
+
+Now let $x \in \text{Int}(A) \cup \text{Bd}(A)$. If $x \in \text{Int}(A)$, then $x \in \text{Cl}(A)$ since $\text{Int}(A) \subseteq A \subseteq \text{Bd}(A)$.
+
+If $x \in \text{Bd}(A)$, then any neighborhood $V_x$ of $x$ contains points in $A$ and $X \setminus A$. That is, $V_x \cap A \neq \emptyset$ and $V_x \cap (X \setminus A) \neq \emptyset$. That is, $x$ is a limit point of $A$, and thus $x \in \text{Cl}(A)$.
+
+So we have
+\[\text{Int}(A) \cup \text{Bd}(A) \subseteq \text{Cl}(A)\]
+By double inclusion, we have
+\[\text{Cl}(A) = \text{Int}(A) \cup \text{Bd}(A)\]
+
+
+\item (\#4 in 4.5) Let $A\subseteq X_{\tau}$ and let $f:X_{\tau} \to Y_{\nu}$ be continuous. If $x$ is a limit point of $A$, must $f(x)$ be a limit point of $f(A)\subseteq Y$? Explain.
+
+No. Consider the function $f : \mathbb{R}_{\mathcal{U}} \to \mathbb{R}_{\mathcal{U}}$ defined by 
+\[f(x) = 4\]
+and let $A = [0,1]$. Notice that $A' = [0,1]$ and that $f(A) = \{4\}$. Also notice that $f(A)' = \emptyset$.
+
+Notice that $\frac{1}{2}$ is a limit point of $A$, and that $f(\frac{1}{2}) = 4 \notin f(A)'$. But $f$ is continuous because it is a constant function. More specifically, if $U \subset \mathbb{R}$ and $\{4\} \in U$, $f^{-1}(U) = \mathbb{R}$ which is open, and if $\{4\} \notin U$, $f^{-1}(U) = \emptyset$ which is open. 
+
+So a limit point of $A$ is not a limit point of $f(A)$. 
+
+\item (\#2 in 5.2) Consider the product space $\mathbb{R}_{\mathcal{L}}\times \mathbb{R}_{\mathcal{L}}$.
+\begin{enumerate}
+\item Sketch a typical basis set in $\mathbb{R}_{\mathcal{L}}\times \mathbb{R}_{\mathcal{L}}$.
+\item Sketch several open sets in $\mathbb{R}_{\mathcal{L}}\times \mathbb{R}_{\mathcal{L}}$.
+\item Sketch several sets which are not open in $\mathbb{R}_{\mathcal{L}}\times \mathbb{R}_{\mathcal{L}}$.
+\end{enumerate}
+
+See attached sketches.
+
+\item (\#5 in 5.2) Prove Theorem 5.2.3: If $X_{\tau}$ and $Y_{\sigma}$ are any topological spaces, with basepoints $x_0\in X$ and $y_0\in Y$, then the inclusion maps $$i_X:X_{\tau}\hookrightarrow X_{\tau}\times Y_{\sigma}$$ and $$i_Y:Y_{\sigma}\hookrightarrow X_{\tau}\times Y_{\sigma}$$ are both continuous, where $X_{\tau}\times Y_{\sigma}$ denotes the Cartesian product endowed with the product topology.
+
+(Hint: these are maps into a product space).
+
+Let $i_X : X_{\tau} \hookrightarrow X_{\tau} \times Y_{\sigma}$ and $i_Y : Y_{\sigma} \hookrightarrow X_{\tau} \times Y_{\sigma}$ where $X_{\tau} \times Y_{\sigma}$ is the Cartesian product with the product topology. 
+
+Let $U$ be $\tau$-open and consider $(P_X \circ i_X)^{-1}(U)$:
+\[(P_X \circ i_X)^{-1}(U)\]
+\[ = (i_X^{-1} \circ P_X^{-1})(U)\]
+\[ = i_X^{-1}(U \times Y)\]
+\[ = U\]
+which is open by assumption, so $P_X \circ i_X$ is continuous. Now we wish to show that $P_Y \circ i_X$ is continuous. Let $V$ be $\sigma$-open and consider
+\[(P_Y \circ i_X)^{-1}(V)\]
+\[ = (i_X^{-1} \circ P_Y^{-1})(V)\]
+\[ = i_X^{-1}(X \times V)\]
+\[ = X\]
+which is open by definition. So $i_X$ is continuous. 
+
+Now we wish to show that $i_Y$ is continuous. Following the same logic above, let $U$ be $\tau$-open and consider
+\[(P_X \circ i_Y)^{-1}(U)\]
+\[ = (i_Y^{-1} \circ P_X^{-1})(U)\]
+\[ = i_Y^{-1}(U \times Y)\]
+\[ = Y\]
+which is open by definition. Now let $V$ be $\sigma$-open and consider
+\[(P_Y \circ i_Y)^{-1}(V)\]
+\[ = (i_Y^{-1} \circ P_Y^{-1})(V)\]
+\[ = i_Y^{-1}(X \times V)\]
+\[ = V\]
+which is open by assumption. So $i_Y$ is continuous.
+
+
+
+
+\item Let $f: A \to B$ and $g: C \to D$ be continuous functions. Define a map $f\times g: A\times C \to B\times D$ by the equation $$(f\times g)(a,c) = (f(a), g(c)).$$ Show that $f\times g$ is continuous.
+
+Proof: Let $f: A \to B$ and $g: C \to D$ be continuous functions and let $\beta$ be open in the product topology on $B \times D$. 
+Also consider the projection maps
+\[P_B : B \times D \to B\]
+\[P_D : B \times D \to D\]
+To show $f \times g$ is continuous, it suffices to show that $P_B \circ (f \times g)$ and $P_D \circ (f \times g)$ are continuous. 
+
+To begin, we will show that 
+\[(f \times g)^{-1} = f^{-1} \times g^{-1}\]
+where
+\[f^{-1} \times g^{-1}:\]
+Let $V_1 \subseteq B$ and $V_2 \subseteq D$.
+Since $V_1 \subseteq B$, for some $U_1 \subseteq A$, we have that $f^{-1}(V_1) = U_1$, and similarly for $V_2 \subseteq D$, for some $U_2 \subseteq C$, $g^{-1}(V_2) = U_2$.
+
+Let $\beta = V_1 \times V_2$ and $\alpha = U_1 \times U_2$.
+
+We wish to show that $((f \times g) \circ (f^{-1} \times g^{-1}))(\beta) = \beta$ and $((f^{-1} \times g^{-1}) \circ (f \times g))(\alpha) = \alpha$.
+
+Notice that
+\[((f \times g) \circ (f^{-1} \times g^{-1}))(\beta)\]
+\[=(f \times g) \circ (f^{-1}(V_1) \times g^{-1}(V_2))\]
+\[=(f \times g) (U_1 \times U_2)\]
+\[= (f(U_1) \times g(U_2)) = V_1 \times V_2 = \beta\]
+
+Also notice that
+\[((f^{-1} \times g^{-1}) \circ (f \times g))(\alpha)\]
+\[= (f^{-1} \times g^{-1}) \circ (f(U_1) \times g(U_2))\]
+\[= (f^{-1} \times g^{-1}) (V_1 \times V_2)\]
+\[= (f^{-1}(V_1) \times g^{-1}(V_2)) = U_1 \times U_2 = \alpha\]
+
+So $(f \times g)^{-1} = (f^{-1} \times g^{-1})$. Now we wish to show that $P_B \circ (f \times g)$ is continuous. Let $U_3 \subseteq B$ and consider
+\[(P_B \circ (f \times g))^{-1}(U_3)\]
+\[ = ((f \times g)^{-1} \circ P_B^{-1})(U_3)\]
+\[ = (f^{-1} \times g^{-1}) (U_3 \times D)\]
+\[ = (f^{-1}(U_3) \times g^{-1}(D))\]
+\[ = V_3 \times C \subseteq A \times C\]
+for some $V_3 \subseteq A$. So $P_B \circ (f \times g)$ is continuous.
+
+Now let $V_4 \subseteq D$ and consider
+\[(P_D \circ (f \times g))^{-1}(V_4)\]
+\[ = ((f \times g)^{-1} \circ P_D^{-1})(V_4)\]
+\[ = (f^{-1} \times g^{-1})(B \times V_4)\]
+\[ = (f^{-1}(B) \times g^{-1}(V_4)) = A \times U_4 \subseteq A \times C\]
+for some $U_4 \subseteq C$. So $P_D \circ (f \times g)$ is continuous, and so $f \times g$ is continuous.
+
+
+
+
+
+\end{enumerate}
+
+
+
+\noindent \textbf{Bonus}  (\#1 in 5.3) Prove that the basis for the box topology on $\prod X_{\alpha}$, $\mathcal{B}=\prod \tau_{\alpha}$, is in fact a basis. That is, show that it satisfies the two conditions of Definition 4.2.1.
+\end{document}

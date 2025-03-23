@@ -1,0 +1,113 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{accents}
+
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{empty}
+\renewcommand \d{\displaystyle}
+\renewcommand \a{\shortstack{$\rightarrow$\\$u$}}
+\renewcommand \b{\shortstack{$\rightarrow$\\$v$}}
+
+\begin{document}
+\noindent Math 4510
+
+\noindent Topology
+
+\vspace{.2in}
+\begin{center}
+Problem Set 9
+\end{center}
+
+ \begin{enumerate}%\setlength{\itemindent}{-1.5em}
+ \item (\#2 in 6.5) Prove the general form of Theorem 6.5.3: If $A_{\gamma}$ is a connected subspace of $X_{\tau}$ for every $\gamma\in \Lambda$ and if $\cap_{\gamma\in\Lambda} A_{\gamma}\neq \emptyset$, then $\cup_{\gamma\in\Lambda}A_\gamma$ is connected as a subspace of $X$.
+ \newline
+ 
+ Proof: Let $A_{\gamma}$ be a connected subspace of $X_{\tau}$ for every $\gamma \in \Lambda$ and assume that $\cap_{\gamma \in \Lambda} A_{\gamma} \neq \emptyset$. 
+ Suppose by way of contradiction that $\cup_{\gamma \in \Lambda} A_{\gamma}$ is disconnected. Then for two disjoint $\tau_{\cup_{\gamma \in \Lambda} A_{\gamma}}$ open sets $U$ and $V$, $\cup_{\gamma \in \Lambda} A_{\gamma} = U \cup V$. 
+ 
+ Suppose that $U \cap (\cup_{\gamma \in \Lambda} A_{\gamma})$ and $V \cap (\cup_{\gamma \in \Lambda} A_{\gamma})$ are non-empty. 
+ For every $\gamma \in \Lambda$, $U \cap A_{\gamma}$ and $V \cap A_{\gamma}$ are nonempty. Well, since $A_{\gamma}$ is connected for every $\gamma \in \Lambda$, we have that $U \cap A_{\gamma}$ or $V \cap A_{\gamma}$ is empty, or $U \cap A_{\gamma}$ is empty for all $\gamma \in \Lambda$. 
+ 
+ Suppose $U \cap A_{\gamma}$ is empty for $\gamma \in \Gamma \subseteq \Lambda$.
+ 
+ For some $\gamma' \in \Lambda \setminus \Gamma$, we have $V \cap A_{\gamma'}$ is empty. Then since $\cap_{\gamma \in \Lambda} A_{\gamma} \neq \emptyset$, we have that there must exist a point $x \in \cap_{\gamma \in \Lambda} A_{\gamma}$ that is neither in $U$ nor $V$. 
+ But since $U \cup V$ was assumed to be equal to $\cup_{\gamma \in \Lambda} A_{\gamma}$, we have a contradiction.
+ 
+ Now suppose that $U \cap A_{\gamma}$ is empty for all $\gamma \in \Lambda$. Since we have $\bigcap_{\gamma \in \Lambda} A_{\gamma} \neq \emptyset$, and $\bigcup_{\gamma \in \Lambda} A_{\gamma} = U \cup V$, and $U \cap A_{\gamma}$ is empty, $U$ and $\bigcup_{\gamma \in \Lambda} A_{\gamma}$ are disjoint. Then we must have $U = \emptyset$, and $\bigcup_{\gamma \in \Lambda} A_{\gamma} = V$. Equivalently, there does not exist a disconnection for $\bigcup_{\gamma \in \Lambda} A_{\gamma}$ for this case.
+ 
+ So $\cup_{\gamma \in \Lambda} A_{\gamma}$ is connected for $A_{\gamma}$ a connected subspace of $X_{\tau}$ for every $\gamma \in \Lambda$.
+ \newline
+ 
+\item (\#2 in 7.2) Prove Corollary 7.2.2: ($i$) If $X_{\tau}$ is compact and $\tau'$ is any topology on $X$ that is coarser than $\tau$, then $X_{\tau'}$ is also compact. ($ii$) If $Y_{\nu}$ is not compact and $\nu'$ is any topology on $Y$ that is finer than $\nu$, then $Y_{\nu'}$ is not compact. (Hint: use the identity maps on $X$ and $Y$).
+
+
+
+Proof of ($i$): Let $X_{\tau}$ be a compact space and let $\tau' \subseteq \tau$ be a topology on $X$. Since $\tau' \subseteq \tau$, we have that $i_x : X_{\tau} \to X_{\tau'}$ the identity map is continuous. Since $\text{Im}(i_x) = X$ and compactness is a strong topological property, we have that $X_{\tau'}$ is compact.
+\newline
+
+Proof of ($ii$): Let $Y_{\nu}$ be not compact and let $\nu \subseteq \nu'$ be a topology on $Y$. Suppose by way of contradiction that $Y_{\nu'}$ is compact. Notice since $\nu \subseteq \nu'$, we have that $i_y : Y_{\nu'} \to Y_{\nu}$, the identity map, is continuous. 
+Then since compactness is a strong topological property and $\text{Im}(i_y) = Y$, we have that $Y_{\nu}$ is compact, a contradiction. Thus, if $Y_{\nu}$ is not compact, and $\nu \subseteq \nu'$, then $Y_{\nu'}$ is not compact.
+\newline
+
+\item (\#6 in 7.2) Show from the definition that $\mathbb{R}^2_{\mathcal{U}^2}$ is not compact.
+\newline
+
+Proof: Let $C = \bigcup_{n \in \mathbb{N}} \{(-n,n) \times (-n,n)\}$ be a cover for $\mathbb{R}^2_{\mathcal{U}^2}$ where $\times$ denotes the Cartesian product. Observe that $C$ does not have a finite subcover:
+
+Suppose $C$ did have a finite subcover. Then for some $k \in \mathbb{N}$, $\mathbb{R}^2 = \bigcup_{n = 1}^k \{(-n, n) \times (-n, n)\}$. Notice that this is a union of nested intervals. That is, $\bigcup_{n = 1}^k \{(-n, n) \times (-n, n)\} = (-k,k) \times (-k,k)$. But then for $k + 1$  
+\[(-k,k) \times (-k,k) \subset (-k - 1,k + 1) \times (-k -1, k+1) \subset \mathbb{R}^2\]
+So $C$ does not have a finite subcover.
+
+so by definition of compactness, $\mathbb{R}^2_{\mathcal{U}^2}$ is not compact.
+
+
+\item (\#4 in 7.3)  Prove that a subspace of a Hausdorff space is Hausdorff.
+\newline
+
+Proof: Let $X_{\tau}$ be Hausdorff and let $A$ be a subspace of $X$. We wish to show that $A_{\tau_A}$ is also Hausdorff. Well, if $A = X$, then we're done. Suppose $A \subset X$, $\text{Card}(A) \geq 2$, and let $a_1, a_2 \in A$. Then since $A \subset X$, $a_1, a_2 \in X$. And since $X$ is Hausdorff, there exist disjoint $\tau$-open sets $U$ and $V$ such that $a_1 \in U$ and $a_2 \in V$. 
+
+Notice that $A \cap U$ and $A \cap V$ are open in $\tau_A$ and that $a_1 \in A \cap U$ and $a_2 \in A \cap V$. We must show $A \cap U$ and $A \cap V$ are disjoint. Consider 
+\[(A \cap U) \cap (A \cap V) = A \cap U \cap A \cap V\]
+\[ = A \cap A \cap U \cap V\]
+\[ = A \cap (U \cap V)\]
+\[ = A \cap (\emptyset)\]
+\[ = \emptyset\]
+That is, we have two disjoint $\tau_A$ open sets each containing one of $a_1$ and $a_2$. Then by definition, $A$ is a Hausdorff space.
+\newline
+
+\item (\#6 in 7.3) Prove Theorem 7.3.2: Let $X_{\tau}$ be compact and Hausdorff. If $\tau'$ is any topology on $X$ with $\tau'$ strictly finer than $\tau$, then $X_{\tau'}$ is not compact. If $\tau''$ is any topology on $X$ with $\tau''$ strictly coarser than $\tau$, then $X_{\tau''}$ is not Hausdorff. (Hint: consider the hint for problem \#5 in 7.3).
+\newline
+
+Proof:  Let $X_{\tau}$ be compact and Hausdorff and suppose by way of contradiction that $X_{\tau'}$ is compact for $\tau \subset \tau'$. Since $\tau$ is coarser than $\tau'$, we have that the identity map $i_x: X_{\tau'} \to X_{\tau}$ is continuous by theorem 3.5.1.
+Thus, $i_x$ is a continuous bijection. So by theorem 7.3.3, we have that $i_x$ is a homeomorphism between $X_{\tau'}$ and $X_{\tau}$. 
+But $i_x$ can only be a homeomorphism if and only if $\tau = \tau'$, contradicting the fact that $\tau \subset \tau'$. 
+Thus, if $X_{\tau}$ is compact and Hausdorff, $X_{\tau'}$ cannot be compact for $\tau \subset \tau'$.
+\newline
+
+Now let $\tau''$ be a topology on $X$ such that $\tau'' \subset \tau$. We wish to show $X_{\tau''}$ is not Hausdorff. Suppose by way of contradiction that $X_{\tau''}$ is Hausdorff. Well, since $\tau''$ is coarser than $\tau$, we have that $i_x: X_{\tau} \to X_{\tau''}$ is continuous by theorem 3.5.1. 
+Thus, $i_x$ is a continuous bijection between $X_{\tau}$ and $X_{\tau''}$. By theorem 7.3.3, we have that $i_x$ is a homeomorphism between $X_{\tau}$ and $X_{\tau''}$. But $i_x$ can only be a homeomorphism if and only if $\tau = \tau'$, which contradicts the fact that $\tau'' \subset \tau$. Thus, $X_{\tau''}$ is not Hausdorff.
+\newline
+
+
+\item (\#2 in 7.5) Prove that any finite union of compact subsets of a topological space is compact.
+\newline
+
+Proof: Let $A_1, A_2 \subseteq X$ be compact where $X_{\tau}$ is a topological space. We wish to show that $A_1 \cup A_2$ is also compact. Well, let $C$ be a cover for $A_1 \cup A_2$. 
+Notice that $C \cap A_1$ is a cover for $A_1$ and $C \cap A_2$ is a cover for $A_2$. Since $A_1, A_2$ are compact, we have that there exist finite subcovers $C_1, C_2 \subset C$ such that $C_1$ covers $A_1$ and $C_2$ covers $A_2$.
+
+Now $C' = C_1 \cup C_2 \subseteq C$ is a cover for $A_1 \cup A_2$. Since $C_1, C_2$ are finite, we have that $C'$ is also finite. That is, we have a finite subcover of $C$. Hence, $A_1 \cup A_2$ is compact. To continue this argument, let $B = A_1 \cup A_2$ and $A_3 \subset X$ be compact. Following the same logic as above, we get that $B \cup A_3$ is compact. Continuing this argument up to some natural number $n$, we find that
+\[\bigcup_{i = 1}^n A_i\]
+is compact for $A_i \subseteq X$ compact for every $1 \leq i \leq n$.
+\newline
+
+\end{enumerate}
+
+\noindent \textbf{Bonus} (\#7 in 7.3) Prove the Closed Graph Theorem: If $f: X_{\tau} \to Y_{\nu}$ is continuous, with $Y$ both compact and Hausdorff, then the graph $$G_f = \{(x,y) \in X\times Y | y=f(x)\}$$ is closed in $X_{\tau}\times Y_{\nu}$.
+\end{document}

@@ -1,0 +1,284 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{empty}
+\title{Problem Set 1  [Revised] (Topology)}
+\author{Michael Nameika}
+\date{February 2022}
+
+\begin{document}
+
+\maketitle
+\begin{enumerate}
+\item{}
+(\#1 in 2.1) Prove \textbf{Theorem 2.1.3 (ii)} (DeMorgan's law): If $X$ is any set and $\{A_{\lambda}|\lambda\in\Lambda\}$ is any indexed collection of sets, then $X\backslash \bigcap_{\lambda\in\Lambda} A_{\lambda} = \bigcup_{\lambda \in \Lambda}(X\setminus A_{\lambda})$.
+\newline
+
+Proof: First consider the case where $X = \emptyset$ and $A_{\lambda}$ may or may not be the empty set for any $\lambda \in \Lambda$. 
+
+Then $\bigcap_{\lambda \in \Lambda} A_{\lambda}$ may or may not be empty. In either case, we will have $X \setminus A_{\lambda} = \emptyset$ for all $\lambda \in \Lambda$.
+
+
+So by definition of set unions, $\bigcup_{\lambda \in \Lambda} (X \setminus A_{\lambda}) = \emptyset$. Additionally, since $X$ is empty, we have that $X \setminus \bigcap_{\lambda \in \Lambda}A_{\lambda} = \emptyset$
+So in this case, $X \setminus \bigcup_{\lambda \in \Lambda}A_{\lambda} = \bigcup_{\lambda \in \Lambda} (X \setminus A_{\lambda})$.
+\newline\newline
+Now consider $X \neq \emptyset$ and $A_{\lambda} = \emptyset$ for at least one $\lambda \in \Lambda$. Then by definition of set intersections, $\bigcap_{\lambda \in \Lambda} A_{\lambda} = \emptyset$. Then by definition of set differences, $X \setminus \bigcap_{\lambda \in \Lambda} A_{\lambda} = X$. Now since $A_{\lambda} = \emptyset$ for at least one $\lambda$, by definition of set difference, $X \setminus A_{\lambda} = X$. Then by definition of set union, $\bigcup_{\lambda \in \Lambda}(X \setminus A_{\lambda}) = X$
+and we have that $X \setminus \bigcap_{\lambda \in \Lambda} A_{\lambda} = \bigcup_{\lambda \in \Lambda} (X \setminus A_{\lambda})$.
+\newline\newline
+
+Now consider the case where $X \neq \emptyset$ and $A_{\lambda} \neq \emptyset$ for all $\lambda \in \Lambda$.
+\newline
+
+Let $x \in X \setminus \bigcap_{\lambda \in \Lambda} A_{\lambda}$. By definition of set differences, $x \in X$ but $x \notin \bigcap_{\lambda \in \Lambda} A_{\lambda}$.
+\newline
+
+Then there is at least one $i \in \Lambda$ such that $x \notin A_i$, then $x \in X \setminus A_i$ and by definition of set union, $x \in \bigcup_{\lambda \in \Lambda}(X \setminus A_{\lambda})$
+\newline
+
+So 
+\[X \setminus \bigcap_{\lambda \in \Lambda}A_{\lambda} \subseteq \bigcup_{\lambda \in \Lambda}(X \setminus A_{\lambda})\]
+Now let $x \in \bigcup_{\lambda \in \Lambda}(X \setminus A_{\lambda})$
+\newline
+
+By definition of set union, for at least one $i \in \Lambda$, $x \in X \setminus A_i$. By definition of set difference, $x \in X$ but $x \notin A_i$.\newline
+Then by definition of set intersection, $x \notin \bigcap_{\lambda \in \Lambda}A_{\lambda}$ and by definition of set difference, $x \in X \setminus \bigcap_{\lambda \in \Lambda}A_{\lambda}$
+\newline
+
+So 
+\[\bigcup_{\lambda \in \Lambda}(X \setminus A_{\lambda}) \subseteq X \setminus \bigcap_{\lambda \in \Lambda} A_{\lambda}\]
+And finally we have 
+\[\bigcup_{\lambda \in \Lambda}(X \setminus A_{\lambda}) = X \setminus \bigcap_{\lambda \in \Lambda} A_{\lambda}\]
+
+\item{}
+(\#3 in 2.1) Consider the subset $D$ of $\mathbb{R}^2$ defined by $D=\{(x,y)|x\leq y^2\}$. Is this set a Cartesian product of two subsets of $\mathbb{R}$? Explain.
+\newline
+
+No. Consider the point $(4, 2)$ and notice $4 \leq 2^2$, so $(4,2) \in D$. Also consider $(1,1)$ and notice that $1 \leq 1^2$, so $(1,1) \in D$. Then for $D$ to be a Cartesian product, $(4,1)$ must also be in $D$. But notice that $4 \nleq 1^2$, so $(4,1) \notin D$. Thus, $D$ is not a Cartesian product.
+
+\item{}
+(\#6 in 2.1) Determine whether the following statement is true or false. If it's true, prove it, if it's false, give a precise counterexample.
+  \begin{itemize}
+  \item $X\backslash(A\cap B)=(X\backslash A)\cap (X\backslash B)$.
+  \end{itemize}
+ 
+  
+False. Consider 
+\[X = \{2, 4, 6\}\]
+\[A = \{2, 4, 6\}\]
+\[B = \{1, 3, 5\}\]
+And notice that 
+\[A \cap B = \emptyset\]
+So 
+\[X \setminus (A \cap B) = X \setminus \emptyset = X\]
+Further notice
+\[X \setminus A = \emptyset\]
+\[X \setminus B = X\]
+So
+\[(X \setminus A) \cap (X \setminus B) = \emptyset \cap X = \emptyset\]
+And now, clearly,
+\[X \setminus (A \cap B) \neq (X \setminus A) \cap (X \setminus B)\]
+
+
+\item{}
+(\#2 c,d in 2.2) For $f:\mathbb{R}\to\mathbb{R}$ given by $f(x) = x^2,$ find and sketch the following sets:
+  \begin{itemize}
+  \item[(c)] $f(f^{-1}([3,4])$
+  \item[(d)] $f^{-1}(f(2,3])$
+  \end{itemize}
+ 
+  
+$f: \mathbb{R} \to \mathbb{R}$, $f(x) = x^2$
+\newline\newline
+c) $f^{-1}([3.4]) = [-2, -\sqrt{3}] \cup [\sqrt{3}, 2]$
+\newline
+$f(f^{-1}([3,4])) = [3,4]$
+\newline\newline
+d) $f^{-1}(f((2,3])) = f^{-1}((4,9]) = [-3,-2) \cup (2,3]$
+\newline
+
+See attached for sketches.
+
+\item{}
+(\#5 in 2.2) Prove \textbf{Theorem 2.2.5}: For $A\subseteq X$ and $f:X\to Y$ any function, we have $A\subseteq f^{-1}(f(A))$. If, in addition, $f$ is one-to-one, then $A=f^{-1}(f(A))$.
+\newline
+
+Proof: Let 
+\[f: X \to Y\]
+and let $A \subseteq X$.
+\newline
+Let us first consider the case that $X = \emptyset$. Since $A \subseteq X$, $A = \emptyset$, and since $f$ maps $X$ to $Y$, we must have that $Im(f) = \emptyset$. Then we have that $f(A) = f(\emptyset) = \emptyset$. And $f^{-1}(f(A)) = f^{-1}(Im(f)) = f^{-1}(\emptyset) = \emptyset$.
+
+Clearly, $A \subseteq f^{-1}(f(A))$.
+\newline\newline\newline
+
+Now assume that $A \neq \emptyset$, $A \subseteq X$ and let $f$ be any function, and let $y \in A$ be an arbitrary element of $A$. By definition of inverse image,
+\begin{equation}
+    f^{-1}(f(A)) = \{x\in X| f(x) \in f(A)\}
+\end{equation}
+since $y \in A$, we have $f(y) \in f(A)$. Now, because of this, we know from the definition above that $y \in \{x \in X | f(x) \in f(A)\}$. In other words, any element of $A$ is also an element of $f^{-1}(f(A))$, or 
+\[A \subseteq f^{-1}(f(A))\]
+
+
+Now assume that $f$ is one-to-one and let $x \in f^{-1}(f(A))$. By definition of inverse image, $f(x) \in f(A)$. 
+
+Since $f$ is one-to-one, $f(x_i) = f(x_j)$ implies $x_i = x_j$. Now let $a \in A$ be such that $f(x) = f(a)$ (since $f(x) \in f(A)$). Then by the definition of one-to-one, $x = a$. Thus, $x \in A$.
+
+
+Then for every element $x \in f^{-1}(f(A))$, $x \in A$, which tells us that $f^{-1}(f(A)) \subseteq A$. From our work above, we also have that $A \subseteq f^{-1}(f(A))$. Thus,
+\[A = f^{-1}(f(A))\]
+when $f$ is one-to-one.
+\newline
+
+\item{}
+(\#8 a, b in 2.2) Let $f:X\to Y$ and $g:Y\to Z$ be any functions.
+  \begin{enumerate}
+  \item Prove that if $f$ is one-to-one and $g$ is one-to-one, then $g\circ f:X\to Z$ is one-to-one. Is the converse true?
+  \item If $g$ is onto and $f$ is onto, then is $g\circ f$ always onto? Is the converse true?
+  \end{enumerate}
+  
+  
+a) Proof: Assume $f$ and $g$ are one-to-one and $f: X \to Y$, $g: Y \to Z$
+\newline
+
+By definition, since $f$ and $g$ are one-to-one, we have that for $x_i, \:x_j \in X$ and  $y_i, \: y_j \in Y$, $f(x_i) = f(x_j)$ implies $x_i = x_j$. Similarly, $g(y_i) = g(y_j)$ implies $y_i = y_j$.
+
+Let $x_i \neq x_j$, $x_i, x_j \in X$. We wish to show that $g(f(x_i)) \neq g(f(x_j))$. Let $f(x_i) = y_i \in Y$ and $f(x_j) = y_j \in Y$. Since $f$ is one-to-one, $y_i \neq y_j$. Now let $g(y_i) = z_i \in Z$ and $g(y_j) = z_j \in Z$. Since $g$ is one-to-one, we have that $z_i \neq z_j$. So for $x_i \neq x_j$, $g(f(x_i)) \neq g(f(x_j))$. By definition, $g \circ f$ is one-to-one. 
+
+Since $g$ is one-to-one, $z_j \neq z_i$. Since $z_j = g(f(x_j))$ and $z_i = g(f(x_j))$, this contradicts our assumption that $g(f(x_j)) = g(f(x_i))$, thus $g \circ f$ is one-to-one.
+\newline\newline
+
+
+
+To show the converse is not true, consider 
+\[f : \mathbb{R} \to [0, \infty)\]
+defined by $f(x) = |x|^{1/3}$. And consider
+\[g : [0, \infty) \to \mathbb{R}\]
+defined by $g(x) = \ln{(x)}$. Now compose $g$ with $f$. That is,
+\[g \circ f = \ln{(|x|^{1/3})}\]
+Notice that $g \circ f: [0, \infty) \to \mathbb{R}$.
+Clearly, $g \circ f$ is one-to-one, however, $f$ is not one-to-one.
+\newline
+
+b) Proof: First consider the case where $X = \emptyset$. Then since $X$ is empty, and $f: X \to Y$, $Im(f)$ must also be empty. And since $g: Y \to Z$, $Im(g)$ must also be empty. Then $g \circ f$ will map to the empty set, so since $f$ and $g$ are both onto, $g \circ f$ is also onto.
+\newline
+
+
+
+Now consider the case where $X \neq \emptyset$ and assume that $f$ and $g$ are onto. Then since $f$ and $g$ are functions, we must have that $Y$ and $Z$ are nonempty since by definition of onto, $Im(f) = Y$ and $Im(g) = Z$. Now consider the composition $g \circ f$. We wish to show that the image of $g \circ f = Z$. Well, let $z \in Z$ be arbitrary. We wish to show that there exists an $x \in X$ such that $(g \circ f)(x) = z$. Since $g$ is onto, there exists an element $y \in Y$ such that $g(y) = z$. Additionally, since $f$ is onto, there exists an element $x \in X$ such that $f(x) = y$. Putting this together, we have that $(g \circ f)(x) = g(f(x)) = g(y) = z$.
+
+Thus, for any arbitrary element of $Z$, we can find an $x \in X$ such that $(g \circ f)(x) = z$. By definition, $g \circ f$ is onto.
+\newline
+The converse is NOT true. Consider the following functions:
+\[f: \mathbb{R} \to \mathbb{R}\]
+defined by $f(x) = x^2$. And let 
+\[g: \mathbb{R} \to [0, \infty)\]
+defined by $g(x) = x^4$. Notice that $f$ is not onto, but $g$ is. and since $f$ maps to $\mathbb{R}$ and $g$ maps from $\mathbb{R}$ to $[0, \infty)$, can see that $g \circ f: \mathbb{R} \to [0,\infty)$, meaning that $g \circ f$ is onto. However, $f$ is not onto.
+
+\item{}
+(\#3 in 2.3) Define two points $(x_1,y_1)$ and $(x_2,y_2)$ in $\mathbb{R}^2$ to be equivalent if $y_1^2+x_1^2=y_2^2+x_2^2$. Check that this is an equivalence relation, then describe and sketch the equivalence classes.
+\newline
+
+We must first show that reflexivity holds. That is, we wish to show that $(x_1,y_1) \sim (x_1, y_1)$. Well, $x_1 = x_1$, so $x_1^2 = x_1^2$. Similarly, $y_1 = y_1$ and $y_1^2 = y_1^2$. Adding these two, we get
+\[x_1^2 + y_1^2 = x_1^2 + y_1^2\]
+Thus, by definition of the equivalence relation,
+\[(x_1, y_1) \sim (x_1, y_1)\]
+
+Now we need to show symmetry holds. 
+Assume $(x_1, y_1) \sim (x_2, y_2)$. We wish to show $(x_2, y_2) \sim (x_1, y_1)$.
+Well, by assumption, 
+\[x_1^2 + y_1^2 = x_2^2 + y_2^2\]
+Since equality is symmetric,
+\[x_2^2 + y_2^2 = x_1^2 + y_1^2\]
+So, by definition,
+\[(x_2, y_2) \sim (x_1, y_1)\]
+Finally, we must show that transitivity works. Assume that $(x_1, y_1) \sim (x_2, y_2)$ and $(x_2, y_2) \sim (x_3, y_3)$. We must show that $(x_1, y_1) \sim (x_3, y_3)$.
+By definition of the equivalence relation,
+\[x_1^2 + y_1^2 = x_2^2 + y_2^2\]
+and
+\[x_2^2 + y_2^2 = x_3^2 + y_3^2\]
+By transitivity of equality, we have
+\[x_1^2 + y_1^2 = x_3^2 + y_3^2\]
+Thus, by definition, 
+\[(x_1, y_1) \sim (x_3, y_3)\]
+And since reflexivity, symmetry, and transitivity hold, this equivalence is an equivalence relation.
+
+\item{}
+(\#3 in 2.5) Verify that the set $\{1,4,7,10,\ldots\}$ is infinite, by Definition 2.5.2.
+\newline
+
+Proof: Let $\mathbb{D} = \{1, 4, 7, 10, \ldots\}$ and let $\mathbb{I} = \{4, 7, 10, \ldots\}$. Notice that
+\[\mathbb{I} \subset \mathbb{D}\]
+In other words, $\mathbb{I}$ is a proper subset of $\mathbb{D}$. Notice that we can map any element of $\mathbb{D}$ to $\mathbb{I}$ by the following function from $\mathbb{D}$ to $\mathbb{I}$:
+\[f: \mathbb{D} \to \mathbb{I}\]
+\[f(x) = x + 3\]
+Notice that f has an inverse function, given by
+\[f^{-1}: \mathbb{I} \to \mathbb{D}\]
+\[f^{-1}(x) = x - 3\]
+Notice that $f^{-1}(f(x)) = f(f^{-1}(x)) = x$.
+
+Since $f$ has an inverse function, f is a bijection.
+
+Notice that $\mathbb{D} \sim \mathbb{I}$, and since we have a bijection between $\mathbb{D}$ and $\mathbb{I}$, $\mathbb{D}$ is an infinite set by definition.
+
+
+\item{}
+Prove that if $B\subseteq A$ and $B$ is infinite, then $A$ is infinite. Conclude that every subset of a finite set is finite.
+\newline
+
+Proof: Let $B \subseteq A$ and assume that $B$ is infinite. We wish to show that $A$ is also infinite. Since $B$ is infinite, we have that there exists a one-to-one function $f: \mathbb{N} \to B$ where $\text{Im($f$)} \subseteq B$. Since $B \subseteq A$, every element of $B$ is also an element of $A$. And since $\text{Im($f$)} \subseteq B$, every element of the image of $f$ is also an element of the image of $B$. So we have that $\text{Im($f$)} \subseteq A$. That is, $f: \mathbb{N} \to A$. So by definition, $A$ is infinite.
+\newline
+
+
+As a consequence, we have that for a finite set $A$, and $B \subseteq A$, $B$ must also be finite.
+
+
+
+\item{}
+Prove that the union of a finite collection of finite sets is finite. (Hint: First prove that the union of two disjoint finite sets is finite, then show that the union of any two finite sets is finite.)
+\newline
+
+Proof: Begin by considering two finite disjoint sets $A$ and $B$. Since $A$ and $B$ are finite, there exist bijections 
+\[f_1 : \{1, 2, \ldots, k\} \to A\]
+\[f_2: \{1, 2, \ldots, m\} \to B\]
+for natural numbers $m,k$. Now consider the function 
+\[f:\{1,2,\ldots, m+k\} \to A \cup B\]
+defined by
+\[f = \begin{cases}
+    f_1(\frac{n+1}{2}), \text{n odd}\\
+    f_2(\frac{n}{2}), \text{n even}\\
+\end{cases}\]
+Notice that $f$ has an inverse, and that $f^{-1}(f_1(l)) = n, \text{$n$ odd}$ and $f^{-1}(f_2(q)) = n, \text{$n$ even}$ for natural numbers $l,q$. So $f$ is a bijection. So we have a bijection
+\[f: \{1, 2, \ldots, m+k\} \to A \cup B\]
+so $A \cup B$ is finite.
+\newline\newline
+\hspace{10mm} Now we wish to show that the union of any two (non-disjoint) sets is finite.
+\newline
+Suppose that $A \cap B \neq \emptyset$. That is, $A$ and $B$ are not disjoint. Now, notice that $A \setminus B$ and $B$ are disjoint, so if we can show that $(A \setminus B) \cup B = A \cup B$, by our work above, we have that $A \cup B$ is finite. To begin, let $x \in A \cup B$. By definition of set union, either $x \in A$, $x \in B$, or both. 
+
+Without loss of generality, assume $x \in A$. Then by definition of set difference,
+\[x \in (A \setminus B)\]
+By definition of set union, we have that $x \in (A \setminus B) \cup B$, so 
+\[A \cup B \subseteq (A \setminus B) \cup B\]
+Now let $x \in (A \setminus B) \cup B$. By definition of set union, $x \in A \setminus B$ or $x \in B$. If $x \in B$, $x \notin A \setminus B$. So $x$ may or may not be an element of $A$. Either way, by definition of set union, $x \in A \cup B$. 
+
+If $x \in A \setminus B$, $x \in A$, but $x \notin B$. By definition of set union, $x \in A \cup B$. So we have
+\[(A \setminus B) \cup B \subseteq A \cup B\]
+By double inclusion, we have that
+\[A \cup B = (A \setminus B) \cup B\]
+Now since $(A \setminus B)$ and $B$ are finite, disjoint sets, by our work above, we have that $A \cup B$ is finite.
+\newline
+
+Now we have shown that the union of two finite sets is also finite. We wish to show that the finite union of finite sets is also finite. Begin by considering $k \in \mathbb{N}$ finite sets, call them
+\[A_1, A_2, \ldots, A_{k-1}, A_k\]
+Begin by considering the union between $A_1$ and $A_2$. Since both sets are finite, we have from our work above that $A_1 \cup A_2$ is also finite. Call this union
+\[A_1 \cup A_2 = B_1\]
+That is, we have $B_1$ a finite set. Now consider the union between $B_1$ and $A_3$. From our previous work, we have that $B_1 \cup A_3$ is finite. Call this union
+\[B_1 \cup A_3 = B_2\]
+Which is finite. Continuing this argument, we can see that each $B_i$, $i = \{1, 2, \ldots, k-1\}$ is finite. Thus, we have that the finite union of finite sets is also finite.
+\end{enumerate}
+\end{document}

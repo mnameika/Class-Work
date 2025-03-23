@@ -1,0 +1,281 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{accents}
+\usepackage{tikz}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{empty}
+
+
+\begin{document}
+\noindent Math 4510
+
+\noindent Topology
+
+\vspace{.2in}
+\begin{center}
+Problem Set 2
+\end{center}
+
+ \begin{enumerate}
+\item (\#5 in 2.5) Prove that the finite union of countable sets is countable. (See the hints given in the text for this problem).
+
+We wish to show that for some $k \in \mathbb{N}$, $\bigcup_{i=1}^k A_i$ is countable for some collection of countable sets $\{A_i\}_i^k$. Let's begin by showing the union of two countable sets is also countable. By definition of countable, there exist onto functions 
+\[f_1 : \mathbb{N} \to A_1\]
+\[f_2 : \mathbb{N} \to A_2\]
+Let $B = A_1 \cup A_2$. We wish to show that there exists an onto function that maps $\mathbb{N} \to B$. Well, consider the function $f_B: \mathbb{N} \to B$
+
+\[f_B(n) = \begin{cases}
+    f_1(\frac{n+1}{2}), \: n\: \text{odd}\\
+    f_2(\frac{n}{2}), \: n\: \text{even}\\
+\end{cases}\]
+
+Notice that $f_B$ will alternate between mapping to elements of $A_1$ and $A_2$. That is, $f_B$ is an onto map from $\mathbb{N}$ to $B$. That is, we have that $B$ is a countable set.  
+
+Now consider the union of the three countable sets $A_1 \cup A_2 \cup A_3 = B \cup A_3$. Since $B$ is countable and $A_3$ is countable, we have from our work above that $B \cup A_3$ is also countable. Continuing this argument up to $k$, we have that the finite union of countable sets is countable.
+
+
+\item (\#4 in 3.2) Find all the topologies on the set $X = \{a,b,c\}$. There are 29 of them. (Hint: be extremely organized in how you write them down).
+\begin{itemize}
+    \item $\{\emptyset, X\}$ 
+    
+    Notice that this is the trivial topology.
+    
+    \item $\{\emptyset, \{a\}, X\}$ 
+    \item $\{\emptyset, \{b\}, X\}$ 
+    \item $\{\emptyset, \{c\}, X\}$ 
+    
+    I will show the three sets above are topologies. Focus on $\{\emptyset, \{a\},X\}$, and call this $A$. Notice the following:
+    \[\emptyset \cup \{a\} = \{a\} \in A\]
+    \[\emptyset \cap \{a\} = \emptyset \in A\]
+    \[\{a\} \cup X = X \in A\]
+    \[\{a\} \cap X = \{a\} \in A\]
+    So $A$ is a topology on $X$. The same holds for the other two sets have the same structure.
+    
+    \item $\{\emptyset, \{a, b\}, X\}$ 
+    \item $\{\emptyset, \{a, c\}, X\}$ 
+    \item $\{\emptyset, \{b, c\}, X\}$  
+    
+    I will show the three sets above are also topologies. Let $B = \{\emptyset, \{a, b\}, X\}$ and notice the following:
+    \[\emptyset \cup \{a,b\} = \{a, b\} \in B\]
+    \[\emptyset \cap \{a,b\} = \emptyset \in B\]
+    \[X \cup \{a,b\} = X \in B\]
+    \[X \cap \{a,b\} = \{a,b\} \in B\]
+    So $B$ is a topology on $X$. The same holds because the other two sets because the collections have the same structure.
+    
+    
+    \item $\{\emptyset, \{c\}, \{a, b\}, X\}$
+    \item $\{\emptyset, \{b\}, \{a, c\}, X\}$
+    \item $\{\emptyset, \{a\}, \{b, c\}, X\}$
+    
+    To show that the above three collections are topologies, let $\tau = \{\emptyset, \{c\}, \{a,b\},X\}$ and notice the following:
+    
+    \[\emptyset \in \tau\]
+    \[X \in \tau\]
+    \[\emptyset \cap \{a\} = \emptyset \in \tau\]
+    \[\emptyset \cap \{b,c\} = \emptyset \in \tau\]
+    \[\emptyset \cap X = \emptyset \in \tau\]
+    \[\emptyset \cup \{a\} = \{a\} \in \tau\]
+    \[\emptyset \cup \{b,c\} = \{b,c\} \in \tau\]
+    \[\emptyset \cup X = X \in \tau\]
+    \[\{a\} \cap \{b,c\} = \emptyset \in \tau\]
+    \[\{a\} \cap X = \{a\} \in \tau\]
+    \[\{b,c\} \cap X = \{b,c\} \in \tau\]
+    \[\{b,c\} \cup X = X \in \tau\]
+    
+    So $\tau$ is a topology on $X$. The other two collections are also topologies because they have the same structure.
+    
+    \item $\{\emptyset, \{a\}, \{a, b\}, X\}$
+    \item $\{\emptyset, \{b\}, \{a, b\}, X\}$
+    
+    \item $\{\emptyset, \{a\}, \{a, c\}, X\}$
+    
+    \item $\{\emptyset, \{c\}, \{a, c\}, X\}$
+    
+    \item $\{\emptyset, \{b\}, \{b, c\}, X\}$
+    \item $\{\emptyset, \{c\}, \{b, c\}, X\}$
+    
+    To show the above nine sets are topologies, let $C = \{\emptyset, \{a\}, \{a, b\}, X\}$ and notice the following:
+    \[\{a\} \cup \emptyset = \{a\} \in C\]
+    \[\{a\} \cap \emptyset = \emptyset \in C\]
+    \[\{a,b\} \cup \emptyset = \{a,b\} \in C\]
+    \[\{a,b\} \cap \emptyset = \emptyset \in C\]
+    \[\{a\} \cup X = X \in C\]
+    \[\{a\} \cap X = \{a\} \in C\]
+    \[\{a,b\} \cup X = X \in C\]
+    \[\{a,b\} \cap X = \{a,b\} \in C\]
+    \[\{a\} \cup \{a,b\} = \{a,b\} \in C\]
+    \[\{a\} \cap \{a,b\} = \{a\} \in C\]
+    So $C$ is a topology on $X$. The same holds for the other eight collections because the sets have the same structure. 
+    
+    \item $\{\emptyset, \{a\}, \{a,b\}, \{b\}, X\}$ 
+    \item $\{\emptyset, \{a\}, \{a, c\}, \{c\}, X\}$ 
+    \item $\{\emptyset, \{b\}, \{b, c\}, \{c\}, X\}$ 
+    
+    To show the above three sets are topologies, let $D = \{\emptyset, \{a\}, \{a,b\}, \{b\}, X\}$ and notice the following:
+    \[\emptyset \cup \{a\} = \{a\} \in D\]
+    \[\emptyset \cap \{a\} = \emptyset \in D\]
+    \[X \cup \{a\} = X \in D\]
+    \[X \cap \{a\} = \{a\} \in D\]
+    \[\emptyset \cup \{b\} = \{b\} \in D\]
+    \[\emptyset \cap \{b\} = \emptyset \in D\]
+    \[X \cup \{b\} = X \in D\]
+    \[X \cap \{b\} = \{b\} \in D\]
+    \[\emptyset \cup \{a,b\} = \{a,b\} \in D\]
+    \[\emptyset \cap \{a,b\} = \emptyset \in D\]
+    \[X \cup \{a,b\} = X \in D\]
+    \[X \cap \{a,b\} = \{a,b\} \in D\]
+    \[\{a\} \cup \{a,b\} = \{a,b\} \in D\]
+    \[\{a\} \cap \{a,b\} = \{a\} \in D\]
+    \[\{b\} \cup \{a,b\} = \{a,b\} \in D\]
+    \[\{b\} \cap \{a,b\} = \{b\} \in D\]
+    \[\{a\} \cup \{b\} \cup \{a,b\} = \{a,b\} \in D\]
+    \[\{a\} \cap \{b\} \cap \{a,b\} = \emptyset \in D\]
+    So $D$ is a topology on $X$. The same holds for the other two collections because they have the same structure.
+    
+    \item $\{\emptyset, \{a, b\}, \{a, c\}, \{a\}, X\}$
+    \item $\{\emptyset, \{b, c\}, \{a, c\}, \{c\}, X\}$
+    \item $\{\emptyset, \{b, c\}, \{a, b\}, \{b\}, X\}$
+    
+    To show the above three sets are topologies, let $E = \{\emptyset, \{a, b\}, \{a, c\}, \{a\}, X\}$ and notice the following:
+    \[\emptyset \cup \{a\} = \{a\} \in E\]
+    \[\emptyset \cap \{a\} = \emptyset \in E\]
+    \[X \cup \{a\} = X \in E\]
+    \[X \cap \{a\} = \{a\} \in E\]
+    \[\emptyset \cup \{a,b\} = \{a,b\} \in E\]
+    \[\emptyset \cap \{a,b\} = \emptyset \in E\]
+    \[X \cup \{a,b\} = X \in E\]
+    \[X \cap \{a,b\} = \{a,b\} \in E\]
+    \[\emptyset \cup \{a,c\} = \{a,c\} \in E\]
+    \[\emptyset \cap \{a,c\} = \emptyset \in E\]
+    \[X \cup \{a,c\} = X \in E\]
+    \[X \cap \{a,c\} = \{a,c\} \in E\]
+    \[\{a\} \cup \{a,b\} = \{a,b\} \in E\]
+    \[\{a\} \cap \{a,b\} = \{a\} \in E\]
+    \[\{a\} \cup \{a,c\} = \{a,c\} \in E\]
+    \[\{a\} \cap \{a,c\} = \{a\} \in E\]
+    \[\{a,b\} \cup \{a,c\} = X \in E\]
+    \[\{a,b\} \cap \{a,c\} = \{a\} \in E\]
+    \[\{a\} \cup \{a,b\} \cup \{a,c\} = X \in E\]
+    \[\{a\} \cap \{a,b\} \cap \{a,c\} = \{a\} \in E\]
+    So $E$ is a topology on $X$. The same result holds for the other two collections because the sets have the same structure.
+    
+    
+    \item $\{\emptyset, \{a\}, \{b\}, \{a, b\}, \{b, c\}, X\}$
+    \item $\{\emptyset, \{b\}, \{c\}, \{a, b\}, \{b, c\}, X\}$
+    \item $\{\emptyset, \{a\}, \{b\}, \{a,b\}, \{a, c\}, X\}$
+    \item $\{\emptyset, \{a\}, \{c\}, \{a, b\}, \{a, c\}, X\}$
+    \item $\{\emptyset, \{a\}, \{c\}, \{a, c\}, \{b, c\}, X\}$
+    \item $\{\emptyset, \{b\}, \{c\}, \{a, c\}, \{b, c\}, X\}$
+    
+    To see that the above six sets are topologies, let $F = \{\emptyset, \{a\}, \{b\}, \{a, b\}, \{b, c\}, X\}$ and notice the following:
+    \[\emptyset \cup \{a\} = \{a\} \in F\]
+    \[\emptyset \cap \{a\} = \emptyset \in F\]
+    \[X \cup \{a\} = X \in F\]
+    \[X \cap \{a\} = \{a\} \in F\]
+    \[\emptyset \cup \{b\} = \{b\} \in F\]
+    \[\emptyset \cap \{b\} = \emptyset \in F\]
+    \[X \cup \{b\} = X \in F\]
+    \[X \cap \{b\} = \{b\} \in F\]
+    \[\emptyset \cup \{a,b\} = \{a,b\} \in F\]
+    \[\emptyset \cap \{a,b\} = \emptyset \in F\]
+    \[X \cup \{a,b\} = X \in F\]
+    \[X \cap \{a,b\} = \{a,b\} \in F\]
+    \[\emptyset \cup \{b,c\} = \{b,c\} \in F\]
+    \[\emptyset \cap \{b,c\} = \emptyset \in F\]
+    \[X \cup \{b,c\} = X \in F\]
+    \[X \cap \{b,c\} = \{b,c\} \in F\]
+    \[\{a\} \cup \{b\} = \{a,b\} \in F\]
+    \[\{a\} \cap \{b\} = \emptyset \in F\]
+    \[\{a\} \cup \{a,b\} = \{a,b\} \in F\]
+    \[\{a\} \cap \{a,b\} = \{a\} \in F\]
+    \[\{a\} \cup \{b,c\} = X \in F\]
+    \[\{a\} \cap \{b,c\} = \emptyset \in F\]
+    \[\{b\} \cup \{a,b\} = \{a,b\} \in F\]
+    \[\{b\} \cap \{a,b\} = \{b\} \in F\]
+    \[\{b\} \cup \{b,c\} = \{b,c\} \in F\]
+    \[\{b\} \cap \{b, c\} = \{b\} \in F\]
+    \[\{a,b\} \cup \{b,c\} = X \in F\]
+    \[\{a,b\} \cap \{b,c\} = \{b\} \in F\]
+    \[\{a\} \cup \{b\} \cup \{a,b\} = \{a,b\} \in F\]
+    \[\{a\} \cap \{b\} \cap \{a,b\} = \emptyset \in F\]
+    \[\{a\} \cup \{b\} \cup \{b,c\} = X \in F\]
+    \[\{a\} \cap \{b\} \cap \{b,c\} = \emptyset \in F\]
+    \[\{a\} \cup \{b\} \cup \{a,b\} \cup \{b,c\} = X \in F\]
+    \[\{a\} \cap \{b\} \cap \{a,b\} \cap \{b,c\} = \emptyset \in F\]
+    
+    
+    
+    \item $\{\emptyset, \{a\}, \{b\}, \{c\}, \{a, b\}, \{a, c\}, \{b, c\}, X\}$
+    
+    Note that this is the discrete topology.
+    
+
+\end{itemize}
+\item In the topology $U$ on $\mathbb{R}$, give an example of an arbitrary intersection of open sets that is nonempty and not open.
+
+Consider the sequence of intervals $s_n = (a - \frac{1}{n}, a + \frac{1}{n}), a\in \mathbb{R},\: n \in \mathbb{N}$. Clearly, each $s_n \in \mathcal{U}$. Now consider the intersection
+\[\bigcap_{n=1}^{\infty} s_n\]
+Notice that $a \in (a - \frac{1}{n}, a + \frac{1}{n})$, for all $n$, and so $a$ is in the intersection. To show $a$ is the only element of the intersection, let 
+\[b \in \bigcap_{n=1}^{\infty} s_n, \: b \neq a\]
+That is, $b \in s_n$ for all $n$. However, since $b \neq a$, we can find some natural number $k$ sufficiently large enough such that $b \notin s_k$.
+Thus, if $b \neq a$, $b$ is not in the intersection of $s_n$. 
+
+So we have
+\[\bigcap_{n=1}^{\infty}  s_n = \{a\}\]
+which is not open in $\mathbb{R_{\mathcal{U}}}$.
+
+
+
+
+\item (\#8 in 3.2) Prove that the set $RR$ is a topology on $\mathbb{R}$.
+
+Proof: First consider the definition of the right ray topology: $\{V \subseteq \mathbb{R} | \text{for ever } x\in \mathbb{R},\text{there exists a ray } (a, \infty)\: \text{for some } a \in \mathbb{R} \text{ with } x \in (a, \infty) \subseteq V\}$. 
+
+Notice that the empty set $\emptyset$ does not have any points that will contradict the requirements to be in $RR$, so $\emptyset \in RR$. 
+To show that $\mathbb{R}$ is in $RR$, fix $x \in \mathbb{R}$. then for any $a < x$, $x \in (a, \infty)$. 
+Since this is true for any $a < x$, $(-\infty, \infty) = \mathbb{R}$ defines a right ray in $\mathbb{R}$, so $\mathbb{R}$ is in the right ray topology.
+
+Let $A_{\lambda}$ be an indexed collection of elements of $\mathcal{RR}$ where $A_{\lambda} = (a_{\lambda}, \infty)$. Consider their union:
+\[\bigcup_{\lambda \in \Lambda} (a_{\lambda}, \infty)\]
+Consider the case where $\{a_{\lambda}\}$ is bounded below. Let $a = \inf a_{\lambda}$. Then $\bigcup_{\lambda \in \Lambda} A_{\lambda} = (a, \infty) \in RR$. 
+
+Now consider the case where $\{a_{\lambda}\}$ is unbounded. Then $\bigcup_{\lambda \in \Lambda} A_{\lambda} = \mathbb{R} \in RR$ by our work above. Thus, we have an arbitrary union of elements of $RR$ is also in $RR$. 
+
+Now we must show that a finite intersection of elements of $RR$ is also in $RR$. 
+
+Begin by considering the set $\{b_n\} = \{b_1, b_2, \ldots, b_n\}$, $n \in \mathbb{N}$, each $b_i \in \mathbb{R}$. now consider
+\[\bigcap_{k=1}^n (b_k, \infty)\]
+Since $\{b_n\}$ is a finite set, it has a maximum, call it $b_m = \max\{b_1, b_2, \ldots, b_n\}$. Then 
+\[\bigcap_{k=1}^n (b_k, \infty) = (b_m, \infty) \in RR\]
+So a finite intersection of elements of $RR$ is also in $RR$. Thus, $RR$ is a topology on $\mathbb{R}$.
+\end{enumerate}
+
+
+
+
+\noindent Recommendation: Also write out the details for \#12 in 3.2, showing that the set $\mathcal{FC}$ is a topology on $\mathbb{R}$.
+
+By definition, $\emptyset \in \mathcal{FC}$. Also notice that $\mathbb{R} \in \mathcal{FC}$ since $\mathbb{R} \setminus \mathbb{R} = \emptyset$ which is finite by definition. 
+Now we wish to show that an arbitrary union of open sets in $\mathcal{FC}$ is in $\mathcal{FC}$.
+Let $A_{\lambda}$ be an indexed collection of open sets in $\mathcal{FC}$ and consider
+\[\bigcup_{\lambda \in \Lambda} A_{\lambda}\]
+Notice that each $\mathbb{R} \setminus A_i$ is finite for all $A_i \in \{A_{\lambda}\}_{\lambda \in \Lambda}$. We wish to show that the above set is in $\mathcal{FC}$, so we wish to show 
+\[\mathbb{R} \setminus \bigcup_{\lambda \in \Lambda} A_{\lambda}\]
+is finite. Notice by DeMorgan's laws:
+\[\mathbb{R} \setminus \bigcup_{\lambda \in \Lambda} A_{\lambda} = \bigcap_{\lambda \in \Lambda} (\mathbb{R} \setminus A_{\lambda})\]
+And since each $\mathbb{R} \setminus A_{\lambda}$ is finite, we have an arbitrary intersection of finite sets, which must be finite. 
+
+Now we wish to show a finite intersection of open sets is also open. Let $B_1, B_,2, \ldots, B_n$ be open sets in $\mathcal{FC}$ for some natural number $n$.
+We wish to show that 
+\[\bigcap_{k=1}^n B_k \in \mathcal{FC}\]
+That is, we wish to show that $\mathbb{R} \setminus \bigcap_{k=1}^n B_k$ is finite. Well, by DeMorgan's law:
+\[\mathbb{R} \setminus \bigcap_{k=1}^n B_k = \bigcup_{k=1}^n (\mathbb{R} \setminus B_k)\]
+So we have a finite union of finite sets, which by a previous homework assignment, a finite union of open sets is open, so $\mathcal{FC}$ is a topology on $\mathbb{R}$.
+\end{document}

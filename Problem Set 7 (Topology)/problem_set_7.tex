@@ -1,0 +1,72 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{accents}
+
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{empty}
+\renewcommand \d{\displaystyle}
+\renewcommand \a{\shortstack{$\rightarrow$\\$u$}}
+\renewcommand \b{\shortstack{$\rightarrow$\\$v$}}
+
+\begin{document}
+\noindent Math 4510
+
+\noindent Topology
+
+\vspace{.2in}
+\begin{center}
+Problem Set 7
+\end{center}
+
+ \begin{enumerate}%\setlength{\itemindent}{-1.5em}
+\item (\#1 in 5.4) Sketch some open sets in the quotient space $\mathbb{R}/\sim$ of Example 5.2. (If you are writing your solutions in LaTeX, you may sketch these on paper, scan and email them to me, or upload in Canvas as a second file). Be sure to show that the sets in $\mathbb{R}_{\mathcal{U}}$ that project to these sets under the quotient map $\nu: \mathbb{R}\to \mathbb{R}/\sim$.
+
+See attached for sketches.
+
+\item Find a subspace $X$ of $\mathbb{R}^2$ and an equivalence relation $\sim$ on $X$ so that $X/\sim\cong S^2$, where $S^2$ is the unit sphere centered at the origin in $\mathbb{R}^3$. Illustrate typical open sets in the quotient space and in $X$. You do not have to give an explicit homeomorphism between $X/\sim$ and $S^2$, but you should describe a function between the two and explain why it is a homeomorphism.
+
+Consider the disk of radius one centered at the origin in $\mathbb{R}^2$ given by $D^2 = \{(x,y) | x^2 + y^2 \leq 1, x,y \in \mathbb{R}\}$. Define the equivalence relation on $D^2$ by $\textbf{x} \sim \textbf{x}$ for $\textbf{x} = (x,y)$ if $x ^2 + y^2 < 1$ and $\textbf{x}_0 \sim \textbf{x}_1$ for $\textbf{x}_0 = (x_0, y_0)$, $\textbf{x}_1 = (x_1, y_1)$ if $x_0^2 + y_0^2 = 1 = x_1^2 + y_1^2$. That is, define all the points on the boundary of $D^2$ to be equivalent to each other. 
+
+Let $f: D^2_{/\sim} \to S^2$ map such that $f(\partial D^2) = (0,0,1) \in S^2$, $f([(0,0)]) = (0,0,-1) \in S^2$, and for some concentric circle of radius $0 < r < 1$ in $D^2$, f maps the equivalence classes of points on the concentric circle to a circle on $S^2$. See sketches for more details.
+.
+
+Also see attached for sketches of open sets in the quotient space and $X$.
+
+\item (\#1 in 5.5) A \textit{path} in a space $X_{\tau}$ is a continuous function $\alpha:[0,1]_{\mathcal{U}}\to X_{\tau}$. If $\alpha$ and $\beta$ are two paths in $X_{\tau}$ such that $\alpha(1) = \beta(0)$, then the map $\alpha \star \beta:[0,1]\to X$ defined by 
+\[(\alpha \star \beta)(t)=\left\{ \begin{array}{ll}
+                  \alpha(2t) & \mbox{$0\leq t\leq 1/2$}\\
+                  \beta(2t-1)      & \mbox{$1/2 \leq t\leq 1$}
+                  \end{array}
+          \right. \]
+ is continuous. (\textit{Hint}: Draw two such paths, then consider the Pasting Lemma.)
+ 
+ We first wish to show that $\alpha(2t)$ is continuous on $0 \leq t \leq 1/2$ and that $\beta(2t-1)$ is continuous on $1/2 \leq t \leq 1$. Well, since $\alpha(t)$ and $\beta(t)$ are paths in $X_{\tau}$ and paths are defined to be continuous, we have that $\alpha(t)$ and $\beta(t)$ are continuous on $0 \leq t \leq 1$.
+ 
+ Let $f : [0, 1/2]_{\mathcal{U}} \to [0,1]_{\mathcal{U}}$ map $t \mapsto 2t$. Let $(a,b) \subseteq [0,1]$ be open in $[0,1]_{\mathcal{U}}$. Notice that $f^{-1}((a,b)) = (a/2, b/2)$ which is also open in $[0,1/2]_{\mathcal{U}}$. So by definition, $f$ is continuous.
+ 
+ Now let $g: [1/2,1] \to [0,1]$ where $t \mapsto 2t - 1$. Let $(a,b)$ be as above. Notice that $g^{-1}((a,b)) = (\frac{a+1}{2},\frac{b+1}{2})$ which is open in $[1/2,1]_{\mathcal{U}}$. So by definition, $g$ is continuous.
+ 
+ Now $\alpha(2t)$ which maps $[0,1/2] \to [0,1]$ is continuous since $f = 2t$ and $\alpha$ are continuous.
+ 
+ Additionally, $\beta(2t-1)$ which maps $[1/2,1] \to [0,1]$ is continuous since $g = 2t-1$ and $\beta$ are continuous. 
+ 
+ Let $A = [0, 1/2]$ and $B = [1/2, 1]$. Notice that $A \cup B = [0,1]$, the domain of $\alpha \star \beta$. Now since $[0,1]$ is equipped with the usual topology, notice that $[0,1] \setminus A = (1/2, 1]$ which is open in $[0,1]_{\mathcal{U}}$ and $[0,1] \setminus B = [0,1/2)$, which is open in $[0,1]_{\mathcal{U}}$, so $A$ and $B$ are closed subsets of $[0,1]$.
+ 
+ Additionally, notice that $A \cap B = \{1/2\}$ and that $\alpha(2(1/2)) = \alpha(1)$ and $\beta(2(1/2) - 1) = \beta(1 - 1) = \beta(0)$. And from the definition of $\alpha$ and $\beta$, we have that $\alpha(1) = \beta(0)$. So by the pasting lemma, we have that $(\alpha \star \beta)(t)$ is continuous.
+
+ \item (\# 7a in 6.2) A space $X_{\tau}$ is said to be \textit{totally disconnected} if every subspace of $X$ with more than one element is disconnected (in the subspace topology). Show that every discrete space is totally disconnected.
+
+Let $X_{\mathcal{D}}$ be a discrete space and $A \subseteq X$ be a subspace of $X$ such that $\text{card}(A) \geq 2$. Since $A$ is a subspace of a discrete space, $\mathcal{D}_A = \mathcal{P}(A)$. 
+Since card($A) \geq 2$, there exist subsets $B,C$ of $A$ such that $B \cap C = \emptyset$, $B \cup C = A$. For example, let $A = \{a_1,a_2\}$. Take $B = \{a_1\}$ and $C = \{a_2\}$. Notice that $B \cup C = A$ and that $B \cap C = \emptyset$. For $\text{Card}(A) > 2$, take $B = \{a_1\}$ and $C = A \setminus \{a_1\}$, and the same argument will hold. Note that $B$ and $C$ are in $\mathcal{D}_A$. 
+
+By definition, $A_{\mathcal{D}_A}$ is disconnected. Since $A$ is an arbitrary subset of $X$ with cardinality greater than two, $X_{\mathcal{D}}$ is totally disconnected.
+
+\end{enumerate}
+\end{document}

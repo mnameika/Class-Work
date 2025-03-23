@@ -1,0 +1,134 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{accents}
+
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-.55in}
+\setlength{\textheight}{9in}
+\pagestyle{empty}
+\renewcommand \d{\displaystyle}
+\renewcommand \a{\shortstack{$\rightarrow$\\$u$}}
+\renewcommand \b{\shortstack{$\rightarrow$\\$v$}}
+
+\title{Problem Set 3 (Topology)}
+\author{Michael Nameika}
+\date{February 2022}
+
+\begin{document}
+
+\maketitle
+\begin{center}
+Problem Set 3
+\end{center}
+
+ \begin{enumerate}%\setlength{\itemindent}{-1.5em}
+\item In the topology $\mathcal{U}$ on $\mathbb{R}$, give an example of an infinite union of closed sets that is open (and bounded).
+
+Consider the collection of sets $\{a + x\}$ where $a \in \mathbb{R}$ and $x \in (0,1)$. Notice that $\{a + x\}$ is closed in $\mathbb{R}_{\mathcal{U}}$ since $\mathbb{R} \setminus \{a + x\} = (-\infty, a + x) \cup (a + x, \infty)$, which is open in $\mathbb{R}_{\mathcal{U}}$. 
+
+Now consider the union
+\[\bigcup_{x \in (0,1)} \{a + x\} = (a, a+ 1)\]
+Which is bounded and open in $\mathbb{R}_{\mathcal{U}}$.
+
+
+\item (\#2 in 3.3) Prove that no nonempty proper subset of $\mathbb{R}_{\mathcal{FC}}$ is simultaneously open and closed.
+
+Proof: Assume by way of contradiction that there exists a set $A \in \mathcal{FC}$ that is both open and closed, and consider $\mathbb{R} \setminus A$. Since $A$ is assumed to be both open and closed, we have that $\mathbb{R} \setminus A \in \mathcal{FC}$. 
+
+Since $A$ is open, we have that $\mathbb{R} \setminus A$ is finite. 
+That is, $\mathbb{R} \setminus A \sim \{1, 2, \ldots, n\}$ for some natural number $n$. 
+Say $\mathbb{R}\setminus A = \{a_1, a_2, \ldots, a_n\}$. Now, if elements of $\mathbb{R} \setminus A$ are listed in ascending order, we have
+\[\mathbb{R} \setminus (\mathbb{R} \setminus A) = (- \infty, a_i) \cup (a_i, a_j) \cup \ldots \cup (a_k, \infty)\]
+Since $\mathbb{R} \setminus (\mathbb{R} \setminus A)$ is a union of intervals, and intervals are uncountable, we have $\mathbb{R} \setminus (\mathbb{R} \setminus A)$ is infinite, contradicting our assumption that $\mathbb{R} \setminus A \in \mathcal{FC}$.
+
+Thus, we have that no set in $\mathcal{FC}$ can be both open and closed.
+
+
+\item Find the closure and the interior of the interval [1,3] in $\mathbb{R}_{\mathcal{FC}}$.
+
+$\text{Int}([1,3]) = \emptyset$
+
+The largest set contained in $[1,3]$ that is open in $\mathbb{R}_{\mathcal{FC}}$ is the empty set.
+To see this, consider some non-empty subset $A \subseteq [1,3]$. Notice that $\mathbb{R} \setminus [1,3] \subseteq \mathbb{R} \setminus A$ and that $\mathbb{R} \setminus [1,3] = (-\infty, 1) \cup (3, \infty)$ which is uncountable since it is a union of open sets in $\mathbb{R}$. Thus, we have
+\[(-\infty, 1) \cup (3, \infty) \subseteq \mathbb{R} \setminus A\]
+so $A$ is infinite. 
+Thus, the interior of $[1,3]$ is the empty set.
+
+$\text{Cl}([1,3]) = \mathbb{R}$
+
+The smallest set that's closed in $\mathbb{R}_{\mathcal{FC}}$ that contains $[1,3]$ is $\mathbb{R}$. 
+In other words, any proper subset of $\mathbb{R}$ that contains $[1,3]$ will not be open in $\mathbb{R}_{\mathcal{FC}}$. 
+To see this, suppose by contradiction that Cl($[1,3]$) = $B$ for some $B \subset \mathbb{R}$. 
+That is, $\mathbb{R} \setminus B$ is open in $\mathcal{FC}$, and so by definition, $\mathbb{R} \setminus (\mathbb{R} \setminus B)$ is open. 
+Notice that $\mathbb{R} \setminus (\mathbb{R} \setminus B) = B$, so $B$ must be finite. 
+But since Cl($[1,3]$) = $B$, we have $[1,3] \subseteq B$. 
+But 
+$[1,3]$ is uncountable, so we must have that $B$ is also uncountable, contradicting the fact that $B$ must be finite from our assumption. 
+
+\item Let $X$ and $Y$ be topological spaces, and let $f:X\to Y$ be any function. Show that the following two conditions are equivalent:
+\begin{enumerate}\item If $U$ is open in $Y$, then $f^{-1}(U)$ is open in $X$.
+\item If $F$ is closed in $Y$, then $f^{-1}(F)$ is closed in $X$. \end{enumerate}
+
+\noindent (Note: Statements $A$ and $B$ are \textit{equivalent} if $A\implies B$ and $B\implies A$.)
+
+First I will prove as a lemma that $f^{-1}(Y \setminus F) = X \setminus f^{-1}(F)$.
+
+By definition of pre-image:
+\[f^{-1}(Y \setminus F) = \{x \in X | f(x) \in Y \setminus F\} \]
+
+\[X \setminus (f^{-1}(F)) = X \setminus \{x \in X | f(x) \in F\}\]
+We wish to show that these two are equal. 
+Notice in the definition of $X \setminus (f^{-1}(F))$ that we are removing from $X$ its elements that map into $F$. 
+That is, we will be left with the elements in $X$ that map into $Y \setminus F$.
+So 
+\[X \setminus (f^{-1}(F)) = \{x \in X | f(x) \in Y \setminus F\} = f^{-1}(Y \setminus F)\]
+
+Now begin by assuming that statement $(a)$ is true and that $F$ is a closed set in $Y$. 
+We wish to show that $f^{-1}(F)$ is closed in $X$. 
+
+Well, since $F$ is a closed set in $Y$, $Y \setminus F$ is open in $Y$. And by (a), we have that $f^{-1}(Y \setminus F)$ is open in X.
+Then $X \setminus (f^{-1}(Y \setminus F))$ is closed in $X$.
+By the lemma, $f^{-1}(Y \setminus F) = X \setminus (f^{-1}(F))$, so $X \setminus f^{-1}(F)$ is open in $X$. 
+Then we have $X \setminus (X \setminus f^{-1}(F)) = f^{-1}(x)$ is closed in $X$.
+
+So $f^{-1}(F)$ is closed in $X$.
+
+Now assume that statement $(b)$ is true and that $U$ is open in $Y$. We have that $Y \setminus U$ is closed in $Y$. Then, by (b), we have that $f^{-1}(Y \setminus U)$ is closed in $X$. By the lemma, we have that $f^{-1}(Y \setminus U) = X \setminus f^{-1}(U)$. And since $X \setminus f^{-1}(U)$ is closed in $X$, we have that $X \setminus (X \setminus f^{-1}(U)) = f^{-1}(U)$ is open in $X$.
+
+So $f^{-1}(U)$ is open in $X$.
+ 
+\item (\#9 in 3.3) Prove Theorem 3.3.4: For a topological space $X_{\tau}$ and a subset $A\subseteq X_{\tau}$,\[ \text{Int($A$)}=\bigcup_{V\subseteq A, V\in\tau}V.\]  That is, show that the interior of a subset $A$ of $X_{\tau}$ is the union of all $\tau$-open sets contained in $A$.
+
+Proof: Let $I = \bigcup_{V \subseteq A, V \in \tau}V$ and let $x \in I$ be an arbitrary element. Notice that since $I$ is a union of open sets, that $I$ is also open. Since every $V \subseteq A$, we have that $x \in A$. Thus, $I \subseteq A$, and since $I$ is open, $I \subseteq \text{Int($A$)}$.
+
+First consider the case that Int($A$) = $\emptyset$. Clearly, Int($A$) $\subseteq I$. Now consider the case Int($A$) $\neq \emptyset$. By definition, $\text{Int}(A) \subseteq A$ is an open set in $\tau$, and thus is by definition of $I$, $\text{Int}(A) \subseteq I$.
+Finally, we have that
+\[\text{Int($A$)} = \bigcup_{V \subseteq A, V \in \tau}V\]
+
+\item (\#11 in 3.3) Give an example of two subsets $A$ and $B$ of $\mathbb{R}_{\mathcal{U}}$ such that Cl$(A\cap B)=\emptyset$ and $\text{Cl}(A)\cap\text{Cl}(B)=\mathbb{R}$. Does your example work in $\mathbb{R}_{\mathcal{L}}$?
+
+Let $A = \mathbb{Q}$ and $B = \mathbb{R} \setminus \mathbb{Q}$. Notice that $A \cap B = \emptyset$, so $\text{Cl($A \cap B$)} = \emptyset$. 
+
+However, notice that $\text{Cl}(A) = \mathbb{R}$ and $\text{Cl}(B) = \mathbb{R}$ by density of the rationals and irrationals, so $\text{Cl}(A) \cap \text{Cl}(B) = \mathbb{R}$.
+
+This example does work in $\mathbb{R}_{\mathcal{L}}$. Consider any interval $(a,b) \in \mathbb{R}$. 
+ 
+We wish to show that $\text{Cl}(A) = \mathbb{R}$. Assume by way of contradiction that $\text{Cl}(A) \neq \mathbb{R}$. 
+Then there exists some interval $[a,b) \subset \mathbb{R}$ such that $[a,b)$ contains no rational numbers. 
+To see this, assume that $\text{Cl}(\mathbb{Q}) = B \subset \mathbb{R}$. 
+Then we have $\mathbb{R} \setminus B$ is open, and thus for every $x \in \mathbb{R} \setminus B$, there exists an interval $[a,b)$ such that $x \in [a,b) \subseteq \mathbb{R} \setminus B$.
+That is, $[a,b)$ must contain no rational numbers.
+
+But by density of the rationals, we can find some rational number $c \in [a,b)$, contradicting the fact that $[a,b)$ contains no rational numbers. 
+Then $\text{Cl}(A) = \mathbb{R}$.
+A similar argument holds for $B = \mathbb{R} \setminus \mathbb{Q}$ using density of the irrationals. 
+So we can see that $\text{Cl($A\cap B$)} = \emptyset$ and $\text{Cl($A$)} \cap \text{Cl($B$)} = \mathbb{R}$.
+
+\end{enumerate}
+
+\end{document}
