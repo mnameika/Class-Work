@@ -1,0 +1,94 @@
+%Solve the differential equation u'' = -4pi^2sin(x), u(0) = 0, u(1) = 0 on
+%[0,1] via Gauss-Seidel, Jacobi, or Successive Over-Relaxation
+
+clear all; close all;
+
+%Select which method to use: 1 = Jacobi, 2 = Gauss-Seidel, 3 = SOR
+method = 3;
+
+%end points of interval
+a = 0;
+b = 1;
+
+%step size
+h = 0.02;
+
+%number of spatial points
+Nx = (b - a)/h + 1;
+
+%spatial vector
+x = a:h:b;
+x = x.';
+
+f = -4*pi^2*sin(2*pi*x);
+
+%initial guess
+u0 = 1/5*x.*(1 - x);
+
+%max number of iterations
+nMax = 200;
+
+xSmooth = linspace(a,b, 1001);
+uEx = sin(2*pi*xSmooth);
+
+for i = 1:nMax
+    switch method
+
+        case 1
+            %Jacobi method
+            methodType = "Jacobi";
+            onesVec = ones(Nx-1,1);
+            J = diag(onesVec, -1) + diag(onesVec, 1);
+            unew = 1/2*J*u0 - h^2/2*f;
+            unew(1) = 0;
+            unew(end) = 0;
+            
+        case 2
+            %Gauss-Seidel
+            methodType = "Gauss-Seidel";
+            
+            onesVec = ones(Nx-1,1);
+            A = diag(onesVec, 1);
+            B = A';
+
+            I = eye(Nx,Nx);
+
+            RHS = 1/2*B*u0 - h^2/2*f;
+            LHS = I - 1/2*A;
+            unew = LHS\RHS;
+            unew(1) = 0;
+            unew(end) = 0;
+           
+        case 3
+            %SOR
+            methodType = "SOR";
+            omega = 1.81;
+
+            onesVec = ones(Nx-1,1);
+            twosVec = -2*ones(Nx,1);
+
+            D = 1/h^2*diag(twosVec);
+            L = -1/h^2*diag(onesVec, -1);
+            U = L.';
+
+            M = 1/omega*(D - omega*L);
+            N = 1/omega*((1 - omega)*D + omega*U);
+            RHS = N*u0 + f;
+
+            unew = M\RHS;
+            unew(1) = 0;
+            unew(end) = 0;
+
+    end
+
+    plot(x, u0, 'bo--',xSmooth, uEx, 'k-', 'linewidth', 1.1)
+    xlabel('$x$', 'fontsize', 20, 'interpreter', 'latex')
+    ylabel('$u(x)$', 'fontsize', 20, 'interpreter', 'latex')
+    title("Approx. \& Ex. Soln. to $u'' = -4\pi^2\sin(x)$ via " + methodType, 'fontsize', 16, 'interpreter', 'latex')
+    legend('$u_{approx}$', '$u_{exact}$', 'fontsize', 14, 'interpreter', 'latex')
+    grid on
+    drawnow
+
+
+    u0 = unew;
+end

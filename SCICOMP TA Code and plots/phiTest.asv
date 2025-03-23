@@ -1,0 +1,60 @@
+%quadratic basis function testing
+
+numGrid = 11;
+xGrid = linspace(0,1,numGrid);
+h = xGrid(2) - xGrid(1);
+
+numFine = 1e3 + 1;
+xFine = linspace(0,1,numFine);
+
+phiSave = zeros(numGrid, numFine);
+
+% j = 1;
+
+%quadratic tent function
+for i = 1:numGrid
+    
+    %quadratic tent
+    if (rem(i,2) == 1)
+
+        for j = 1:numFine
+
+            if (j < numGrid - 1 && xFine(j) <= xGrid(i + 2) && xFine(j) >= xGrid(i))
+
+                phiSave(i,j) = 1/(2*h^2)*(xFine(j) - xGrid(i) - h)*(xFine(j) - xGrid(i) - 2*h);
+
+            elseif (j > 2 && xFine(j) >= xGrid(i - 2) && xFine(j) <= xGrid(i))
+
+                phiSave(i,j) = 1/(2*h^2)*(xFine(j) - xGrid(i) + h)*(xFine(j) - xGrid(i) + 2*h);
+
+            end %end if
+
+        end %end for
+
+    %"normal" quadratic
+    else
+        for j = 1:numFine
+
+            if (xFine(j) >= xGrid(i-1) && xFine(j) <= xGrid(i + 1))
+
+                phiSave(i,j) = -1/h^2*(xFine(j) - xGrid(i))*(xFine(j) - xGrid(i) - 2*h);
+
+            end %end if
+    
+        end %end for
+        
+    end %end if/else
+
+
+end %end main for loop
+
+
+% for i = 1:numFine
+%     if (xFine(i) <= xGrid(j + 4) && xFine(i) >= xGrid(j+2))
+%         phi3(i) = 1/(2*h^2)*(xFine(i) - xGrid(j + 2) - h)*(xFine(i) - xGrid(j + 2) - 2*h);
+%     elseif ( xFine(i) >= xGrid(j) && xFine(i) <= xGrid(j + 2))
+%         phi3(i) = 1/(2*h^2)*(xFine(i) - xGrid(j + 2) + h)*(xFine(i) - xGrid(j + 2) + 2*h);
+%     end
+% end
+
+plot(xFine,phi1, 'k-', xFine, phi2, 'b-', xFine, phi3, 'r-', 'linewidth', 1.1)
